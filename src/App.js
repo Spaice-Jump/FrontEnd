@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import './App.js';
+import Header from './Header';
+import TravelSection from './TravelSection.js';
+import ExperienceSection from './ExperienceSection';
+import ProjectsSection from './ProjectsSection';
+import SubscribeSection from './SubscribeSection';
+import ContactSection from './ContactSection';
+import Footer from './Footer';
+import setupNavbar from './scripts';
+import './css/styles.css';
 
 function App() {
+  useEffect(() => {
+    setupNavbar();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <TravelSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <SubscribeSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }
