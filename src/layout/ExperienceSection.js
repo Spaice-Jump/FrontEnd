@@ -1,5 +1,5 @@
 import React from 'react';
-import viveLaExperienciaImage from './assets/img/vive-la-experiencia.png';
+import ExperienceImage from '../assets/img/vive-la-experiencia.png';
 
 function ExperienceSection() {
   return (
@@ -20,7 +20,7 @@ function ExperienceSection() {
           </div>
           <img
             class="img-fluid"
-            src={viveLaExperienciaImage}
+            src={ExperienceImage}
             alt="..."
           />
         </div>

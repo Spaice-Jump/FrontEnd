@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import './App.js';
-import Header from './Header';
-import TravelSection from './TravelSection.js';
-import ExperienceSection from './ExperienceSection';
-import ProjectsSection from './ProjectsSection';
-import SubscribeSection from './SubscribeSection';
-import ContactSection from './ContactSection';
-import Footer from './Footer';
-import setupNavbar from './scripts';
+import Header from './layout/Header.js';
+import TravelSection from './layout/TravelSection.js';
+import ExperienceSection from './layout/ExperienceSection.js';
+import ProjectsSection from './layout/ProjectsSection.js';
+import SubscribeSection from './layout/SubscribeSection.js';
+import ContactSection from './layout/ContactSection.js';
+import Footer from './layout/Footer.js';
+import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 
 function App() {
