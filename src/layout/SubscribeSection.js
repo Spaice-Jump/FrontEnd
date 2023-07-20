@@ -13,7 +13,7 @@ function SubscribeSection() {
           <div class="row gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
               <FontAwesomeIcon icon={faPaperPlane} className="fa-2x mb-2 text-white" />
-              <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+              <h2 class="text-white mb-5">¡Subscríbete para recibir noticias nuevas!</h2>
               {/* * * * * * * * * * * * * * * *
                         <!-- * * SB Forms Contact Form * *-->
                         <!-- * * * * * * * * * * * * * * *-->
