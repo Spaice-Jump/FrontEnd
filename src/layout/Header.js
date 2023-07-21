@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
@@ -54,6 +55,15 @@ function Header() {
                 >
                   Contacto o algo similar
                 </a>
+              </li>
+
+              <li class="nav-item">
+                <NavLink
+                  to="/sigup"
+                  className="nav-link"
+                >
+                  New Space User
+                </NavLink>
               </li>
             </ul>
           </div>
