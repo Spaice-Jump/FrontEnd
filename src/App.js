@@ -9,7 +9,7 @@ import ContactSection from './layout/ContactSection.js';
 import Footer from './layout/Footer.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
-import NewUserPage from './layout/auth/CreateUser/NewUserPage.jsx';
+import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -20,11 +20,13 @@ function App() {
   return (
     <div>
       <Header />
+      
+      <TravelSection />
+
       <Routes>
         <Route path="/signup" element={ <NewUserPage />} />
         
       </Routes>
-      <TravelSection />
       <ExperienceSection />
       <ProjectsSection />
       <SubscribeSection />

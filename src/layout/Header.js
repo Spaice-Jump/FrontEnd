@@ -59,7 +59,7 @@ function Header() {
 
               <li class="nav-item">
                 <NavLink
-                  to="/sigup"
+                  to="/signup"
                   className="nav-link"
                 >
                   New Space User
