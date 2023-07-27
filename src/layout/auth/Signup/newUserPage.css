@@ -1,0 +1,16 @@
+#neu-user{
+    padding-top: 0;
+    background-color: black;
+    margin: 0;
+    margin-right: 0;
+
+}
+
+#neu-user h1{
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+}
+
+.error{
+    color: rgb(192, 16, 16);
+}
