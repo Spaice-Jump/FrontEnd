@@ -11,19 +11,12 @@ import Travels from './Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
-import { Route, Routes } from 'react-router-dom';
 
 function Home() {
   return (
     <div>
       <Header />
-      
       <TravelSection />
-
-      <Routes>
-        <Route path="/signup" element={ <NewUserPage />} />
-        
-      </Routes>
       <ExperienceSection />
       <ProjectsSection />
       <SubscribeSection />
@@ -39,12 +32,11 @@ function App() {
   }, []);
 
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/travels" element={<Travels />} />
+        <Route path="/signup" element={ <NewUserPage />} />
       </Routes>
-    </Router>
   );
 }
 

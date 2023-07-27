@@ -58,12 +58,12 @@ function Header() {
               </li>
 
               <li class="nav-item">
-                <NavNavLink
+                <NavLink
                   to="/signup"
                   className="nav-NavLink"
                 >
                   New Space User
-                </NavNavLink>
+                </NavLink>
               </li>
             </ul>
           </div>
