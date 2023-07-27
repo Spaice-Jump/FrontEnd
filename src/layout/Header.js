@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -8,12 +9,12 @@ function Header() {
     >
       {
         <div class="container px-4 px-lg-5">
-          <a
-            class="navbar-brand"
-            href="#page-top"
+          <Link
+            to="/"
+            className="navbar-brand"
           >
-            Nombre de nuestro equipo
-          </a>
+            Inicio
+          </Link>
           <button
             class="navbar-toggler navbar-toggler-right"
             type="button"

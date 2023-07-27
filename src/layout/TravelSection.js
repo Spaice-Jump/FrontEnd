@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TravelSection() {
   return (
@@ -11,12 +12,7 @@ function TravelSection() {
               <h2 class="text-white-50 mx-auto mt-2 mb-5">
                 Descripción del proyecto y nombre de nuestro equipo por ejemplo
               </h2>
-              <a
-                class="btn btn-primary"
-                href="#about"
-              >
-                Empieza tu viaje aquí
-              </a>
+              <Link to="/travels" className="btn btn-primary">Empieza tu viaje aquí</Link>
             </div>
           </div>
         </div>

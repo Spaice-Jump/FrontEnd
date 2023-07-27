@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
-import './App.js';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './layout/Header.js';
+import Footer from './layout/Footer.js';
 import TravelSection from './layout/TravelSection.js';
 import ExperienceSection from './layout/ExperienceSection.js';
 import ProjectsSection from './layout/ProjectsSection.js';
 import SubscribeSection from './layout/SubscribeSection.js';
 import ContactSection from './layout/ContactSection.js';
-import Footer from './layout/Footer.js';
+import Travels from './Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 
-function App() {
-  useEffect(() => {
-    setupNavbar();
-  }, []);
-
+function Home() {
   return (
     <div>
       <Header />
@@ -25,6 +22,21 @@ function App() {
       <ContactSection />
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  useEffect(() => {
+    setupNavbar();
+  }, []);
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/travels" element={<Travels />} />
+      </Routes>
+    </Router>
   );
 }
 
