@@ -8,7 +8,7 @@ function NewUserPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -42,8 +42,9 @@ function NewUserPage() {
         const newUser = await signUp(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });
+        console.log(newUser);
       } catch (error) {}
-      console.log(data);
+      
     }
   };
 
