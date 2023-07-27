@@ -3,14 +3,14 @@ import Header from './layout/Header.js';
 import Footer from './layout/Footer.js';
 import ExperienceSection from './layout/ExperienceSection.js';
 import ContactSection from './layout/ContactSection.js';
-import TravelsSectionOneStructure from './layout/TravelsSectionStructureOne.js';
+import TravelsStructureTwo from './layout/TravelsStructureTwo.js';
 
 function Travels() {
   return (
     <div>
       <Header />
       <ExperienceSection />
-      <TravelsSectionOneStructure />
+      <TravelsStructureTwo />
       <ContactSection />
       <Footer />
     </div>
