@@ -4,7 +4,7 @@ import './css/travels.css';
 import ExperienceSection from '../home/components/ExperienceSection.js';
 
 
-const TravelsStructureTwo = () => {
+const Travels = () => {
   return (
     <>
     <ExperienceSection />
@@ -212,4 +212,4 @@ const TravelsStructureTwo = () => {
   );
 };
 
-export default TravelsStructureTwo;
+export default Travels;

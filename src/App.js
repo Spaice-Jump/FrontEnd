@@ -20,7 +20,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/travels" element={<TravelsStructureTwo />} />
+        <Route path="/travels" element={<Travels />} />
         <Route path="/signup" element={ <NewUserPage />} />
       </Routes>
       <ContactSection />
