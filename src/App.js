@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './layout/utils/Header.js';
 import Footer from './layout/utils/Footer.js';
 import ContactSection from './layout/utils/ContactSection.js';
-import TravelsStructureTwo from './layout/travels/Travels.js';
+import Travels from './layout/travels/Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
