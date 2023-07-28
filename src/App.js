@@ -11,6 +11,7 @@ import Travels from './Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
+import Login from './layout/auth/login/login.jsx';
 
 function Home() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/travels" element={<Travels />} />
         <Route path="/signup" element={ <NewUserPage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
   );
 }
