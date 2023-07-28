@@ -4,8 +4,14 @@ import './css/index.css';
 import App from './App';
 import reportWebVitals from './layout/reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import storage from './utils/storage';
+import { setAuthorizationHeader } from './api/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const accessToken = storage.get('auth');
+if (accessToken) {
+  setAuthorizationHeader(accessToken); //leemos al inicir o refrescar la pagina si hay token o no en el local storage
+}
 root.render(
   <React.StrictMode>
     <BrowserRouter>

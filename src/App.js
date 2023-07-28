@@ -10,8 +10,9 @@ import ContactSection from './layout/ContactSection.js';
 import Travels from './Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
+import './layout/auth/login/login.css'
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
-import Login from './layout/auth/login/login.jsx';
+import Login from './layout/auth/login/loginPage.jsx';
 
 function Home() {
   return (
