@@ -1,5 +1,5 @@
 import React from 'react';
-import ExperienceImage from '../assets/img/vive-la-experiencia.png';
+import ExperienceImage from '../../../assets/img/vive-la-experiencia.png';
 
 function ExperienceSection() {
   return (

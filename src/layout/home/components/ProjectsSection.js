@@ -1,7 +1,7 @@
 import React from 'react';
-import bgMasthead from '../assets/img/bg-masthead.jpg';
-import demoImage01 from '../assets/img/demo-image-01.jpg';
-import demoImage02 from '../assets/img/demo-image-02.jpg';
+import bgMasthead from '../../../assets/img/bg-masthead.jpg';
+import demoImage01 from '../../../assets/img/demo-image-01.jpg';
+import demoImage02 from '../../../assets/img/demo-image-02.jpg';
 
 function ProjectsSection() {
   return (

@@ -1,30 +1,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './layout/Header.js';
-import Footer from './layout/Footer.js';
-import TravelSection from './layout/TravelSection.js';
-import ExperienceSection from './layout/ExperienceSection.js';
-import ProjectsSection from './layout/ProjectsSection.js';
-import SubscribeSection from './layout/SubscribeSection.js';
-import ContactSection from './layout/ContactSection.js';
-import Travels from './Travels.js';
+import Header from './layout/utils/Header.js';
+import Footer from './layout/utils/Footer.js';
+import ContactSection from './layout/utils/ContactSection.js';
+import TravelsStructureTwo from './layout/travels/Travels.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
+import Home from './layout/home/Home.jsx';
 
-function Home() {
-  return (
-    <div>
-      <Header />
-      <TravelSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <SubscribeSection />
-      <ContactSection />
-      <Footer />
-    </div>
-  );
-}
 
 function App() {
   useEffect(() => {
@@ -32,11 +16,17 @@ function App() {
   }, []);
 
   return (
+    <>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/travels" element={<Travels />} />
+        <Route path="/travels" element={<TravelsStructureTwo />} />
         <Route path="/signup" element={ <NewUserPage />} />
       </Routes>
+      <ContactSection />
+      <Footer />
+    </>
+    
   );
 }
 
