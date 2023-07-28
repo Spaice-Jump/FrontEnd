@@ -65,6 +65,15 @@ function Header() {
                   New Space User
                 </NavLink>
               </li>
+
+              <li class="nav-item">
+                <NavLink
+                  to="/login"
+                  className="nav-NavLink"
+                >
+                  Login
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
