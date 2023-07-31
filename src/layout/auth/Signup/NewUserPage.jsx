@@ -38,15 +38,13 @@ function NewUserPage() {
       };
 
       try {
-        //Error si el usuario ya existe
         const newUser = await signUp(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });
         newUser?.status===400 ? setError(newUser?.message)
-        : setError('');
-        console.log(newUser);
+        : setError(''); //Redirect To Login
       } catch (error) {}
-      console.log(error);
+        setError(error.message)
     }
   };
 
