@@ -2,10 +2,10 @@ import client, {
     removeAuthorizationHeader,
     setAuthorizationHeader,
   } from './client';
-  import storage from '../utils/storage';
+  import storage from '../utils/storage.js';
   
   export const login = (credentials, isChecked) => {
-    return client.post('/api/auth/login', credentials).then(response => {
+    return client.post('/login', credentials).then(response => {
       setAuthorizationHeader(response.accessToken); //pone el token en la cabecera por defecto
       if (isChecked) {
         storage.set('auth', response.accessToken); //guarda el token en el localStorage
