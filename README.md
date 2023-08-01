@@ -1,3 +1,62 @@
+# FrontEnd --- 
+## Project: SPACE JUMP
+* Jesús Martín Moreno
+* Antonio Luis Martinez Perales
+* Enric Pina Navarro
+* Xavi Roca Vilalta
+* Cristian varela Casas
+
+
+## How to install in local environment
+
+Get repository
+```sh
+git clone https://github.com/Spaice-Jump/FrontEnd.git
+```
+
+Install dependencies with:
+```sh
+npm install
+```
+
+**.env.local** file (sample file: .env.local.copy)
+```js
+REACT_APP_API_BASE_URL=http://localhost:3001
+REACT_APP_API_SIGNUP_URL=/api/v1/signup
+```
+
+
+## How to run in local environment
+
+Start in development mode:
+```sh
+npm start
+```
+
+Result
+```log  
+...
+...
+...
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.23.2.245:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+```
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
