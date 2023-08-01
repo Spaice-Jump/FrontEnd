@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { login } from '../../../api/serviceLogin';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [error, setError] = useState('');
 
   const handleSubmit = async event => {
     event.preventDefault();
-    await login(credential,checked)}
+    await login(credential,checked)
+    Navigate('/')}
     
 
   //const handleEmailChange = event => {
@@ -130,6 +129,7 @@ function LoginPage() {
             />
             <span className='span-check'>Marca para guardar credenciales</span>
             </p>
+            
 
             {!error ? (
               <br />

@@ -1,10 +1,13 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../css/travelsStructureTwo.css';
+import './css/travels.css';
+import ExperienceSection from '../home/components/ExperienceSection.js';
 
 
-const TravelsStructureTwo = () => {
+const Travels = () => {
   return (
+    <>
+    <ExperienceSection />
     <div className="container">
       <div className="row">
         <div className="col-md-3 col-sm-6">
@@ -205,7 +208,8 @@ const TravelsStructureTwo = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
-export default TravelsStructureTwo;
+export default Travels;
