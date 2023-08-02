@@ -6,9 +6,12 @@ import client, {
   
   export const login = (credentials, isChecked) => {
     return client.post('/login', credentials).then(response => {
-      setAuthorizationHeader(response.accessToken); //pone el token en la cabecera por defecto
+      if(response.status===400){
+        throw(response.error)
+      }
+      setAuthorizationHeader(response.jwt); //pone el token en la cabecera por defecto
       if (isChecked) {
-        storage.set('auth', response.accessToken); //guarda el token en el localStorage
+        storage.set('auth', response.jwt); //guarda el token en el localStorage
       }
     });
   };

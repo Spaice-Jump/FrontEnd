@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../../api/serviceLogin';
 
 function LoginPage() {
   const [error, setError] = useState('');
-
+  const navigate = useNavigate()
   const handleSubmit = async event => {
     event.preventDefault();
-    await login(credential,checked)
-    Navigate('/')}
-    
+    try {
+      await login(credential,checked)
+      navigate('/')
+      
+    } catch (error) {
+      setError(error)
+      
+    }
+
+    }
+
 
   //const handleEmailChange = event => {
     //setEmail(event.target.value);
