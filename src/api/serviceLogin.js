@@ -6,7 +6,8 @@ import client, {
   
   export const login = (credentials, isChecked) => {
     return client.post('/login', credentials).then(response => {
-      if(response.status===400){
+        
+      if(response?.status===400){
         throw(response.error)
       }
       setAuthorizationHeader(response.jwt); //pone el token en la cabecera por defecto

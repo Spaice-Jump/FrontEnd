@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { signUp } from '../../../api/auth';
 import Input from './Input';
-import { createNewUser, isButtonDisabled, isPasswordEqual } from './formUtils';
-import { Error } from './Error';
+import { isButtonDisabled } from './formUtils';
+import { login } from '../../../api/serviceLogin';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const navigate = useNavigate()
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [error, setError] = useState('');
@@ -33,6 +35,16 @@ const Form = () => {
         });
 
         setError(newUser?.message);
+        if (newUser?.status==="OK"){
+            const credential ={
+                email,
+                password
+            }
+            const checked = true
+            await login(credential,checked)
+            navigate('/')  
+        }
+        console.log(newUser) 
       } catch (error) {
         setError(error?.message);
       }

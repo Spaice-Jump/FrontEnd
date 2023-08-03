@@ -12,6 +12,7 @@ const accessToken = storage.get('auth');
 if (accessToken) {
   setAuthorizationHeader(accessToken); //leemos al inicir o refrescar la pagina si hay token o no en el local storage
 }
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
