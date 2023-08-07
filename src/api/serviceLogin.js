@@ -2,7 +2,7 @@ import client, {
     removeAuthorizationHeader,
     setAuthorizationHeader,
   } from './client';
-  import storage from '../utils/storage.js';
+  import storage from '../layout/utils/storage.js';
   
   export const login = (credentials, isChecked) => {
     return client.post('/login', credentials).then(response => {

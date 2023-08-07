@@ -4,7 +4,7 @@ import './css/index.css';
 import App from './App';
 import reportWebVitals from './layout/reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import storage from './utils/storage';
+import storage from './layout/utils/storage';
 import { setAuthorizationHeader } from './api/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
