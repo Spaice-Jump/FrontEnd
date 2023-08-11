@@ -1,33 +1,44 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../../api/serviceLogin';
+import { authlogin, resetErrors } from '../../../redux/actions';
+import { getIsLogged, getUi } from '../../../redux/selectors';
 
 function LoginPage() {
-  const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  let { isLoading, error } = useSelector(getUi);
+  const estado = useSelector(getIsLogged)
+  //const [error, setError] = useState('');
+  //const [loading, setLoading] = useState(false)
+  //const [isLogin, setIsLogin] = useState(false)
+  //const navigate = useNavigate()
+  // const handleSubmit = async event => {
+  //   event.preventDefault();
+  //   try {
+  //     setLoading(true)
+  //     await login(credential,checked)
+  //     setLoading(false)
+  //     navigate('/')
+      
+  //   } catch (error) {
+  //     setError(error)
+      
+  //   }
+
+  //   }
   const handleSubmit = async event => {
     event.preventDefault();
-    try {
-      await login(credential,checked)
-      navigate('/')
-      
-    } catch (error) {
-      setError(error)
-      
-    }
-
-    }
-
-
-  //const handleEmailChange = event => {
-    //setEmail(event.target.value);
-  //};
-  //const handlePasswordChange = event => {
-    //setPassword(event.target.value);
-  //};
+    console.log('estado1',estado)
+    await dispatch(authlogin(credential, checked));
+    console.log('estado2',estado)
+    //redirect to pathname
+    // const to = location.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+    // navigate(to); //con las interrogaciones es por si viene esos estados vacios para que no de error pues si vienen vacio vas a /
+  };
 
   const resetError = () => {
-    setError('');
+    dispatch(resetErrors());
   };
   const [credential, setCredential] = useState({
     email: '',
@@ -57,37 +68,8 @@ function LoginPage() {
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
           <h1 className="mx-auto my-0 text-uppercase">New Space Traveler</h1>
+          {isLoading ? <p>...Loading</p> : 
           <form onSubmit={handleSubmit}>
-            {/* <Input
-                  tiLabel="Name User"
-                  type="text"
-                  name="user"
-                  id="user"
-                  onChange={handleUserChange}
-                />
-    
-                <Input
-                  tiLabel="Email"
-                  type="email"
-                  name="email"
-                  id="email"
-                  onChange={handleEmailChange}
-                />
-                <Input
-                  tiLabel="Password"
-                  type="password"
-                  name="password"
-                  id="password"
-                  onChange={handlePasswordChange}
-                />
-                <Input
-                  tiLabel="Password Confirm"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  onChange={handlePasswordConfirmChange}
-                /> */}
-
             <p className="text-white-50 mx-auto mt-2 mb-5">
               <label>
                 Email
@@ -149,7 +131,7 @@ function LoginPage() {
                 <p data-testid="error"> {error}</p>
               </div>
             )}
-          </form>
+          </form>}
         </div>
       </div>
     </section>
