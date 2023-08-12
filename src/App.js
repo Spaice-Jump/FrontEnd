@@ -12,11 +12,12 @@ import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
 
 
+
 function App() {
   useEffect(() => {
     setupNavbar();
   }, []);
-
+  
   return (
     <>
       <Header />

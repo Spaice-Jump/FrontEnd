@@ -1,7 +1,20 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../../api/serviceLogin';
+import { authLogout } from '../../redux/actions';
+import { getIsLogged } from '../../redux/selectors';
 
 function Header() {
+  const isLogged = useSelector(getIsLogged) 
+  
+   console.log('islogged',isLogged)
+   const dispatch = useDispatch();
+
+  const handlerLogout = () => {
+    dispatch(authLogout());
+    logout();
+  };
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light fixed-top"
@@ -67,12 +80,15 @@ function Header() {
               </li>
 
               <li class="nav-item">
+                {
+                isLogged ? <NavLink onClick={handlerLogout} className="nav-NavLink"> Logout </NavLink> :
                 <NavLink
                   to="/login"
                   className="nav-NavLink"
                 >
                   Login
                 </NavLink>
+                }
               </li>
             </ul>
           </div>

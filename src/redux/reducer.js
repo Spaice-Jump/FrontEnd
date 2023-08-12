@@ -31,7 +31,7 @@ import { AUTH_LOGIN_FAILURE, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, UI_RESET_ERROR } f
       case AUTH_LOGIN_SUCCESS:
         return {isLogged:true, userId: action.payload}; //clonamos el estado y le cambiamos la autenticacion a true o false si esta o no logeado
       case AUTH_LOGOUT:
-        return false;
+        return {isLogged:false, userId: null};
       case AUTH_LOGIN_FAILURE:
         return {isLogged:false, userId: null}
   

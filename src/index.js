@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 import configureStore from './redux';
 import Root from './Root';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 const accessToken = storage.get('auth');
 if (accessToken) {
   setAuthorizationHeader(accessToken); //leemos al inicir o refrescar la pagina si hay token o no en el local storage
@@ -21,7 +20,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
 ]);
-const store = configureStore({ auth: !!accessToken }, { router }); //creamos el store y ya disponemos de dispatch, getState...
+const store = configureStore({ auth: {isLogged:!!accessToken}}, { router }); //creamos el store y ya disponemos de dispatch, getState...
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // root.render(
 //   <React.StrictMode>
