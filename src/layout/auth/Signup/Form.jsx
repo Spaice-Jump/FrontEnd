@@ -4,114 +4,128 @@ import Input from './Input';
 import { isButtonDisabled } from './formUtils';
 import { login } from '../../../api/serviceLogin';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../utils/spinner/Loading';
 
 const Form = () => {
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const navigate = useNavigate();
 
-  const [buttonDisabled, setButtonDisabled] = useState(true);
-  const [error, setError] = useState('');
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [error, setError] = useState('');
 
-  useEffect(() => {
-    setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
-  }, [user, email, password, passwordConfirm]);
+    useEffect(() => {
+      setButtonDisabled(
+        isButtonDisabled(user, email, password, passwordConfirm)
+      );
+      setLoading(true);
+    }, [user, email, password, passwordConfirm]);
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    if (password === passwordConfirm) {
-      setError('');
-      const data = {
-        user,
-        email,
-        password,
-      };
+    const handleSubmit = async event => {
+      event.preventDefault();
+      setLoading(false);
+      if (password === passwordConfirm) {
+        setError('');
+        const data = {
+          user,
+          email,
+          password,
+        };
 
-      try {
-        const newUser = await signUp(data, {
-          headers: { 'content-type': 'multipart/form-data' },
-        });
+        try {
+          const newUser = await signUp(data, {
+            headers: { 'content-type': 'multipart/form-data' },
+          });
 
-        setError(newUser?.message);
-        if (newUser?.status==="OK"){
-            const credential ={
-                email,
-                password
-            }
-            const checked = true
-            await login(credential,checked)
-            navigate('/')  
+          setError(newUser?.message);
+          if (newUser?.status === 'OK') {
+            const credential = {
+              email,
+              password,
+            };
+            const checked = true;
+            await login(credential, checked);
+
+            navigate('/');
+          }
+          console.log(newUser);
+        } catch (error) {
+          setError(error?.message);
         }
-        console.log(newUser) 
-      } catch (error) {
-        setError(error?.message);
+      } else {
+        setError('password confirmation does not match');
       }
-    } else {
-      setError('password confirmation does not match');
-    }
-  };
+      setLoading(true);
+    };
 
-  const resetError = () => {
-    setError('');
-  };
+    const resetError = () => {
+      setError('');
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        tiLabel="Name User"
-        type="text"
-        name="user"
-        id="user"
-        handleInput={e => setUser(e.target.value)}
-      />
+    return (
+      <form onSubmit={handleSubmit}>
+        {loading ? (
+          <Loading/>
+        ) : (
+          <>
+            <Input
+              tiLabel="Name User"
+              type="text"
+              name="user"
+              id="user"
+              handleInput={e => setUser(e.target.value)}
+            />
 
-      <Input
-        tiLabel="Email"
-        type="email"
-        name="email"
-        id="email"
-        handleInput={e => setEmail(e.target.value)}
-      />
+            <Input
+              tiLabel="Email"
+              type="email"
+              name="email"
+              id="email"
+              handleInput={e => setEmail(e.target.value)}
+            />
 
-      <Input
-        tiLabel="Password"
-        type="password"
-        name="password"
-        id="password"
-        handleInput={e => setPassword(e.target.value)}
-      />
+            <Input
+              tiLabel="Password"
+              type="password"
+              name="password"
+              id="password"
+              handleInput={e => setPassword(e.target.value)}
+            />
 
-      <Input
-        tiLabel="Password Confirm"
-        type="password"
-        name="passwordConfirm"
-        id="passwordConfirm"
-        handleInput={e => setPasswordConfirm(e.target.value)}
-      />
+            <Input
+              tiLabel="Password Confirm"
+              type="password"
+              name="passwordConfirm"
+              id="passwordConfirm"
+              handleInput={e => setPasswordConfirm(e.target.value)}
+            />
 
-      <button
-        type="submit"
-        className="btn btn-primary"
-        disabled={buttonDisabled}
-        data-testid="signUpButton"
-      >
-        Sign Up
-      </button>
-      {!error ? (
-        <br />
-      ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
-          <p data-testid="error"> {error}</p>
-        </div>
-        // <Error error={error}/>
-      )}
-    </form>
-  );
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={buttonDisabled}
+              data-testid="signUpButton"
+            >
+              Sign Up
+            </button>
+          </>
+        )}
+        {!error ? (
+          <br />
+        ) : (
+          <div
+            className="error"
+            onClick={resetError}
+          >
+            <p data-testid="error"> {error}</p>
+          </div>
+          // <Error error={error}/>
+        )}
+      </form>
+    );
 };
 
 export default Form;
