@@ -14,6 +14,7 @@ function Header() {
   const handlerLogout = () => {
     dispatch(authLogout());
     logout();
+    
   };
   return (
     <nav
