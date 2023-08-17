@@ -18,9 +18,10 @@
   }
 }
 
-* {
-  color: black;
-}
+/* * {
+  color: black; 
+}*/
+
 .text-loading {
   color: rgb(120, 121, 120);
 }

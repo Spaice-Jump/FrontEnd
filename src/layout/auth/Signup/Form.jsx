@@ -65,11 +65,11 @@ const Form = () => {
       setError('');
     };
 
+
+
     return (
       <form onSubmit={handleSubmit}>
         {loading ? (
-          <Loading/>
-        ) : (
           <>
             <Input
               tiLabel="Name User"
@@ -112,6 +112,8 @@ const Form = () => {
               Sign Up
             </button>
           </>
+        ) : (
+          <Loading />
         )}
         {!error ? (
           <br />
