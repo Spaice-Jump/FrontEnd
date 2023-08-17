@@ -5,3 +5,8 @@ export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 export const UI_RESET_ERROR = 'UI_RESET_ERROR' //borrar errores
+
+
+export const UI_SIGNUP_REQUEST = 'UI_SIGNUP_REQUEST'; 
+export const UI_SIGNUP_SUCCESS = 'UI_SIGNUP_SUCCESS';
+export const UI_SIGNUP_FAILURE = 'UI_SIGNUP_FAILURE';
