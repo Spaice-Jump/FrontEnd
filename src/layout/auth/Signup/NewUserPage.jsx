@@ -5,8 +5,10 @@ import { signUp } from '../../../api/auth';
 import Form from './Form';
 import Loading from '../../utils/spinner/Loading';
 
+
 function NewUserPage() {
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     setLoading(true);
