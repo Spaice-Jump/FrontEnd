@@ -70,26 +70,39 @@ function Header() {
                 </a>
               </li>
 
-              <li class="nav-item">
-                <NavLink
-                  to="/signup"
-                  className="nav-NavLink"
-                >
-                  New Space User
-                </NavLink>
-              </li>
+               
+              {isLogged ? (
+                <li class="nav-item">
+                  <NavLink
+                    onClick={handlerLogout}
+                    className="nav-NavLink"
+                  >
+                    {' '}
+                    Logout{' '}
+                  </NavLink>
+                </li>
+              ) : (
+                <>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/signup"
+                      className="nav-NavLink"
+                    >
+                      New Space User
+                    </NavLink>
+                  </li>
 
-              <li class="nav-item">
-                {
-                isLogged ? <NavLink onClick={handlerLogout} className="nav-NavLink"> Logout </NavLink> :
-                <NavLink
-                  to="/login"
-                  className="nav-NavLink"
-                >
-                  Login
-                </NavLink>
-                }
-              </li>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/login"
+                      className="nav-NavLink"
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+
+                </>
+              )}
             </ul>
           </div>
         </div>
