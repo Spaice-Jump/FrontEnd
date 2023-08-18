@@ -10,8 +10,8 @@ import './layout/auth/login/login.css'
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
 import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
-
-
+import './components/NewTravelPage.jsx';
+import NewTravelPage from './components/NewTravelPage.jsx';
 
 function App() {
   useEffect(() => {
@@ -26,6 +26,7 @@ function App() {
         <Route path="/travels" element={<Travels />} />
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/newtravel" element={<NewTravelPage />} />
       </Routes>
       <ContactSection />
       <Footer />
