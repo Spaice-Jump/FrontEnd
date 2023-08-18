@@ -7,7 +7,44 @@ import {
   UI_SIGNUP_FAILURE,
   UI_SIGNUP_SUCCESS,
   UI_SIGNUP_REQUEST,
+  CREATE_TRAVEL_REQUEST,
+  CREATE_TRAVEL_SUCCESS,
+  CREATE_TRAVEL_FAILURE,
 } from './types';
+
+import { postTravel, deleteTravel } from '../api/serviceTravels';
+
+// Travels actions:
+//TODO Hay que hacer que service llegue por props {api} a través del middleware.
+
+export const createTravelRequest = () => ({
+  type: CREATE_TRAVEL_REQUEST
+});
+
+export const createTravelSuccess = travel => ({
+  type: CREATE_TRAVEL_SUCCESS,
+  payload: travel
+});
+
+export const createTravelFailure = error => ({
+  type: CREATE_TRAVEL_FAILURE,
+  error: true,
+  payload: error
+});
+
+export const createTravel = data => 
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(createTravelRequest());
+    try {
+      console.log('data', data);
+      const travel = await postTravel(data);
+      dispatch(createTravelSuccess(travel));
+      router.navigate(`/travels/${travel.id}`);
+    } catch (error) {
+      dispatch(createTravelFailure(error));
+    }
+  };
+
 
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
