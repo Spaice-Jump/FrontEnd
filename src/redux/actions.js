@@ -36,7 +36,6 @@ export const createTravel = data =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(createTravelRequest());
     try {
-      console.log('data', data);
       const travel = await postTravel(data);
       dispatch(createTravelSuccess(travel));
       router.navigate(`/travels/${travel.id}`);

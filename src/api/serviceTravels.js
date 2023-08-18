@@ -9,11 +9,12 @@ export function getTravel(id) {
 }
 
 export function postTravel(data) {
+  console.log("viaje:", data);
   return client.post("/api/travels", data, {
-    headers: {
+/*     headers: {
       "Content-Type": "multipart/form-data",
       },
-  });
+   */});
 }
 
 export function deleteTravel(id) {
