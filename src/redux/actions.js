@@ -7,6 +7,9 @@ import {
   UI_SIGNUP_FAILURE,
   UI_SIGNUP_SUCCESS,
   UI_SIGNUP_REQUEST,
+  UI_DELETE_USER_REQUEST,
+  UI_DELETE_USER_SUCCESS,
+  UI_DELETE_USER_FAILURE,
 } from './types';
 
 export const authLoginRequest = () => ({
@@ -52,6 +55,7 @@ export const resetErrors = () => ({
   type: UI_RESET_ERROR,
 });
 
+/*Create New User */
 export const uiSignUpFailure = error => ({
   type: UI_SIGNUP_FAILURE,
   error: true,
@@ -68,7 +72,7 @@ export const uiSignUpRequest = () => ({
 
 export const authSignUp = data =>
   async function (dispatch, _getState, { api, router }) {
-    dispatch(uiSignUpRequest())
+    dispatch(uiSignUpRequest());
     if (data.password === data.passwordConfirm) {
       try {
         const newUser = await api.auth.signUp(data, {
@@ -80,7 +84,7 @@ export const authSignUp = data =>
             email: data.email,
             password: data.password,
           };
-          dispatch(uiSignUpSuccess())
+          dispatch(uiSignUpSuccess());
           await dispatch(authlogin(credential, true));
         } else {
           dispatch(uiSignUpFailure(newUser?.message));
@@ -90,5 +94,50 @@ export const authSignUp = data =>
       }
     } else {
       dispatch(uiSignUpFailure('password confirmation does not match'));
+    }
+  };
+
+
+/*Delete User */
+
+export const uiDeleteUserFailure = error => ({
+  type: UI_DELETE_USER_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const uiDeleteUserSuccess = () => ({
+  type: UI_DELETE_USER_SUCCESS,
+});
+
+export const uiDeleteUserRequest = () => ({
+  type: UI_DELETE_USER_REQUEST,
+});
+
+export const authDeleteUser = data =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(uiDeleteUserRequest());
+    if (data.password === data.passwordConfirm) {
+      try {
+        console.log("data",data)
+        const DeleteUser = await api.auth.deleteUser(data, {
+          headers: { 'content-type': 'multipart/form-data' },
+        });
+
+        //const DeleteUser = await api.auth.deleteUser(data);
+
+        if (DeleteUser?.status === 'OK') {
+
+          dispatch(uiDeleteUserSuccess());
+          await dispatch(authLogout());
+
+        } else {
+          dispatch(uiDeleteUserFailure(DeleteUser?.message));
+        }
+      } catch (error) {
+        dispatch(uiDeleteUserFailure(error?.message));
+      }
+    } else {
+      dispatch(uiDeleteUserFailure('password confirmation does not match'));
     }
   };

@@ -27,8 +27,13 @@ import client, {
 
   export const signUp = (user,headers) => {
     const signUp_URL = process.env.REACT_APP_API_SIGNUP_URL;
-    console.log(user)
-    console.log(headers)
     return client.post(signUp_URL, user, headers);
   
   };
+
+  export const deleteUser=(user,headers)=>{
+
+    const delete_URL = process.env.REACT_APP_API_DELETE_USER_URL;
+    return client.post(delete_URL, user,headers);  
+
+  }

@@ -70,17 +70,27 @@ function Header() {
                 </a>
               </li>
 
-               
               {isLogged ? (
-                <li class="nav-item">
-                  <NavLink
-                    onClick={handlerLogout}
-                    className="nav-NavLink"
-                  >
-                    {' '}
-                    Logout{' '}
-                  </NavLink>
-                </li>
+                <>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/deleteUser"
+                      className="nav-NavLink"
+                    >
+                      Delete User
+                    </NavLink>
+                  </li>
+
+                  <li class="nav-item">
+                    <NavLink
+                      onClick={handlerLogout}
+                      className="nav-NavLink"
+                    >
+                      {' '}
+                      Logout{' '}
+                    </NavLink>
+                  </li>
+                </>
               ) : (
                 <>
                   <li class="nav-item">
@@ -100,7 +110,6 @@ function Header() {
                       Login
                     </NavLink>
                   </li>
-
                 </>
               )}
             </ul>

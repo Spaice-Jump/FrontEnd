@@ -10,6 +10,7 @@ import './layout/auth/login/login.css'
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
 import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
+import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/travels" element={<Travels />} />
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/deleteUser" element={<DeleteUserPage />} />
       </Routes>
       <ContactSection />
       <Footer />

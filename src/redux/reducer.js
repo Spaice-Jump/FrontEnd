@@ -6,6 +6,9 @@ import {
   UI_SIGNUP_FAILURE,
   UI_SIGNUP_REQUEST,
   UI_SIGNUP_SUCCESS,
+  UI_DELETE_USER_REQUEST,
+  UI_DELETE_USER_SUCCESS,
+  UI_DELETE_USER_FAILURE,
 } from './types';
 
 //creamos el estado que va a tener por defecto
@@ -65,6 +68,8 @@ export function ui(state = defaultState.ui, action) {
     return { ...state, error: null };
   }
 
+
+/* Create User */
   if (action.type === UI_SIGNUP_SUCCESS) {
     return { isLoading: true, error: null };
   }
@@ -74,6 +79,18 @@ export function ui(state = defaultState.ui, action) {
   if (action.type === UI_SIGNUP_FAILURE) {
     return { isLoading: false, error: action.payload };
   }
+
+/* Delete User */
+  if (action.type === UI_DELETE_USER_SUCCESS) {
+    return { isLoading: true, error: null };
+  }
+  if (action.type === UI_DELETE_USER_REQUEST) {
+    return { isLoading: false, error:null };
+  }
+  if (action.type === UI_DELETE_USER_FAILURE) {
+    return { isLoading: false, error: action.payload };
+  }
+
 
   return state;
 }
