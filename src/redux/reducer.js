@@ -10,6 +10,7 @@ import {
   CREATE_TRAVEL_SUCCESS,
   DELETE_TRAVEL_SUCCESS,
   ADD_TRAVEL_SUCCESS,
+  FETCH_LOCATIONS_SUCCESS,
 } from './types';
 
 //creamos el estado que va a tener por defecto
@@ -51,6 +52,15 @@ export function travels(state = defaultState.travels, action) {
         data: state.data.filter((travel) => travel.id !== action.payload),
       };
     default:
+      return state;
+  }
+}
+
+export function locations(state = defaultState.locations, action) { 
+  switch (action.type) {
+    case FETCH_LOCATIONS_SUCCESS:
+      return action.payload;
+    default: 
       return state;
   }
 }
