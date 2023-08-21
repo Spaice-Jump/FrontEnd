@@ -1,12 +1,14 @@
 /* Estilos generales para el contenedor del formulario */
 .newTravelContainer {
   max-width: 500px;
-  margin: 20px auto; /* Agregado margen superior e inferior */
+  margin: 80px auto 20px; /* Ajustado margen superior y agregado margen inferior */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  position: relative; /* Añadido posicionamiento relativo */
+  z-index: 1; /* Asegura que el formulario aparezca por encima de otros elementos */
 }
 
 /* Estilos para el encabezado */
@@ -39,7 +41,7 @@
   margin-top: 8px;
 }
 
-/* Estilos para el botón de enviar */
+/* Estilos para el botón de enviar habilitado */
 .newTravelContainer button[type="submit"] {
   background-color: #007bff;
   color: #fff;
@@ -52,4 +54,11 @@
 
 .newTravelContainer button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+/* Estilos para el botón de enviar desactivado */
+.newTravelContainer button[type="submit"]:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }

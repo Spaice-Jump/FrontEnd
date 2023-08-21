@@ -7,10 +7,10 @@ import './NewTravelPage.css';
 function NewTravelPage() {
 	const [travel, setTravel] = useState({
 		topic: '',
-		origin: '',
-		destination: '',
+		origin: 'Earth',
+		destination: 'Earth',
 		remarks: '',
-		price: 0,
+		price: null,
 		forSale: true,
 		photo: null,
 	});
@@ -28,9 +28,6 @@ function NewTravelPage() {
 	};
 
 	const handleChange = event => {
-		//TODO: añadir el files[0] para la foto.
-		console.log(event.target.name, event.target.value, event.target.files);
-
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
@@ -40,13 +37,15 @@ function NewTravelPage() {
 		setTravel({ ...travel, [name]: value });
 	};
 
+	const isDisabled = !travel.topic || !travel.origin || !travel.destination || !travel.price;
+
 	return (
 		<div className="newTravelContainer">
 			<h1>Crear nuevo viaje espacial</h1>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="topic">Título del viaje</label>
 				<input
-					value={travel.topics}
+					value={travel.topic}
 					onChange={handleChange}
 					type="text"
 					name="topic"
@@ -123,7 +122,7 @@ function NewTravelPage() {
 					name="photo"
 					id="photo"
 				/>
-				<button type="submit">Crear viaje</button>
+				<button type="submit" disabled={isDisabled}>Crear viaje</button>
 			</form>
 		</div>
 	);
