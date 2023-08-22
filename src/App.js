@@ -13,6 +13,9 @@ import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
 import './components/NewTravelPage.jsx';
 import NewTravelPage from './components/NewTravelPage.jsx';
+import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
+
+
 
 function App() {
   useEffect(() => {
@@ -29,6 +32,7 @@ function App() {
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtravel" element={<NewTravelPage />} />
+        <Route path="/deleteUser" element={<DeleteUserPage />} />
       </Routes>
       <ContactSection />
       <Footer />
