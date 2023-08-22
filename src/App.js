@@ -4,6 +4,7 @@ import Header from './layout/utils/Header.js';
 import Footer from './layout/utils/Footer.js';
 import ContactSection from './layout/utils/ContactSection.js';
 import Travels from './layout/travels/Travels.js';
+import TravelDescription from './layout/travels/TravelDescription.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import './layout/auth/login/login.css'
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/travels" element={<Travels />} />
+        <Route path="/travel/:id" element={<TravelDescription />} />
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtravel" element={<NewTravelPage />} />
