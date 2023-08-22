@@ -12,6 +12,7 @@ import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
 import './components/NewTravelPage.jsx';
 import NewTravelPage from './components/NewTravelPage.jsx';
+import RememberPassword from './layout/auth/login/RememberPassword.js';
 
 function App() {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtravel" element={<NewTravelPage />} />
+        <Route path="/password" element={<RememberPassword />}/>
       </Routes>
       <ContactSection />
       <Footer />

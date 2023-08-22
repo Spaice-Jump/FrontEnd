@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { login } from '../../../api/serviceLogin';
-import { authlogin, resetErrors } from '../../../redux/actions';
-import { getIsLogged, getUi } from '../../../redux/selectors';
-import Loading from '../../utils/spinner/Loading';
-function LoginPage() {
-  const dispatch = useDispatch();
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authPassword, resetErrors } from "../../../redux/actions";
+import Loading from "../../utils/spinner/Loading"
+import { getUi } from '../../../redux/selectors';
+import { rememberPassword } from "../../../api/serviceLogin";
+
+
+
+function RememberPassword() {
+    const dispatch = useDispatch();
   let { isLoading, error } = useSelector(getUi);
-  const estado = useSelector(getIsLogged);
   //const [error, setError] = useState('');
   //const [loading, setLoading] = useState(false)
   //const [isLogin, setIsLogin] = useState(false)
@@ -29,10 +30,9 @@ function LoginPage() {
   //   }
   const handleSubmit = async event => {
     event.preventDefault();
-    await dispatch(authlogin(credential, checked));
-    //redirect to pathname
-    // const to = location.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
-    // navigate(to); //con las interrogaciones es por si viene esos estados vacios para que no de error pues si vienen vacio vas a /
+    console.log(credential)
+    //await rememberPassword(credential)
+    await dispatch(authPassword(credential));
   };
 
   const resetError = () => {
@@ -40,26 +40,18 @@ function LoginPage() {
   };
   const [credential, setCredential] = useState({
     email: '',
-    password: '',
   });
   const handleChange = event => {
     if (event.target.name === 'email') {
       setCredential({ ...credential, email: event.target.value }); //con esto vemos si escribe en los imput o no
     }
-    if (event.target.name === 'password') {
-      setCredential({ ...credential, password: event.target.value });
-    }
   };
 
-  const disableButton = !credential.email || !credential.password;
-  const [checked, setCheked] = useState(false);
-  const handleChecked = event => {
-    setCheked(event.target.checked);
-  };
+  const disableButton = !credential.email
 
   return (
     <section
-      id="neu-user"
+      id="neu-password"
       className="masthead"
     >
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
@@ -84,21 +76,6 @@ function LoginPage() {
                   />
                 </label>
               </p>
-              <p className="text-white-50 mx-auto mt-2 mb-5">
-                <label>
-                  Password
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Write your Password"
-                    data-testid="password"
-                    required
-                    onChange={handleChange}
-                  />
-                </label>
-              </p>
               <p>
                 <button
                   type="submit"
@@ -106,22 +83,8 @@ function LoginPage() {
                   disabled={disableButton}
                   data-testid="signUpButton"
                 >
-                  Login
+                  Remember
                 </button>
-              </p>
-              <p>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChecked}
-                />
-                <span className="span-check">
-                  Marca para guardar credenciales
-                </span>
-              </p>
-              <p class="text-white">
-                ¿Has olvidado la contraseña? <a href="/password" class="link-info">Recordar Contraseña</a>
               </p>
 
               {!error ? (
@@ -141,5 +104,6 @@ function LoginPage() {
     </section>
   );
 }
-
-export default LoginPage;
+    
+    
+export default RememberPassword;

@@ -25,6 +25,15 @@ import client, {
     });
   };
 
+  export const rememberPassword = (credentials) =>{
+    return client.post('/password', credentials).then(response=>{
+      if(response?.status===400){
+        throw(response.error)
+      }
+      return response.password
+    })
+  }
+
   export const signUp = (user,headers) => {
     const signUp_URL = process.env.REACT_APP_API_SIGNUP_URL;
     console.log(user)
