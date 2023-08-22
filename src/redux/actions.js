@@ -7,10 +7,76 @@ import {
   UI_SIGNUP_FAILURE,
   UI_SIGNUP_SUCCESS,
   UI_SIGNUP_REQUEST,
+  CREATE_TRAVEL_REQUEST,
+  CREATE_TRAVEL_SUCCESS,
+  CREATE_TRAVEL_FAILURE,
+  FETCH_LOCATIONS_FAILURE,
+  FETCH_LOCATIONS_REQUEST,
+  FETCH_LOCATIONS_SUCCESS,
   UI_DELETE_USER_REQUEST,
   UI_DELETE_USER_SUCCESS,
   UI_DELETE_USER_FAILURE,
 } from './types';
+
+// Travels actions:
+
+export const createTravelRequest = () => ({
+  type: CREATE_TRAVEL_REQUEST
+});
+
+export const createTravelSuccess = travel => ({
+  type: CREATE_TRAVEL_SUCCESS,
+  payload: travel
+});
+
+export const createTravelFailure = error => ({
+  type: CREATE_TRAVEL_FAILURE,
+  error: true,
+  payload: error
+});
+
+export const createTravel = data => 
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(createTravelRequest());
+    try {
+      const travel = await api.travels.postTravel(data);
+      dispatch(createTravelSuccess(travel));
+      router.navigate(`/travels/${travel.id}`);
+    } catch (error) {
+      dispatch(createTravelFailure(error));
+    }
+  };
+
+// locations actions:
+
+export const fetchLocationsRequest = () => ({
+  type: FETCH_LOCATIONS_REQUEST
+});
+
+export const fetchLocationsSuccess = locations => ({ 
+  type: FETCH_LOCATIONS_SUCCESS,
+  payload: locations
+});
+
+export const fetchLocationsFailure = error => ({
+  type: FETCH_LOCATIONS_FAILURE,
+  error: true,
+  payload: error
+});
+
+export const fetchLocations = () => {
+  return async function (dispatch, _getState, { api }) {
+    dispatch(fetchLocationsRequest());
+    try {
+      const locations = await api.travels.getLocations();
+      dispatch(fetchLocationsSuccess(locations));
+    } catch (error) {
+      dispatch(fetchLocationsFailure(error));
+    }
+  };
+};
+
+// Auth actions:
 
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,

@@ -6,6 +6,11 @@ import {
   UI_SIGNUP_FAILURE,
   UI_SIGNUP_REQUEST,
   UI_SIGNUP_SUCCESS,
+  FETCH_TRAVELS_SUCCESS,
+  CREATE_TRAVEL_SUCCESS,
+  DELETE_TRAVEL_SUCCESS,
+  ADD_TRAVEL_SUCCESS,
+  FETCH_LOCATIONS_SUCCESS,
   UI_DELETE_USER_REQUEST,
   UI_DELETE_USER_SUCCESS,
   UI_DELETE_USER_FAILURE,
@@ -35,6 +40,33 @@ export const defaultState = {
     error: null,
   },
 };
+
+export function travels(state = defaultState.travels, action) {
+  switch (action.type) {
+    case FETCH_TRAVELS_SUCCESS:
+      return { areLoaded: true, data: action.payload };
+    case ADD_TRAVEL_SUCCESS:
+      return { ...state, data: [action.payload] };
+    case CREATE_TRAVEL_SUCCESS:
+      return { ...state, data: [...state.data, action.payload] };
+    case DELETE_TRAVEL_SUCCESS:
+      return {
+        ...state,
+        data: state.data.filter((travel) => travel.id !== action.payload),
+      };
+    default:
+      return state;
+  }
+}
+
+export function locations(state = defaultState.locations, action) { 
+  switch (action.type) {
+    case FETCH_LOCATIONS_SUCCESS:
+      return action.payload;
+    default: 
+      return state;
+  }
+}
 
 export function auth(state = defaultState.auth, action) {
   //esta parte del reducer solo tiene en cuenta la paerte de auth

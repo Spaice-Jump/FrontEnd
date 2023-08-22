@@ -6,10 +6,10 @@ import { authLogout } from '../../redux/actions';
 import { getIsLogged } from '../../redux/selectors';
 
 function Header() {
-  const isLogged = useSelector(getIsLogged) 
-  
-   console.log('islogged',isLogged)
-   const dispatch = useDispatch();
+  const isLogged = useSelector(getIsLogged);
+
+  console.log('islogged', isLogged);
+  const dispatch = useDispatch();
 
   const handlerLogout = () => {
     dispatch(authLogout());
@@ -72,6 +72,15 @@ function Header() {
 
               {isLogged ? (
                 <>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/newtravel"
+                      className="nav-NavLink"
+                    >
+                      Crear Viaje
+                    </NavLink>
+                  </li>
+
                   <li class="nav-item">
                     <NavLink
                       to="/deleteUser"
