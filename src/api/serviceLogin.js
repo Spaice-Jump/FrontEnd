@@ -30,7 +30,7 @@ import client, {
       if(response?.status===400){
         throw(response.error)
       }
-      return response.password
+      return response
     })
   }
 

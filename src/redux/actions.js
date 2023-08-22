@@ -114,6 +114,7 @@ export const authlogin = (credential, checked) =>
     dispatch(authLoginRequest()); //saber si esta cargando la llamada
     try {
       const userId = await api.auth.login(credential, checked);
+      console.log(userId)
       //leguearse
       dispatch(authLoginSuccess(userId));
       const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
@@ -144,9 +145,11 @@ export const authPassword = credential =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(authRememberPasswordRequest())
     try {
+      console.log('crede', credential)
       const password = await api.auth.rememberPassword(credential);
       dispatch(authRememberPasswordSuccess())
-      console.log('paaaaaaaa', password);
+      alert(password.msg)
+      console.log('paaaaaaaa', password.msg);
       const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
       router.navigate(to);
     } catch (error) {dispatch(authRememberPasswordFailure(error))}
