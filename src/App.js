@@ -17,8 +17,7 @@ import NewTravelPage from './components/NewTravelPage.jsx';
 import RememberPassword from './layout/auth/login/RememberPassword.js';
 
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
-
-
+import EditTravelPage from './components/EditTravelPage.jsx';
 
 
 function App() {
@@ -40,7 +39,8 @@ function App() {
         <Route path="/password" element={<RememberPassword />}/>
 
         <Route path="/deleteUser" element={<DeleteUserPage />} />
-
+        <Route path="/travel-edit/:id" element={<EditTravelPage />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <ContactSection />
       <Footer />

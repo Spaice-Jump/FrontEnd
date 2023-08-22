@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getTravel } from '../../api/serviceTravels';
+import { Navigate, useParams } from 'react-router-dom';
+import { getTravel, getTravels } from '../../api/serviceTravels';
 import ExperienceSection from '../home/components/ExperienceSection';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getIsLogged, getUserId } from '../../redux/selectors';
+import { deleteTravel } from '../../redux/actions';
 
 const TravelDescription = () => {
 	const { id } = useParams();
 	const [travel, setTravel] = useState(null);
 	const isLogged = useSelector(getIsLogged);
 	const userId = useSelector(getUserId);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getTravel(id)
@@ -24,6 +26,14 @@ const TravelDescription = () => {
 	if (!travel) {
 		return <p>Loading...</p>;
 	}
+
+	const handleEdit = () => {
+		<Navigate to={`/travel-edit/${id}`} />;
+	};
+
+	const handleDelete = () => {
+		dispatch(deleteTravel(id));
+	};
 
 	return (
 		<>
@@ -49,7 +59,10 @@ const TravelDescription = () => {
 				)}
 				<div className="travel-buttons">
 					{isLogged && userId === travel.userId ? (
-						<button className="btn btn-primary">Edit</button>
+						<>
+							<button onClick={handleEdit} className="btn btn-primary">Editar viaje</button>
+							<button onClick={handleDelete} className="btn btn-primary">Borrar viaje</button>
+						</>
 					) : null}
 				</div>
 			</div>
