@@ -1,10 +1,13 @@
 import { createTravel, fetchLocations } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations } from '../redux/selectors';
+import { getLocations, getUserId } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 import './NewTravelPage.css';
 
 function NewTravelPage() {
+
+	const userId = useSelector(getUserId);
+
 	const [travel, setTravel] = useState({
 		topic: '',
 		origin: 'Earth',
@@ -13,6 +16,7 @@ function NewTravelPage() {
 		price: null,
 		forSale: true,
 		photo: null,
+		userId: userId
 	});
 
 	const dispatch = useDispatch();

@@ -41,7 +41,8 @@ export const createTravel = data =>
     try {
       const travel = await api.travels.postTravel(data);
       dispatch(createTravelSuccess(travel));
-      router.navigate(`/travels/${travel.id}`);
+      console.log('travel', travel);
+      router.navigate(`/travel/${travel._id}`);
     } catch (error) {
       dispatch(createTravelFailure(error));
     }
@@ -104,7 +105,6 @@ export const authlogin = (credential, checked) =>
     dispatch(authLoginRequest()); //saber si esta cargando la llamada
     try {
       const userId = await api.auth.login(credential, checked);
-      console.log('user', userId);
       //leguearse
       dispatch(authLoginSuccess(userId));
       const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
@@ -185,7 +185,6 @@ export const authDeleteUser = data =>
     dispatch(uiDeleteUserRequest());
     if (data.password === data.passwordConfirm) {
       try {
-        console.log("data",data)
         const DeleteUser = await api.auth.deleteUser(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });

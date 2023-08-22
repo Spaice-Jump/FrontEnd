@@ -7,9 +7,7 @@ import { getIsLogged } from '../../redux/selectors';
 
 function Header() {
   const isLogged = useSelector(getIsLogged) 
-  
-   console.log('islogged',isLogged)
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handlerLogout = () => {
     dispatch(authLogout());
