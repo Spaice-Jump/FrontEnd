@@ -14,8 +14,7 @@ import LoginPage from './layout/auth/login/loginPage.jsx';
 import './components/NewTravelPage.jsx';
 import NewTravelPage from './components/NewTravelPage.jsx';
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
-
-
+import EditTravelPage from './components/EditTravelPage.jsx';
 
 function App() {
   useEffect(() => {
@@ -33,6 +32,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtravel" element={<NewTravelPage />} />
         <Route path="/deleteUser" element={<DeleteUserPage />} />
+        <Route path="/travel-edit/:id" element={<EditTravelPage />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <ContactSection />
       <Footer />
