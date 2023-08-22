@@ -10,15 +10,21 @@ import {
   CREATE_TRAVEL_REQUEST,
   CREATE_TRAVEL_SUCCESS,
   CREATE_TRAVEL_FAILURE,
+
   AUTH_REMEMBER_PASSWORD_REQUEST,
   AUTH_REMEMBER_PASSWORD_SUCCESS,
   AUTH_REMEMBER_PASSWORD_FAILURE,
+
+  FETCH_LOCATIONS_FAILURE,
+  FETCH_LOCATIONS_REQUEST,
+  FETCH_LOCATIONS_SUCCESS,
+  UI_DELETE_USER_REQUEST,
+  UI_DELETE_USER_SUCCESS,
+  UI_DELETE_USER_FAILURE,
+
 } from './types';
 
-import { postTravel, deleteTravel } from '../api/serviceTravels';
-
 // Travels actions:
-//TODO Hay que hacer que service llegue por props {api} a través del middleware.
 
 export const createTravelRequest = () => ({
   type: CREATE_TRAVEL_REQUEST,
@@ -39,13 +45,48 @@ export const createTravel = data =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(createTravelRequest());
     try {
-      const travel = await postTravel(data);
+      const travel = await api.travels.postTravel(data);
       dispatch(createTravelSuccess(travel));
-      router.navigate(`/travels/${travel.id}`);
+      console.log('travel', travel);
+      router.navigate(`/travel/${travel._id}`);
     } catch (error) {
       dispatch(createTravelFailure(error));
     }
   };
+
+
+
+// locations actions:
+
+export const fetchLocationsRequest = () => ({
+  type: FETCH_LOCATIONS_REQUEST
+});
+
+export const fetchLocationsSuccess = locations => ({ 
+  type: FETCH_LOCATIONS_SUCCESS,
+  payload: locations
+});
+
+export const fetchLocationsFailure = error => ({
+  type: FETCH_LOCATIONS_FAILURE,
+  error: true,
+  payload: error
+});
+
+export const fetchLocations = () => {
+  return async function (dispatch, _getState, { api }) {
+    dispatch(fetchLocationsRequest());
+    try {
+      const locations = await api.travels.getLocations();
+      dispatch(fetchLocationsSuccess(locations));
+    } catch (error) {
+      dispatch(fetchLocationsFailure(error));
+    }
+  };
+};
+
+// Auth actions:
+
 
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
@@ -73,7 +114,6 @@ export const authlogin = (credential, checked) =>
     dispatch(authLoginRequest()); //saber si esta cargando la llamada
     try {
       const userId = await api.auth.login(credential, checked);
-      console.log('user', userId);
       //leguearse
       dispatch(authLoginSuccess(userId));
       const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
@@ -116,6 +156,7 @@ export const resetErrors = () => ({
   type: UI_RESET_ERROR,
 });
 
+/*Create New User */
 export const uiSignUpFailure = error => ({
   type: UI_SIGNUP_FAILURE,
   error: true,
@@ -154,5 +195,49 @@ export const authSignUp = data =>
       }
     } else {
       dispatch(uiSignUpFailure('password confirmation does not match'));
+    }
+  };
+
+
+/*Delete User */
+
+export const uiDeleteUserFailure = error => ({
+  type: UI_DELETE_USER_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const uiDeleteUserSuccess = () => ({
+  type: UI_DELETE_USER_SUCCESS,
+});
+
+export const uiDeleteUserRequest = () => ({
+  type: UI_DELETE_USER_REQUEST,
+});
+
+export const authDeleteUser = data =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(uiDeleteUserRequest());
+    if (data.password === data.passwordConfirm) {
+      try {
+        const DeleteUser = await api.auth.deleteUser(data, {
+          headers: { 'content-type': 'multipart/form-data' },
+        });
+
+        //const DeleteUser = await api.auth.deleteUser(data);
+
+        if (DeleteUser?.status === 'OK') {
+
+          dispatch(uiDeleteUserSuccess());
+          await dispatch(authLogout());
+
+        } else {
+          dispatch(uiDeleteUserFailure(DeleteUser?.message));
+        }
+      } catch (error) {
+        dispatch(uiDeleteUserFailure(error?.message));
+      }
+    } else {
+      dispatch(uiDeleteUserFailure('password confirmation does not match'));
     }
   };
