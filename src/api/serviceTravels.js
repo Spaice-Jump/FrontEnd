@@ -24,3 +24,10 @@ export function getLocations() {
   return client.get("/api/locations");
 }
 
+export function editTravel(id, data) {
+  return client.put(`/api/travels/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
