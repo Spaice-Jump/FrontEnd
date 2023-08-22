@@ -15,6 +15,7 @@ import NewTravelPage from './components/NewTravelPage.jsx';
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 
 
+
 function App() {
   useEffect(() => {
     setupNavbar();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/travels" element={<Travels />} />
         <Route path="/signup" element={ <NewUserPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/newtravel" element={<NewTravelPage />} />
         <Route path="/deleteUser" element={<DeleteUserPage />} />
       </Routes>
       <ContactSection />
