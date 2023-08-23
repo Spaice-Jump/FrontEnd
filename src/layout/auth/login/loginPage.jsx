@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { login } from '../../../api/serviceLogin';
+import { login } from '../../../api/serviceAuth';
 import { authlogin, resetErrors } from '../../../redux/actions';
 import { getIsLogged, getUi } from '../../../redux/selectors';
 import Loading from '../../utils/spinner/Loading';

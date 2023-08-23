@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authPassword, resetErrors } from "../../../redux/actions";
 import Loading from "../../utils/spinner/Loading"
 import { getUi } from '../../../redux/selectors';
-import { rememberPassword } from "../../../api/serviceLogin";
+import { rememberPassword } from "../../../api/serviceAuth";
 
 
 

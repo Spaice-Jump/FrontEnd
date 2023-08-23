@@ -5,7 +5,7 @@ import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
 import { isButtonDisabled } from '../Signup/formUtils';
 import { authDeleteUser, resetErrors } from '../../../redux/actions';
-import { logout } from '../../../api/serviceLogin'
+import { logout } from '../../../api/serviceAuth'
 
 function FormDeleteUser({ userId }) {
   let { isLoading, error } = useSelector(getUi);

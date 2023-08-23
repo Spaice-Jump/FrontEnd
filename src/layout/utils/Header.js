@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../api/serviceLogin';
+import { logout } from '../../api/serviceAuth';
 import { authLogout } from '../../redux/actions';
 import { getIsLogged } from '../../redux/selectors';
 
