@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getTravel, getTravels } from '../../api/serviceTravels';
 import ExperienceSection from '../home/components/ExperienceSection';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ const TravelDescription = () => {
 	const isLogged = useSelector(getIsLogged);
 	const userId = useSelector(getUserId);
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate()
 	useEffect(() => {
 		getTravel(id)
 			.then(response => {
@@ -28,7 +28,7 @@ const TravelDescription = () => {
 	}
 
 	const handleEdit = () => {
-		<Navigate to={`/travel-edit/${id}`} />;
+		navigate(`/travel-edit/${id}`);
 	};
 
 	const handleDelete = () => {
