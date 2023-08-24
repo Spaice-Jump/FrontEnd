@@ -128,7 +128,7 @@ function EditTravelPage() {
 					name="photo"
 					id="photo"
 				/>
-				<button type="submit" disabled={isDisabled}>Crear viaje</button>
+				<button type="submit" disabled={isDisabled}>Actualizar viaje</button>
 			</form>
 		</div>
 	);
