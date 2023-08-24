@@ -34,6 +34,10 @@ export const defaultState = {
     areLoaded: false,
     data: [],
   },
+  chats: {
+    areLoaded: false,
+    data: [],
+  },
   locations: [],
   ui: {
     isLoading: false,
