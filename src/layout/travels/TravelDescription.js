@@ -12,7 +12,8 @@ const TravelDescription = () => {
 	const isLogged = useSelector(getIsLogged);
 	const userId = useSelector(getUserId);
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
+	
 	useEffect(() => {
 		getTravel(id)
 			.then(response => {

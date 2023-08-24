@@ -3,6 +3,9 @@ export const getUserId = state => state.auth.userId;
 export const getUi = state => state.ui;
 
 export const getLocations = state => state.locations;
-export const getTravelById = (state, id) => state.travels[id];
 
-
+export const getTravelById = id => state => {
+  console.log(state.travels);
+  console.log(id);
+  return state.travels.data.find(travel => travel._id === id);
+};

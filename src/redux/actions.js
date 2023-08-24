@@ -50,7 +50,6 @@ export const createTravel = data =>
 		try {
 			const travel = await api.travels.postTravel(data);
 			dispatch(createTravelSuccess(travel));
-			console.log('travel', travel);
 			router.navigate(`/travel/${travel._id}`);
 		} catch (error) {
 			dispatch(createTravelFailure(error));
