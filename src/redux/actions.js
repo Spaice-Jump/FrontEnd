@@ -284,7 +284,7 @@ export const authDeleteUser = data =>
 				const DeleteUser = await api.auth.deleteUser(data, {
 					headers: { 'content-type': 'multipart/form-data' },
 				});
-
+                
 				//const DeleteUser = await api.auth.deleteUser(data);
 
 				if (DeleteUser?.status === 'OK') {
