@@ -9,7 +9,6 @@ export function getTravel(id) {
 }
 
 export function postTravel(data) {
-  console.log("viaje:", data);
   return client.post("/api/travels", data, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -25,3 +24,10 @@ export function getLocations() {
   return client.get("/api/locations");
 }
 
+export function editTravel(id, data) {
+  return client.put(`/api/travels/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}

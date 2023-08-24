@@ -23,6 +23,7 @@ npm install
 ```js
 REACT_APP_API_BASE_URL=http://localhost:3001
 REACT_APP_API_SIGNUP_URL=/api/v1/signup
+REACT_APP_API_DELETE_USER_URL=/api/v1/deleteuser
 ```
 
 

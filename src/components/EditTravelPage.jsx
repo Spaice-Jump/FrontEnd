@@ -1,22 +1,24 @@
-import { createTravel, fetchLocations } from '../redux/actions';
+import { fetchLocations } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations, getUserId } from '../redux/selectors';
-import { useState, useEffect } from 'react';
+import { getLocations, getTravelById } from '../redux/selectors';
+import { useEffect, useState } from 'react';
 import './NewTravelPage.css';
+import { useParams } from 'react-router-dom';
 
-function NewTravelPage() {
+function EditTravelPage() {
 
-	const userId = useSelector(getUserId);
+  const {id} = useParams()
+  const editTravel = useSelector(getTravelById(id));
 
-	const [travel, setTravel] = useState({
-		topic: '',
-		origin: 'Earth',
-		destination: 'Earth',
-		remarks: '',
-		price: null,
-		forSale: true,
-		photo: null,
-		userId: userId
+  const [travel, setTravel] = useState({
+		topic: editTravel.topic,
+		origin: editTravel.origin,
+		destination: editTravel.destination,
+		remarks: editTravel.remarks,
+		price: editTravel.price,
+		forSale: editTravel.forSale,
+		photo: editTravel.photo,
+		userId: editTravel.userId
 	});
 
 	const dispatch = useDispatch();
@@ -28,7 +30,7 @@ function NewTravelPage() {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		dispatch(createTravel(travel));
+		dispatch(editTravel(travel));
 	};
 
 	const handleChange = event => {
@@ -132,4 +134,4 @@ function NewTravelPage() {
 	);
 }
 
-export default NewTravelPage;
+export default EditTravelPage;

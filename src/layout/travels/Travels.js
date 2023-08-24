@@ -1,256 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
-import ExperienceSection from '../home/components/ExperienceSection.js';
-
+import { Link } from 'react-router-dom';
+import ExperienceSection from '../home/components/ExperienceSection';
+import { getTravels } from '../../api/serviceTravels';
 
 const Travels = () => {
+  const [travels, setTravels] = useState([]);
+
+  useEffect(() => {
+    getTravels()
+      .then(response => {
+        setTravels(response);
+      })
+      .catch(error => {
+        console.error('Error fetching travels:', error);
+      });
+  }, []);
+
   return (
     <>
-    <ExperienceSection />
-    <div className="container travels-container">
-      <div className="row">
-      <div className="col-md-3 col-sm-6">
-            <div className="product-grid">
-              <div className="product-image">
-                <a href="#" className="image">
-                  <img
-                    className="pic-1"
-                    src="https://img.freepik.com/fotos-premium/luna-sol-tierra-orbita-estacion-espacial_875722-8211.jpg?w=2000"
-                    alt=""
-                  />
-                  <img
-                    className="pic-2"
-                    src="https://img.freepik.com/fotos-premium/estacion-espacial-espacio_875722-8210.jpg"
-                    alt=""
-                  />
-                </a>
-                <span className="product-sale-label">hot</span>
-                <span className="product-discount-label">-33%</span>
-              </div>
-              <div className="product-content">
-                <ul className="rating">
-                  <li className="fas fa-star"></li>
-                  <li className="fas fa-star"></li>
-                  <li className="fas fa-star"></li>
-                  <li className="fas fa-star"></li>
-                  <li className="fas fa-star disable"></li>
-                </ul>
-                <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                  <p className='text-travels-ads'>Topic: Space Travel</p>
-                  <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                  <div className="price"><span>Price: 1.200€</span> 900€</div>
-                  <p className='text-travels-ads'>Sale</p>
-                  <p className='text-travels-ads'>Origin: Tierra</p>
-                  <p className='text-travels-ads'>Destination: Moon</p>
-                <div className="product-button-group">
-                  <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                  <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                  <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
+      <ExperienceSection />
+      <div className="container travels-container">
+        <div className="row">
+          {travels ? (
+            travels.map(travel => (
+              <div key={travel._id} className="col-md-3 col-sm-6">
+                <div className="product-grid">
+                  <div className="product-image">
+                    <a href="#" className="image">
+                      <img className="pic-1" src={travel.photo} alt="" />
+                      <img className="pic-2" src={travel.photo} alt="" />
+                    </a>
+                  </div>
+                  <div className="product-content">
+                    <ul className="rating">
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star disable"></li>
+                    </ul>
+                    <h3 className="title">
+                      <Link to={`/travel/${travel._id}`}>{travel.topic}</Link>
+                    </h3>
+                    <p className="text-travels-ads">Remarks: {travel.remarks}</p>
+                    <div className="price">
+                      <span>Price: {travel.price}€</span>
+                      {/* travel.discount && <span> {travel.originalPrice}€</span> */}
+                    </div>
+                    {travel.forSale ? (
+                      <p className="text-travels-ads">Sale</p>
+                    ) : (
+                      <p className="text-travels-ads">Search</p>
+                    )}
+                    <p className="text-travels-ads">Origin: {travel.origin}</p>
+                    <p className="text-travels-ads">Destination: {travel.destination}</p>
+                    <div className="product-button-group">
+                      <a className="product-like-icon" href="#">
+                        <i className="fas fa-heart"></i>
+                      </a>
+                      <Link to={`/travel/${travel._id}`} className="add-to-cart">
+                      <i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ
+                      </Link>
+                      <a className="product-compare-icon" href="#">
+                        <i className="fas fa-random"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://cdn.forbes.com.mx/2021/05/Nave-espacial-Dream-Chaser-e1620856857225.jpg" alt="" />
-                <img className="pic-2" src="https://s2.abcstatics.com/Media/201010/13/nave_secreta--478x270.jpg" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/07/naves-mas-famosas-cine-tv_3.jpg?tf=3840x" alt="" />
-                <img className="pic-2" src="https://static.eldiario.es/clip/cf687089-5478-4d2c-afc1-4019a9f909e4_16-9-aspect-ratio_default_0.webp" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://img.freepik.com/fotos-premium/luna-sol-tierra-orbita-estacion-espacial_875722-8211.jpg?w=2000" alt="" />
-                <img className="pic-2" src="https://img.freepik.com/fotos-premium/estacion-espacial-espacio_875722-8210.jpg" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://img.freepik.com/fotos-premium/luna-sol-tierra-orbita-estacion-espacial_875722-8211.jpg?w=2000" alt="" />
-                <img className="pic-2" src="https://img.freepik.com/fotos-premium/estacion-espacial-espacio_875722-8210.jpg" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://img.freepik.com/fotos-premium/luna-sol-tierra-orbita-estacion-espacial_875722-8211.jpg?w=2000" alt="" />
-                <img className="pic-2" src="https://img.freepik.com/fotos-premium/estacion-espacial-espacio_875722-8210.jpg" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-3 col-sm-6">
-          <div className="product-grid">
-            <div className="product-image">
-              <a href="#" className="image">
-                <img className="pic-1" src="https://img.freepik.com/fotos-premium/luna-sol-tierra-orbita-estacion-espacial_875722-8211.jpg?w=2000" alt="" />
-                <img className="pic-2" src="https://img.freepik.com/fotos-premium/estacion-espacial-espacio_875722-8210.jpg" alt="" />
-              </a>
-              <span className="product-sale-label">hot</span>
-              <span className="product-discount-label">-33%</span>
-            </div>
-            <div className="product-content">
-              <ul className="rating">
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star"></li>
-                <li className="fas fa-star disable"></li>
-              </ul>
-              <h3 className="title"><a href="#">Nombre Viaje/Nave</a></h3>
-                <p className='text-travels-ads'>Topic: Space Travel</p>
-                <p className='text-travels-ads'>Remarks: Explore outer space!</p>
-                <div className="price"><span>Price: 1.200€</span> 900€</div>
-                <p className='text-travels-ads'>Sale</p>
-                <p className='text-travels-ads'>Origin: Tierra</p>
-                <p className='text-travels-ads'>Destination: Moon</p>
-              <div className="product-button-group">
-                <a className="product-like-icon" href="#"><i className="fas fa-heart"></i></a>
-                <a className="add-to-cart" href="#"><i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ</a>
-                <a className="product-compare-icon" href="#"><i className="fas fa-random"></i></a>
-              </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <p>No travel data available.</p>
+          )}
         </div>
       </div>
-    </div>
     </>
   );
 };

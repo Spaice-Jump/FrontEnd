@@ -5,7 +5,7 @@ import * as reducers from './reducer'
 import * as actionCreators from './actions'
 import {composeWithDevTools} from '@redux-devtools/extension'
 import thunk from 'redux-thunk';
-import * as auth from '../api/serviceLogin';
+import * as auth from '../api/serviceAuth';
 import * as travels from '../api/serviceTravels';
 
 const reducer = combineReducers(reducers)
