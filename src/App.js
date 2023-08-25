@@ -30,30 +30,63 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/travels" element={<Travels />} />
-        <Route path="/travel/:id" element={<TravelDescription />} />
-        <Route path="/signup" element={ <NewUserPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/newtravel" element={<NewTravelPage />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/travels"
+          element={<Travels />}
+        />
+        <Route
+          path="/travel/:id"
+          element={<TravelDescription />}
+        />
+        <Route
+          path="/signup"
+          element={<NewUserPage />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
+        <Route
+          path="/newtravel"
+          element={
+            <RequireAuth>
+              {' '}
+              <NewTravelPage />
+            </RequireAuth>
+          }
+        />
 
-        <Route path="/password" element={<RememberPassword />}/>
+        <Route
+          path="/password"
+          element={<RememberPassword />}
+        />
 
-        <Route path="/deleteUser" element={
-        <RequireAuth>
-            {' '}
-            <DeleteUserPage />
-        </RequireAuth>
-    
-        } />
-        
-        <Route path="/travel-edit/:id" element={<EditTravelPage />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route
+          path="/deleteUser"
+          element={
+            <RequireAuth>
+              {' '}
+              <DeleteUserPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/travel-edit/:id"
+          element={<EditTravelPage />}
+        />
+        <Route
+          path="*"
+          element={<h1>Not Found</h1>}
+        />
       </Routes>
       <ContactSection />
       <Footer />
     </>
-    
   );
 }
 
