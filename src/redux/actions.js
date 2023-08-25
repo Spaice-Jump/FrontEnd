@@ -103,8 +103,10 @@ export const editTravel = (id, data) =>
     dispatch(editTravelRequest());
     try {
       const travel = await api.travels.editTravel(id, data);
+			console.log('travel pasa1', travel);
       dispatch(editTravelSuccess(travel));
       router.navigate(`/travel/${travel._id}`);
+			console.log('travel._id pasa2', travel._id);
     } catch (error) {
       dispatch(editTravelFailure(error));
     }

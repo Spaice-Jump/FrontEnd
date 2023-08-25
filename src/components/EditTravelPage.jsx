@@ -1,4 +1,4 @@
-import { fetchLocations } from '../redux/actions';
+import { fetchLocations, editTravel } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, getTravelById } from '../redux/selectors';
 import { useEffect, useState } from 'react';
@@ -8,17 +8,17 @@ import { useParams } from 'react-router-dom';
 function EditTravelPage() {
 
   const {id} = useParams()
-  const editTravel = useSelector(getTravelById(id));
+  const editTrip = useSelector(getTravelById(id));
 
   const [travel, setTravel] = useState({
-		topic: editTravel.topic,
-		origin: editTravel.origin,
-		destination: editTravel.destination,
-		remarks: editTravel.remarks,
-		price: editTravel.price,
-		forSale: editTravel.forSale,
-		photo: editTravel.photo,
-		userId: editTravel.userId
+		topic: editTrip.topic,
+		origin: editTrip.origin,
+		destination: editTrip.destination,
+		remarks: editTrip.remarks,
+		price: editTrip.price,
+		forSale: editTrip.forSale,
+		photo: editTrip.photo,
+		userId: editTrip.userId
 	});
 
 	const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function EditTravelPage() {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		dispatch(editTravel(travel));
+		dispatch(editTravel(id, travel));
 	};
 
 	const handleChange = event => {
