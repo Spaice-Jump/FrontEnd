@@ -18,6 +18,7 @@ import RememberPassword from './layout/auth/login/RememberPassword.js';
 
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
+import RequireAuth from './layout/RequireAuth.js';
 
 
 function App() {
@@ -38,7 +39,14 @@ function App() {
 
         <Route path="/password" element={<RememberPassword />}/>
 
-        <Route path="/deleteUser" element={<DeleteUserPage />} />
+        <Route path="/deleteUser" element={
+        <RequireAuth>
+            {' '}
+            <DeleteUserPage />
+        </RequireAuth>
+    
+        } />
+        
         <Route path="/travel-edit/:id" element={<EditTravelPage />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>

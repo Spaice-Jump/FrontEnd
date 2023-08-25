@@ -46,4 +46,13 @@ import client, {
 
   }
 
+  export const getMe=(token)=>{
+    const me_URL = "/api/jwtWeb"
+    const data = {
+        token
+      };
+    return client.post(me_URL,data); 
+     
+  }
+
   

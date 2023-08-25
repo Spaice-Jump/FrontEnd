@@ -32,7 +32,7 @@ function FormDeleteUser({ userId }) {
     };
 
     await dispatch(authDeleteUser(data));
-    logout();
+
 
     
   };
