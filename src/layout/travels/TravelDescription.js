@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getTravel} from '../../api/serviceTravels';
+import { getTravel } from '../../api/serviceTravels';
 import ExperienceSection from '../home/components/ExperienceSection';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIsLogged, getUserId, getTravelById } from '../../redux/selectors';
@@ -48,12 +48,14 @@ const TravelDescription = () => {
 			<ExperienceSection />
 			<div className="travel-details">
 				<h2>{travel.topic}</h2>
-				<div className="travel-image">
-					<img
-						src={travel.photo}
-						alt={travel.topic}
-					/>
-				</div>
+				{travel.photo ? (
+					<div className="product-image">
+						<img
+							src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
+							alt={travel.topic}
+						/>
+					</div>
+				) : null}
 				<p className="text-travel-description">Origin: {travel.origin}</p>
 				<p className="text-travel-description">
 					Destination: {travel.destination}
