@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../api/serviceAuth';
-import { authLogout } from '../../redux/actions';
-import { getIsLogged } from '../../redux/selectors';
+import { getMe, logout } from '../../api/serviceAuth';
+import { authLoginSuccess, authLogout } from '../../redux/actions';
+import { getIsLogged, getUserId } from '../../redux/selectors';
+import storage from './storage';
 
 function Header() {
-  const isLogged = useSelector(getIsLogged) 
+  const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
+  const userId = useSelector(getUserId);
+
+  //Effect to search de userId
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!userId) {
+        const accessToken = storage.get('auth');
+        if (accessToken !== null) {
+          try {
+            const newUserId = await getMe(accessToken);
+            console.log(newUserId);
+            dispatch(authLoginSuccess(newUserId));
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+          }
+        }
+      }
+    };
+
+    fetchData();
+  }, [userId, dispatch]);
 
   const handlerLogout = () => {
     dispatch(authLogout());
@@ -68,37 +90,36 @@ function Header() {
                 </a>
               </li>
 
-               
               {isLogged ? (
                 <>
-                <li class="nav-item">
-                  <NavLink
-                    to="/newtravel"
-                    className="nav-NavLink"
-                  >
-                    Crear Viaje
-                  </NavLink>
-                </li>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/newtravel"
+                      className="nav-NavLink"
+                    >
+                      Crear Viaje
+                    </NavLink>
+                  </li>
 
-                <li class="nav-item">
-                  <NavLink
-                    to="/deleteUser"
-                    className="nav-NavLink"
-                  >
-                    Delete User
-                  </NavLink>
-                </li>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/deleteUser"
+                      className="nav-NavLink"
+                    >
+                      Delete User
+                    </NavLink>
+                  </li>
 
-                <li class="nav-item">
-                  <NavLink
-                    onClick={handlerLogout}
-                    className="nav-NavLink"
-                  >
-                    {' '}
-                    Logout{' '}
-                  </NavLink>
-                </li>
-              </>
+                  <li class="nav-item">
+                    <NavLink
+                      onClick={handlerLogout}
+                      className="nav-NavLink"
+                    >
+                      {' '}
+                      Logout{' '}
+                    </NavLink>
+                  </li>
+                </>
               ) : (
                 <>
                   <li class="nav-item">
@@ -118,7 +139,6 @@ function Header() {
                       Login
                     </NavLink>
                   </li>
-
                 </>
               )}
             </ul>
