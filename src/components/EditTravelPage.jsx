@@ -21,12 +21,15 @@ function EditTravelPage() {
 		userId: editTrip.userId
 	});
 
+	const locations = useSelector(getLocations);
 	const dispatch = useDispatch();
 	useEffect(() => {
+		if (locations.length !== 0){
+			return;
+		}
 		dispatch(fetchLocations());
-	}, [dispatch]);
+	}, [dispatch, locations]);
 
-	const locations = useSelector(getLocations);
 
 	const handleSubmit = event => {
 		event.preventDefault();

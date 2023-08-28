@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { getTravel, getTravels } from '../../api/serviceTravels';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getTravel} from '../../api/serviceTravels';
 import ExperienceSection from '../home/components/ExperienceSection';
 import { useSelector, useDispatch } from 'react-redux';
-import { getIsLogged, getUserId } from '../../redux/selectors';
+import { getIsLogged, getUserId, getTravelById } from '../../redux/selectors';
 import { deleteTravel } from '../../redux/actions';
 
 const TravelDescription = () => {
@@ -11,18 +11,25 @@ const TravelDescription = () => {
 	const [travel, setTravel] = useState(null);
 	const isLogged = useSelector(getIsLogged);
 	const userId = useSelector(getUserId);
+	const travelById = useSelector(getTravelById(id));
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	
+
+	console.log('travelById', travelById);
+
 	useEffect(() => {
-		getTravel(id)
-			.then(response => {
-				setTravel(response);
-			})
-			.catch(error => {
-				console.error('Error fetching travel details:', error);
-			});
-	}, [id]);
+		if (!travelById) {
+			getTravel(id)
+				.then(response => {
+					setTravel(response);
+				})
+				.catch(error => {
+					console.error('Error fetching travel details:', error);
+				});
+		} else {
+			setTravel(travelById);
+		}
+	}, [id, travelById]);
 
 	if (!travel) {
 		return <p>Loading...</p>;
@@ -61,8 +68,18 @@ const TravelDescription = () => {
 				<div className="travel-buttons">
 					{isLogged && userId === travel.userId ? (
 						<>
-							<button onClick={handleEdit} className="btn btn-primary">Editar viaje</button>
-							<button onClick={handleDelete} className="btn btn-primary">Borrar viaje</button>
+							<button
+								onClick={handleEdit}
+								className="btn btn-primary"
+							>
+								Editar viaje
+							</button>
+							<button
+								onClick={handleDelete}
+								className="btn btn-primary"
+							>
+								Borrar viaje
+							</button>
 						</>
 					) : null}
 				</div>
