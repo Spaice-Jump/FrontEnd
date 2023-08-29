@@ -20,7 +20,6 @@ import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
 import RequireAuth from './layout/RequireAuth.js';
 
-
 function App() {
   useEffect(() => {
     setupNavbar();
@@ -60,20 +59,20 @@ function App() {
           }
         />
 
-        <Route
-          path="/password"
-          element={<RememberPassword />}
-        />
+				<Route
+					path="/password"
+					element={<RememberPassword />}
+				/>
 
-        <Route
-          path="/deleteUser"
-          element={
-            <RequireAuth>
-              {' '}
-              <DeleteUserPage />
-            </RequireAuth>
-          }
-        />
+				<Route
+					path="/deleteUser"
+					element={
+						<RequireAuth>
+							{' '}
+							<DeleteUserPage />
+						</RequireAuth>
+					}
+				/>
 
         <Route
           path="/travel-edit/:id"

@@ -6,11 +6,10 @@ import './NewTravelPage.css';
 import { useParams } from 'react-router-dom';
 
 function EditTravelPage() {
+	const { id } = useParams();
+	const editTrip = useSelector(getTravelById(id));
 
-  const {id} = useParams()
-  const editTrip = useSelector(getTravelById(id));
-
-  const [travel, setTravel] = useState({
+	const [travel, setTravel] = useState({
 		topic: editTrip.topic,
 		origin: editTrip.origin,
 		destination: editTrip.destination,
@@ -18,15 +17,17 @@ function EditTravelPage() {
 		price: editTrip.price,
 		forSale: editTrip.forSale,
 		photo: editTrip.photo,
-		userId: editTrip.userId
+		userId: editTrip.userId,
 	});
 
+	const locations = useSelector(getLocations);
 	const dispatch = useDispatch();
 	useEffect(() => {
+		if (locations.length !== 0) {
+			return;
+		}
 		dispatch(fetchLocations());
-	}, [dispatch]);
-
-	const locations = useSelector(getLocations);
+	}, [dispatch, locations]);
 
 	const handleSubmit = event => {
 		event.preventDefault();
@@ -43,11 +44,20 @@ function EditTravelPage() {
 		setTravel({ ...travel, [name]: value });
 	};
 
-	const isDisabled = !travel.topic || !travel.origin || !travel.destination || !travel.price;
+	const isDisabled =
+		!travel.topic || !travel.origin || !travel.destination || !travel.price;
 
 	return (
 		<div className="newTravelContainer">
-			<h1>Crear nuevo viaje espacial</h1>
+			<h1>Edita tu viaje espacial</h1>
+			{travel.photo ? (
+				<div className="product-image">
+					<img
+						src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
+						alt={travel.topic}
+					/>
+				</div>
+			) : null}
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="topic">Título del viaje</label>
 				<input
@@ -128,7 +138,12 @@ function EditTravelPage() {
 					name="photo"
 					id="photo"
 				/>
-				<button type="submit" disabled={isDisabled}>Actualizar viaje</button>
+				<button
+					type="submit"
+					disabled={isDisabled}
+				>
+					Actualizar viaje
+				</button>
 			</form>
 		</div>
 	);

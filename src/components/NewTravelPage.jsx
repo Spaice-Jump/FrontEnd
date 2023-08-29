@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import './NewTravelPage.css';
 
 function NewTravelPage() {
-
 	const userId = useSelector(getUserId);
 
 	const [travel, setTravel] = useState({
@@ -16,15 +15,17 @@ function NewTravelPage() {
 		price: null,
 		forSale: true,
 		photo: null,
-		userId: userId
+		userId: userId,
 	});
 
+	const locations = useSelector(getLocations);
 	const dispatch = useDispatch();
 	useEffect(() => {
+		if (locations.length !== 0) {
+			return;
+		}
 		dispatch(fetchLocations());
-	}, [dispatch]);
-
-	const locations = useSelector(getLocations);
+	}, [dispatch, locations]);
 
 	const handleSubmit = event => {
 		event.preventDefault();
@@ -41,7 +42,8 @@ function NewTravelPage() {
 		setTravel({ ...travel, [name]: value });
 	};
 
-	const isDisabled = !travel.topic || !travel.origin || !travel.destination || !travel.price;
+	const isDisabled =
+		!travel.topic || !travel.origin || !travel.destination || !travel.price;
 
 	return (
 		<div className="newTravelContainer">
@@ -126,7 +128,12 @@ function NewTravelPage() {
 					name="photo"
 					id="photo"
 				/>
-				<button type="submit" disabled={isDisabled}>Crear viaje</button>
+				<button
+					type="submit"
+					disabled={isDisabled}
+				>
+					Crear viaje
+				</button>
 			</form>
 		</div>
 	);
