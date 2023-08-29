@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "menu_mobile": "Menú",
+    "experience": "Vive la experiencia"
+  },
+  "experience_section": {
+    "title": "Vive la experiencia"
+  },
+  "travel_section": {
+    "title": "VIAJA AL ESPACIO"
+  }
+}

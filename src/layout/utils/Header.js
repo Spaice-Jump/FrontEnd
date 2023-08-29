@@ -2,11 +2,18 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getMe, logout } from '../../api/serviceAuth';
+import { useTranslation } from 'react-i18next';
 import { authLoginSuccess, authLogout } from '../../redux/actions';
 import { getIsLogged, getUserId } from '../../redux/selectors';
+import flagEn from '../../assets/img/flag_en.png'
+import flagEs from '../../assets/img/flag_es.png'
 import storage from './storage';
 
 function Header() {
+  const { t, i18n } = useTranslation();
+  const changeLanguage = language => {
+    i18n.changeLanguage(language);
+  };
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
   const userId = useSelector(getUserId);
@@ -42,11 +49,46 @@ function Header() {
     >
       {
         <div class="container px-4 px-lg-5">
+          <li className="nav-item dropdown">
+          <button
+              className="nav-link dropdown-toggle"
+              id="languageDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src={i18n.language === 'en' ? flagEn : flagEs}
+                alt={i18n.language.toUpperCase()}
+                className="language-flag"
+              />
+            </button>
+            <ul
+              className="dropdown-menu"
+              aria-labelledby="languageDropdown"
+            >
+              <li>
+                <button
+                  onClick={() => changeLanguage('en')}
+                  className="dropdown-item"
+                >
+                  <img src={flagEn} alt="EN" className="language-flag" /> EN
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => changeLanguage('es')}
+                  className="dropdown-item"
+                >
+                  <img src={flagEs} alt="ES" className="language-flag" /> ES
+                </button>
+              </li>
+            </ul>
+          </li>
           <NavLink
             to="/"
             className="navbar-brand"
           >
-            Inicio
+            {t('navbar.home')}
           </NavLink>
           <button
             class="navbar-toggler navbar-toggler-right"
@@ -57,7 +99,7 @@ function Header() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            Menu
+            {t('navbar.menu_mobile')}
             <i class="fas fa-bars"></i>
           </button>
           <div
@@ -70,7 +112,7 @@ function Header() {
                   class="nav-NavLink"
                   href="#about"
                 >
-                  Vive la experiencia
+                  {t('navbar.experience')}
                 </a>
               </li>
               <li class="nav-item">

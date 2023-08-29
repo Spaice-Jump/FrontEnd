@@ -8,14 +8,14 @@ import TravelDescription from './layout/travels/TravelDescription.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import './layout/auth/login/login.css'
+import { I18nextProvider } from 'react-i18next';
+import i18n from './layout/utils/i18n/i18n.js';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
 import Home from './layout/home/Home.jsx';
 import LoginPage from './layout/auth/login/loginPage.jsx';
 import './components/NewTravelPage.jsx';
 import NewTravelPage from './components/NewTravelPage.jsx';
-
 import RememberPassword from './layout/auth/login/RememberPassword.js';
-
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
 import RequireAuth from './layout/RequireAuth.js';
@@ -27,7 +27,7 @@ function App() {
   }, []);
   
   return (
-    <>
+    <I18nextProvider i18n={i18n}>
       <Header />
       <Routes>
         <Route
@@ -86,7 +86,7 @@ function App() {
       </Routes>
       <ContactSection />
       <Footer />
-    </>
+    </I18nextProvider>
   );
 }
 
