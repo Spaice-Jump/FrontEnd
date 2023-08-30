@@ -7,7 +7,7 @@ import Travels from './layout/travels/Travels.js';
 import TravelDescription from './layout/travels/TravelDescription.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
-import './layout/auth/login/login.css'
+import './layout/auth/login/login.css';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './layout/utils/i18n/i18n.js';
 import NewUserPage from './layout/auth/Signup/NewUserPage.jsx';
@@ -19,12 +19,13 @@ import RememberPassword from './layout/auth/login/RememberPassword.js';
 import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
 import RequireAuth from './layout/RequireAuth.js';
+import UpdateUser from './layout/auth/updateUser/updateUser.js';
 
 function App() {
   useEffect(() => {
     setupNavbar();
   }, []);
-  
+
   return (
     <I18nextProvider i18n={i18n}>
       <Header />
@@ -59,20 +60,30 @@ function App() {
           }
         />
 
-				<Route
-					path="/password"
-					element={<RememberPassword />}
-				/>
+        <Route
+          path="/password"
+          element={<RememberPassword />}
+        />
 
-				<Route
-					path="/deleteUser"
-					element={
-						<RequireAuth>
-							{' '}
-							<DeleteUserPage />
-						</RequireAuth>
-					}
-				/>
+        <Route
+          path="/deleteUser"
+          element={
+            <RequireAuth>
+              {' '}
+              <DeleteUserPage />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/updateUser"
+          element={
+            <RequireAuth>
+              {' '}
+              <UpdateUser />
+            </RequireAuth>
+          }
+        />
 
         <Route
           path="/travel-edit/:id"

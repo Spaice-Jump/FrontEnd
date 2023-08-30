@@ -1,4 +1,4 @@
-const Input = ({ tiLabel, type, name, id, handleInput }) => {
+const Input = ({ tiLabel, type, name, id, handleInput, value }) => {
   const handleChange = event => {
     handleInput(event);
   };
@@ -8,6 +8,7 @@ const Input = ({ tiLabel, type, name, id, handleInput }) => {
         {tiLabel}
         <br />
         <input
+          value={value}
           type={type}
           name={name}
           id={id}

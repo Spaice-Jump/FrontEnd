@@ -64,7 +64,7 @@ function LoginPage() {
     >
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">New Space Traveler</h1>
+          <h1 className="mx-auto my-0 text-uppercase">Login User</h1>
           {isLoading ? (
             <Loading />
           ) : (
@@ -121,7 +121,13 @@ function LoginPage() {
                 </span>
               </p>
               <p class="text-white">
-                ¿Has olvidado la contraseña? <a href="/password" class="link-info">Recordar Contraseña</a>
+                ¿Has olvidado la contraseña?{' '}
+                <a
+                  href="/password"
+                  class="link-info"
+                >
+                  Recordar Contraseña
+                </a>
               </p>
 
               {!error ? (

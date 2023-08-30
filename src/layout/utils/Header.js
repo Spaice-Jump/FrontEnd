@@ -142,6 +142,14 @@ function Header() {
                       Crear Viaje
                     </NavLink>
                   </li>
+                  <li class="nav-item">
+                    <NavLink
+                      to="/updateUser"
+                      className="nav-NavLink"
+                    >
+                      Update User
+                    </NavLink>
+                  </li>
 
                   <li class="nav-item">
                     <NavLink
