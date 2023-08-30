@@ -60,15 +60,15 @@ function LoginPage() {
   return (
     <section
       id="neu-user"
-      className="masthead"
+      className="masthead login-form-page"
     >
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">New Space Traveler</h1>
+          <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">New Space Traveler</h1>
           {isLoading ? (
             <Loading />
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-login-form">
               <p className="text-white-50 mx-auto mt-2 mb-5">
                 <label>
                   Email
@@ -120,8 +120,10 @@ function LoginPage() {
                   Marca para guardar credenciales
                 </span>
               </p>
-              <p class="text-white">
-                ¿Has olvidado la contraseña? <a href="/password" class="link-info">Recordar Contraseña</a>
+              <p class="text-white forget-password">
+                ¿Has olvidado la contraseña?
+                <br />
+                <a href="/password" class="link-info">Recordar Contraseña</a>
               </p>
 
               {!error ? (

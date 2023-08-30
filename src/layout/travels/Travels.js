@@ -20,7 +20,7 @@ const Travels = () => {
 
 	return (
 		<>
-			<ExperienceSection />
+			<section className='travels-first-container'>
 			<div className="container travels-container">
 				<div className="row">
 					{travels ? (
@@ -94,6 +94,7 @@ const Travels = () => {
 					)}
 				</div>
 			</div>
+			</section>
 		</>
 	);
 };

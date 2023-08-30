@@ -38,7 +38,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-form">
       {isLoading ? (
         <Loading />
       ) : (

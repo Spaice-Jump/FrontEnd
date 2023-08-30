@@ -17,11 +17,11 @@ function NewUserPage() {
   return (
     <section
       id="neu-user"
-      className="masthead"
+      className="masthead register-form-page"
     >
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">New Space Traveler</h1>
+          <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">New Space Traveler</h1>
           {loading ? <Form /> : <Loading/>}
         </div>
       </div>

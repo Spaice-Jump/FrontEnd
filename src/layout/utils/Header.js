@@ -47,43 +47,43 @@ function Header() {
       className="navbar navbar-expand-lg navbar-light fixed-top"
       id="mainNav"
     >
+    <li className="nav-item dropdown language-selector">
+      <button
+        className="nav-link dropdown-toggle language-selector-button"
+        id="languageDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+      <img
+        src={i18n.language === 'en' ? flagEn : flagEs}
+        alt={i18n.language.toUpperCase()}
+        className="language-flag"
+      />
+      </button>
+        <ul
+          className="dropdown-menu language-menu"
+          aria-labelledby="languageDropdown"
+        >
+          <li>
+            <button
+              onClick={() => changeLanguage('en')}
+              className="dropdown-item language-option"
+            >
+              <img src={flagEn} alt="EN" className="language-flag" /><span className='language-text'>EN</span>
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => changeLanguage('es')}
+              className="dropdown-item language-option"
+            >
+              <img src={flagEs} alt="ES" className="language-flag" /><span className='language-text'>ES</span>
+            </button>
+          </li>
+        </ul>
+      </li>
       {
         <div class="container px-4 px-lg-5">
-          <li className="nav-item dropdown">
-          <button
-              className="nav-link dropdown-toggle"
-              id="languageDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src={i18n.language === 'en' ? flagEn : flagEs}
-                alt={i18n.language.toUpperCase()}
-                className="language-flag"
-              />
-            </button>
-            <ul
-              className="dropdown-menu"
-              aria-labelledby="languageDropdown"
-            >
-              <li>
-                <button
-                  onClick={() => changeLanguage('en')}
-                  className="dropdown-item"
-                >
-                  <img src={flagEn} alt="EN" className="language-flag" /> EN
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => changeLanguage('es')}
-                  className="dropdown-item"
-                >
-                  <img src={flagEs} alt="ES" className="language-flag" /> ES
-                </button>
-              </li>
-            </ul>
-          </li>
           <NavLink
             to="/"
             className="navbar-brand"
@@ -110,28 +110,11 @@ function Header() {
               <li class="nav-item">
                 <a
                   class="nav-NavLink"
-                  href="#about"
+                  href="/travels"
                 >
-                  {t('navbar.experience')}
+                  Viajes
                 </a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-NavLink"
-                  href="#projects"
-                >
-                  Distintas ideas del proyecto
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-NavLink"
-                  href="#signup"
-                >
-                  Contacto o algo similar
-                </a>
-              </li>
-
               {isLogged ? (
                 <>
                   <li class="nav-item">

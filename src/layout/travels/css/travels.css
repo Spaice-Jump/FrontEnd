@@ -3,6 +3,10 @@
   --text-color: #131e2c;
 }
 .product-grid{
+  border: cadetblue;
+  border-style: outset;
+  border-radius: 35px;
+  height: 45vh;
   font-family: 'Oswald', sans-serif;
   text-align: center;
   margin: 40px 10px;
@@ -91,6 +95,8 @@
   z-index: 1;
 }
 .product-grid .add-to-cart{
+  border-style: outset;
+  border-radius: 30px;
   color: black;
   background: #f4f4f4;
   font-size: 14px;
@@ -146,9 +152,22 @@
 }
 
 /* CUSTOM STYLES */
+.travels-first-container {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.7) 75%,
+    #000 100%
+  ),url('../../../assets/img/espacio-planetas.jpg');
+  background-position: absolute;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-size: contain;
+}
+
 .travels-container {
-  margin-top: 60px;
-  margin-bottom: 60px;
+  padding-top: 120px;
+  padding-bottom: 60px;
 }
 
 .text-travels-ads {

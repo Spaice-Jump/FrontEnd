@@ -1,64 +1,145 @@
-/* Estilos generales para el contenedor del formulario */
-.newTravelContainer {
-  max-width: 500px;
-  margin: 80px auto 20px; /* Ajustado margen superior y agregado margen inferior */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  position: relative; /* Añadido posicionamiento relativo */
-  z-index: 1; /* Asegura que el formulario aparezca por encima de otros elementos */
+.new-travel-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-/* Estilos para el encabezado */
-.newTravelContainer h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.new-travel-title {
+  margin-top: 10px !important;
+  background-color: #1251d8 !important;
 }
 
-/* Estilos para las etiquetas de los campos */
-.newTravelContainer label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
+.new-travel-all-form {
+  z-index: 1;
 }
 
-/* Estilos para los campos de entrada */
-.newTravelContainer input[type="text"],
-.newTravelContainer input[type="number"],
-.newTravelContainer select {
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-/* Estilos para el campo de archivo */
-.newTravelContainer input[type="file"] {
-  margin-top: 8px;
+#new-travel {
+  background-color: #050505;
+  margin: 0;
+  margin-right: 0;
+  height: 160vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
 }
 
-/* Estilos para el botón de enviar habilitado */
-.newTravelContainer button[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
+.new-travel-form-wrapper {
+  display: flex;
+  justify-content: center; /* Añade esta línea */
+  align-items: center;
+}
+
+.new-travel-form {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 1s ease;
+}
+
+.new-travel-form label {
+  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.new-travel-form input {
+  background-color: transparent;
+  border: 2px solid #64a19d; /* Borde de color */
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.new-travel-form select {
+  background-color: #64a19d;
+  border: 2px solid #64a19d;
+  color: black;
+  padding: 0.5rem 1rem;
+  margin-bottom: 10px; /* Aumenta el margen inferior para separar los select */
+  border-radius: 5px;
+  width: 100%;
+  appearance: none; /* Elimina el estilo nativo del desplegable */
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' width='12' height='6' viewBox='0 0 12 6' xmlns='http://www.w3.org/2000/svg'><path d='M1.5 0l4.5 4.5L10.5 0z' fill='white'/></svg>"); /* Agrega una flecha personalizada */
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px 6px;
+  transition: border-color 0.3s ease;
+}
+
+.new-travel-form select:focus {
+  outline: none;
+  border-color: #64a19d;
+  box-shadow: 0 0 20px rgba(100, 161, 157, 0.5);
+}
+
+.new-travel-form input:focus {
+  outline: none;
+  border-color: #64a19d;
+  box-shadow: 0 0 20px rgba(100, 161, 157, 0.5); /* Sombra al enfocar */
+}
+
+.new-travel-form button {
+  background-color: #64a19d;
   border: none;
-  border-radius: 4px;
-  font-size: 18px;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.newTravelContainer button[type="submit"]:hover {
-  background-color: #0056b3;
+.new-travel-form button:hover {
+  background-color: #50857c;
 }
 
-/* Estilos para el botón de enviar desactivado */
-.newTravelContainer button[type="submit"]:disabled {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
+/* Estilos adicionales para el mensaje de error */
+.error p {
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.error p:hover {
+  color: #a61313;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

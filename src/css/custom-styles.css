@@ -1,0 +1,34 @@
+/* NAVBAR */
+.language-selector {
+  margin-left: 20px;
+  background-color: transparent;
+}
+
+.language-selector-button {
+  background-color: transparent;
+  border-style: none;
+  color: white;
+}
+
+.language-flag {
+  margin: 20px;
+}
+
+.language-menu {
+  background-color: transparent !important;
+  animation: fadeInUp 1s ease;
+}
+
+.language-option {
+  margin: -10px -10px -10px 5px;
+  padding: 0 !important;
+  border-radius: 10px;
+}
+
+.language-option:hover {
+  background-color: #64a19d !important;
+}
+
+.language-text {
+  color: rgba(255, 255, 255, 0.5);
+}

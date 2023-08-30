@@ -2,6 +2,7 @@ import { createTravel, fetchLocations } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, getUserId } from '../redux/selectors';
 import { useState, useEffect } from 'react';
+import videoBackground from '../assets/video/new-travel-video-background.mp4'
 import './NewTravelPage.css';
 
 function NewTravelPage() {
@@ -46,9 +47,15 @@ function NewTravelPage() {
 		!travel.topic || !travel.origin || !travel.destination || !travel.price;
 
 	return (
-		<div className="newTravelContainer">
-			<h1>Crear nuevo viaje espacial</h1>
-			<form onSubmit={handleSubmit}>
+		<section id="new-travel" className="masthead new-travel-page">
+			<video className="video-background" autoPlay muted loop>
+        <source src={videoBackground} type="video/mp4" />
+        Tu navegador no admite la reproducción de videos.
+      </video>
+		<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
+		<div className="text-center">
+			<h1 className="mx-auto my-0 text-uppercase new-travel-title">Crear nuevo viaje espacial</h1>
+			<form onSubmit={handleSubmit} className='new-travel-form'>
 				<label htmlFor="topic">Título del viaje</label>
 				<input
 					value={travel.topic}
@@ -57,7 +64,7 @@ function NewTravelPage() {
 					name="topic"
 					id="topic"
 				/>
-				<label htmlFor="origin">Origen</label>
+				<label htmlFor="origin" className='origin-label'>Origen</label>
 				<select
 					value={travel.origin}
 					onChange={handleChange}
@@ -75,7 +82,7 @@ function NewTravelPage() {
 						</option>
 					))}
 				</select>
-				<label htmlFor="destination">Destino</label>
+				<label htmlFor="destination" className='destination-label'>Destino</label>
 				<select
 					value={travel.destination}
 					onChange={handleChange}
@@ -93,6 +100,7 @@ function NewTravelPage() {
 						</option>
 					))}
 				</select>
+				<br />
 				<label htmlFor="price">Precio</label>
 				<input
 					value={travel.price}
@@ -136,6 +144,8 @@ function NewTravelPage() {
 				</button>
 			</form>
 		</div>
+		</div>
+		</section>
 	);
 }
 
