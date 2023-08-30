@@ -1,6 +1,5 @@
 /* Estilos para el cohete */
 .rocket {
-  display: none;
   position: absolute;
   width: 100px;
   height: 100px;
@@ -16,12 +15,10 @@
 
 /* Animación para volar al hacer hover */
 .btn:hover .rocket {
-  display: block;
   opacity: 1;
-  transform: translateY(-100px) rotate(-45deg);
-  animation: flyAway 4s ease-in-out forwards;
+  animation: flyAway 8s ease-in-out forwards;
+  
 }
-
 @keyframes flyAway {
   0% {
     transform: translateY(0) rotate(0);
@@ -31,7 +28,7 @@
     transform: translateY(200px) rotate(-45deg);
   }
   50% {
-    transform: translateY(5px) rotate(-45deg);
+    transform: translateY(-15px) rotate(-45deg);
   }
   100% {
     transform: translateY(-1000px) rotate(-45deg);
