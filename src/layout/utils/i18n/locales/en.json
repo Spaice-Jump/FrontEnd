@@ -2,13 +2,19 @@
   "navbar": {
     "home": "Home",
     "menu_mobile": "Menu",
-    "experience": "Live the experience"
+    "travels": "Travels",
+    "create-travel": "Create a unique travel experience",
+    "delete-user": "Delete user",
+    "logout-user": "Logout",
+    "new-user": "New space traveler",
+    "login-user": "Login"
   },
   "experience_section": {
     "title": "Live the experience"
   },
   "travel_section": {
-    "title": "TRAVEL TO SPACE"
+    "title": "TRAVEL TO SPACE",
+    "description": "Embark on the unimaginable with our space exploration platform. Whether you're seeking the journey of your dreams beyond the stars or aiming to vend a life-altering experience, we're here to transform your ambitions into cosmic reality. We unite dreamers and adventurers in an intergalactic marketplace, presenting the opportunity to uncover the mysteries of deep space. Your next space voyage starts here!",
+    "start-journey": "Start your journey here"
   }
-  
 }

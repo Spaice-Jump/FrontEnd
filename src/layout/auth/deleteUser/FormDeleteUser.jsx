@@ -1,28 +1,28 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getUi, getUserId } from '../../../redux/selectors';
-import Loading from '../../utils/spinner/Loading';
-import Input from '../Signup/Input';
-import { isButtonDisabled } from '../Signup/formUtils';
-import { authDeleteUser, resetErrors } from '../../../redux/actions';
-import { logout } from '../../../api/serviceAuth'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getUi, getUserId } from "../../../redux/selectors";
+import Loading from "../../utils/spinner/Loading";
+import Input from "../Signup/Input";
+import { isButtonDisabled } from "../Signup/formUtils";
+import { authDeleteUser, resetErrors } from "../../../redux/actions";
+import { logout } from "../../../api/serviceAuth";
 
 function FormDeleteUser({ userId }) {
   let { isLoading, error } = useSelector(getUi);
 
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
     setButtonDisabled(
-      isButtonDisabled('user', email, password, passwordConfirm)
+      isButtonDisabled("user", email, password, passwordConfirm),
     );
   }, [email, password, passwordConfirm]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       userId,
@@ -32,9 +32,6 @@ function FormDeleteUser({ userId }) {
     };
 
     await dispatch(authDeleteUser(data));
-
-
-    
   };
 
   const resetError = () => {
@@ -52,7 +49,7 @@ function FormDeleteUser({ userId }) {
             type="email"
             name="email"
             id="email"
-            handleInput={e => setEmail(e.target.value)}
+            handleInput={(e) => setEmail(e.target.value)}
           />
 
           <Input
@@ -60,7 +57,7 @@ function FormDeleteUser({ userId }) {
             type="password"
             name="password"
             id="password"
-            handleInput={e => setPassword(e.target.value)}
+            handleInput={(e) => setPassword(e.target.value)}
           />
 
           <Input
@@ -68,7 +65,7 @@ function FormDeleteUser({ userId }) {
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
-            handleInput={e => setPasswordConfirm(e.target.value)}
+            handleInput={(e) => setPasswordConfirm(e.target.value)}
           />
 
           <button
@@ -84,10 +81,7 @@ function FormDeleteUser({ userId }) {
       {!error ? (
         <br />
       ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
+        <div className="error" onClick={resetError}>
           <p data-testid="error"> {error}</p>
         </div>
       )}

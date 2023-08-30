@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getMe, logout } from '../../api/serviceAuth';
-import { useTranslation } from 'react-i18next';
-import { authLoginSuccess, authLogout } from '../../redux/actions';
-import { getIsLogged, getUserId } from '../../redux/selectors';
-import flagEn from '../../assets/img/flag_en.png'
-import flagEs from '../../assets/img/flag_es.png'
-import storage from './storage';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { getMe, logout } from "../../api/serviceAuth";
+import { useTranslation } from "react-i18next";
+import { authLoginSuccess, authLogout } from "../../redux/actions";
+import { getIsLogged, getUserId } from "../../redux/selectors";
+import flagEn from "../../assets/img/flag_en.png";
+import flagEs from "../../assets/img/flag_es.png";
+import storage from "./storage";
 
 function Header() {
   const { t, i18n } = useTranslation();
-  const changeLanguage = language => {
+  const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
   const isLogged = useSelector(getIsLogged);
@@ -22,14 +22,14 @@ function Header() {
   useEffect(() => {
     const fetchData = async () => {
       if (!userId) {
-        const accessToken = storage.get('auth');
+        const accessToken = storage.get("auth");
         if (accessToken !== null) {
           try {
             const newUserId = await getMe(accessToken);
             console.log(newUserId);
             dispatch(authLoginSuccess(newUserId));
           } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.error("Error fetching user data:", error);
           }
         }
       }
@@ -47,48 +47,47 @@ function Header() {
       className="navbar navbar-expand-lg navbar-light fixed-top"
       id="mainNav"
     >
-    <li className="nav-item dropdown language-selector">
-      <button
-        className="nav-link dropdown-toggle language-selector-button"
-        id="languageDropdown"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-      <img
-        src={i18n.language === 'en' ? flagEn : flagEs}
-        alt={i18n.language.toUpperCase()}
-        className="language-flag"
-      />
-      </button>
+      <li className="nav-item dropdown language-selector">
+        <button
+          className="nav-link dropdown-toggle language-selector-button"
+          id="languageDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src={i18n.language === "en" ? flagEn : flagEs}
+            alt={i18n.language.toUpperCase()}
+            className="language-flag"
+          />
+        </button>
         <ul
           className="dropdown-menu language-menu"
           aria-labelledby="languageDropdown"
         >
           <li>
             <button
-              onClick={() => changeLanguage('en')}
+              onClick={() => changeLanguage("en")}
               className="dropdown-item language-option"
             >
-              <img src={flagEn} alt="EN" className="language-flag" /><span className='language-text'>EN</span>
+              <img src={flagEn} alt="EN" className="language-flag" />
+              <span className="language-text">EN</span>
             </button>
           </li>
           <li>
             <button
-              onClick={() => changeLanguage('es')}
+              onClick={() => changeLanguage("es")}
               className="dropdown-item language-option"
             >
-              <img src={flagEs} alt="ES" className="language-flag" /><span className='language-text'>ES</span>
+              <img src={flagEs} alt="ES" className="language-flag" />
+              <span className="language-text">ES</span>
             </button>
           </li>
         </ul>
       </li>
       {
         <div class="container px-4 px-lg-5">
-          <NavLink
-            to="/"
-            className="navbar-brand"
-          >
-            {t('navbar.home')}
+          <NavLink to="/" className="navbar-brand">
+            {t("navbar.home")}
           </NavLink>
           <button
             class="navbar-toggler navbar-toggler-right"
@@ -99,69 +98,47 @@ function Header() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            {t('navbar.menu_mobile')}
+            {t("navbar.menu_mobile")}
             <i class="fas fa-bars"></i>
           </button>
-          <div
-            class="collapse navbar-collapse"
-            id="navbarResponsive"
-          >
+          <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a
-                  class="nav-NavLink"
-                  href="/travels"
-                >
-                  Viajes
+                <a class="nav-NavLink" href="/travels">
+                  {t("navbar.travels")}
                 </a>
               </li>
               {isLogged ? (
                 <>
                   <li class="nav-item">
-                    <NavLink
-                      to="/newtravel"
-                      className="nav-NavLink"
-                    >
-                      Crear Viaje
+                    <NavLink to="/newtravel" className="nav-NavLink">
+                      {t("navbar.create-travel")}
                     </NavLink>
                   </li>
 
                   <li class="nav-item">
-                    <NavLink
-                      to="/deleteUser"
-                      className="nav-NavLink"
-                    >
-                      Delete User
+                    <NavLink to="/deleteUser" className="nav-NavLink">
+                      {t("navbar.delete-user")}
                     </NavLink>
                   </li>
-
                   <li class="nav-item">
-                    <NavLink
-                      onClick={handlerLogout}
-                      className="nav-NavLink"
-                    >
-                      {' '}
-                      Logout{' '}
+                    <NavLink onClick={handlerLogout} className="nav-NavLink">
+                      {" "}
+                      {t("navbar.logout-user")}{" "}
                     </NavLink>
                   </li>
                 </>
               ) : (
                 <>
                   <li class="nav-item">
-                    <NavLink
-                      to="/signup"
-                      className="nav-NavLink"
-                    >
-                      New Space User
+                    <NavLink to="/signup" className="nav-NavLink">
+                      {t("navbar.new-user")}
                     </NavLink>
                   </li>
 
                   <li class="nav-item">
-                    <NavLink
-                      to="/login"
-                      className="nav-NavLink"
-                    >
-                      Login
+                    <NavLink to="/login" className="nav-NavLink">
+                      {t("navbar.login-user")}
                     </NavLink>
                   </li>
                 </>

@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authPassword, resetErrors } from "../../../redux/actions";
-import Loading from "../../utils/spinner/Loading"
-import { getUi } from '../../../redux/selectors';
+import Loading from "../../utils/spinner/Loading";
+import { getUi } from "../../../redux/selectors";
 import { rememberPassword } from "../../../api/serviceAuth";
 
-
-
 function RememberPassword() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   let { isLoading, error } = useSelector(getUi);
   //const [error, setError] = useState('');
   //const [loading, setLoading] = useState(false)
@@ -28,9 +26,9 @@ function RememberPassword() {
   //   }
 
   //   }
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(credential)
+    console.log(credential);
     //await rememberPassword(credential)
     await dispatch(authPassword(credential));
   };
@@ -39,21 +37,18 @@ function RememberPassword() {
     dispatch(resetErrors());
   };
   const [credential, setCredential] = useState({
-    email: '',
+    email: "",
   });
-  const handleChange = event => {
-    if (event.target.name === 'email') {
+  const handleChange = (event) => {
+    if (event.target.name === "email") {
       setCredential({ ...credential, email: event.target.value }); //con esto vemos si escribe en los imput o no
     }
   };
 
-  const disableButton = !credential.email
+  const disableButton = !credential.email;
 
   return (
-    <section
-      id="neu-password"
-      className="masthead"
-    >
+    <section id="neu-password" className="masthead">
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
           <h1 className="mx-auto my-0 text-uppercase">New Space Traveler</h1>
@@ -90,10 +85,7 @@ function RememberPassword() {
               {!error ? (
                 <br />
               ) : (
-                <div
-                  className="error"
-                  onClick={resetError}
-                >
+                <div className="error" onClick={resetError}>
                   <p data-testid="error"> {error}</p>
                 </div>
               )}
@@ -104,6 +96,5 @@ function RememberPassword() {
     </section>
   );
 }
-    
-    
+
 export default RememberPassword;

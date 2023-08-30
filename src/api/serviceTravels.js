@@ -12,7 +12,7 @@ export function postTravel(data) {
   return client.post("/api/travels", data, {
     headers: {
       "Content-Type": "multipart/form-data",
-      },
+    },
   });
 }
 

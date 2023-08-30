@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react';
-import Input from './Input';
-import { isButtonDisabled } from './formUtils';
-import Loading from '../../utils/spinner/Loading';
-import { useDispatch, useSelector } from 'react-redux';
-import { authSignUp, resetErrors } from '../../../redux/actions';
-import { getUi } from '../../../redux/selectors';
+import { useEffect, useState } from "react";
+import Input from "./Input";
+import { isButtonDisabled } from "./formUtils";
+import Loading from "../../utils/spinner/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { authSignUp, resetErrors } from "../../../redux/actions";
+import { getUi } from "../../../redux/selectors";
 
 const Form = () => {
   let { isLoading, error } = useSelector(getUi);
 
   const dispatch = useDispatch();
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
-
 
   useEffect(() => {
     setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
   }, [user, email, password, passwordConfirm]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       user,
@@ -48,7 +47,7 @@ const Form = () => {
             type="text"
             name="user"
             id="user"
-            handleInput={e => setUser(e.target.value)}
+            handleInput={(e) => setUser(e.target.value)}
           />
 
           <Input
@@ -56,7 +55,7 @@ const Form = () => {
             type="email"
             name="email"
             id="email"
-            handleInput={e => setEmail(e.target.value)}
+            handleInput={(e) => setEmail(e.target.value)}
           />
 
           <Input
@@ -64,7 +63,7 @@ const Form = () => {
             type="password"
             name="password"
             id="password"
-            handleInput={e => setPassword(e.target.value)}
+            handleInput={(e) => setPassword(e.target.value)}
           />
 
           <Input
@@ -72,7 +71,7 @@ const Form = () => {
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
-            handleInput={e => setPasswordConfirm(e.target.value)}
+            handleInput={(e) => setPasswordConfirm(e.target.value)}
           />
 
           <button
@@ -88,13 +87,9 @@ const Form = () => {
       {!error ? (
         <br />
       ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
+        <div className="error" onClick={resetError}>
           <p data-testid="error"> {error}</p>
         </div>
-
       )}
     </form>
   );

@@ -1,5 +1,5 @@
 const Input = ({ tiLabel, type, name, id, handleInput }) => {
-  const handleChange = event => {
+  const handleChange = (event) => {
     handleInput(event);
   };
   return (

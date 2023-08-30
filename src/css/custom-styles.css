@@ -32,3 +32,8 @@
 .language-text {
   color: rgba(255, 255, 255, 0.5);
 }
+
+/* Travel Section CSS */
+.travel-title {
+  margin-bottom: 60px !important;
+}

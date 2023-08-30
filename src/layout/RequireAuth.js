@@ -30,11 +30,11 @@
 //           );
 //       } else {
 //         try {
-//             const newUserId = await getMe(accessToken)    
+//             const newUserId = await getMe(accessToken)
 //         } catch (error) {
-            
+
 //         }
-        
+
 //       }
 //     }
 //   }
@@ -44,14 +44,13 @@
 
 // export default RequireAuth;
 
-
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react'; // Importa useEffect
-import { getIsLogged, getUserId } from '../redux/selectors';
-import { Navigate, useLocation } from 'react-router-dom';
-import storage from './utils/storage';
-import { getMe } from '../api/serviceAuth';
-import { authLoginSuccess } from '../redux/actions';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react"; // Importa useEffect
+import { getIsLogged, getUserId } from "../redux/selectors";
+import { Navigate, useLocation } from "react-router-dom";
+import storage from "./utils/storage";
+import { getMe } from "../api/serviceAuth";
+import { authLoginSuccess } from "../redux/actions";
 // ...
 
 const RequireAuth = ({ children }) => {
@@ -63,13 +62,12 @@ const RequireAuth = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (!userId) {
-        const accessToken = storage.get('auth');
+        const accessToken = storage.get("auth");
         if (accessToken !== null) {
           try {
             const newUserId = await getMe(accessToken);
-            console.log(newUserId)
+            console.log(newUserId);
             dispatch(authLoginSuccess(newUserId));
-            
           } catch (error) {
             console.error("Error fetching user data:", error);
           }
@@ -81,12 +79,7 @@ const RequireAuth = ({ children }) => {
   }, [userId]);
 
   if (!isLogged) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ from: location }}
-      />
-    );
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 
   return children;

@@ -1,24 +1,17 @@
-import React from 'react';
-import bgMasthead from '../../../assets/img/bg-masthead.jpg';
-import demoImage01 from '../../../assets/img/demo-image-01.jpg';
-import demoImage02 from '../../../assets/img/demo-image-02.jpg';
+import React from "react";
+import bgMasthead from "../../../assets/img/bg-masthead.jpg";
+import demoImage01 from "../../../assets/img/demo-image-01.jpg";
+import demoImage02 from "../../../assets/img/demo-image-02.jpg";
 
 function ProjectsSection() {
   return (
-    <section
-      className="projects-section bg-light"
-      id="projects"
-    >
+    <section className="projects-section bg-light" id="projects">
       {
         <div class="container px-4 px-lg-5">
           {/*Featured Project Row*/}
           <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
             <div class="col-xl-8 col-lg-7">
-              <img
-                class="img-fluid mb-3 mb-lg-0"
-                src={bgMasthead}
-                alt="..."
-              />
+              <img class="img-fluid mb-3 mb-lg-0" src={bgMasthead} alt="..." />
             </div>
             <div class="col-xl-4 col-lg-5">
               <div class="featured-text text-center text-lg-left">
@@ -34,11 +27,7 @@ function ProjectsSection() {
           {/*Project One Row*/}
           <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
             <div class="col-lg-6">
-              <img
-                class="img-fluid"
-                src={demoImage01}
-                alt="..."
-              />
+              <img class="img-fluid" src={demoImage01} alt="..." />
             </div>
             <div class="col-lg-6">
               <div class="bg-black text-center h-100 project">
@@ -57,11 +46,7 @@ function ProjectsSection() {
           {/*Project two Row*/}
           <div class="row gx-0 justify-content-center">
             <div class="col-lg-6">
-              <img
-                class="img-fluid"
-                src={demoImage02}
-                alt="..."
-              />
+              <img class="img-fluid" src={demoImage02} alt="..." />
             </div>
             <div class="col-lg-6 order-lg-first">
               <div class="bg-black text-center h-100 project">

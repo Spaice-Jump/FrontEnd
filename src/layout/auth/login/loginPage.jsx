@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { login } from '../../../api/serviceAuth';
-import { authlogin, resetErrors } from '../../../redux/actions';
-import { getIsLogged, getUi } from '../../../redux/selectors';
-import Loading from '../../utils/spinner/Loading';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { login } from "../../../api/serviceAuth";
+import { authlogin, resetErrors } from "../../../redux/actions";
+import { getIsLogged, getUi } from "../../../redux/selectors";
+import Loading from "../../utils/spinner/Loading";
 function LoginPage() {
   const dispatch = useDispatch();
   let { isLoading, error } = useSelector(getUi);
@@ -27,7 +27,7 @@ function LoginPage() {
   //   }
 
   //   }
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(authlogin(credential, checked));
     //redirect to pathname
@@ -39,32 +39,31 @@ function LoginPage() {
     dispatch(resetErrors());
   };
   const [credential, setCredential] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const handleChange = event => {
-    if (event.target.name === 'email') {
+  const handleChange = (event) => {
+    if (event.target.name === "email") {
       setCredential({ ...credential, email: event.target.value }); //con esto vemos si escribe en los imput o no
     }
-    if (event.target.name === 'password') {
+    if (event.target.name === "password") {
       setCredential({ ...credential, password: event.target.value });
     }
   };
 
   const disableButton = !credential.email || !credential.password;
   const [checked, setCheked] = useState(false);
-  const handleChecked = event => {
+  const handleChecked = (event) => {
     setCheked(event.target.checked);
   };
 
   return (
-    <section
-      id="neu-user"
-      className="masthead login-form-page"
-    >
+    <section id="neu-user" className="masthead login-form-page">
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">New Space Traveler</h1>
+          <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">
+            New Space Traveler
+          </h1>
           {isLoading ? (
             <Loading />
           ) : (
@@ -123,16 +122,15 @@ function LoginPage() {
               <p class="text-white forget-password">
                 ¿Has olvidado la contraseña?
                 <br />
-                <a href="/password" class="link-info">Recordar Contraseña</a>
+                <a href="/password" class="link-info">
+                  Recordar Contraseña
+                </a>
               </p>
 
               {!error ? (
                 <br />
               ) : (
-                <div
-                  className="error"
-                  onClick={resetError}
-                >
+                <div className="error" onClick={resetError}>
                   <p data-testid="error"> {error}</p>
                 </div>
               )}

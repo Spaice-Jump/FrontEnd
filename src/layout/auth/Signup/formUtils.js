@@ -7,9 +7,6 @@ export const isButtonDisabled = (user, email, password, passwordConfirm) => {
     !!password?.length &&
     !!passwordConfirm?.length
   ) {
-
-    
-
     return false;
   } else {
     return true;
@@ -18,33 +15,26 @@ export const isButtonDisabled = (user, email, password, passwordConfirm) => {
 
 export const isPasswordEqual = (password, passwordConfirm) => {
   if (password !== passwordConfirm) {
-    return 'password confirmation does not match';
+    return "password confirmation does not match";
   } else {
-    return '';
+    return "";
   }
 };
 
-export const createNewUser = async (user,email,password)=>{
+export const createNewUser = async (user, email, password) => {
+  const data = {
+    user,
+    email,
+    password,
+  };
 
-    const data = {
-        user,
-        email,
-        password,
-      };
+  try {
+    const newUser = await signUp(data, {
+      headers: { "content-type": "multipart/form-data" },
+    });
 
-      try {
-        const newUser = await signUp(data, {
-            headers: { 'content-type': 'multipart/form-data' },
-          });
-  
-        return newUser
-         
-
-      } catch (error) {
-        
-          return error
-      }
-
-    
-
-}
+    return newUser;
+  } catch (error) {
+    return error;
+  }
+};
