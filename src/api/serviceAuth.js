@@ -14,7 +14,7 @@ import client, {
       if (isChecked) {
         storage.set('auth', response.jwt); //guarda el token en el localStorage
       }
-      return response.userId 
+      return response 
     });
   };
   

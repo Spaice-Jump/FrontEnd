@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getMe, logout } from '../../api/serviceAuth';
 import { useTranslation } from 'react-i18next';
 import { authLoginSuccess, authLogout } from '../../redux/actions';
-import { getIsLogged, getUserId } from '../../redux/selectors';
+import { getIsLogged, getUserId, getEmail } from '../../redux/selectors';
 import flagEn from '../../assets/img/flag_en.png'
 import flagEs from '../../assets/img/flag_es.png'
 import storage from './storage';
@@ -17,6 +17,7 @@ function Header() {
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
   const userId = useSelector(getUserId);
+  const email = useSelector(getEmail)
 
   //Effect to search de userId
   useEffect(() => {
@@ -49,6 +50,7 @@ function Header() {
     >
       {
         <div class="container px-4 px-lg-5">
+          {isLogged ? <spam class="text-white">Hola {email}</spam> : <spam class="text-white">Hola Visitate</spam>}
           <li className="nav-item dropdown">
           <button
               className="nav-link dropdown-toggle"
