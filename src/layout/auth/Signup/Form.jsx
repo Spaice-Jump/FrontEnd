@@ -3,10 +3,12 @@ import Input from "./Input";
 import { isButtonDisabled } from "./formUtils";
 import Loading from "../../utils/spinner/Loading";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { authSignUp, resetErrors } from "../../../redux/actions";
 import { getUi } from "../../../redux/selectors";
 
 const Form = () => {
+  const { t } = useTranslation();
   let { isLoading, error } = useSelector(getUi);
 
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const Form = () => {
       ) : (
         <>
           <Input
-            tiLabel="Name User"
+            tiLabel={t("new-user-page.username-label")}
             type="text"
             name="user"
             id="user"
@@ -51,7 +53,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Email"
+            tiLabel={t("new-user-page.email-label")}
             type="email"
             name="email"
             id="email"
@@ -59,7 +61,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Password"
+            tiLabel={t("new-user-page.password-label")}
             type="password"
             name="password"
             id="password"
@@ -67,7 +69,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Password Confirm"
+            tiLabel={t("new-user-page.password-confirm-label")}
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
@@ -80,7 +82,7 @@ const Form = () => {
             disabled={buttonDisabled}
             data-testid="signUpButton"
           >
-            Sign Up
+          {t("new-user-page.signup-button")}
           </button>
         </>
       )}

@@ -2,7 +2,7 @@ import { createTravel, fetchLocations } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocations, getUserId } from "../redux/selectors";
 import { useState, useEffect } from "react";
-import videoBackground from "../assets/video/new-travel-video-background.mp4";
+import videoBackground from "../assets/video/new-travel-background.mp4";
 import "./NewTravelPage.css";
 
 function NewTravelPage() {

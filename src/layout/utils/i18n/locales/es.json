@@ -1,12 +1,14 @@
 {
   "navbar": {
-    "home": "Inicio",
+    "greetings": "Bienvenido,",
+    "greetings-nonuser": "Bienvenido, visitante",
+    "home": "INICIO",
     "menu_mobile": "Menú",
     "travels": "Viajes",
     "create-travel": "Crea una experiencia de viaje única",
     "delete-user": "Eliminar usuario",
     "logout-user": "Cerrar sesión",
-    "new-user": "Nuevo viajero del espacio",
+    "new-user": "Nuevo viajero espacial",
     "login-user": "Iniciar sesión"
   },
   "experience_section": {
@@ -16,5 +18,18 @@
     "title": "VIAJA AL ESPACIO",
     "description": "Embárcate en lo inimaginable con nuestra plataforma de exploración espacial. Ya sea que busques el viaje de tus sueños más allá de las estrellas o desees vender una experiencia que cambiará vidas, estamos aquí para convertir tus ambiciones en realidad cósmica. Conectamos a soñadores y aventureros en un mercado intergaláctico, ofreciendo la oportunidad de descubrir los misterios del espacio profundo. ¡Tu próximo viaje espacial comienza aquí!",
     "start-journey": "Comienza tu viaje aquí"
+  },
+  "new-user-page": {
+    "new-user-title": "NUEVO VIAJERO ESPACIAL",
+    "username-label": "Nombre de usuario",
+    "email-label": "Correo electrónico",
+    "password-label": "Contraseña",
+    "password-confirm-label": "Confirmar contraseña",
+    "signup-button": "Registrarse"
+  },
+  "login-page": {
+    "welcome-traveler-title": "Bienvenido de nuevo, viajero",
+    "email-label": "Correo electrónico",
+    "password-label": "Contraseña"
   }
 }

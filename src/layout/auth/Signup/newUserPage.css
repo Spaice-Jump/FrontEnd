@@ -5,7 +5,7 @@
       rgba(0, 0, 0, 0.7) 75%,
       #000 100%
     ),
-    url(../../../assets/img/espiral-espacio.png);
+    url(../../../assets/img/new-user-background.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -20,7 +20,7 @@
   background-color: #050505;
   margin: 0;
   margin-right: 0;
-  height: 100vh;
+  height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@
 }
 
 .space-form {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.514);
   padding: 2rem;
   border-radius: 20px;
   margin: auto;

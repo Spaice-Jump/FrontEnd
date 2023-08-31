@@ -1,6 +1,8 @@
 {
   "navbar": {
-    "home": "Home",
+    "greetings": "Welcome",
+    "greetings-nonuser": "Welcome, visitor",
+    "home": "HOME",
     "menu_mobile": "Menu",
     "travels": "Travels",
     "create-travel": "Create a unique travel experience",
@@ -16,5 +18,18 @@
     "title": "TRAVEL TO SPACE",
     "description": "Embark on the unimaginable with our space exploration platform. Whether you're seeking the journey of your dreams beyond the stars or aiming to vend a life-altering experience, we're here to transform your ambitions into cosmic reality. We unite dreamers and adventurers in an intergalactic marketplace, presenting the opportunity to uncover the mysteries of deep space. Your next space voyage starts here!",
     "start-journey": "Start your journey here"
+  },
+  "new-user-page": {
+    "new-user-title": "NEW SPACE TRAVELER",
+    "username-label": "Username",
+    "email-label": "Email",
+    "password-label": "Password",
+    "password-confirm-label": "Password confirm",
+    "signup-button": "Sign Up"
+  },
+  "login-page": {
+    "welcome-traveler-title": "Welcome back, traveler",
+    "email-label": "Email",
+    "password-label": "Password"
   }
 }

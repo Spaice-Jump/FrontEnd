@@ -1,4 +1,11 @@
 /* NAVBAR */
+.greetings {
+  font-size: 16px;
+  transition: none;
+  padding: 2rem 1.5rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .language-selector {
   margin-left: 20px;
   background-color: transparent;

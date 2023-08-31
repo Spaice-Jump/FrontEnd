@@ -11386,9 +11386,14 @@ body {
   outline: none;
 }
 #mainNav .navbar-brand {
-  color: #000;
-  font-weight: 700;
-  padding: 0.9rem 0;
+  color: fade(#fff, 80%);
+  outline: none;
+  background-color: transparent;
+}
+#mainNav .navbar-brand:hover {
+  color: rgba(255, 255, 255, 0.75);
+  outline: none;
+  background-color: transparent;
 }
 #mainNav .navbar-nav .nav-item:hover {
   color: fade(#fff, 80%);

@@ -10,12 +10,8 @@
   font-family: "Oswald", sans-serif;
   text-align: center;
   margin: 40px 10px;
-  background: linear-gradient(
-    to bottom,
-    white 0%,
-    rgb(12 12 12 / 90%) 75%,
-    rgb(59 38 219 / 80%) 100%
-  );
+  background: url("../../../assets/img/background-card-travel.jpg");
+  background-size: cover;
 }
 .product-grid .product-image {
   position: relative;

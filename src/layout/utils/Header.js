@@ -48,7 +48,6 @@ function Header() {
       className="navbar navbar-expand-lg navbar-light fixed-top"
       id="mainNav"
     >
-      {isLogged ? <spam class="text-white">Hola {email}</spam> : <spam class="text-white">Hola Visitate</spam>}
       <li className="nav-item dropdown language-selector">
         <button
           className="nav-link dropdown-toggle language-selector-button"
@@ -86,6 +85,7 @@ function Header() {
           </li>
         </ul>
       </li>
+      {isLogged ? <spam class="greetings">{t("navbar.greetings")} {email}</spam> : <spam class="greetings">{t("navbar.greetings-nonuser")}</spam>}
       {
         <div class="container px-4 px-lg-5">
           <NavLink to="/" className="navbar-brand">
