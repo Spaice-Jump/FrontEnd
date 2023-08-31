@@ -131,7 +131,7 @@ function EditTravelPage() {
 					<option value={true}>Publicar un viaje</option>
 					<option value={false}>Demandar un viaje</option>
 				</select>
-				<label htmlFor="photo">Subir una fotografía</label>
+				<label htmlFor="photo">Subir una nueva fotografía (se eliminará la anterior)</label>
 				<input
 					onChange={handleChange}
 					type="file"

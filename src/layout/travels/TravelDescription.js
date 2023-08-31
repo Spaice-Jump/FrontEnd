@@ -15,8 +15,6 @@ const TravelDescription = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	console.log('travelById', travelById);
-
 	useEffect(() => {
 		if (!travelById) {
 			getTravel(id)
