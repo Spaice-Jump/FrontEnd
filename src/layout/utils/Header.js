@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getMe, logout } from "../../api/serviceAuth";
 import { useTranslation } from "react-i18next";
 import { authLoginSuccess, authLogout } from "../../redux/actions";
-import { getIsLogged, getUserId } from "../../redux/selectors";
+import { getIsLogged, getUserId, getEmail } from "../../redux/selectors";
 import flagEn from "../../assets/img/flag_en.png";
 import flagEs from "../../assets/img/flag_es.png";
 import storage from "./storage";
@@ -17,6 +17,7 @@ function Header() {
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
   const userId = useSelector(getUserId);
+  const email = useSelector(getEmail)
 
   //Effect to search de userId
   useEffect(() => {
@@ -47,6 +48,7 @@ function Header() {
       className="navbar navbar-expand-lg navbar-light fixed-top"
       id="mainNav"
     >
+      {isLogged ? <spam class="text-white">Hola {email}</spam> : <spam class="text-white">Hola Visitate</spam>}
       <li className="nav-item dropdown language-selector">
         <button
           className="nav-link dropdown-toggle language-selector-button"
@@ -117,14 +119,21 @@ function Header() {
                   </li>
 
                   <li class="nav-item">
-                    <NavLink to="/deleteUser" className="nav-NavLink">
-                      {t("navbar.delete-user")}
+                    <NavLink
+                      to="/deleteUser"
+                      className="nav-NavLink"
+                    >
+                      Delete User
                     </NavLink>
                   </li>
+
                   <li class="nav-item">
-                    <NavLink onClick={handlerLogout} className="nav-NavLink">
-                      {" "}
-                      {t("navbar.logout-user")}{" "}
+                    <NavLink
+                      onClick={handlerLogout}
+                      className="nav-NavLink"
+                    >
+                      {' '}
+                      Logout{' '}
                     </NavLink>
                   </li>
                 </>
