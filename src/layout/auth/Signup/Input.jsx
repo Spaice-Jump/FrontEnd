@@ -1,4 +1,4 @@
-const Input = ({ tiLabel, type, name, id, handleInput, placeholder, required  }) => {
+const Input = ({ tiLabel, type, name, id, handleInput, placeholder, required, readOnly  }) => {
   const handleChange = event => {
     handleInput(event);
   };
@@ -14,6 +14,7 @@ const Input = ({ tiLabel, type, name, id, handleInput, placeholder, required  })
           id={id}
           required={required}
           onChange={handleChange}
+          readOnly={readOnly}
         />
       </label>
     </p>

@@ -50,6 +50,7 @@ const Form = () => {
             id="user"
             required={true}
             handleInput={e => setUser(e.target.value)}
+            
           />
 
           <Input

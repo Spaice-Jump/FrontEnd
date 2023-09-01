@@ -77,6 +77,7 @@ function UpdateUser() {
                   id="email"
                   required={false}
                   handleInput={e => setEmail(e.target.value)}
+                  readOnly={true}
                   
                 />
 
