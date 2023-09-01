@@ -85,7 +85,7 @@ function Header() {
           </li>
         </ul>
       </li>
-      {isLogged ? <spam class="greetings">{t("navbar.greetings")} {email}</spam> : <spam class="greetings">{t("navbar.greetings-nonuser")}</spam>}
+      {isLogged ? <span class="greetings">{t("navbar.greetings")} {email}</span> : <span class="greetings">{t("navbar.greetings-nonuser")}</span>}
       {
         <div class="container px-4 px-lg-5">
           <NavLink to="/" className="navbar-brand">
