@@ -4,6 +4,7 @@ import { getLocations, getTravelById } from '../redux/selectors';
 import { useEffect, useState } from 'react';
 import './NewTravelPage.css';
 import { useParams } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 
 function EditTravelPage() {
 	const { id } = useParams();
@@ -34,13 +35,32 @@ function EditTravelPage() {
 		dispatch(editTravel(id, travel));
 	};
 
-	const handleChange = event => {
+	const handleChange = async event => {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-			setTravel({ ...travel, [name]: event.target.files[0] });
+
+			// Función de redimensión de la imagen.
+			const resizeFile = file =>
+			new Promise(resolve => {
+				Resizer.imageFileResizer(
+					file,
+					600,
+					400,
+					'JPG',
+					100,
+					0,
+					uri => {
+						resolve(setTravel({ ...travel, [name]: uri }));
+					},
+					'file'
+				);
+			});
+
+			await resizeFile(event.target.files[0]);
 			return;
 		}
+
 		setTravel({ ...travel, [name]: value });
 	};
 
@@ -131,7 +151,7 @@ function EditTravelPage() {
 					<option value={true}>Publicar un viaje</option>
 					<option value={false}>Demandar un viaje</option>
 				</select>
-				<label htmlFor="photo">Subir una nueva fotografía (se eliminará la anterior)</label>
+				<label htmlFor="photo">Cambia la fotografía (se eliminará la anterior)</label>
 				<input
 					onChange={handleChange}
 					type="file"
