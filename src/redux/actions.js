@@ -334,6 +334,7 @@ export const authDeleteUser = data =>
         console.log('update', update)
         dispatch(authUpdateUserSuccess(update));
         alert(update.msg)
+        router.navigate('/')
         console.log('update2', update)
         
         // const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
