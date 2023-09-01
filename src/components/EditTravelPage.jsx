@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import './NewTravelPage.css';
 import { useParams } from 'react-router-dom';
 import Resizer from 'react-image-file-resizer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function EditTravelPage() {
 	const { id } = useParams();
@@ -30,6 +32,24 @@ function EditTravelPage() {
 		dispatch(fetchLocations());
 	}, [dispatch, locations]);
 
+	// Eliminación de la imagen desde icono.
+
+	const [isDeleteConfirmationVisible, setIsDeleteConfirmationVisible] = useState(false);
+
+  const handleDeletePhoto = () => {
+    setIsDeleteConfirmationVisible(true);
+  };
+
+  const confirmDeletePhoto = () => {
+		// Ruta a la API borrando foto
+    /* setTravel({ ...travel, photo: null }); */
+    setIsDeleteConfirmationVisible(false);
+  };
+
+  const cancelDeletePhoto = () => {
+    setIsDeleteConfirmationVisible(false);
+  };
+
 	const handleSubmit = event => {
 		event.preventDefault();
 		dispatch(editTravel(id, travel));
@@ -42,19 +62,19 @@ function EditTravelPage() {
 
 			// Función de redimensión de la imagen.
 			const resizeFile = file =>
-			new Promise(resolve => {
-				Resizer.imageFileResizer(
-					file,
-					600,
-					400,
-					'JPG',
-					100,
-					0,
-					uri => {
-						resolve(setTravel({ ...travel, [name]: uri }));
-					},
-					'file'
-				);
+				new Promise(resolve => {
+					Resizer.imageFileResizer(
+						file,
+						600,
+						400,
+						'JPG',
+						100,
+						0,
+						uri => {
+							resolve(setTravel({ ...travel, [name]: uri }));
+						},
+						'file'
+					);
 			});
 
 			await resizeFile(event.target.files[0]);
@@ -70,14 +90,28 @@ function EditTravelPage() {
 	return (
 		<div className="newTravelContainer">
 			<h1>Edita tu viaje espacial</h1>
-			{travel.photo ? (
-				<div className="product-image">
-					<img
-						src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
-						alt={travel.topic}
-					/>
-				</div>
-			) : null}
+{travel.photo ? (
+        <>
+          <div className="product-image">
+            <img
+              src={`${process.env.REACT_APP_API_BASE_URL}uploads/${editTrip.photo}`}
+              alt={travel.topic}
+            />
+            <div className="delete-photo-overlay">
+              <button onClick={handleDeletePhoto} className="delete-photo-button">
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+              {isDeleteConfirmationVisible && (
+                <div className="delete-confirmation">
+                  <p>¿Estás seguro de que quieres eliminar esta foto?</p>
+                  <button onClick={confirmDeletePhoto}>Aceptar</button>
+                  <button onClick={cancelDeletePhoto}>Cancelar</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      ) : null}
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="topic">Título del viaje</label>
 				<input
