@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./css/travels.css";
-import { Link } from "react-router-dom";
-import ExperienceSection from "../home/components/ExperienceSection";
-import { getTravels } from "../../api/serviceTravels";
+import React, { useEffect } from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './css/travels.css';
+import { Link } from 'react-router-dom';
+import ExperienceSection from '../home/components/ExperienceSection';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTravels } from '../../redux/actions';
+import { getTravels } from '../../redux/selectors';
 
 const Travels = () => {
-  const [travels, setTravels] = useState([]);
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    getTravels()
-      .then((response) => {
-        setTravels(response);
-      })
-      .catch((error) => {
-        console.error("Error fetching travels:", error);
-      });
-  }, []);
+	useEffect(() => {
+		dispatch(fetchTravels());
+	}, [dispatch]);
+
+	const travels = useSelector(getTravels);
+	console.log(travels);
 
   return (
     <>

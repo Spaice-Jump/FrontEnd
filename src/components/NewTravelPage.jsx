@@ -4,6 +4,7 @@ import { getLocations, getUserId } from "../redux/selectors";
 import { useState, useEffect } from "react";
 import videoBackground from "../assets/video/new-travel-background.mp4";
 import "./NewTravelPage.css";
+import Resizer from 'react-image-file-resizer';
 
 function NewTravelPage() {
   const userId = useSelector(getUserId);
@@ -33,15 +34,34 @@ function NewTravelPage() {
     dispatch(createTravel(travel));
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+	const handleChange = async event => {
+		const { name, value } = event.target;
 
-    if (name === "photo") {
-      setTravel({ ...travel, [name]: event.target.files[0] });
-      return;
-    }
-    setTravel({ ...travel, [name]: value });
-  };
+		if (name === 'photo') {
+
+			// Función de redimensión de la imagen.
+			const resizeFile = file =>
+				new Promise(resolve => {
+					Resizer.imageFileResizer(
+						file,
+						600,
+						400,
+						'PNG',
+						100,
+						0,
+						uri => {
+							resolve(setTravel({ ...travel, [name]: uri }));
+						},
+						'file'
+					);
+				});
+
+			await resizeFile(event.target.files[0]);
+
+			return;
+		}
+		setTravel({ ...travel, [name]: value });
+	};
 
   const isDisabled =
     !travel.topic || !travel.origin || !travel.destination || !travel.price;

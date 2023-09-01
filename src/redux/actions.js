@@ -25,11 +25,47 @@ import {
   EDIT_TRAVEL_FAILURE,
   EDIT_TRAVEL_REQUEST,
   EDIT_TRAVEL_SUCCESS,
-} from "./types";
 
-import storage from "../layout/utils/storage";
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
+
+  FETCH_TRAVELS_FAILURE,
+  FETCH_TRAVELS_REQUEST,
+  FETCH_TRAVELS_SUCCESS,
+
+} from './types';
+
+import storage from '../layout/utils/storage';
+import { updateUser } from '../api/serviceAuth';
 
 // Travels actions:
+
+export const fetchTravelsRequest = () => ({
+  type: FETCH_TRAVELS_REQUEST,
+});
+
+export const fetchTravelsSuccess = travels => ({
+  type: FETCH_TRAVELS_SUCCESS,
+  payload: travels,
+});
+
+export const fetchTravelsFailure = error => ({
+  type: FETCH_TRAVELS_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const fetchTravels = () =>
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchTravelsRequest());
+    try {
+      const travels = await api.travels.getTravels();
+      dispatch(fetchTravelsSuccess(travels));
+    } catch (error) {
+      dispatch(fetchTravelsFailure(error));
+    }
+  };
 
 export const createTravelRequest = () => ({
   type: CREATE_TRAVEL_REQUEST,
@@ -105,10 +141,9 @@ export const editTravel = (id, data) =>
     dispatch(editTravelRequest());
     try {
       const travel = await api.travels.editTravel(id, data);
-      console.log("travel pasa1", travel);
+			console.log('travel update', travel);
       dispatch(editTravelSuccess(travel));
       router.navigate(`/travel/${travel._id}`);
-      console.log("travel._id pasa2", travel._id);
     } catch (error) {
       dispatch(editTravelFailure(error));
     }
@@ -152,7 +187,7 @@ export const authLoginRequest = () => ({
 export const authLoginSuccess = (user) => ({
   //crea la accion de type authlogin para saber si esta loguedo
   type: AUTH_LOGIN_SUCCESS,
-  payload: {userId: user.userId, email:user.email}
+  payload: {userId: user.userId, email:user.email, userName:user.userName}
 });
 
 export const authLoginFailure = (error) => ({
@@ -300,6 +335,45 @@ export const authDeleteUser = (data) =>
         dispatch(uiDeleteUserFailure(error?.message));
       }
     } else {
-      dispatch(uiDeleteUserFailure("password confirmation does not match"));
+      dispatch(uiDeleteUserFailure('password confirmation does not match'));
     }
   };
+
+  export const authUpdateUserRequest = () => ({
+    type: UPDATE_USER_REQUEST,
+  });
+  
+  export const authUpdateUserSuccess = update => ({
+    //crea la accion de type authlogin para saber si esta loguedo
+    type: UPDATE_USER_SUCCESS,
+    payload: {userName:update.userName}
+  });
+  
+  export const authUpdateUserFailure = error => ({
+    type: UPDATE_USER_FAILURE,
+    error: true,
+    payload: error,
+  });
+  export const authUpdateUser = credential =>
+    async function (dispatch, _getState, { api, router }) {
+      dispatch(authUpdateUserRequest());
+      if (credential.password === credential.passwordConfirm) {
+      try {
+        console.log('crede', credential);
+        const update=await updateUser(credential)
+        
+        console.log('update', update)
+        dispatch(authUpdateUserSuccess(update));
+        alert(update.msg)
+        router.navigate('/')
+        console.log('update2', update)
+        
+        // const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+        // router.navigate(to);
+      } catch (error) {
+        dispatch(authUpdateUserFailure(error));
+      }
+    }else{
+      dispatch(authUpdateUserFailure('Las contraseñas no coinciden'))
+    }
+    };

@@ -44,10 +44,25 @@ export const deleteUser = (user, headers) => {
   return client.post(delete_URL, user, headers);
 };
 
-export const getMe = (token) => {
-  const me_URL = "/api/jwtWeb";
-  const data = {
-    token,
-  };
-  return client.post(me_URL, data);
-};
+  }
+
+  export const getMe=(token)=>{
+    const me_URL = "/api/jwtWeb"
+    const data = {
+        token
+      };
+    return client.post(me_URL,data); 
+     
+  }
+
+  export const updateUser= (credentials)=>{
+    return client.post('/update', credentials, credentials).then(response=>{
+      if(response?.status===400){
+        throw(response.error)
+      }
+      return response
+    })
+  }
+  
+
+  
