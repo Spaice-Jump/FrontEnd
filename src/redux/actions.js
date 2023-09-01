@@ -25,15 +25,47 @@ import {
   EDIT_TRAVEL_FAILURE,
   EDIT_TRAVEL_REQUEST,
   EDIT_TRAVEL_SUCCESS,
+
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
+
+  FETCH_TRAVELS_FAILURE,
+  FETCH_TRAVELS_REQUEST,
+  FETCH_TRAVELS_SUCCESS,
+
 } from './types';
 
 import storage from '../layout/utils/storage';
 import { updateUser } from '../api/serviceAuth';
 
 // Travels actions:
+
+export const fetchTravelsRequest = () => ({
+  type: FETCH_TRAVELS_REQUEST,
+});
+
+export const fetchTravelsSuccess = travels => ({
+  type: FETCH_TRAVELS_SUCCESS,
+  payload: travels,
+});
+
+export const fetchTravelsFailure = error => ({
+  type: FETCH_TRAVELS_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const fetchTravels = () =>
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchTravelsRequest());
+    try {
+      const travels = await api.travels.getTravels();
+      dispatch(fetchTravelsSuccess(travels));
+    } catch (error) {
+      dispatch(fetchTravelsFailure(error));
+    }
+  };
 
 export const createTravelRequest = () => ({
   type: CREATE_TRAVEL_REQUEST,
@@ -109,10 +141,9 @@ export const editTravel = (id, data) =>
     dispatch(editTravelRequest());
     try {
       const travel = await api.travels.editTravel(id, data);
-			console.log('travel pasa1', travel);
+			console.log('travel update', travel);
       dispatch(editTravelSuccess(travel));
       router.navigate(`/travel/${travel._id}`);
-			console.log('travel._id pasa2', travel._id);
     } catch (error) {
       dispatch(editTravelFailure(error));
     }

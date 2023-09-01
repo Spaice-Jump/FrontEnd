@@ -14,19 +14,14 @@ import {
   UI_DELETE_USER_REQUEST,
   UI_DELETE_USER_SUCCESS,
   UI_DELETE_USER_FAILURE,
+
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
   UPDATE_USER_REQUEST,
-} from './types';
 
-//creamos el estado que va a tener por defecto
-// export const defoultState = {
-//     auth: false,
-//     ui: {
-//       isLoading: false,
-//       error: null,
-//     },
-//   };
+  EDIT_TRAVEL_SUCCESS,
+
+} from './types';
 
 export const defaultState = {
   auth: {
@@ -58,6 +53,15 @@ export function travels(state = defaultState.travels, action) {
       return { ...state, data: [action.payload] };
     case CREATE_TRAVEL_SUCCESS:
       return { ...state, data: [...state.data, action.payload] };
+    case EDIT_TRAVEL_SUCCESS:
+      console.log("action.payload:", action.payload);
+      console.log("state.data", state.data);
+      return {
+        ...state,
+        data: state.data.map((travel) =>
+          travel._id === action.payload._id ? action.payload : travel
+        ),
+      };
     case DELETE_TRAVEL_SUCCESS:
       return {
         ...state,

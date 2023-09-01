@@ -14,8 +14,7 @@ const TravelDescription = () => {
 	const travelById = useSelector(getTravelById(id));
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	console.log('travelById', travelById);
+	const [deleteProcess, setDeleteProcess] = useState(false);
 
 	useEffect(() => {
 		if (!travelById) {
@@ -39,8 +38,13 @@ const TravelDescription = () => {
 		navigate(`/travel-edit/${id}`);
 	};
 
+	const HandleDeleteProcess = value => () => {
+		setDeleteProcess(value);
+	};
+
 	const handleDelete = () => {
 		dispatch(deleteTravel(id));
+		navigate('/travels');
 	};
 
 	return (
@@ -76,12 +80,29 @@ const TravelDescription = () => {
 							>
 								Editar viaje
 							</button>
-							<button
-								onClick={handleDelete}
-								className="btn btn-primary"
-							>
-								Borrar viaje
-							</button>
+							{!deleteProcess ? (
+								<button
+									onClick={HandleDeleteProcess(true)}
+									className="btn btn-primary"
+								>
+									Borrar viaje
+								</button>
+							) : (
+								<>
+									<button
+										onClick={handleDelete}
+										className="btn btn-primary"
+									>
+										Confirmar borrado
+									</button>
+									<button
+										onClick={HandleDeleteProcess(false)}
+										className="btn btn-primary"
+									>
+										Cancelar
+									</button>
+								</>
+							)}
 						</>
 					) : null}
 				</div>
