@@ -55,4 +55,14 @@ import client, {
      
   }
 
+  export const updateUser= (credentials)=>{
+    return client.post('/update', credentials, credentials).then(response=>{
+      if(response?.status===400){
+        throw(response.error)
+      }
+      return response
+    })
+  }
+  
+
   

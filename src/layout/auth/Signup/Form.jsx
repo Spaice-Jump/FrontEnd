@@ -48,6 +48,7 @@ const Form = () => {
             type="text"
             name="user"
             id="user"
+            required={true}
             handleInput={e => setUser(e.target.value)}
           />
 
@@ -56,6 +57,7 @@ const Form = () => {
             type="email"
             name="email"
             id="email"
+            required={true}
             handleInput={e => setEmail(e.target.value)}
           />
 
@@ -64,6 +66,7 @@ const Form = () => {
             type="password"
             name="password"
             id="password"
+            required={true}
             handleInput={e => setPassword(e.target.value)}
           />
 
@@ -72,6 +75,7 @@ const Form = () => {
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
+            required={true}
             handleInput={e => setPasswordConfirm(e.target.value)}
           />
 

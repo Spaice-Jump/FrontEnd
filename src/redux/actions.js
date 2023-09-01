@@ -24,10 +24,14 @@ import {
   DELETE_TRAVEL_SUCCESS,
   EDIT_TRAVEL_FAILURE,
   EDIT_TRAVEL_REQUEST,
-  EDIT_TRAVEL_SUCCESS
+  EDIT_TRAVEL_SUCCESS,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from './types';
 
 import storage from '../layout/utils/storage';
+import { updateUser } from '../api/serviceAuth';
 
 // Travels actions:
 
@@ -152,7 +156,7 @@ export const authLoginRequest = () => ({
 export const authLoginSuccess = (user) => ({
   //crea la accion de type authlogin para saber si esta loguedo
   type: AUTH_LOGIN_SUCCESS,
-  payload: {userId: user.userId, email:user.email}
+  payload: {userId: user.userId, email:user.email, userName:user.userName}
 });
 
 export const authLoginFailure = error => ({
@@ -303,3 +307,41 @@ export const authDeleteUser = data =>
       dispatch(uiDeleteUserFailure('password confirmation does not match'));
     }
   };
+
+  export const authUpdateUserRequest = () => ({
+    type: UPDATE_USER_REQUEST,
+  });
+  
+  export const authUpdateUserSuccess = update => ({
+    //crea la accion de type authlogin para saber si esta loguedo
+    type: UPDATE_USER_SUCCESS,
+    payload: {userName:update.userName}
+  });
+  
+  export const authUpdateUserFailure = error => ({
+    type: UPDATE_USER_FAILURE,
+    error: true,
+    payload: error,
+  });
+  export const authUpdateUser = credential =>
+    async function (dispatch, _getState, { api, router }) {
+      dispatch(authUpdateUserRequest());
+      if (credential.password === credential.passwordConfirm) {
+      try {
+        console.log('crede', credential);
+        const update=await updateUser(credential)
+        
+        console.log('update', update)
+        dispatch(authUpdateUserSuccess(update));
+        alert(update.msg)
+        console.log('update2', update)
+        
+        // const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+        // router.navigate(to);
+      } catch (error) {
+        dispatch(authUpdateUserFailure(error));
+      }
+    }else{
+      dispatch(authUpdateUserFailure('Las contraseñas no coinciden'))
+    }
+    };
