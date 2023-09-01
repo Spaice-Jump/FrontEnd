@@ -42,19 +42,19 @@ function EditTravelPage() {
 
 			// Función de redimensión de la imagen.
 			const resizeFile = file =>
-			new Promise(resolve => {
-				Resizer.imageFileResizer(
-					file,
-					600,
-					400,
-					'JPG',
-					100,
-					0,
-					uri => {
-						resolve(setTravel({ ...travel, [name]: uri }));
-					},
-					'file'
-				);
+				new Promise(resolve => {
+					Resizer.imageFileResizer(
+						file,
+						600,
+						400,
+						'JPG',
+						100,
+						0,
+						uri => {
+							resolve(setTravel({ ...travel, [name]: uri }));
+						},
+						'file'
+					);
 			});
 
 			await resizeFile(event.target.files[0]);
@@ -73,7 +73,7 @@ function EditTravelPage() {
 			{travel.photo ? (
 				<div className="product-image">
 					<img
-						src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
+						src={`${process.env.REACT_APP_API_BASE_URL}uploads/${editTrip.photo}`}
 						alt={travel.topic}
 					/>
 				</div>
