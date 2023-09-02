@@ -1,30 +1,35 @@
-import { fetchLocations, editTravel, deletePhoto } from '../redux/actions';
+import {
+	fetchLocations,
+	editTravel,
+	deletePhoto,
+	fetchSingleTravel,
+} from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations, getTravelById } from '../redux/selectors';
+import { getLocations, getTravelById, getUi } from '../redux/selectors';
 import { useEffect, useState } from 'react';
 import './NewTravelPage.css';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import resizeFile from '../utils/resizeFile';
+import Loading from '../layout/utils/spinner/Loading';
 
 function EditTravelPage() {
 	const { id } = useParams();
+	const dispatch = useDispatch();
+	const [travel, setTravel] = useState({});
 	const editTrip = useSelector(getTravelById(id));
+	const {isLoading} = useSelector(getUi);
 
-	const [travel, setTravel] = useState({
-		topic: editTrip.topic,
-		origin: editTrip.origin,
-		destination: editTrip.destination,
-		remarks: editTrip.remarks,
-		price: editTrip.price,
-		forSale: editTrip.forSale,
-		photo: editTrip.photo,
-		userId: editTrip.userId,
-	});
+	useEffect(() => {
+		setTravel(editTrip);
+		if (!editTrip) {
+			const trip = dispatch(fetchSingleTravel(id));
+			setTravel(trip);
+		}
+	}, [dispatch, id, editTrip]);
 
 	const locations = useSelector(getLocations);
-	const dispatch = useDispatch();
 	useEffect(() => {
 		if (locations.length !== 0) {
 			return;
@@ -69,6 +74,10 @@ function EditTravelPage() {
 
 	const isDisabled =
 		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<div className="newTravelContainer">

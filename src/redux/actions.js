@@ -38,6 +38,10 @@ import {
   DELETE_PHOTO_REQUEST,
   DELETE_PHOTO_SUCCESS,
 
+  FETCH_SINGLE_TRAVEL_FAILURE,
+  FETCH_SINGLE_TRAVEL_REQUEST,
+  FETCH_SINGLE_TRAVEL_SUCCESS,
+
 } from './types';
 
 import storage from '../layout/utils/storage';
@@ -150,6 +154,32 @@ export const editTravel = (id, data) =>
       router.navigate(`/travel/${travel._id}`);
     } catch (error) {
       dispatch(editTravelFailure(error));
+    }
+  };
+
+export const fetchSingleTravelRequest = () => ({
+  type: FETCH_SINGLE_TRAVEL_REQUEST,
+});
+
+export const fetchSingleTravelSuccess = travel => ({
+  type: FETCH_SINGLE_TRAVEL_SUCCESS,
+  payload: travel,
+});
+
+export const fetchSingleTravelFailure = error => ({
+  type: FETCH_SINGLE_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const fetchSingleTravel = id =>
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchSingleTravelRequest());
+    try {
+      const travel = await api.travels.getTravel(id);
+      dispatch(fetchSingleTravelSuccess(travel));
+    } catch (error) {
+      dispatch(fetchSingleTravelFailure(error));
     }
   };
 

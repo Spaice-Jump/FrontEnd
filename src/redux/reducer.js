@@ -9,7 +9,6 @@ import {
 	FETCH_TRAVELS_SUCCESS,
 	CREATE_TRAVEL_SUCCESS,
 	DELETE_TRAVEL_SUCCESS,
-	ADD_TRAVEL_SUCCESS,
 	FETCH_LOCATIONS_SUCCESS,
 	UI_DELETE_USER_REQUEST,
 	UI_DELETE_USER_SUCCESS,
@@ -18,9 +17,8 @@ import {
 	UPDATE_USER_FAILURE,
 	UPDATE_USER_REQUEST,
 	EDIT_TRAVEL_SUCCESS,
-	DELETE_PHOTO_FAILURE,
-	DELETE_PHOTO_REQUEST,
 	DELETE_PHOTO_SUCCESS,
+	FETCH_SINGLE_TRAVEL_SUCCESS
 } from './types';
 
 export const defaultState = {
@@ -49,7 +47,7 @@ export function travels(state = defaultState.travels, action) {
 	switch (action.type) {
 		case FETCH_TRAVELS_SUCCESS:
 			return { areLoaded: true, data: action.payload };
-		case ADD_TRAVEL_SUCCESS:
+		case FETCH_SINGLE_TRAVEL_SUCCESS:
 			return { ...state, data: [action.payload] };
 		case CREATE_TRAVEL_SUCCESS:
 			return { ...state, data: [...state.data, action.payload] };
