@@ -34,6 +34,10 @@ import {
   FETCH_TRAVELS_REQUEST,
   FETCH_TRAVELS_SUCCESS,
 
+  DELETE_PHOTO_FAILURE,
+  DELETE_PHOTO_REQUEST,
+  DELETE_PHOTO_SUCCESS,
+
 } from './types';
 
 import storage from '../layout/utils/storage';
@@ -177,6 +181,36 @@ export const fetchLocations = () => {
     }
   };
 };
+
+// Delete only main travel photo:
+
+export const deletePhotoRequest = () => ({
+  type: DELETE_PHOTO_REQUEST,
+});
+
+export const deletePhotoSuccess = (id) => ({
+  type: DELETE_PHOTO_SUCCESS,
+  payload: id,
+});
+
+export const deletePhotoFailure = error => ({
+  type: DELETE_PHOTO_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const deletePhoto = (id, travel) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(deletePhotoRequest(id));
+    try {
+      console.log('travel', travel);
+      await api.travels.deletePhoto(travel.photo);
+      dispatch(deletePhotoSuccess(id));
+      router.navigate(`/travel-edit/${id}`);
+    } catch (error) {
+      dispatch(deletePhotoFailure(error));
+    }
+  };
 
 // Auth actions:
 

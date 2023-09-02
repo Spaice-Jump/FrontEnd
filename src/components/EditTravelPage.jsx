@@ -1,12 +1,12 @@
-import { fetchLocations, editTravel } from '../redux/actions';
+import { fetchLocations, editTravel, deletePhoto } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, getTravelById } from '../redux/selectors';
 import { useEffect, useState } from 'react';
 import './NewTravelPage.css';
 import { useParams } from 'react-router-dom';
-import Resizer from 'react-image-file-resizer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import resizeFile from '../utils/resizeFile';
 
 function EditTravelPage() {
 	const { id } = useParams();
@@ -34,21 +34,21 @@ function EditTravelPage() {
 
 	// Eliminación de la imagen desde icono.
 
-	const [isDeleteConfirmationVisible, setIsDeleteConfirmationVisible] = useState(false);
+	const [isDeleteConfirmationVisible, setIsDeleteConfirmationVisible] =
+		useState(false);
 
-  const handleDeletePhoto = () => {
-    setIsDeleteConfirmationVisible(true);
-  };
+	const handleDeletePhoto = () => {
+		setIsDeleteConfirmationVisible(true);
+	};
 
-  const confirmDeletePhoto = () => {
-		// Ruta a la API borrando foto
-    /* setTravel({ ...travel, photo: null }); */
-    setIsDeleteConfirmationVisible(false);
-  };
+	const confirmDeletePhoto = () => {
+		dispatch(deletePhoto(id, travel));
+		setIsDeleteConfirmationVisible(false);
+	};
 
-  const cancelDeletePhoto = () => {
-    setIsDeleteConfirmationVisible(false);
-  };
+	const cancelDeletePhoto = () => {
+		setIsDeleteConfirmationVisible(false);
+	};
 
 	const handleSubmit = event => {
 		event.preventDefault();
@@ -59,25 +59,8 @@ function EditTravelPage() {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-
-			// Función de redimensión de la imagen.
-			const resizeFile = file =>
-				new Promise(resolve => {
-					Resizer.imageFileResizer(
-						file,
-						600,
-						400,
-						'JPG',
-						100,
-						0,
-						uri => {
-							resolve(setTravel({ ...travel, [name]: uri }));
-						},
-						'file'
-					);
-			});
-
-			await resizeFile(event.target.files[0]);
+			const image = await resizeFile(event.target.files[0]);
+			setTravel({ ...travel, [name]: image });
 			return;
 		}
 
@@ -90,28 +73,31 @@ function EditTravelPage() {
 	return (
 		<div className="newTravelContainer">
 			<h1>Edita tu viaje espacial</h1>
-{travel.photo ? (
-        <>
-          <div className="product-image">
-            <img
-              src={`${process.env.REACT_APP_API_BASE_URL}uploads/${editTrip.photo}`}
-              alt={travel.topic}
-            />
-            <div className="delete-photo-overlay">
-              <button onClick={handleDeletePhoto} className="delete-photo-button">
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
-              {isDeleteConfirmationVisible && (
-                <div className="delete-confirmation">
-                  <p>¿Estás seguro de que quieres eliminar esta foto?</p>
-                  <button onClick={confirmDeletePhoto}>Aceptar</button>
-                  <button onClick={cancelDeletePhoto}>Cancelar</button>
-                </div>
-              )}
-            </div>
-          </div>
-        </>
-      ) : null}
+			{travel.photo ? (
+				<>
+					<div className="product-image">
+						<img
+							src={`${process.env.REACT_APP_API_BASE_URL}uploads/${editTrip.photo}`}
+							alt={travel.topic}
+						/>
+						<div className="delete-photo-overlay">
+							<button
+								onClick={handleDeletePhoto}
+								className="delete-photo-button"
+							>
+								<FontAwesomeIcon icon={faTrash} />
+							</button>
+							{isDeleteConfirmationVisible && (
+								<div className="delete-confirmation">
+									<p>¿Estás seguro de que quieres eliminar esta foto?</p>
+									<button onClick={confirmDeletePhoto}>Aceptar</button>
+									<button onClick={cancelDeletePhoto}>Cancelar</button>
+								</div>
+							)}
+						</div>
+					</div>
+				</>
+			) : null}
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="topic">Título del viaje</label>
 				<input
@@ -185,7 +171,9 @@ function EditTravelPage() {
 					<option value={true}>Publicar un viaje</option>
 					<option value={false}>Demandar un viaje</option>
 				</select>
-				<label htmlFor="photo">Cambia la fotografía (se eliminará la anterior)</label>
+				<label htmlFor="photo">
+					Cambia la fotografía (se eliminará la anterior)
+				</label>
 				<input
 					onChange={handleChange}
 					type="file"
