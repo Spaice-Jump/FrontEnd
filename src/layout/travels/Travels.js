@@ -22,24 +22,17 @@ const Travels = () => {
           <div className="row">
             {travels ? (
               travels.map((travel) => (
-                <div key={travel._id} className="col-md-3 col-sm-6">
+                <div key={travel._id} className="col-md-3 col-sm-6 travels-columns">
                   <div className="product-grid">
                     {travel.photo ? (
                       <div className="product-image">
                         <img
-                          src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
                           alt={travel.topic}
                         />
                       </div>
                     ) : null}
                     <div className="product-content">
-                      <ul className="rating">
-                        <li className="fas fa-star"></li>
-                        <li className="fas fa-star"></li>
-                        <li className="fas fa-star"></li>
-                        <li className="fas fa-star"></li>
-                        <li className="fas fa-star disable"></li>
-                      </ul>
                       <h3 className="title">
                         <Link to={`/travel/${travel._id}`}>{travel.topic}</Link>
                       </h3>

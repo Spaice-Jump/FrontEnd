@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTravel } from "../../api/serviceTravels";
-import ExperienceSection from "../home/components/ExperienceSection";
+import './css/travelDescription.css';
 import { useSelector, useDispatch } from "react-redux";
 import { getIsLogged, getUserId, getTravelById } from "../../redux/selectors";
 import { deleteTravel } from "../../redux/actions";
@@ -38,7 +38,7 @@ const TravelDescription = () => {
 		navigate(`/travel-edit/${id}`);
 	};
 
-	const HandleDeleteProcess = value => () => {
+	const HandleDeleteProcess = (value) => () => {
 		setDeleteProcess(value);
 	};
 
@@ -49,64 +49,69 @@ const TravelDescription = () => {
 
 	return (
 		<>
-			<ExperienceSection />
-			<div className="travel-details">
-				<h2>{travel.topic}</h2>
-				{travel.photo ? (
-					<div className="product-image">
-						<img
-							src={`${process.env.REACT_APP_API_BASE_URL}uploads/${travel.photo}`}
-							alt={travel.topic}
-						/>
+		<section className="travel-description-page">
+			<div id="container-travel-description">
+				<div class="product-details-travel-description">
+					<h1>{travel.topic}</h1>
+					<p class="information">"{travel.remarks}"</p>
+					<div class="control-travel-description">
+						<button class="btn-travel-description">
+							<span class="price-travel-description">{travel.price}€</span>
+							<span class="shopping-cart-travel-description">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							</span>
+							<span class="buy-travel-description">Buy Now</span>
+						</button>
 					</div>
-				) : null}
-				<p className="text-travel-description">Origin: {travel.origin}</p>
-				<p className="text-travel-description">
-					Destination: {travel.destination}
-				</p>
-				<p className="text-travel-description">Price: {travel.price}€</p>
-				<p className="text-travel-description">Remarks: {travel.remarks}</p>
-				{travel.forSale ? (
-					<p className="text-travel-description">For Sale</p>
-				) : (
-					<p className="text-travel-description">For Buy</p>
-				)}
-				<div className="travel-buttons">
-					{isLogged && userId === travel.userId ? (
-						<>
-							<button
-								onClick={handleEdit}
-								className="btn btn-primary"
-							>
-								Editar viaje
-							</button>
-							{!deleteProcess ? (
-								<button
-									onClick={HandleDeleteProcess(true)}
-									className="btn btn-primary"
-								>
-									Borrar viaje
-								</button>
-							) : (
-								<>
-									<button
-										onClick={handleDelete}
-										className="btn btn-primary"
-									>
-										Confirmar borrado
-									</button>
-									<button
-										onClick={HandleDeleteProcess(false)}
-										className="btn btn-primary"
-									>
-										Cancelar
-									</button>
-								</>
-							)}
-						</>
-					) : null}
+				</div>
+				<div class="product-image-travel-description">
+					<img
+						src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
+						alt={travel.topic}
+					/>
+					<div class="info-overlay">
+						<p class="overlay-text">Pasa el ratón para ver más detalles</p>
+					</div>
+					<div class="info-travel-description">
+						<h2>The Description</h2>
+						<ul>
+							<li><strong>Origin: </strong>{travel.origin}</li>
+							<li><strong>Destination: </strong>{travel.destination}</li>
+							<li><strong>Remarks: </strong>{travel.remarks}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
+			<div className="travel-buttons">
+				{isLogged && userId === travel.userId ? (
+					<>
+						<button onClick={handleEdit} className="btn-travel-description btn-edit">
+							Editar viaje
+						</button>
+						{!deleteProcess ? (
+							<button
+								onClick={HandleDeleteProcess(true)}
+								className="btn-travel-description btn-delete"
+							>
+								Borrar viaje
+							</button>
+						) : (
+							<>
+								<button onClick={handleDelete} className="btn-travel-description btn-confirm">
+									Confirmar borrado
+								</button>
+								<button
+									onClick={HandleDeleteProcess(false)}
+									className="btn-travel-description btn-cancel"
+								>
+									Cancelar
+								</button>
+							</>
+						)}
+					</>
+				) : null}
+			</div>
+			</section>
 		</>
 	);
 };
