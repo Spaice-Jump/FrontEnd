@@ -87,8 +87,8 @@ function Header() {
       </li>
       {isLogged ? <span class="greetings">{t("navbar.greetings")} {email}</span> : <span class="greetings">{t("navbar.greetings-nonuser")}</span>}
       {
-        <div class="container px-4 px-lg-5">
-          <NavLink to="/" className="navbar-brand">
+        <div class="container px-4 px-lg-5 navbar-style">
+          <NavLink to="/" className="navbar-brand nav-NavLink home-button">
             {t("navbar.home")}
           </NavLink>
           <button
@@ -106,9 +106,9 @@ function Header() {
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-NavLink" href="/travels">
+                <NavLink to="/travels" className="nav-NavLink">
                   {t("navbar.travels")}
-                </a>
+                </NavLink>
               </li>
               {isLogged ? (
                 <>

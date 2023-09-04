@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
 import { Link } from 'react-router-dom';
-import ExperienceSection from '../home/components/ExperienceSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTravels } from '../../redux/actions';
 import { getTravels } from '../../redux/selectors';

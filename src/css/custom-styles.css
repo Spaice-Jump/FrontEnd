@@ -1,4 +1,12 @@
 /* NAVBAR */
+.navbar-style {
+  padding-left: 0px !important;
+}
+
+.home-button {
+  padding-left: 0px !important;
+}
+
 .greetings {
   font-size: 16px;
   transition: none;

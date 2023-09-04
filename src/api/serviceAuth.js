@@ -44,8 +44,6 @@ export const deleteUser = (user, headers) => {
   return client.post(delete_URL, user, headers);
 };
 
-  }
-
   export const getMe=(token)=>{
     const me_URL = "/api/jwtWeb"
     const data = {
