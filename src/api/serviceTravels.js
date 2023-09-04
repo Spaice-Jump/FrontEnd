@@ -31,3 +31,7 @@ export function editTravel(id, data) {
     },
   });
 }
+
+export function deletePhoto(photoName) {
+  return client.delete(`/api/travels/deletePhoto/${photoName}`);
+}

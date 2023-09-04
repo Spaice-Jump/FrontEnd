@@ -15,7 +15,6 @@ const Travels = () => {
 	}, [dispatch]);
 
 	const travels = useSelector(getTravels);
-	console.log(travels);
 
 	return (
 		<>

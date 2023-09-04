@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, getUserId } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 import './NewTravelPage.css';
-import Resizer from 'react-image-file-resizer';
+import resizeFile from '../utils/resizeFile';
 
 function NewTravelPage() {
 	const userId = useSelector(getUserId);
@@ -37,27 +37,11 @@ function NewTravelPage() {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-
-			// Función de redimensión de la imagen.
-			const resizeFile = file =>
-				new Promise(resolve => {
-					Resizer.imageFileResizer(
-						file,
-						600,
-						400,
-						'PNG',
-						100,
-						0,
-						uri => {
-							resolve(setTravel({ ...travel, [name]: uri }));
-						},
-						'file'
-					);
-				});
-
-			await resizeFile(event.target.files[0]);
-
-			return;
+			if (name === 'photo') {
+				const image = await resizeFile(event.target.files[0]);
+				setTravel({ ...travel, [name]: image });
+				return;
+			}
 		}
 		setTravel({ ...travel, [name]: value });
 	};
