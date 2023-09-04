@@ -125,7 +125,7 @@ function LoginPage() {
                 ¿Has olvidado la contraseña?
                 <br />
                 <a href="/password" class="link-info">
-                  Recordar Contraseña
+                  <span className="remember-password">Recordar Contraseña</span>
                 </a>
               </p>
 

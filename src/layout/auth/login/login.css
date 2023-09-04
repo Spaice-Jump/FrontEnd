@@ -136,7 +136,22 @@
   background-clip: text;
 }
 
+.remember-password {
+  -webkit-text-fill-color: rgb(100 161 157) !important;
+}
+
+.remember-password:hover {
+  -webkit-text-fill-color: rgb(11 99 104) !important;
+}
+
 .form-check-input {
   width: 10px !important;
   margin-right: 10px;
+}
+
+/* Estilos adicionales para el mensaje de error */
+.error p {
+  margin-top: 0.5rem;
+  transition: color 0.3s ease;
+  color: #a61313;
 }
