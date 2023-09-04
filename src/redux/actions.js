@@ -34,6 +34,14 @@ import {
   FETCH_TRAVELS_REQUEST,
   FETCH_TRAVELS_SUCCESS,
 
+  DELETE_PHOTO_FAILURE,
+  DELETE_PHOTO_REQUEST,
+  DELETE_PHOTO_SUCCESS,
+
+  FETCH_SINGLE_TRAVEL_FAILURE,
+  FETCH_SINGLE_TRAVEL_REQUEST,
+  FETCH_SINGLE_TRAVEL_SUCCESS,
+
 } from './types';
 
 import storage from '../layout/utils/storage';
@@ -149,6 +157,32 @@ export const editTravel = (id, data) =>
     }
   };
 
+export const fetchSingleTravelRequest = () => ({
+  type: FETCH_SINGLE_TRAVEL_REQUEST,
+});
+
+export const fetchSingleTravelSuccess = travel => ({
+  type: FETCH_SINGLE_TRAVEL_SUCCESS,
+  payload: travel,
+});
+
+export const fetchSingleTravelFailure = error => ({
+  type: FETCH_SINGLE_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const fetchSingleTravel = id =>
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchSingleTravelRequest());
+    try {
+      const travel = await api.travels.getTravel(id);
+      dispatch(fetchSingleTravelSuccess(travel));
+    } catch (error) {
+      dispatch(fetchSingleTravelFailure(error));
+    }
+  };
+
 // locations actions:
 
 export const fetchLocationsRequest = () => ({
@@ -177,6 +211,36 @@ export const fetchLocations = () => {
     }
   };
 };
+
+// Delete only main travel photo:
+
+export const deletePhotoRequest = () => ({
+  type: DELETE_PHOTO_REQUEST,
+});
+
+export const deletePhotoSuccess = (id) => ({
+  type: DELETE_PHOTO_SUCCESS,
+  payload: id,
+});
+
+export const deletePhotoFailure = error => ({
+  type: DELETE_PHOTO_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const deletePhoto = (id, travel) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(deletePhotoRequest(id));
+    try {
+      console.log('travel', travel);
+      await api.travels.deletePhoto(travel.photo);
+      dispatch(deletePhotoSuccess(id));
+      router.navigate(`/travel-edit/${id}`);
+    } catch (error) {
+      dispatch(deletePhotoFailure(error));
+    }
+  };
 
 // Auth actions:
 
