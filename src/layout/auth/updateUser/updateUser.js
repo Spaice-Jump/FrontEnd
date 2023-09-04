@@ -30,21 +30,23 @@ function UpdateUser() {
   };
 
   //setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
+  const credential = {
+    user,
+    email,
+    password,
+    passwordConfirm,
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const data = {
-      user,
-      email,
-      password,
-      passwordConfirm,
-    };
         
-      console.log(data);
-      await dispatch(authUpdateUser(data)) 
+      console.log(credential);
+      await dispatch(authUpdateUser(credential)) 
       
     //await dispatch(authUpdateUser(data));
   };
+  const disableButton = !credential.passwordConfirm && !credential.password && !credential.user;
+  console.log('prueba', !credential.user)
 
   return (
     <section
@@ -103,6 +105,7 @@ function UpdateUser() {
                   type="submit"
                   className="btn btn-primary"
                   data-testid="signUpButton"
+                  disabled={disableButton}
                 >
                   Sign Up
                 </button>

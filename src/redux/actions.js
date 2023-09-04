@@ -213,6 +213,10 @@ export const authlogin = (credential, checked) =>
       router.navigate(to);
     } catch (error) {
       dispatch(authLoginFailure(error));
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
+    
 
       return;
     }
@@ -245,6 +249,10 @@ export const authPassword = credential =>
       router.navigate(to);
     } catch (error) {
       dispatch(authRememberPasswordFailure(error));
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
+    
     }
   };
 export const resetErrors = () => ({
@@ -372,8 +380,14 @@ export const authDeleteUser = data =>
         // router.navigate(to);
       } catch (error) {
         dispatch(authUpdateUserFailure(error));
+        setTimeout(() => {
+          dispatch(resetErrors())
+        }, 4000);
       }
     }else{
       dispatch(authUpdateUserFailure('Las contraseñas no coinciden'))
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
     }
     };
