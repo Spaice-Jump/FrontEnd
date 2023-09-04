@@ -1,27 +1,28 @@
-import { useEffect, useState } from 'react';
-import Input from './Input';
-import { isButtonDisabled } from './formUtils';
-import Loading from '../../utils/spinner/Loading';
-import { useDispatch, useSelector } from 'react-redux';
-import { authSignUp, resetErrors } from '../../../redux/actions';
-import { getUi } from '../../../redux/selectors';
+import { useEffect, useState } from "react";
+import Input from "./Input";
+import { isButtonDisabled } from "./formUtils";
+import Loading from "../../utils/spinner/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { authSignUp, resetErrors } from "../../../redux/actions";
+import { getUi } from "../../../redux/selectors";
 
 const Form = () => {
+  const { t } = useTranslation();
   let { isLoading, error } = useSelector(getUi);
 
   const dispatch = useDispatch();
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
-
 
   useEffect(() => {
     setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
   }, [user, email, password, passwordConfirm]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       user,
@@ -38,13 +39,13 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-form">
       {isLoading ? (
         <Loading />
       ) : (
         <>
           <Input
-            tiLabel="Name User"
+            tiLabel={t("new-user-page.username-label")}
             type="text"
             name="user"
             id="user"
@@ -54,7 +55,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Email"
+            tiLabel={t("new-user-page.email-label")}
             type="email"
             name="email"
             id="email"
@@ -63,7 +64,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Password"
+            tiLabel={t("new-user-page.password-label")}
             type="password"
             name="password"
             id="password"
@@ -72,7 +73,7 @@ const Form = () => {
           />
 
           <Input
-            tiLabel="Password Confirm"
+            tiLabel={t("new-user-page.password-confirm-label")}
             type="password"
             name="passwordConfirm"
             id="passwordConfirm"
@@ -86,20 +87,16 @@ const Form = () => {
             disabled={buttonDisabled}
             data-testid="signUpButton"
           >
-            Sign Up
+          {t("new-user-page.signup-button")}
           </button>
         </>
       )}
       {!error ? (
         <br />
       ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
+        <div className="error" onClick={resetError}>
           <p data-testid="error"> {error}</p>
         </div>
-
       )}
     </form>
   );

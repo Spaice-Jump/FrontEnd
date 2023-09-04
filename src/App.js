@@ -30,31 +30,16 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/travels"
-          element={<Travels />}
-        />
-        <Route
-          path="/travel/:id"
-          element={<TravelDescription />}
-        />
-        <Route
-          path="/signup"
-          element={<NewUserPage />}
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/travels" element={<Travels />} />
+        <Route path="/travel/:id" element={<TravelDescription />} />
+        <Route path="/signup" element={<NewUserPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/newtravel"
           element={
             <RequireAuth>
-              {' '}
+              {" "}
               <NewTravelPage />
             </RequireAuth>
           }
@@ -85,14 +70,8 @@ function App() {
           }
         />
 
-        <Route
-          path="/travel-edit/:id"
-          element={<EditTravelPage />}
-        />
-        <Route
-          path="*"
-          element={<h1>Not Found</h1>}
-        />
+        <Route path="/travel-edit/:id" element={<EditTravelPage />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <ContactSection />
       <Footer />

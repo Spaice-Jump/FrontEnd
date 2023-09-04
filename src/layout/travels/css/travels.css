@@ -1,26 +1,46 @@
-:root{
+:root {
   --main-color1: #eb4d4b;
   --text-color: #131e2c;
 }
-.product-grid{
-  font-family: 'Oswald', sans-serif;
+
+.travels-columns{
+  margin-right: 40px !important;
+  padding-left: 40px !important;
+}
+
+.product-grid {
+  border: cadetblue;
+  border-style: outset;
+  border-radius: 35px;
+  height: 70vh;
+  width: 40vh;
+  font-family: "Oswald", sans-serif;
   text-align: center;
   margin: 40px 10px;
-  background: linear-gradient(to bottom, white 0%, rgb(12 12 12 / 90%) 75%, rgb(59 38 219 / 80%) 100%);
+  background: url("../../../assets/img/background-card-travel.jpg");
+  background-size: cover;
 }
-.product-grid .product-image{ position: relative; }
-.product-grid .product-image a.image{ display: block; }
-.product-grid .product-image img{
-  width: 100%;
-  height: auto;
+.product-grid .product-image {
+  position: relative;
 }
-.product-image .pic-1{
+.product-grid .product-image a.image {
+  display: block;
+}
+.product-grid .product-image img {
+  margin-top: 20px;
+  max-width: 190px;
+  height: 170px;
+  border-radius: 10%;
+}
+.product-image .pic-1 {
   opacity: 1;
   backface-visibility: hidden;
   transition: all 0.3s ease-in-out;
 }
-.product-grid:hover .product-image .pic-1{ opacity: 0; }
-.product-image .pic-2{
+.product-grid:hover .product-image .pic-1 {
+  opacity: 0;
+}
+.product-image .pic-2 {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -30,9 +50,11 @@
   left: 0;
   transition: all 0.3s ease-in-out;
 }
-.product-grid:hover .product-image .pic-2{ opacity: 1; }
+.product-grid:hover .product-image .pic-2 {
+  opacity: 1;
+}
 .product-grid .product-sale-label,
-.product-grid .product-discount-label{
+.product-grid .product-discount-label {
   color: #fff;
   background: #da5555;
   font-size: 12px;
@@ -45,52 +67,59 @@
   right: 10px;
   transition: all 0.4s ease;
 }
-.product-grid .product-sale-label{
+.product-grid .product-sale-label {
   background: #2ba968;
   text-transform: uppercase;
   left: 10px;
   right: auto;
 }
-.product-grid .product-content{ padding: 12px; }
-.product-grid .rating{
+.product-grid .product-content {
+  padding: 12px;
+}
+.product-grid .rating {
   padding: 0;
   margin: 0 0 7px;
   list-style: none;
 }
-.product-grid .rating li{
+.product-grid .rating li {
   color: white;
   font-size: 12px;
   display: inline-block;
 }
-.product-grid .rating li.disable{ color: rgba(0,0,0,.20); }
-.product-grid .title{
+.product-grid .rating li.disable {
+  color: rgba(0, 0, 0, 0.2);
+}
+.product-grid .title {
   color: white;
   font-size: 20px;
   text-transform: capitalize;
   margin: 0 0 7px;
 }
-.product-grid .title a{
+.product-grid .title a {
   color: white;
   transition: all 500ms;
 }
-.product-grid .title a:hover{ color: var(--main-color1); }
-.product-grid .price{
+.product-grid .title a:hover {
+  color: var(--main-color1);
+}
+.product-grid .price {
   color: white;
   font-size: 18px;
   letter-spacing: 0.005em;
   margin-bottom: 10px;
 }
-.product-grid .price span{
+.product-grid .price span {
   color: white;
   font-size: 14px;
   font-weight: 400;
-  text-decoration: line-through;
 }
-.product-grid .product-button-group{
+.product-grid .product-button-group {
   position: relative;
   z-index: 1;
 }
-.product-grid .add-to-cart{
+.product-grid .add-to-cart {
+  border-style: outset;
+  border-radius: 30px;
   color: black;
   background: #f4f4f4;
   font-size: 14px;
@@ -100,22 +129,22 @@
   display: inline-block;
   transition: all 0.25s ease 0s;
 }
-.product-grid .add-to-cart i{
+.product-grid .add-to-cart i {
   margin-right: 8px;
   display: none;
   visibility: hidden;
   transition: all 0.25s ease 0s;
 }
-.product-grid:hover .add-to-cart{
-  color:#fff;
+.product-grid:hover .add-to-cart {
+  color: #fff;
   background: var(--text-color);
 }
-.product-grid:hover .add-to-cart i{
+.product-grid:hover .add-to-cart i {
   display: inline-block;
   visibility: visible;
 }
 .product-grid .product-like-icon,
-.product-grid .product-compare-icon{
+.product-grid .product-compare-icon {
   color: white;
   background: black;
   line-height: 34px;
@@ -129,26 +158,42 @@
   z-index: -1;
   transition: all 0.25s ease 0s;
 }
-.product-grid .product-compare-icon{
+.product-grid .product-compare-icon {
   left: auto;
   right: 50px;
 }
-.product-grid:hover .product-like-icon{
+.product-grid:hover .product-like-icon {
   opacity: 1;
   left: 0;
 }
-.product-grid:hover .product-compare-icon{
+.product-grid:hover .product-compare-icon {
   opacity: 1;
   right: 0;
 }
-@media only screen and (max-width:990px){
-  .product-grid{ margin-bottom: 30px; }
+@media only screen and (max-width: 990px) {
+  .product-grid {
+    margin-bottom: 30px;
+  }
 }
 
 /* CUSTOM STYLES */
+.travels-first-container {
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.7) 75%,
+      #000 100%
+    ),
+    url("../../../assets/img/espacio-planetas.jpg");
+  background-position: absolute;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-size: contain;
+}
+
 .travels-container {
-  margin-top: 60px;
-  margin-bottom: 60px;
+  padding-top: 120px;
+  padding-bottom: 60px;
 }
 
 .text-travels-ads {

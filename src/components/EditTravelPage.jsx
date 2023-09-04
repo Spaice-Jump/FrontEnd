@@ -72,8 +72,8 @@ function EditTravelPage() {
 		setTravel({ ...travel, [name]: value });
 	};
 
-	const isDisabled =
-		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+  const isDisabled =
+    !travel.topic || !travel.origin || !travel.destination || !travel.price;
 
 	if (isLoading) {
 		return <Loading />;

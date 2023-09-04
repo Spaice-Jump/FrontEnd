@@ -25,26 +25,24 @@ import client, {
     });
   };
 
-  export const rememberPassword = (credentials) =>{
-    return client.post('/password', credentials).then(response=>{
-      if(response?.status===400){
-        throw(response.error)
-      }
-      return response
-    })
-  }
+export const rememberPassword = (credentials) => {
+  return client.post("/password", credentials).then((response) => {
+    if (response?.status === 400) {
+      throw response.error;
+    }
+    return response;
+  });
+};
 
-  export const signUp = (user,headers) => {
-    const signUp_URL = process.env.REACT_APP_API_SIGNUP_URL;
-    return client.post(signUp_URL, user, headers);
-  
-  };
+export const signUp = (user, headers) => {
+  const signUp_URL = process.env.REACT_APP_API_SIGNUP_URL;
+  return client.post(signUp_URL, user, headers);
+};
 
-  export const deleteUser=(user,headers)=>{
-    const delete_URL = process.env.REACT_APP_API_DELETE_USER_URL;
-    return client.post(delete_URL, user,headers);  
-
-  }
+export const deleteUser = (user, headers) => {
+  const delete_URL = process.env.REACT_APP_API_DELETE_USER_URL;
+  return client.post(delete_URL, user, headers);
+};
 
   export const getMe=(token)=>{
     const me_URL = "/api/jwtWeb"

@@ -1,19 +1,21 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 
 function SubscribeSection() {
   return (
-    <section
-      className="signup-section"
-      id="signup"
-    >
+    <section className="signup-section" id="signup">
       {
         <div class="container px-4 px-lg-5">
           <div class="row gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
-              <FontAwesomeIcon icon={faPaperPlane} className="fa-2x mb-2 text-white" />
-              <h2 class="text-white mb-5">¡Subscríbete para recibir noticias nuevas!</h2>
+              <FontAwesomeIcon
+                icon={faPaperPlane}
+                className="fa-2x mb-2 text-white"
+              />
+              <h2 class="text-white mb-5">
+                ¡Subscríbete para recibir noticias nuevas!
+              </h2>
               {/* * * * * * * * * * * * * * * *
                         <!-- * * SB Forms Contact Form * *-->
                         <!-- * * * * * * * * * * * * * * *-->
@@ -64,10 +66,7 @@ function SubscribeSection() {
                             <!---->
                             <!-- This is what your users will see when the form-->
                             <!-- has successfully submitted-->*/}
-                <div
-                  class="d-none"
-                  id="submitSuccessMessage"
-                >
+                <div class="d-none" id="submitSuccessMessage">
                   <div class="text-center mb-3 mt-2 text-white">
                     <div class="fw-bolder">Form submission successful!</div>
                     To activate this form, sign up at
@@ -81,10 +80,7 @@ function SubscribeSection() {
                             <!---->
                             <!-- This is what your users will see when there is-->
                             <!-- an error submitting the form-->*/}
-                <div
-                  class="d-none"
-                  id="submitErrorMessage"
-                >
+                <div class="d-none" id="submitErrorMessage">
                   <div class="text-center text-danger mb-3 mt-2">
                     Error sending message!
                   </div>
