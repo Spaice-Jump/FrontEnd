@@ -46,7 +46,7 @@ function NewTravelPage() {
 		}
 		setTravel({ ...travel, [name]: value });
 	};
-
+        
   const isDisabled =
     !travel.topic || !travel.origin || !travel.destination || !travel.price;
 

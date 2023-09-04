@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getMe, logout } from "../../api/serviceAuth";
 import { useTranslation } from "react-i18next";
-import { authLoginSuccess, authLogout } from "../../redux/actions";
+import { authSuccess, authLogout } from "../../redux/actions";
 import { getIsLogged, getUserId, getEmail } from "../../redux/selectors";
 import flagEn from "../../assets/img/flag_en.png";
 import flagEs from "../../assets/img/flag_es.png";
@@ -21,17 +21,36 @@ function Header() {
 
   //Effect to search de userId
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData =  () => {
+        console.log(userId)
       if (!userId) {
         const accessToken = storage.get("auth");
+        
         if (accessToken !== null) {
-          try {
-            const newUserId = await getMe(accessToken);
-            console.log(newUserId);
-            dispatch(authLoginSuccess(newUserId));
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-          }
+          console.log('accessToken', accessToken);
+
+          const base64Url = accessToken.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = decodeURIComponent(
+            window
+              .atob(base64)
+              .split('')
+              .map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+              })
+              .join('')
+          );
+          const jsonweb =  JSON.parse(jsonPayload);
+          console.log(jsonweb)
+          dispatch(authSuccess(jsonweb));
+
+          //   try {
+          //     const newUserId = await getMe(accessToken);
+          //     console.log(newUserId);
+          //     dispatch(authLoginSuccess(newUserId));
+          //   } catch (error) {
+          //     console.error("Error fetching user data:", error);
+          //   }
         }
       }
     };

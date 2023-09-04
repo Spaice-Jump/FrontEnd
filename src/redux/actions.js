@@ -42,6 +42,8 @@ import {
   FETCH_SINGLE_TRAVEL_REQUEST,
   FETCH_SINGLE_TRAVEL_SUCCESS,
 
+  AUTH_DETAIL_SUCCESS,
+
 } from './types';
 
 import storage from '../layout/utils/storage';
@@ -248,10 +250,21 @@ export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
 });
 
-export const authLoginSuccess = (user) => ({
+ export const authLoginSuccess = (user) => (
+     {
+    
   //crea la accion de type authlogin para saber si esta loguedo
   type: AUTH_LOGIN_SUCCESS,
   payload: {userId: user.userId, email:user.email, userName:user.userName}
+ }
+);
+
+export const authSuccess = (user) => (
+    {
+    
+  //crea la accion de type authlogin para saber si esta loguedo
+  type: AUTH_DETAIL_SUCCESS,
+  payload: {userId: user._id, email:user.email, userName:user.userName}
 });
 
 export const authLoginFailure = (error) => ({
