@@ -255,7 +255,7 @@ export const authLoginRequest = () => ({
     
   //crea la accion de type authlogin para saber si esta loguedo
   type: AUTH_LOGIN_SUCCESS,
-  payload: {userId: user.userId, email:user.email, userName:user.userName}
+  payload: {userId: user._id, email:user.email, userName:user.userName}
  }
 );
 
