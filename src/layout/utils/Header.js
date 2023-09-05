@@ -27,7 +27,7 @@ function Header() {
         const accessToken = storage.get("auth");
         
         if (accessToken !== null) {
-          console.log('accessToken', accessToken);
+     
 
           const base64Url = accessToken.split('.')[1];
           const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -40,17 +40,11 @@ function Header() {
               })
               .join('')
           );
-          const jsonweb =  JSON.parse(jsonPayload);
-          console.log(jsonweb)
-          dispatch(authSuccess(jsonweb));
+          const jsonweb = JSON.parse(jsonPayload);
 
-          //   try {
-          //     const newUserId = await getMe(accessToken);
-          //     console.log(newUserId);
-          //     dispatch(authLoginSuccess(newUserId));
-          //   } catch (error) {
-          //     console.error("Error fetching user data:", error);
-          //   }
+          dispatch(authSuccess(jsonweb));
+        
+
         }
       }
     };
