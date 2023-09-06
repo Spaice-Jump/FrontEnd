@@ -48,6 +48,7 @@ import {
 
 import storage from '../layout/utils/storage';
 import { updateUser } from '../api/serviceAuth';
+import { getUserId } from './selectors';
 
 // Travels actions:
 
@@ -92,17 +93,18 @@ export const createTravelFailure = (error) => ({
   payload: error,
 });
 
-export const createTravel = (data) =>
-  async function (dispatch, _getState, { api, router }) {
-    dispatch(createTravelRequest());
-    try {
-      const travel = await api.travels.postTravel(data);
-      dispatch(createTravelSuccess(travel));
-      router.navigate(`/travel/${travel._id}`);
-    } catch (error) {
-      dispatch(createTravelFailure(error));
-    }
-  };
+export const createTravel = data =>
+	async function (dispatch, _getState, { api, router }) {
+		dispatch(createTravelRequest());
+		try {
+			data.datetimeCreation = Date.now();
+			const travel = await api.travels.postTravel(data);
+			dispatch(createTravelSuccess(travel));
+			router.navigate(`/travel/${travel._id}`);
+		} catch (error) {
+			dispatch(createTravelFailure(error));
+		}
+	};
 
 export const deleteTravelRequest = () => ({
   type: DELETE_TRAVEL_REQUEST,
@@ -184,6 +186,61 @@ export const fetchSingleTravel = id =>
       dispatch(fetchSingleTravelFailure(error));
     }
   };
+
+export const buyTravelRequest = () => ({
+	type: BUY_TRAVEL_REQUEST,
+});
+
+export const buyTravelSuccess = travel => ({
+	type: BUY_TRAVEL_SUCCESS,
+	payload: travel,
+});
+
+export const buyTravelFailure = error => ({
+	type: BUY_TRAVEL_FAILURE,
+	error: true,
+	payload: error,
+});
+
+/* export const buyTravel = (id) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(buyTravelRequest());
+    try {
+      const travel = await api.travels.buyTravel(id);
+      dispatch(buyTravelSuccess(travel));
+    } catch (error) {
+      dispatch(buyTravelFailure(error));
+    }
+  }; */
+
+/* export const buyTravel = id =>
+	async function (dispatch, _getState, { api, router }) {
+		return new Promise(async (resolve, reject) => {
+			dispatch(buyTravelRequest());
+			try {
+				const travel = await api.travels.buyTravel(id);
+				dispatch(buyTravelSuccess(travel));
+				resolve(travel);
+			} catch (error) {
+				dispatch(buyTravelFailure(error));
+				reject(error);
+			}
+		});
+	}; */
+
+export const buyTravel = id =>
+	async function (dispatch, _getState, { api, router }) {
+		dispatch(buyTravelRequest());
+		try {
+			const travel = await api.travels.buyTravel(id);
+			console.log('travellll',travel)
+			dispatch(buyTravelSuccess(travel));
+			return travel;
+		} catch (error) {
+			dispatch(buyTravelFailure(error));
+			throw error;
+		}
+	};
 
 // locations actions:
 

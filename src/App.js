@@ -20,6 +20,7 @@ import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
 import RequireAuth from './layout/RequireAuth.js';
 import UpdateUser from './layout/auth/updateUser/updateUser.js';
+import PurchasedTravel from './components/PurchasedTravel.jsx';
 import TravelUser from './layout/travels/TravelUser.js';
 
 function App() {
@@ -70,9 +71,10 @@ function App() {
             </RequireAuth>
           }
         />
-
         <Route path="/travel-edit/:id" element={<EditTravelPage />} />
+        <Route path="/congratulations" element={<PurchasedTravel />} />
         <Route path="/travel-user/:user" element={<TravelUser />} />
+        
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <ContactSection />

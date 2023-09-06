@@ -32,8 +32,8 @@ export function editTravel(id, data) {
   });
 }
 
-export function buyTravel(id) {
-  return client.put(`/api/travels/buy/${id}`);
+export function buyTravel(id, buyerId) {
+  return client.put(`/api/travels/buy/${id}`, {buyerId});
 }
 
 export function deletePhoto(photoName) {
