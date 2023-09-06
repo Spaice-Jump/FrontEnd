@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTravels } from '../../redux/actions';
 import { getTravels } from '../../redux/selectors';
-import { compose } from 'redux';
+
 
 const Travels = () => {
   const [result,setResult]= useState([])
