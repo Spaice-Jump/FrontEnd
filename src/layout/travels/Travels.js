@@ -1,25 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTravels } from '../../redux/actions';
 import { getTravels } from '../../redux/selectors';
+import { compose } from 'redux';
 
 const Travels = () => {
+  const [result,setResult]= useState([])
+  const [search, setSearch]=useState('')
 	const dispatch = useDispatch();
+  const travel = useSelector(getTravels);
+  
+  
+  
+  //busqueda
+  const searcher = (e)=>{
+    setSearch(e.target.value)
+  }
+
+  //filtrado
+let travels= []
+if(!search){
+  travels=result
+}else{
+  travels = result.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
+}
+
+ 
+
 
 	useEffect(() => {
+    setResult(travel)
 		dispatch(fetchTravels());
-	}, [dispatch]);
+	}, [dispatch, travel]);
 
-	const travels = useSelector(getTravels);
+
+
+
 
   return (
     <>
       <section className="travels-first-container">
         <div className="container travels-container">
           <div className="row">
+        <input type='text' value={search} onChange={searcher} placeholder='Search' className='form-Control'></input>
             {travels ? (
               travels.map((travel) => (
                 <div key={travel._id} className="col-md-3 col-sm-6 travels-columns">

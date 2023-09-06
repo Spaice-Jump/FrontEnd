@@ -228,6 +228,7 @@ export const buyTravel = id =>
 		dispatch(buyTravelRequest());
 		try {
 			const travel = await api.travels.buyTravel(id);
+			console.log('travellll',travel)
 			dispatch(buyTravelSuccess(travel));
 			return travel;
 		} catch (error) {
