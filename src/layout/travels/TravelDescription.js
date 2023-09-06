@@ -52,8 +52,11 @@ const TravelDescription = () => {
   }
 
 	const handleBuy = async () => {
-		await dispatch(buyTravel(travel.id));
-		const travelInactive = getTravelById(travel.id);
+		console.log('travel', travel._id);
+		console.log("id", id);
+		const result = await dispatch(buyTravel(travel._id));
+		console.log("pasa");
+		const travelInactive = getTravelById(id);
 		setTravel(travelInactive);
 	};
 

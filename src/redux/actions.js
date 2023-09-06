@@ -208,7 +208,7 @@ export const buyTravelFailure = error => ({
     }
   }; */
 
-export const buyTravel = id =>
+/* export const buyTravel = id =>
 	async function (dispatch, _getState, { api, router }) {
 		return new Promise(async (resolve, reject) => {
 			dispatch(buyTravelRequest());
@@ -221,6 +221,19 @@ export const buyTravel = id =>
 				reject(error);
 			}
 		});
+	}; */
+
+export const buyTravel = id =>
+	async function (dispatch, _getState, { api, router }) {
+		dispatch(buyTravelRequest());
+		try {
+			const travel = await api.travels.buyTravel(id);
+			dispatch(buyTravelSuccess(travel));
+			return travel;
+		} catch (error) {
+			dispatch(buyTravelFailure(error));
+			throw error;
+		}
 	};
 
 // locations actions:
