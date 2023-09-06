@@ -20,6 +20,7 @@ import {
   DELETE_PHOTO_SUCCESS,
   FETCH_SINGLE_TRAVEL_SUCCESS,
   AUTH_DETAIL_SUCCESS,
+  BUY_TRAVEL_SUCCESS,
 } from './types';
 
 export const defaultState = {
@@ -59,15 +60,19 @@ export function travels(state = defaultState.travels, action) {
           travel._id === action.payload._id ? action.payload : travel
         ),
       };
+    case BUY_TRAVEL_SUCCESS:
+      return {
+        ...state,
+        data: state.data.map(travel =>
+          travel._id === action.payload._id ? action.payload : travel
+        ),
+      };
     case DELETE_TRAVEL_SUCCESS:
       return {
         ...state,
         data: state.data.filter(travel => travel.id !== action.payload),
       };
     case DELETE_PHOTO_SUCCESS:
-      console.log('action.payload', action.payload);
-      console.log('state.data', state.data);
-
       return {
         ...state,
         data: state.data.map(travel =>

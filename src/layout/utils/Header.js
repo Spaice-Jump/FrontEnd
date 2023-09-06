@@ -99,14 +99,14 @@ function Header() {
           </li>
         </ul>
       </li>
-      {isLogged ? <span class="greetings">{t("navbar.greetings")} {email}</span> : <span class="greetings">{t("navbar.greetings-nonuser")}</span>}
+      {isLogged ? <span className="greetings">{t("navbar.greetings")} {email}</span> : <span className="greetings">{t("navbar.greetings-nonuser")}</span>}
       {
-        <div class="container px-4 px-lg-5 navbar-style">
+        <div className="container px-4 px-lg-5 navbar-style">
           <NavLink to="/" className="navbar-brand nav-NavLink home-button">
             {t("navbar.home")}
           </NavLink>
           <button
-            class="navbar-toggler navbar-toggler-right"
+            className="navbar-toggler navbar-toggler-right"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarResponsive"
@@ -115,23 +115,23 @@ function Header() {
             aria-label="Toggle navigation"
           >
             {t("navbar.menu_mobile")}
-            <i class="fas fa-bars"></i>
+            <i className="fas fa-bars"></i>
           </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
                 <NavLink to="/travels" className="nav-NavLink">
                   {t("navbar.travels")}
                 </NavLink>
               </li>
               {isLogged ? (
                 <>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink to="/newtravel" className="nav-NavLink">
                       {t("navbar.create-travel")}
                     </NavLink>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink
                       to="/updateUser"
                       className="nav-NavLink"
@@ -139,7 +139,7 @@ function Header() {
                       Update User
                     </NavLink>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink
                       to="/deleteUser"
                       className="nav-NavLink"
@@ -148,7 +148,7 @@ function Header() {
                     </NavLink>
                   </li>
 
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink
                       onClick={handlerLogout}
                       className="nav-NavLink"
@@ -160,13 +160,13 @@ function Header() {
                 </>
               ) : (
                 <>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink to="/signup" className="nav-NavLink">
                       {t("navbar.new-user")}
                     </NavLink>
                   </li>
 
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink to="/login" className="nav-NavLink">
                       {t("navbar.login-user")}
                     </NavLink>

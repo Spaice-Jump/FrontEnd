@@ -17,6 +17,7 @@ function NewTravelPage() {
     price: null,
     forSale: true,
     photo: null,
+    active: true,
     userId: userId,
   });
 
