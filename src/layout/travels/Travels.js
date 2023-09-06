@@ -4,8 +4,8 @@ import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTravels } from '../../redux/actions';
-import { getTravels } from '../../redux/selectors';
-
+import { getTravels, getUi } from '../../redux/selectors';
+import Loading from '../../layout/utils/spinner/Loading';
 
 const Travels = () => {
   const [result,setResult]= useState([])
@@ -30,6 +30,7 @@ if(!search){
 
  
 
+  const {isLoading, error} = useSelector(getUi);
 
 	useEffect(() => {
     setResult(travel)
@@ -39,6 +40,10 @@ if(!search){
 
 
 
+
+  if (isLoading) {
+		return <Loading />;
+	}
 
   return (
     <>
@@ -88,7 +93,7 @@ if(!search){
                           to={`/travel/${travel._id}`}
                           className="add-to-cart"
                         >
-                          <i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ
+                          <i className="fa fa-shopping-bag"></i>{travel.active? "VIAJAR AQUÍ ": "VIAJE COMPLETO"}
                         </Link>
                         <a className="product-compare-icon" href="#">
                           <i className="fas fa-random"></i>
@@ -103,6 +108,10 @@ if(!search){
             )}
           </div>
         </div>
+        {error ? (
+				<div className="error">
+					<p> {error}</p>
+				</div> ) : null}
       </section>
     </>
   );
