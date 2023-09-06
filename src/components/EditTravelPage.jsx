@@ -19,7 +19,7 @@ function EditTravelPage() {
 	const dispatch = useDispatch();
 	const [travel, setTravel] = useState({});
 	const editTrip = useSelector(getTravelById(id));
-	const {isLoading} = useSelector(getUi);
+	const {isLoading, error} = useSelector(getUi);
 
 	useEffect(() => {
 		setTravel(editTrip);
@@ -196,6 +196,10 @@ function EditTravelPage() {
 					Actualizar viaje
 				</button>
 			</form>
+			{error ? (
+				<div className="error">
+					<p> {error}</p>
+				</div> ) : null}
 		</div>
 	);
 }

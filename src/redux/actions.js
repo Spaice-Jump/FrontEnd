@@ -45,6 +45,7 @@ import {
 
 import storage from '../layout/utils/storage';
 import { updateUser } from '../api/serviceAuth';
+import { getUserId } from './selectors';
 
 // Travels actions:
 
@@ -93,6 +94,7 @@ export const createTravel = data =>
 	async function (dispatch, _getState, { api, router }) {
 		dispatch(createTravelRequest());
 		try {
+			data.datetimeCreation = Date.now();
 			const travel = await api.travels.postTravel(data);
 			dispatch(createTravelSuccess(travel));
 			router.navigate(`/travel/${travel._id}`);
@@ -197,42 +199,17 @@ export const buyTravelFailure = error => ({
 	payload: error,
 });
 
-/* export const buyTravel = (id) =>
-  async function (dispatch, _getState, { api, router }) {
-    dispatch(buyTravelRequest());
-    try {
-      const travel = await api.travels.buyTravel(id);
-      dispatch(buyTravelSuccess(travel));
-    } catch (error) {
-      dispatch(buyTravelFailure(error));
-    }
-  }; */
-
-/* export const buyTravel = id =>
-	async function (dispatch, _getState, { api, router }) {
-		return new Promise(async (resolve, reject) => {
-			dispatch(buyTravelRequest());
-			try {
-				const travel = await api.travels.buyTravel(id);
-				dispatch(buyTravelSuccess(travel));
-				resolve(travel);
-			} catch (error) {
-				dispatch(buyTravelFailure(error));
-				reject(error);
-			}
-		});
-	}; */
-
 export const buyTravel = id =>
 	async function (dispatch, _getState, { api, router }) {
 		dispatch(buyTravelRequest());
 		try {
-			const travel = await api.travels.buyTravel(id);
+			const buyerId = getUserId(_getState());
+			const travel = await api.travels.buyTravel(id, buyerId);
 			dispatch(buyTravelSuccess(travel));
-			return travel;
+			router.navigate('/congratulations');
 		} catch (error) {
 			dispatch(buyTravelFailure(error));
-			throw error;
+			/* throw error; */
 		}
 	};
 
