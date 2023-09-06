@@ -20,6 +20,7 @@ import DeleteUserPage from './layout/auth/deleteUser/DeleteUserPage.jsx';
 import EditTravelPage from './components/EditTravelPage.jsx';
 import RequireAuth from './layout/RequireAuth.js';
 import UpdateUser from './layout/auth/updateUser/updateUser.js';
+import TravelUser from './layout/travels/TravelUser.js';
 
 function App() {
   useEffect(() => {
@@ -71,6 +72,7 @@ function App() {
         />
 
         <Route path="/travel-edit/:id" element={<EditTravelPage />} />
+        <Route path="/travel-user/:user" element={<TravelUser />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <ContactSection />

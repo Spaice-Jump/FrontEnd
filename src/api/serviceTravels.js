@@ -35,3 +35,9 @@ export function editTravel(id, data) {
 export function deletePhoto(photoName) {
   return client.delete(`/api/travels/deletePhoto/${photoName}`);
 }
+
+
+export const getTravelUser = (user, headers) => {
+    const URL = "/api/travels/users";
+    return client.post(URL, user, headers);
+  };
