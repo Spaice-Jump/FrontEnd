@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLocations, getUserId, getUi } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 import videoBackground from '../assets/video/new-travel-background.mp4';
-import './NewTravelPage.css';
+import './componentTravels.css';
 import resizeFile from '../utils/resizeFile';
 import Loading from '../layout/utils/spinner/Loading';
 
@@ -72,7 +72,6 @@ function NewTravelPage() {
 					src={videoBackground}
 					type="video/mp4"
 				/>
-				Tu navegador no admite la reproducción de videos.
 			</video>
 			<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
 				<div className="text-center">

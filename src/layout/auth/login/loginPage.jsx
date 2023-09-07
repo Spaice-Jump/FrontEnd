@@ -121,7 +121,7 @@ function LoginPage() {
                   Marca para guardar credenciales
                 </span>
               </p>
-              <p class="text-white forget-password">
+              <p className="text-white forget-password">
                 ¿Has olvidado la contraseña?
                 <br />
                 <a href="/password" class="link-info">

@@ -6,14 +6,14 @@ function SubscribeSection() {
   return (
     <section className="signup-section" id="signup">
       {
-        <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
+        <div className="container px-4 px-lg-5">
+          <div className="row gx-4 gx-lg-5">
+            <div className="col-md-10 col-lg-8 mx-auto text-center">
               <FontAwesomeIcon
                 icon={faPaperPlane}
                 className="fa-2x mb-2 text-white"
               />
-              <h2 class="text-white mb-5">
+              <h2 className="text-white mb-5">
                 ¡Subscríbete para recibir noticias nuevas!
               </h2>
               {/* * * * * * * * * * * * * * * *
@@ -24,15 +24,15 @@ function SubscribeSection() {
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!*/}
               <form
-                class="form-signup"
+                className="form-signup"
                 id="contactForm"
                 data-sb-form-api-token="API_TOKEN"
               >
                 {/* Email address input*/}
-                <div class="row input-group-newsletter">
-                  <div class="col">
+                <div className="row input-group-newsletter">
+                  <div className="col">
                     <input
-                      class="form-control"
+                      className="form-control"
                       id="emailAddress"
                       type="email"
                       placeholder="Enter email address..."
@@ -40,9 +40,9 @@ function SubscribeSection() {
                       data-sb-validations="required,email"
                     />
                   </div>
-                  <div class="col-auto">
+                  <div className="col-auto">
                     <button
-                      class="btn btn-primary disabled"
+                      className="btn btn-primary disabled"
                       id="submitButton"
                       type="submit"
                     >
@@ -51,13 +51,13 @@ function SubscribeSection() {
                   </div>
                 </div>
                 <div
-                  class="invalid-feedback mt-2"
+                  className="invalid-feedback mt-2"
                   data-sb-feedback="emailAddress:required"
                 >
                   An email is required.
                 </div>
                 <div
-                  class="invalid-feedback mt-2"
+                  className="invalid-feedback mt-2"
                   data-sb-feedback="emailAddress:email"
                 >
                   Email is not valid.
@@ -66,9 +66,9 @@ function SubscribeSection() {
                             <!---->
                             <!-- This is what your users will see when the form-->
                             <!-- has successfully submitted-->*/}
-                <div class="d-none" id="submitSuccessMessage">
-                  <div class="text-center mb-3 mt-2 text-white">
-                    <div class="fw-bolder">Form submission successful!</div>
+                <div className="d-none" id="submitSuccessMessage">
+                  <div className="text-center mb-3 mt-2 text-white">
+                    <div className="fw-bolder">Form submission successful!</div>
                     To activate this form, sign up at
                     <br />
                     <a href="https://startbootstrap.com/solution/contact-forms">
@@ -80,8 +80,8 @@ function SubscribeSection() {
                             <!---->
                             <!-- This is what your users will see when there is-->
                             <!-- an error submitting the form-->*/}
-                <div class="d-none" id="submitErrorMessage">
-                  <div class="text-center text-danger mb-3 mt-2">
+                <div className="d-none" id="submitErrorMessage">
+                  <div className="text-center text-danger mb-3 mt-2">
                     Error sending message!
                   </div>
                 </div>
