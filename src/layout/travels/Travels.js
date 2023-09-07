@@ -4,13 +4,15 @@ import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTravels } from '../../redux/actions';
-import { getTravels } from '../../redux/selectors';
+import { getTravels, getUi } from '../../redux/selectors';
+import Loading from '../../layout/utils/spinner/Loading';
 
 const Travels = () => {
 	// const [result, setResult] = useState([]);
 	// const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
 	const travels = useSelector(getTravels);
+	const { isLoading, error } = useSelector(getUi);
 
 	// //busqueda
 	// const searcher = e => {
@@ -30,7 +32,11 @@ const Travels = () => {
 	useEffect(() => {
 		// setResult(travel);
 		dispatch(fetchTravels());
-	}, [dispatch/* , travel */]);
+	}, [dispatch /* , travel */]);
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<>
@@ -92,7 +98,8 @@ const Travels = () => {
 													to={`/travel/${travel._id}`}
 													className="add-to-cart"
 												>
-													<i className="fa fa-shopping-bag"></i>VIAJAR AQUÍ
+													<i className="fa fa-shopping-bag"></i>
+													{travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
 												</Link>
 												<a
 													className="product-compare-icon"
@@ -110,6 +117,11 @@ const Travels = () => {
 						)}
 					</div>
 				</div>
+				{error ? (
+					<div className="error">
+						<p> {error}</p>
+					</div>
+				) : null}
 			</section>
 		</>
 	);
