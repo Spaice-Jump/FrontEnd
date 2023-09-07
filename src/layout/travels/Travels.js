@@ -7,6 +7,8 @@ import { fetchTravels } from '../../redux/actions';
 import { getTravels, getUi } from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
 
+
+//b
 const Travels = () => {
 	const dispatch = useDispatch();
   const {isLoading, error} = useSelector(getUi);
