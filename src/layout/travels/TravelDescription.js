@@ -73,26 +73,33 @@ const TravelDescription = () => {
 					<h1>{travel.topic}</h1>
 					<p class="information">"{travel.remarks}"</p>
 					<div class="control-travel-description">
-						{travel.active ? (
-							<button
-								onClick={handleBuy}
-								class="btn-travel-description"
-							>
-								<span class="price-travel-description">{travel.price}€</span>
-								<span class="shopping-cart-travel-description">
-									<i
-										class="fa fa-shopping-cart"
-										aria-hidden="true"
-									></i>
-								</span>
-								<span class="buy-travel-description">Buy Now</span>
-							</button>
+						{travel.active && isLogged ? (
+							<>
+								{userId === travel.userId ? 
+								<p>Viaje de mi compañía</p> : (
+									<button
+										onClick={handleBuy}
+										class="btn-travel-description"
+									>
+										<span class="price-travel-description">
+											{travel.price}€
+										</span>
+										<span class="shopping-cart-travel-description">
+											<i
+												class="fa fa-shopping-cart"
+												aria-hidden="true"
+											></i>
+										</span>
+										<span class="buy-travel-description">Buy Now</span>
+									</button>
+								)}
+							</>
 						) : (
 							<>
 								<p>Viaje completo</p>
-								<button onClick={handleReturn}>Volver</button>
 							</>
 						)}
+						<button onClick={handleReturn}>Volver</button>
 					</div>
 				</div>
 				<div class="product-image-travel-description">
