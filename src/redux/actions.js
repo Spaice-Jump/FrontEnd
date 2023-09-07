@@ -1,4 +1,5 @@
 import {
+
 	AUTH_LOGIN_FAILURE,
 	AUTH_LOGIN_REQUEST,
 	AUTH_LOGIN_SUCCESS,
@@ -42,10 +43,14 @@ import {
 	BUY_TRAVEL_REQUEST,
 	BUY_TRAVEL_SUCCESS,
 	FILTER_TRAVELS_SUCCESS,
+
+  
+
 } from './types';
 
 import storage from '../layout/utils/storage';
 import { updateUser } from '../api/serviceAuth';
+import { getUserId } from './selectors';
 
 // Travels actions:
 
@@ -55,50 +60,51 @@ export const filterTravelsSuccess = travels => ({
 });
 
 export const fetchTravelsRequest = () => ({
-	type: FETCH_TRAVELS_REQUEST,
+  type: FETCH_TRAVELS_REQUEST,
 });
 
 export const fetchTravelsSuccess = travels => ({
-	type: FETCH_TRAVELS_SUCCESS,
-	payload: travels,
+  type: FETCH_TRAVELS_SUCCESS,
+  payload: travels,
 });
 
 export const fetchTravelsFailure = error => ({
-	type: FETCH_TRAVELS_FAILURE,
-	error: true,
-	payload: error,
+  type: FETCH_TRAVELS_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const fetchTravels = () =>
-	async function (dispatch, _getState, { api }) {
-		dispatch(fetchTravelsRequest());
-		try {
-			const travels = await api.travels.getTravels();
-			dispatch(fetchTravelsSuccess(travels));
-		} catch (error) {
-			dispatch(fetchTravelsFailure(error));
-		}
-	};
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchTravelsRequest());
+    try {
+      const travels = await api.travels.getTravels();
+      dispatch(fetchTravelsSuccess(travels));
+    } catch (error) {
+      dispatch(fetchTravelsFailure(error));
+    }
+  };
 
 export const createTravelRequest = () => ({
-	type: CREATE_TRAVEL_REQUEST,
+  type: CREATE_TRAVEL_REQUEST,
 });
 
-export const createTravelSuccess = travel => ({
-	type: CREATE_TRAVEL_SUCCESS,
-	payload: travel,
+export const createTravelSuccess = (travel) => ({
+  type: CREATE_TRAVEL_SUCCESS,
+  payload: travel,
 });
 
-export const createTravelFailure = error => ({
-	type: CREATE_TRAVEL_FAILURE,
-	error: true,
-	payload: error,
+export const createTravelFailure = (error) => ({
+  type: CREATE_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const createTravel = data =>
 	async function (dispatch, _getState, { api, router }) {
 		dispatch(createTravelRequest());
 		try {
+			data.datetimeCreation = Date.now();
 			const travel = await api.travels.postTravel(data);
 			dispatch(createTravelSuccess(travel));
 			router.navigate(`/travel/${travel._id}`);
@@ -108,85 +114,85 @@ export const createTravel = data =>
 	};
 
 export const deleteTravelRequest = () => ({
-	type: DELETE_TRAVEL_REQUEST,
+  type: DELETE_TRAVEL_REQUEST,
 });
 
-export const deleteTravelSuccess = id => ({
-	type: DELETE_TRAVEL_SUCCESS,
-	payload: id,
+export const deleteTravelSuccess = (id) => ({
+  type: DELETE_TRAVEL_SUCCESS,
+  payload: id,
 });
 
-export const deleteTravelFailure = error => ({
-	type: DELETE_TRAVEL_FAILURE,
-	error: true,
-	payload: error,
+export const deleteTravelFailure = (error) => ({
+  type: DELETE_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
 });
 
-export const deleteTravel = id =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(deleteTravelRequest());
-		try {
-			await api.travels.deleteTravel(id);
-			dispatch(deleteTravelSuccess(id));
-			router.navigate('/');
-		} catch (error) {
-			dispatch(deleteTravelFailure(error));
-		}
-	};
+export const deleteTravel = (id) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(deleteTravelRequest());
+    try {
+      await api.travels.deleteTravel(id);
+      dispatch(deleteTravelSuccess(id));
+      router.navigate("/");
+    } catch (error) {
+      dispatch(deleteTravelFailure(error));
+    }
+  };
 
 export const editTravelRequest = () => ({
-	type: EDIT_TRAVEL_REQUEST,
+  type: EDIT_TRAVEL_REQUEST,
 });
 
-export const editTravelSuccess = travel => ({
-	type: EDIT_TRAVEL_SUCCESS,
-	payload: travel,
+export const editTravelSuccess = (travel) => ({
+  type: EDIT_TRAVEL_SUCCESS,
+  payload: travel,
 });
 
-export const editTravelFailure = error => ({
-	type: EDIT_TRAVEL_FAILURE,
-	error: true,
-	payload: error,
+export const editTravelFailure = (error) => ({
+  type: EDIT_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const editTravel = (id, data) =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(editTravelRequest());
-		try {
-			const travel = await api.travels.editTravel(id, data);
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(editTravelRequest());
+    try {
+      const travel = await api.travels.editTravel(id, data);
 			console.log('travel update', travel);
-			dispatch(editTravelSuccess(travel));
-			router.navigate(`/travel/${travel._id}`);
-		} catch (error) {
-			dispatch(editTravelFailure(error));
-		}
-	};
+      dispatch(editTravelSuccess(travel));
+      router.navigate(`/travel/${travel._id}`);
+    } catch (error) {
+      dispatch(editTravelFailure(error));
+    }
+  };
 
 export const fetchSingleTravelRequest = () => ({
-	type: FETCH_SINGLE_TRAVEL_REQUEST,
+  type: FETCH_SINGLE_TRAVEL_REQUEST,
 });
 
 export const fetchSingleTravelSuccess = travel => ({
-	type: FETCH_SINGLE_TRAVEL_SUCCESS,
-	payload: travel,
+  type: FETCH_SINGLE_TRAVEL_SUCCESS,
+  payload: travel,
 });
 
 export const fetchSingleTravelFailure = error => ({
-	type: FETCH_SINGLE_TRAVEL_FAILURE,
-	error: true,
-	payload: error,
+  type: FETCH_SINGLE_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const fetchSingleTravel = id =>
-	async function (dispatch, _getState, { api }) {
-		dispatch(fetchSingleTravelRequest());
-		try {
-			const travel = await api.travels.getTravel(id);
-			dispatch(fetchSingleTravelSuccess(travel));
-		} catch (error) {
-			dispatch(fetchSingleTravelFailure(error));
-		}
-	};
+  async function (dispatch, _getState, { api }) {
+    dispatch(fetchSingleTravelRequest());
+    try {
+      const travel = await api.travels.getTravel(id);
+      dispatch(fetchSingleTravelSuccess(travel));
+    } catch (error) {
+      dispatch(fetchSingleTravelFailure(error));
+    }
+  };
 
 export const buyTravelRequest = () => ({
 	type: BUY_TRAVEL_REQUEST,
@@ -246,276 +252,286 @@ export const buyTravel = id =>
 // locations actions:
 
 export const fetchLocationsRequest = () => ({
-	type: FETCH_LOCATIONS_REQUEST,
+  type: FETCH_LOCATIONS_REQUEST,
 });
 
-export const fetchLocationsSuccess = locations => ({
-	type: FETCH_LOCATIONS_SUCCESS,
-	payload: locations,
+export const fetchLocationsSuccess = (locations) => ({
+  type: FETCH_LOCATIONS_SUCCESS,
+  payload: locations,
 });
 
-export const fetchLocationsFailure = error => ({
-	type: FETCH_LOCATIONS_FAILURE,
-	error: true,
-	payload: error,
+export const fetchLocationsFailure = (error) => ({
+  type: FETCH_LOCATIONS_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const fetchLocations = () => {
-	return async function (dispatch, _getState, { api }) {
-		dispatch(fetchLocationsRequest());
-		try {
-			const locations = await api.travels.getLocations();
-			dispatch(fetchLocationsSuccess(locations));
-		} catch (error) {
-			dispatch(fetchLocationsFailure(error));
-		}
-	};
+  return async function (dispatch, _getState, { api }) {
+    dispatch(fetchLocationsRequest());
+    try {
+      const locations = await api.travels.getLocations();
+      dispatch(fetchLocationsSuccess(locations));
+    } catch (error) {
+      dispatch(fetchLocationsFailure(error));
+    }
+  };
 };
 
 // Delete only main travel photo:
 
 export const deletePhotoRequest = () => ({
-	type: DELETE_PHOTO_REQUEST,
+  type: DELETE_PHOTO_REQUEST,
 });
 
-export const deletePhotoSuccess = id => ({
-	type: DELETE_PHOTO_SUCCESS,
-	payload: id,
+export const deletePhotoSuccess = (id) => ({
+  type: DELETE_PHOTO_SUCCESS,
+  payload: id,
 });
 
 export const deletePhotoFailure = error => ({
-	type: DELETE_PHOTO_FAILURE,
-	error: true,
-	payload: error,
+  type: DELETE_PHOTO_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const deletePhoto = (id, travel) =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(deletePhotoRequest(id));
-		try {
-			console.log('travel', travel);
-			await api.travels.deletePhoto(travel.photo);
-			dispatch(deletePhotoSuccess(id));
-			router.navigate(`/travel-edit/${id}`);
-		} catch (error) {
-			dispatch(deletePhotoFailure(error));
-		}
-	};
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(deletePhotoRequest(id));
+    try {
+      console.log('travel', travel);
+      await api.travels.deletePhoto(travel.photo);
+      dispatch(deletePhotoSuccess(id));
+      router.navigate(`/travel-edit/${id}`);
+    } catch (error) {
+      dispatch(deletePhotoFailure(error));
+    }
+  };
 
 // Auth actions:
 
 export const authLoginRequest = () => ({
-	type: AUTH_LOGIN_REQUEST,
+  type: AUTH_LOGIN_REQUEST,
 });
 
-export const authLoginSuccess = user => ({
-	//crea la accion de type authlogin para saber si esta loguedo
-	type: AUTH_LOGIN_SUCCESS,
-	payload: { userId: user._id, email: user.email, userName: user.userName },
+ export const authLoginSuccess = (user) => (
+     {
+    
+  //crea la accion de type authlogin para saber si esta loguedo
+  type: AUTH_LOGIN_SUCCESS,
+  payload: {userId: user._id, email:user.email, userName:user.userName}
+ }
+);
+
+export const authSuccess = (user) => (
+    {
+    
+  //crea la accion de type authlogin para saber si esta loguedo
+  type: AUTH_DETAIL_SUCCESS,
+  payload: {userId: user._id, email:user.email, userName:user.userName}
 });
 
-export const authSuccess = user => ({
-	//crea la accion de type authlogin para saber si esta loguedo
-	type: AUTH_DETAIL_SUCCESS,
-	payload: { userId: user._id, email: user.email, userName: user.userName },
-});
-
-export const authLoginFailure = error => ({
-	type: AUTH_LOGIN_FAILURE,
-	error: true,
-	payload: error,
+export const authLoginFailure = (error) => ({
+  type: AUTH_LOGIN_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const authLogout = () => ({
-	//crea la accion de type authlogout para saber si no esta loguedo
-	type: AUTH_LOGOUT,
+  //crea la accion de type authlogout para saber si no esta loguedo
+  type: AUTH_LOGOUT,
 });
 
 export const authlogin = (credential, checked) =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(authLoginRequest()); //saber si esta cargando la llamada
-		try {
-			const user = await api.auth.login(credential, checked);
-			console.log('aaaaa', user);
-			//leguearse
-			dispatch(authLoginSuccess(user));
-			const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
-			router.navigate(to);
-		} catch (error) {
-			dispatch(authLoginFailure(error));
-			setTimeout(() => {
-				dispatch(resetErrors());
-			}, 4000);
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(authLoginRequest()); //saber si esta cargando la llamada
+    try {
+      const user = await api.auth.login(credential, checked);
+      console.log('aaaaa',user);
+      //leguearse
+      dispatch(authLoginSuccess(user));
+      const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+      router.navigate(to);
+    } catch (error) {
+      dispatch(authLoginFailure(error));
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
+    
 
-			return;
-		}
-	};
+      return;
+    }
+  };
 
 export const authRememberPasswordRequest = () => ({
-	type: AUTH_REMEMBER_PASSWORD_REQUEST,
+  type: AUTH_REMEMBER_PASSWORD_REQUEST,
 });
 
-export const authRememberPasswordSuccess = userId => ({
-	//crea la accion de type authlogin para saber si esta loguedo
-	type: AUTH_REMEMBER_PASSWORD_SUCCESS,
+export const authRememberPasswordSuccess = (userId) => ({
+  //crea la accion de type authlogin para saber si esta loguedo
+  type: AUTH_REMEMBER_PASSWORD_SUCCESS,
 });
 
-export const authRememberPasswordFailure = error => ({
-	type: AUTH_REMEMBER_PASSWORD_FAILURE,
-	error: true,
-	payload: error,
+export const authRememberPasswordFailure = (error) => ({
+  type: AUTH_REMEMBER_PASSWORD_FAILURE,
+  error: true,
+  payload: error,
 });
-export const authPassword = credential =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(authRememberPasswordRequest());
-		try {
-			console.log('crede', credential);
-			const password = await api.auth.rememberPassword(credential);
-			dispatch(authRememberPasswordSuccess());
-			alert(password.msg);
-			console.log('paaaaaaaa', password.msg);
-			const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
-			router.navigate(to);
-		} catch (error) {
-			dispatch(authRememberPasswordFailure(error));
-			setTimeout(() => {
-				dispatch(resetErrors());
-			}, 4000);
-		}
-	};
+export const authPassword = (credential) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(authRememberPasswordRequest());
+    try {
+      console.log("crede", credential);
+      const password = await api.auth.rememberPassword(credential);
+      dispatch(authRememberPasswordSuccess());
+      alert(password.msg);
+      console.log("paaaaaaaa", password.msg);
+      const to = router.state?.from?.pathname || "/login"; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+      router.navigate(to);
+    } catch (error) {
+      dispatch(authRememberPasswordFailure(error));
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
+    
+    }
+  };
 export const resetErrors = () => ({
-	//borramos error
-	type: UI_RESET_ERROR,
+  //borramos error
+  type: UI_RESET_ERROR,
 });
 
 /*Create New User */
-export const uiSignUpFailure = error => ({
-	type: UI_SIGNUP_FAILURE,
-	error: true,
-	payload: error,
+export const uiSignUpFailure = (error) => ({
+  type: UI_SIGNUP_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const uiSignUpSuccess = () => ({
-	type: UI_SIGNUP_SUCCESS,
+  type: UI_SIGNUP_SUCCESS,
 });
 
 export const uiSignUpRequest = () => ({
-	type: UI_SIGNUP_REQUEST,
+  type: UI_SIGNUP_REQUEST,
 });
 
-export const authSignUp = data =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(uiSignUpRequest());
-		if (data.password === data.passwordConfirm) {
-			try {
-				const newUser = await api.auth.signUp(data, {
-					headers: { 'content-type': 'multipart/form-data' },
-				});
+export const authSignUp = (data) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(uiSignUpRequest());
+    if (data.password === data.passwordConfirm) {
+      try {
+        const newUser = await api.auth.signUp(data, {
+          headers: { "content-type": "multipart/form-data" },
+        });
 
-				if (newUser?.status === 'OK') {
-					const credential = {
-						email: data.email,
-						password: data.password,
-					};
-					dispatch(uiSignUpSuccess());
-					await dispatch(authlogin(credential, true));
-				} else {
-					dispatch(uiSignUpFailure(newUser?.message));
-				}
-			} catch (error) {
-				dispatch(uiSignUpFailure(error?.message));
-			}
-		} else {
-			dispatch(uiSignUpFailure('password confirmation does not match'));
-		}
-	};
+        if (newUser?.status === "OK") {
+          const credential = {
+            email: data.email,
+            password: data.password,
+          };
+          dispatch(uiSignUpSuccess());
+          await dispatch(authlogin(credential, true));
+        } else {
+          dispatch(uiSignUpFailure(newUser?.message));
+        }
+      } catch (error) {
+        dispatch(uiSignUpFailure(error?.message));
+      }
+    } else {
+      dispatch(uiSignUpFailure("password confirmation does not match"));
+    }
+  };
 
 /*Delete User */
 
-export const uiDeleteUserFailure = error => ({
-	type: UI_DELETE_USER_FAILURE,
-	error: true,
-	payload: error,
+export const uiDeleteUserFailure = (error) => ({
+  type: UI_DELETE_USER_FAILURE,
+  error: true,
+  payload: error,
 });
 
 export const uiDeleteUserSuccess = () => ({
-	type: UI_DELETE_USER_SUCCESS,
+  type: UI_DELETE_USER_SUCCESS,
 });
 
 export const uiDeleteUserRequest = () => ({
-	type: UI_DELETE_USER_REQUEST,
+  type: UI_DELETE_USER_REQUEST,
 });
 
-export const authDeleteUser = data =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(uiDeleteUserRequest());
-		if (data.password === data.passwordConfirm) {
-			try {
-				const DeleteUser = await api.auth.deleteUser(data, {
-					headers: { 'content-type': 'multipart/form-data' },
-				});
+export const authDeleteUser = (data) =>
+  async function (dispatch, _getState, { api, router }) {
+    dispatch(uiDeleteUserRequest());
+    if (data.password === data.passwordConfirm) {
+      try {
+        const DeleteUser = await api.auth.deleteUser(data, {
+          headers: { "content-type": "multipart/form-data" },
+        });
 
-				//const DeleteUser = await api.auth.deleteUser(data);
+        //const DeleteUser = await api.auth.deleteUser(data);
 
-				if (DeleteUser?.status === 'OK') {
-					dispatch(uiDeleteUserSuccess());
-					storage.remove('auth');
+        if (DeleteUser?.status === "OK") {
+          dispatch(uiDeleteUserSuccess());
+          storage.remove("auth");
 
-					await dispatch(authLoginFailure(''));
-					const to = router.state?.from?.pathname || '/login';
-					router.navigate(to);
-				} else {
-					dispatch(uiDeleteUserFailure(DeleteUser?.message));
-				}
-			} catch (error) {
-				dispatch(uiDeleteUserFailure(error?.message));
-			}
-		} else {
-			dispatch(uiDeleteUserFailure('password confirmation does not match'));
-		}
-	};
+          await dispatch(authLoginFailure(""));
+          const to = router.state?.from?.pathname || "/login";
+          router.navigate(to);
+        } else {
+          dispatch(uiDeleteUserFailure(DeleteUser?.message));
+        }
+      } catch (error) {
+        dispatch(uiDeleteUserFailure(error?.message));
+      }
+    } else {
+      dispatch(uiDeleteUserFailure('password confirmation does not match'));
+    }
+  };
 
-export const authUpdateUserRequest = () => ({
-	type: UPDATE_USER_REQUEST,
-});
+  export const authUpdateUserRequest = () => ({
+    type: UPDATE_USER_REQUEST,
+  });
+  
+  export const authUpdateUserSuccess = update => ({
+    //crea la accion de type authlogin para saber si esta loguedo
+    type: UPDATE_USER_SUCCESS,
+    payload: {userName:update.userName}
+  });
+  
+  export const authUpdateUserFailure = error => ({
+    type: UPDATE_USER_FAILURE,
+    error: true,
+    payload: error,
+  });
+  export const authUpdateUser = credential =>
+    async function (dispatch, _getState, { api, router }) {
+      dispatch(authUpdateUserRequest());
+      if (credential.password === credential.passwordConfirm) {
+      try {
+        console.log('crede', credential);
+        const update=await updateUser(credential)
+        
+        console.log('update', update)
+        dispatch(authUpdateUserSuccess(update));
+        alert(update.msg)
+        router.navigate('/')
+        console.log('update2', update)
+        
+        // const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
+        // router.navigate(to);
+      } catch (error) {
+        dispatch(authUpdateUserFailure(error));
+        setTimeout(() => {
+          dispatch(resetErrors())
+        }, 4000);
+      }
+    }else{
+      dispatch(authUpdateUserFailure('Las contraseñas no coinciden'))
+      setTimeout(() => {
+        dispatch(resetErrors())
+      }, 4000);
+    }
+    };
 
-export const authUpdateUserSuccess = update => ({
-	//crea la accion de type authlogin para saber si esta loguedo
-	type: UPDATE_USER_SUCCESS,
-	payload: { userName: update.userName },
-});
 
-export const authUpdateUserFailure = error => ({
-	type: UPDATE_USER_FAILURE,
-	error: true,
-	payload: error,
-});
-export const authUpdateUser = credential =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(authUpdateUserRequest());
-		if (credential.password === credential.passwordConfirm) {
-			try {
-				console.log('crede', credential);
-				const update = await updateUser(credential);
-
-				console.log('update', update);
-				dispatch(authUpdateUserSuccess(update));
-				alert(update.msg);
-				router.navigate('/');
-				console.log('update2', update);
-
-				// const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
-				// router.navigate(to);
-			} catch (error) {
-				dispatch(authUpdateUserFailure(error));
-				setTimeout(() => {
-					dispatch(resetErrors());
-				}, 4000);
-			}
-		} else {
-			dispatch(authUpdateUserFailure('Las contraseñas no coinciden'));
-			setTimeout(() => {
-				dispatch(resetErrors());
-			}, 4000);
-		}
-	};
+    

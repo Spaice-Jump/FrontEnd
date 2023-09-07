@@ -32,10 +32,16 @@ export function editTravel(id, data) {
   });
 }
 
-export function buyTravel(id) {
-  return client.put(`/api/travels/buy/${id}`);
+export function buyTravel(id, buyerId) {
+  return client.put(`/api/travels/buy/${id}`, {buyerId});
 }
 
 export function deletePhoto(photoName) {
   return client.delete(`/api/travels/deletePhoto/${photoName}`);
 }
+
+
+export const getTravelUser = (user, headers) => {
+    const URL = "/api/travels/users";
+    return client.post(URL, user, headers);
+  };
