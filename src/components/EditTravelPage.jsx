@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import resizeFile from '../utils/resizeFile';
 import Loading from '../layout/utils/spinner/Loading';
+import { useNavigate } from 'react-router-dom';
 
 function EditTravelPage() {
 	const { id } = useParams();
@@ -75,6 +76,12 @@ function EditTravelPage() {
 
   const isDisabled =
     !travel.topic || !travel.origin || !travel.destination || !travel.price;
+
+	const navigate = useNavigate();
+	const handleReturn = () => {
+		navigate(`/travel/${id}`);
+	};
+
 
 	if (isLoading) {
 		return <Loading />;
@@ -216,6 +223,12 @@ function EditTravelPage() {
 					disabled={isDisabled}
 				>
 					Actualizar viaje
+				</button>
+				<button
+					type="submit"
+					onClick={handleReturn}
+				>
+					Volver atrás
 				</button>
 			</form>
 			{error ? (
