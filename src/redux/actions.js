@@ -41,12 +41,18 @@ import {
 	BUY_TRAVEL_FAILURE,
 	BUY_TRAVEL_REQUEST,
 	BUY_TRAVEL_SUCCESS,
+	FILTER_TRAVELS_SUCCESS,
 } from './types';
 
 import storage from '../layout/utils/storage';
 import { updateUser } from '../api/serviceAuth';
 
 // Travels actions:
+
+export const filterTravelsSuccess = travels => ({
+	type: FILTER_TRAVELS_SUCCESS,
+	payload: travels,
+});
 
 export const fetchTravelsRequest = () => ({
 	type: FETCH_TRAVELS_REQUEST,

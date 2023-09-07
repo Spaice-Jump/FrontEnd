@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTravels } from '../../redux/actions';
+import { fetchTravels, fetchTravelsSuccess } from '../../redux/actions';
 import { getTravels } from '../../redux/selectors';
 
 
@@ -12,29 +12,141 @@ const Travels = () => {
   const [search, setSearch]=useState('')
 	const dispatch = useDispatch();
   const travel = useSelector(getTravels);
+  const [advertFilter, setAdvertFilter] = useState([]);
+  const [data, setData] = useState({
+    sales: '',
+    buy: '',
+    priceMin: 0,
+    priceMax: Infinity,
+  });
+	useEffect(() => {
+    //setResult(travel)
+    dispatch(fetchTravels());
+	}, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(advertsLoaded(advert));
+  // }, [dispatch, advert]);
+
+  // const [checked, setCheked] = useState(null);
+
+  // const handleClickFilter = event => {
+  //   event.preventDefault();
+
+  //   const state = () => {
+  //     let resultSale = '';
+
+  //     if (data.sales) {
+  //       resultSale = true;
+  //     } else if (data.buy) {
+  //       resultSale = false;
+  //     }
+  //     return resultSale;
+  //   };
+  //   if (state() === true || state() === false) {
+  //     let filterPrice = advert.filter(
+  //       advert =>
+  //         advert.price >= data.priceMin &&
+  //         advert.price <= data.priceMax &&
+  //         advert.sale === state(),
+  //     );
+
+  //     dispatch(advertsLoadedSuccess(filterPrice));
+  //   } else {
+  //     let filterPrice = advert.filter(
+  //       advert =>
+  //         advert.price >= data.priceMin && advert.price <= data.priceMax,
+  //     );
+
+  //     dispatch(advertsLoadedSuccess(filterPrice));
+  //   }
+  // };
+
+  // const handleChangeFilterSaleCheck = event => {
+  //   event.target.name === 'sales'
+  //     ? setData({ ...data, sales: event.target.checked })
+  //     : setData({ ...data, buy: event.target.checked });
+  // };
+  // const handleChangeFilterPriceMax = event => {
+  //   setData({ ...data, priceMax: event.target.value });
+  // };
+
+  // const handleChangeFilterPriceMin = event => {
+  //   setData({ ...data, priceMin: event.target.value });
+  // };
+  // const disabledCheckBuy = data.sales;
+  // const disabledCheckSale = data.buy;
   
   
-  
-  //busqueda
+  //busqueda por palabras
   const searcher = (e)=>{
     setSearch(e.target.value)
   }
 
+  //filtrado por precios
+
+
+
+
+
   //filtrado
-let travels= []
-if(!search){
-  travels=result
-}else{
-  travels = result.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
-}
+  
+  
+  
+  let travels= travel
+  console.log('t',travel)
+  const handleClickFilter = event => {
+    event.preventDefault();
+    travels=[]
+    let filterPrice=[]
+    console.log('fff',filterPrice)
+    if(!search && !filterPrice){
+    dispatch(fetchTravels())
+    //dispatch(fetchTravelsSuccess(travel))
+    travels=travel
+    console.log('tave1',travels)
+  }else{
+    travels = travel.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
+    dispatch(fetchTravelsSuccess(travels))
+    console.log('tave1',travels)
+  }
+  
+  console.log('evento', data)
+  console.log('travelst',travels)
+
+    filterPrice = travels.filter(
+      travel =>
+      //console.log('trav', travel.price), console.log('data', data.priceMin),
+      travel.price >= data.priceMin &&
+      travel.price <= data.priceMax,
+      //travel.sale === state(),
+      );
+      travels= filterPrice
+      //setResult(filterPrice)
+      console.log('filtro', filterPrice)
+      console.log('aaaa',travels)
+      dispatch(fetchTravelsSuccess(filterPrice))
+      console.log('singular',travel)
+      
+   
+      //dispatch(advertsLoadedSuccess(filterPrice));
+      
+      //dispatch(advertsLoadedSuccess(filterPrice));
+
+    };
+
+const handleChangeFilterPriceMax = event => {
+  setData({ ...data, priceMax: event.target.value });
+};
+
+const handleChangeFilterPriceMin = event => {
+  setData({ ...data, priceMin: event.target.value });
+};
 
  
 
 
-	useEffect(() => {
-    setResult(travel)
-		dispatch(fetchTravels());
-	}, [dispatch, travel]);
+
 
 
 
@@ -45,7 +157,35 @@ if(!search){
       <section className="travels-first-container">
         <div className="container travels-container">
           <div className="row">
-        <input type='text' value={search} onChange={searcher} placeholder='Search' className='form-Control'></input>
+        <input type='text' value={search} onChange={searcher} placeholder='Search' name='search' className='form-Control'></input>
+        <form>
+        <label className="labelAdvertsPage" name="price">
+              Precio Minimo
+            </label>
+            <input
+              className="inputPriceMinAdvertsPage"
+              type="number"
+              pattern="filtro precio"
+              name="price"
+              value={data.sales.value}
+              onChange={handleChangeFilterPriceMin}
+              placeholder="introduzca precio minimo"
+            />
+            <label className="labelAdvertsPage" name="price">
+              Precio Maximo
+            </label>
+            <input
+              className="inputPriceMaxAdvertsPage"
+              type="number"
+              pattern="filtro precio"
+              name="price"
+              value={data.sales.value}
+              onChange={handleChangeFilterPriceMax}
+              placeholder="introduzca precio maximo"
+            />
+
+            <button onClick={handleClickFilter}>Filtrar</button>
+            </form>
             {travels ? (
               travels.map((travel) => (
                 <div key={travel._id} className="col-md-3 col-sm-6 travels-columns">

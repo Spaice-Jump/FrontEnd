@@ -21,6 +21,7 @@ import {
   FETCH_SINGLE_TRAVEL_SUCCESS,
   AUTH_DETAIL_SUCCESS,
   BUY_TRAVEL_SUCCESS,
+  FILTER_TRAVELS_SUCCESS,
 } from './types';
 
 export const defaultState = {
@@ -48,6 +49,8 @@ export const defaultState = {
 export function travels(state = defaultState.travels, action) {
   switch (action.type) {
     case FETCH_TRAVELS_SUCCESS:
+      return { areLoaded: true, data: action.payload };
+    case FILTER_TRAVELS_SUCCESS:
       return { areLoaded: true, data: action.payload };
     case FETCH_SINGLE_TRAVEL_SUCCESS:
       return { ...state, data: [action.payload] };
@@ -124,59 +127,56 @@ export function auth(state = defaultState.auth, action) {
   }
 }
 
-
-
-
 export function ui(state = defaultState.ui, action) {
-	if (action.error) {
-		return { isLoading: false, error: action.payload };
-	}
+  if (action.error) {
+    return { isLoading: false, error: action.payload };
+  }
 
-	if (/_REQUEST$/.test(action.type)) {
-		//todas las acciones que acaben en request
-		return { isLoading: true, error: null };
-	}
+  if (/_REQUEST$/.test(action.type)) {
+    //todas las acciones que acaben en request
+    return { isLoading: true, error: null };
+  }
 
-	if (/_SUCCESS$/.test(action.type)) {
-		return { isLoading: false, error: null };
-	}
-	if (action.type === UI_RESET_ERROR) {
-		return { ...state, error: null };
-	}
+  if (/_SUCCESS$/.test(action.type)) {
+    return { isLoading: false, error: null };
+  }
+  if (action.type === UI_RESET_ERROR) {
+    return { ...state, error: null };
+  }
 
-	/* Create User */
-	if (action.type === UI_SIGNUP_SUCCESS) {
-		return { isLoading: true, error: null };
-	}
-	if (action.type === UI_SIGNUP_REQUEST) {
-		return { isLoading: false, error: null };
-	}
-	if (action.type === UI_SIGNUP_FAILURE) {
-		return { isLoading: false, error: action.payload };
-	}
+  /* Create User */
+  if (action.type === UI_SIGNUP_SUCCESS) {
+    return { isLoading: true, error: null };
+  }
+  if (action.type === UI_SIGNUP_REQUEST) {
+    return { isLoading: false, error: null };
+  }
+  if (action.type === UI_SIGNUP_FAILURE) {
+    return { isLoading: false, error: action.payload };
+  }
 
-	/* Delete User */
-	if (action.type === UI_DELETE_USER_SUCCESS) {
-		return { isLoading: true, error: null };
-	}
-	if (action.type === UI_DELETE_USER_REQUEST) {
-		return { isLoading: false, error: null };
-	}
-	if (action.type === UI_DELETE_USER_FAILURE) {
-		return { isLoading: false, error: action.payload };
-	}
+  /* Delete User */
+  if (action.type === UI_DELETE_USER_SUCCESS) {
+    return { isLoading: true, error: null };
+  }
+  if (action.type === UI_DELETE_USER_REQUEST) {
+    return { isLoading: false, error: null };
+  }
+  if (action.type === UI_DELETE_USER_FAILURE) {
+    return { isLoading: false, error: action.payload };
+  }
 
-	//Update User
+  //Update User
 
-	if (action.type === UPDATE_USER_SUCCESS) {
-		return { isLoading: true, error: null };
-	}
-	if (action.type === UPDATE_USER_REQUEST) {
-		return { isLoading: false, error: null };
-	}
-	if (action.type === UPDATE_USER_FAILURE) {
-		return { isLoading: false, error: action.payload };
-	}
+  if (action.type === UPDATE_USER_SUCCESS) {
+    return { isLoading: true, error: null };
+  }
+  if (action.type === UPDATE_USER_REQUEST) {
+    return { isLoading: false, error: null };
+  }
+  if (action.type === UPDATE_USER_FAILURE) {
+    return { isLoading: false, error: action.payload };
+  }
 
-	return state;
+  return state;
 }
