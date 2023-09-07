@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import './componentTravels.css';
+import videoBackgroundPurchasedTravel from '../assets/video/video-background-purchased-travel.mp4';
 
 const PurchasedTravel = () => {
   const navigate = useNavigate();
@@ -8,7 +10,21 @@ const PurchasedTravel = () => {
   
   return (
     <div className="purchased-travel">
-      <h1>¡ Enhorabuena !</h1>
+      <video
+				className="video-background-purchased-travel"
+				autoPlay
+				muted
+				loop
+			>
+				<source
+					src={videoBackgroundPurchasedTravel}
+					type="video/mp4"
+				/>
+			</video>
+      <div className="icon-purchased">
+        <div className="tick-purchased">✔</div>
+      </div>
+      <h1>¡Enhorabuena, te vas de viaje!</h1>
       <p>La compra del viaje se ha realizado con éxito</p>
       <button onClick={handleReturn}>Seguir navegando</button>
     </div>)

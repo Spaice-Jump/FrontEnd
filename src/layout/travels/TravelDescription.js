@@ -69,23 +69,23 @@ const TravelDescription = () => {
 	return (
 		<section className="travel-description-page">
 			<div id="container-travel-description">
-				<div class="product-details-travel-description">
+				<div className="product-details-travel-description">
 					<h1>{travel.topic}</h1>
-					<p class="information">"{travel.remarks}"</p>
-					<div class="control-travel-description">
+					<p className="information">"{travel.remarks}"</p>
+					<div className="control-travel-description">
 						{travel.active ? (
 							<button
 								onClick={handleBuy}
-								class="btn-travel-description"
+								className="btn-travel-description"
 							>
-								<span class="price-travel-description">{travel.price}€</span>
-								<span class="shopping-cart-travel-description">
+								<span className="price-travel-description">{travel.price}€</span>
+								<span className="shopping-cart-travel-description">
 									<i
-										class="fa fa-shopping-cart"
+										className="fa fa-shopping-cart"
 										aria-hidden="true"
 									></i>
 								</span>
-								<span class="buy-travel-description">Buy Now</span>
+								<span className="buy-travel-description">Buy Now</span>
 							</button>
 						) : (
 							<>
@@ -95,17 +95,17 @@ const TravelDescription = () => {
 						)}
 					</div>
 				</div>
-				<div class="product-image-travel-description">
+				<div className="product-image-travel-description">
 					{travel.photo ? (
 						<img
 							src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
 							alt={travel.topic}
 						/>
 					) : null}
-					<div class="info-overlay">
-						<p class="overlay-text">Pasa el ratón para ver más detalles</p>
+					<div className="info-overlay">
+						<p className="overlay-text">Pasa el ratón para ver más detalles</p>
 					</div>
-					<div class="info-travel-description">
+					<div className="info-travel-description">
 						<h2>The Description</h2>
 						<ul>
 							<li>

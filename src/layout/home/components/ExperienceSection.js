@@ -7,17 +7,17 @@ function ExperienceSection() {
   return (
     <section className="about-section text-center" id="about">
       {
-        <div class="container px-4 px-lg-5">
-          <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8">
-              <h2 class="text-white mb-4">{t("experience_section.title")}</h2>
-              <p class="text-white-50">
+        <div className="container px-4 px-lg-5">
+          <div className="row gx-4 gx-lg-5 justify-content-center">
+            <div className="col-lg-8">
+              <h2 className="text-white mb-4">{t("experience_section.title")}</h2>
+              <p className="text-white-50">
                 (Algo que se nos ocurra que defina la experiencia y atrape al
                 usuario)
               </p>
             </div>
           </div>
-          <img class="img-fluid" src={ExperienceImage} alt="..." />
+          <img className="img-fluid" src={ExperienceImage} alt="..." />
         </div>
       }
     </section>
