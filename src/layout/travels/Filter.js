@@ -4,9 +4,10 @@ export default function Filters(
     priceMax,
     priceMin,
   ) {
-    filterAdvert = filterAdvert.filter(advert =>
-      (advert.name ?? '').toUpperCase().startsWith(query.toLocaleUpperCase()),
-    );
+    filterAdvert = filterAdvert.filter((dato)=> dato.topic.toLowerCase().includes(query.toLocaleLowerCase()))
+    // filterAdvert = filterAdvert.filter(advert =>
+    //   (advert.name ?? '').toUpperCase().startsWith(query.toLocaleUpperCase()),
+    // );
   
   
     filterAdvert = filterAdvert.filter(

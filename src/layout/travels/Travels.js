@@ -12,6 +12,7 @@ import { fetchTravels, fetchTravelsSuccess } from '../../redux/actions';
 import { getTravels, getUi } from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
+import Filters from './Filter';
 
 
 const Travels = () => {
@@ -19,6 +20,8 @@ const Travels = () => {
 	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
  const [disabled, setDisabled]= useState(false)
+ const [precMax, setPrecMax]= useState(Infinity)
+ const [precMin, setPrecMin]= useState(0)
   const travel = useSelector(getTravels);
   const [advertFilter, setAdvertFilter] = useState([]);
   const [data, setData] = useState({
@@ -32,8 +35,22 @@ const Travels = () => {
     dispatch(fetchTravels());
 	}, [dispatch]);
 
-  let filterTravels = travel
-  console.log(filterTravels)
+  let travels = travel;
+
+  if (precMax === '') {
+    setPrecMax(Infinity);
+  }
+  console.log(search)
+
+  travels = Filters(
+    travels,
+    search,
+    precMax,
+    precMin
+  );
+
+  // let filterTravels = travel
+  // console.log(filterTravels)
 
   // useEffect(() => {
   //   dispatch(advertsLoaded(advert));
@@ -104,85 +121,87 @@ const Travels = () => {
   
   
   
-  let travels= travel
-  console.log('t',travel)
-  const restart = event=>{
-    event.preventDefault()
-    dispatch(fetchTravels())
-    setDisabled(false)
-  }
+  //let travels= travel
+  // console.log('t',travel)
+  // const restart = event=>{
+  //   event.preventDefault()
+  //   dispatch(fetchTravels())
+  //   setDisabled(false)
+  // }
   
-  const handleClickFilter = event => {
+  // const handleClickFilter = event => {
     
-    event.preventDefault();
+  //   event.preventDefault();
     
-    travels=filterTravels
-    if((data.priceMax=== Infinity  || data.priceMax==='')&& (data.priceMin=== 0|| data.priceMin==='')&& search===''){
-      dispatch(fetchTravels())
-    }
+  //   travels=filterTravels
+  //   if((data.priceMax=== Infinity  || data.priceMax==='')&& (data.priceMin=== 0|| data.priceMin==='')&& search===''){
+  //     dispatch(fetchTravels())
+  //   }
 
-    if(data.priceMax !== '' || data.priceMin!==''){
-      let filterPrice=[]
-      console.log('fff',filterPrice)
-      filterPrice = travels.filter(
-        travel =>
-        //console.log('trav', travel.price), console.log('data', data.priceMin),
-        travel.price >= data.priceMin &&
-        travel.price <= data.priceMax,
-        //travel.sale === state(),
-        );
-        travels= filterPrice
-        //setResult(filterPrice)
-        console.log('filtro', filterPrice)
-        console.log('aaaa',travels)
-        //dispatch(fetchTravelsSuccess(filterPrice))
-        console.log('singular',travel) 
+  //   if(data.priceMax !== '' || data.priceMin!==''){
+  //     let filterPrice=[]
+  //     console.log('fff',filterPrice)
+  //     filterPrice = travels.filter(
+  //       travel =>
+  //       //console.log('trav', travel.price), console.log('data', data.priceMin),
+  //       travel.price >= data.priceMin &&
+  //       travel.price <= data.priceMax,
+  //       //travel.sale === state(),
+  //       );
+  //       travels= filterPrice
+  //       //setResult(filterPrice)
+  //       console.log('filtro', filterPrice)
+  //       console.log('aaaa',travels)
+  //       //dispatch(fetchTravelsSuccess(filterPrice))
+  //       console.log('singular',travel) 
 
-    }
+  //   }
     
     
-    console.log('evento', data)
-    console.log('travelst',travels)
+  //   console.log('evento', data)
+  //   console.log('travelst',travels)
     
-    let filterPrice=[]
-    console.log('fff',filterPrice)
-    filterPrice = travels.filter(
-      travel =>
-      //console.log('trav', travel.price), console.log('data', data.priceMin),
-      travel.price >= data.priceMin &&
-      travel.price <= data.priceMax,
-      //travel.sale === state(),
-      );
-      travels= filterPrice
-      //setResult(filterPrice)
-      console.log('filtro', filterPrice)
-      console.log('aaaa',travels)
-      dispatch(fetchTravelsSuccess(filterPrice))
-      console.log('singular',travel)
+  //   let filterPrice=[]
+  //   console.log('fff',filterPrice)
+  //   filterPrice = travels.filter(
+  //     travel =>
+  //     //console.log('trav', travel.price), console.log('data', data.priceMin),
+  //     travel.price >= data.priceMin &&
+  //     travel.price <= data.priceMax,
+  //     //travel.sale === state(),
+  //     );
+  //     travels= filterPrice
+  //     //setResult(filterPrice)
+  //     console.log('filtro', filterPrice)
+  //     console.log('aaaa',travels)
+  //     dispatch(fetchTravelsSuccess(filterPrice))
+  //     console.log('singular',travel)
       
-      if(!search && !filterPrice){
-        dispatch(fetchTravels())
-        //dispatch(fetchTravelsSuccess(travel))
-        //travels=travel
-        console.log('tave1',travels)
-      }else{
-        travels = travels.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
-        dispatch(fetchTravelsSuccess(travels))
-        console.log('tave1',travels)
-      }
-      setDisabled(true)
-      //dispatch(advertsLoadedSuccess(filterPrice));
+  //     if(!search && !filterPrice){
+  //       dispatch(fetchTravels())
+  //       //dispatch(fetchTravelsSuccess(travel))
+  //       //travels=travel
+  //       console.log('tave1',travels)
+  //     }else{
+  //       travels = travels.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
+  //       dispatch(fetchTravelsSuccess(travels))
+  //       console.log('tave1',travels)
+  //     }
+  //     setDisabled(true)
+  //     //dispatch(advertsLoadedSuccess(filterPrice));
       
-      //dispatch(advertsLoadedSuccess(filterPrice));
+  //     //dispatch(advertsLoadedSuccess(filterPrice));
       
-    };
+  //   };
 
 const handleChangeFilterPriceMax = event => {
   setData({ ...data, priceMax: event.target.value });
+  setPrecMax(event.target.value)
 };
 
 const handleChangeFilterPriceMin = event => {
   setData({ ...data, priceMin: event.target.value });
+  setPrecMin(event.target.value)
 };
 
 	const travelsjj = useSelector(getTravels);
@@ -252,9 +271,7 @@ const handleChangeFilterPriceMin = event => {
               onChange={handleChangeFilterPriceMax}
               placeholder="introduzca precio maximo"
             />
-
-            <button onClick={handleClickFilter} disabled={disabled}>Filtrar</button>
-            <button onClick={restart}>nueva busqueda</button>
+gi
             </form>
             {travels ? (
               travels.map((travel) => (
