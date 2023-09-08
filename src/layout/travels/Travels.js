@@ -37,7 +37,7 @@ const Travels = () => {
 	if (isLoading) {
 		return <Loading />;
 	}
-
+    console.log(travels)
 	return (
 		<>
 			<section className="travels-first-container">
@@ -87,6 +87,14 @@ const Travels = () => {
 											<p className="text-travels-ads">
 												Destination: {travel.destination}
 											</p>
+                                            <p className="text-travels-ads">
+												User :
+                                                <Link
+													to={`/travel-user/${travel.userName}`}
+													class="text-decoration-none"
+												>{travel.userName}</Link> 
+											</p>
+
 											<div className="product-button-group">
 												<a
 													className="product-like-icon"
