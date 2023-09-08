@@ -1,26 +1,23 @@
-import { useParams } from 'react-router-dom';
 import Loading from '../utils/spinner/Loading';
 import './css/travelUser.css';
 import { useEffect, useState } from 'react';
-import { getTravelUser } from '../../api/serviceTravels';
+import { getTravelFavorite } from '../../api/serviceTravels';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 
-const TravelUser = () => {
-  const { user } = useParams();
-
+const TravelFavorite = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [travelsData, setTravelsData] = useState([]);
-  const userName = useSelector(getUserName);
+  const user = useSelector(getUserName);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = { user };
       try {
-        const travelsData = await getTravelUser(data, {
+        const travelsData = await getTravelFavorite(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });
         if (travelsData?.status === 400) {
@@ -34,8 +31,8 @@ const TravelUser = () => {
         setError(error.message);
       }
     };
-
     fetchData();
+
   }, [user]);
 
   const resetError = () => {
@@ -49,12 +46,12 @@ const TravelUser = () => {
           <div className="container travels-container">
             <div className="row"></div>
             <h1>Travels to {user}</h1>
-            {userName === user ? (
-              <UserPanel
-                user={user}
-                origin={'property'}
-              />
-            ) : null}
+
+            <UserPanel
+              user={user}
+              origin={'favorite'}
+            />
+
             {travelsData ? (
               travelsData.map(travel => (
                 <div
@@ -93,29 +90,27 @@ const TravelUser = () => {
                         Destination: {travel.destination}
                       </p>
                     </div>
-                    {userName === user ? null : (
-                      <div className="product-button-group">
-                        <a
-                          className="product-like-icon"
-                          href="#"
-                        >
-                          <i className="fas fa-heart"></i>
-                        </a>
-                        <Link
-                          to={`/travel/${travel._id}`}
-                          className="add-to-cart"
-                        >
-                          <i className="fa fa-shopping-bag"></i>
-                          {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
-                        </Link>
-                        <a
-                          className="product-compare-icon"
-                          href="#"
-                        >
-                          <i className="fas fa-random"></i>
-                        </a>
-                      </div>
-                    )}
+                    <div className="product-button-group">
+                      <a
+                        className="product-like-icon"
+                        href="#"
+                      >
+                        <i className="fas fa-heart"></i>
+                      </a>
+                      <Link
+                        to={`/travel/${travel._id}`}
+                        className="add-to-cart"
+                      >
+                        <i className="fa fa-shopping-bag"></i>
+                        {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
+                      </Link>
+                      <a
+                        className="product-compare-icon"
+                        href="#"
+                      >
+                        <i className="fas fa-random"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))
@@ -144,4 +139,4 @@ const TravelUser = () => {
   );
 };
 
-export default TravelUser;
+export default TravelFavorite;
