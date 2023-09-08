@@ -50,7 +50,10 @@ const TravelUser = () => {
             <div className="row"></div>
             <h1>Travels to {user}</h1>
             {userName === user ? (
-                <UserPanel user={user} origin={"property"}/>
+              <UserPanel
+                user={user}
+                origin={'property'}
+              />
             ) : null}
             {travelsData ? (
               travelsData.map(travel => (
@@ -89,8 +92,30 @@ const TravelUser = () => {
                       <p className="text-travels-ads">
                         Destination: {travel.destination}
                       </p>
-                     
                     </div>
+                    {userName === user ? null : (
+                      <div className="product-button-group">
+                        <a
+                          className="product-like-icon"
+                          href="#"
+                        >
+                          <i className="fas fa-heart"></i>
+                        </a>
+                        <Link
+                          to={`/travel/${travel._id}`}
+                          className="add-to-cart"
+                        >
+                          <i className="fa fa-shopping-bag"></i>
+                          {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
+                        </Link>
+                        <a
+                          className="product-compare-icon"
+                          href="#"
+                        >
+                          <i className="fas fa-random"></i>
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))

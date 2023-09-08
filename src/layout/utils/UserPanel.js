@@ -10,12 +10,12 @@ const UserPanel = ({user,origin}) => {
             <div className="container-fluid">
                 {origin === "property" ? 
                 <>
-                    <Link to={`/travel-user/${user}`} className="text-decoration-none fs-5 fw-bold "> Property Travels </Link>
+                    <Link to={`/travel-user/${user}`} className="text-decoration-none fs-5 fw-bold ">  Travels on Property </Link>
                     <Link to={`/travel-favorite`} className="text-decoration-none"> Favorite Travels </Link>
                 </>
                  :
                  <>
-                    <Link to={`/travel-user/${user}`} className="text-decoration-none"> Property Travels </Link>
+                    <Link to={`/travel-user/${user}`} className="text-decoration-none"> Travels on Property </Link>
                     <Link to={`/travel-favorite`} className="text-decoration-none fs-5 fw-bold"> Favorite Travels </Link>
                 </>}
 

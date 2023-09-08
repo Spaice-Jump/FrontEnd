@@ -231,19 +231,19 @@ export const buyTravelFailure = error => ({
 		});
 	}; */
 
-export const buyTravel = id =>
-	async function (dispatch, _getState, { api, router }) {
-		dispatch(buyTravelRequest());
-		try {
-			const travel = await api.travels.buyTravel(id);
-			console.log('travellll',travel)
-			dispatch(buyTravelSuccess(travel));
-			return travel;
-		} catch (error) {
-			dispatch(buyTravelFailure(error));
-			throw error;
-		}
-	};
+    export const buyTravel = id =>
+    async function (dispatch, _getState, { api, router }) {
+        dispatch(buyTravelRequest());
+        try {
+            const buyerId = getUserId(_getState());
+            const travel = await api.travels.buyTravel(id, buyerId);
+            dispatch(buyTravelSuccess(travel));
+            router.navigate('/congratulations');
+        } catch (error) {
+            dispatch(buyTravelFailure(error));
+            /* throw error; */
+        }
+    };
 
 // locations actions:
 
