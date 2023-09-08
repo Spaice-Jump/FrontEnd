@@ -11,13 +11,14 @@ import { fetchTravels, fetchTravelsSuccess } from '../../redux/actions';
 
 import { getTravels, getUi } from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 
 const Travels = () => {
 	// const [result, setResult] = useState([]);
 	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
-
+ const [disabled, setDisabled]= useState(false)
   const travel = useSelector(getTravels);
   const [advertFilter, setAdvertFilter] = useState([]);
   const [data, setData] = useState({
@@ -30,6 +31,9 @@ const Travels = () => {
     //setResult(travel)
     dispatch(fetchTravels());
 	}, [dispatch]);
+
+  let filterTravels = travel
+  console.log(filterTravels)
 
   // useEffect(() => {
   //   dispatch(advertsLoaded(advert));
@@ -102,25 +106,46 @@ const Travels = () => {
   
   let travels= travel
   console.log('t',travel)
-  const handleClickFilter = event => {
-    event.preventDefault();
-    travels=[]
-    let filterPrice=[]
-    console.log('fff',filterPrice)
-    if(!search && !filterPrice){
+  const restart = event=>{
+    event.preventDefault()
     dispatch(fetchTravels())
-    //dispatch(fetchTravelsSuccess(travel))
-    travels=travel
-    console.log('tave1',travels)
-  }else{
-    travels = travel.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
-    dispatch(fetchTravelsSuccess(travels))
-    console.log('tave1',travels)
+    setDisabled(false)
   }
   
-  console.log('evento', data)
-  console.log('travelst',travels)
+  const handleClickFilter = event => {
+    
+    event.preventDefault();
+    
+    travels=filterTravels
+    if((data.priceMax=== Infinity  || data.priceMax==='')&& (data.priceMin=== 0|| data.priceMin==='')&& search===''){
+      dispatch(fetchTravels())
+    }
 
+    if(data.priceMax !== '' || data.priceMin!==''){
+      let filterPrice=[]
+      console.log('fff',filterPrice)
+      filterPrice = travels.filter(
+        travel =>
+        //console.log('trav', travel.price), console.log('data', data.priceMin),
+        travel.price >= data.priceMin &&
+        travel.price <= data.priceMax,
+        //travel.sale === state(),
+        );
+        travels= filterPrice
+        //setResult(filterPrice)
+        console.log('filtro', filterPrice)
+        console.log('aaaa',travels)
+        //dispatch(fetchTravelsSuccess(filterPrice))
+        console.log('singular',travel) 
+
+    }
+    
+    
+    console.log('evento', data)
+    console.log('travelst',travels)
+    
+    let filterPrice=[]
+    console.log('fff',filterPrice)
     filterPrice = travels.filter(
       travel =>
       //console.log('trav', travel.price), console.log('data', data.priceMin),
@@ -135,11 +160,21 @@ const Travels = () => {
       dispatch(fetchTravelsSuccess(filterPrice))
       console.log('singular',travel)
       
-   
+      if(!search && !filterPrice){
+        dispatch(fetchTravels())
+        //dispatch(fetchTravelsSuccess(travel))
+        //travels=travel
+        console.log('tave1',travels)
+      }else{
+        travels = travels.filter((dato)=> dato.topic.toLowerCase().includes(search.toLocaleLowerCase()))
+        dispatch(fetchTravelsSuccess(travels))
+        console.log('tave1',travels)
+      }
+      setDisabled(true)
       //dispatch(advertsLoadedSuccess(filterPrice));
       
       //dispatch(advertsLoadedSuccess(filterPrice));
-
+      
     };
 
 const handleChangeFilterPriceMax = event => {
@@ -218,7 +253,8 @@ const handleChangeFilterPriceMin = event => {
               placeholder="introduzca precio maximo"
             />
 
-            <button onClick={handleClickFilter}>Filtrar</button>
+            <button onClick={handleClickFilter} disabled={disabled}>Filtrar</button>
+            <button onClick={restart}>nueva busqueda</button>
             </form>
             {travels ? (
               travels.map((travel) => (
