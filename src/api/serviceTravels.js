@@ -45,3 +45,8 @@ export const getTravelUser = (user, headers) => {
     const URL = "/api/travels/users";
     return client.post(URL, user, headers);
   };
+
+  export const getTravelFavorite = (user, headers) => {
+    const URL = '/api/favorites';
+    return client.post(URL, user, headers);
+  };

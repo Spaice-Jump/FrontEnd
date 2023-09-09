@@ -22,6 +22,7 @@ import RequireAuth from './layout/RequireAuth.js';
 import UpdateUser from './layout/auth/updateUser/updateUser.js';
 import PurchasedTravel from './components/PurchasedTravel.jsx';
 import TravelUser from './layout/travels/TravelUser.js';
+import TravelFavorite from './layout/travels/TravelFavorite.js';
 
 function App() {
   useEffect(() => {
@@ -32,16 +33,31 @@ function App() {
     <I18nextProvider i18n={i18n}>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/travels" element={<Travels />} />
-        <Route path="/travel/:id" element={<TravelDescription />} />
-        <Route path="/signup" element={<NewUserPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/travels"
+          element={<Travels />}
+        />
+        <Route
+          path="/travel/:id"
+          element={<TravelDescription />}
+        />
+        <Route
+          path="/signup"
+          element={<NewUserPage />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
         <Route
           path="/newtravel"
           element={
             <RequireAuth>
-              {" "}
+              {' '}
               <NewTravelPage />
             </RequireAuth>
           }
@@ -71,11 +87,33 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/travel-edit/:id" element={<EditTravelPage />} />
-        <Route path="/congratulations" element={<PurchasedTravel />} />
-        <Route path="/travel-user/:user" element={<TravelUser />} />
+        <Route
+          path="/travel-edit/:id"
+          element={<EditTravelPage />}
+        />
+        <Route
+          path="/congratulations"
+          element={<PurchasedTravel />}
+        />
+        <Route
+          path="/travel-user/:user"
+          element={<TravelUser />}
+        />
         
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route
+          path="/travel-favorite"
+          element={
+            <RequireAuth>
+              {' '}
+              <TravelFavorite />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="*"
+          element={<h1>Not Found</h1>}
+        />
       </Routes>
       <ContactSection />
       <Footer />
