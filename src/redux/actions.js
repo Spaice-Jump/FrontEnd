@@ -236,11 +236,12 @@ export const buyTravelFailure = error => ({
 	}; */
 
     export const buyTravel = id =>
-    async function (dispatch, _getState, { api, router }) {
+    async function (dispatch, getState, { api, router }) {
         dispatch(buyTravelRequest());
         try {
-            const buyerId = getUserId(_getState());
-            const travel = await api.travels.buyTravel(id, buyerId);
+            const userBuyer = getUserId(getState());
+            const travel = await api.travels.buyTravel(id, userBuyer);
+            console.log("travel", travel)
             dispatch(buyTravelSuccess(travel));
             router.navigate('/congratulations');
         } catch (error) {

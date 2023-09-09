@@ -75,8 +75,9 @@ const TravelDescription = () => {
 					<div class="control-travel-description">
 						{travel.active && isLogged ? (
 							<>
-								{userId === travel.userId ? 
-								<p>Viaje de mi compañía</p> : (
+								{userId === travel.userId ? (
+									<p>Viaje de mi compañía</p>
+								) : (
 									<button
 										onClick={handleBuy}
 										className="btn-travel-description"
@@ -96,7 +97,11 @@ const TravelDescription = () => {
 							</>
 						) : (
 							<>
-								<p>Viaje completo</p>
+								{travel.userBuyer === userId ? (
+									<p>Ya has comprado un pasaje para este viaje</p>
+								) : (
+									<p>Viaje completo</p>
+								)}
 							</>
 						)}
 						<button onClick={handleReturn}>Volver</button>
