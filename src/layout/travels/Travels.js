@@ -3,20 +3,29 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { fetchTravels, fetchTravelsSuccess } from '../../redux/actions';
-
-import { getTravels, getUi, getUserId } from '../../redux/selectors';
+import { fetchLocations, fetchTravels } from '../../redux/actions';
+import {
+	getTravels,
+	getUi,
+	getLocations,
+	getUserId,
+} from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
+import Filters from './Filter';
 
 const Travels = () => {
-	// const [result, setResult] = useState([]);
 	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
+	const [precMax, setPrecMax] = useState(Infinity);
+	const [precMin, setPrecMin] = useState(0);
 	const userId = useSelector(getUserId);
 
 	const travel = useSelector(getTravels);
-	const [advertFilter, setAdvertFilter] = useState([]);
+	const [locationOrigin, setLocationOrigin] = useState('');
+	const [locationDestination, setLocationDestination] = useState('');
+
+	const allLocations = useSelector(getLocations);
+
 	const [data, setData] = useState({
 		sales: '',
 		buy: '',
@@ -24,148 +33,62 @@ const Travels = () => {
 		priceMax: Infinity,
 	});
 	useEffect(() => {
-		//setResult(travel)
 		dispatch(fetchTravels());
+		dispatch(fetchLocations());
 	}, [dispatch]);
 
-	// useEffect(() => {
-	//   dispatch(advertsLoaded(advert));
-	// }, [dispatch, advert]);
+	let travels = travel;
+	let locationsOrigin = allLocations;
+	let locationsDestination = allLocations;
 
-	// const [checked, setCheked] = useState(null);
+	if (precMax === '') {
+		setPrecMax(Infinity);
+	}
 
-	// const handleClickFilter = event => {
-	//   event.preventDefault();
+	if (!!locationOrigin) {
+		const resultDestination = locationsDestination.filter(
+			location => location.name !== locationOrigin
+		);
 
-	//   const state = () => {
-	//     let resultSale = '';
+		locationsDestination = resultDestination;
+	}
 
-	//     if (data.sales) {
-	//       resultSale = true;
-	//     } else if (data.buy) {
-	//       resultSale = false;
-	//     }
-	//     return resultSale;
-	//   };
-	//   if (state() === true || state() === false) {
-	//     let filterPrice = advert.filter(
-	//       advert =>
-	//         advert.price >= data.priceMin &&
-	//         advert.price <= data.priceMax &&
-	//         advert.sale === state(),
-	//     );
+	if (!!locationDestination) {
+		const resultOrigin = locationsOrigin.filter(
+			location => location.name !== locationDestination
+		);
 
-	//     dispatch(advertsLoadedSuccess(filterPrice));
-	//   } else {
-	//     let filterPrice = advert.filter(
-	//       advert =>
-	//         advert.price >= data.priceMin && advert.price <= data.priceMax,
-	//     );
+		locationsOrigin = resultOrigin;
+	}
 
-	//     dispatch(advertsLoadedSuccess(filterPrice));
-	//   }
-	// };
-
-	// const handleChangeFilterSaleCheck = event => {
-	//   event.target.name === 'sales'
-	//     ? setData({ ...data, sales: event.target.checked })
-	//     : setData({ ...data, buy: event.target.checked });
-	// };
-	// const handleChangeFilterPriceMax = event => {
-	//   setData({ ...data, priceMax: event.target.value });
-	// };
-
-	// const handleChangeFilterPriceMin = event => {
-	//   setData({ ...data, priceMin: event.target.value });
-	// };
-	// const disabledCheckBuy = data.sales;
-	// const disabledCheckSale = data.buy;
+	travels = Filters(
+		travels,
+		search,
+		precMax,
+		precMin,
+		locationOrigin,
+		locationDestination
+	);
 
 	//busqueda por palabras
 	const searcher = e => {
 		setSearch(e.target.value);
 	};
 
-	//filtrado por precios
-
-	//filtrado
-
-	let travels = travel;
-	console.log('t', travel);
-	const handleClickFilter = event => {
-		event.preventDefault();
-		travels = [];
-		let filterPrice = [];
-		console.log('fff', filterPrice);
-		if (!search && !filterPrice) {
-			dispatch(fetchTravels());
-			//dispatch(fetchTravelsSuccess(travel))
-			travels = travel;
-			console.log('tave1', travels);
-		} else {
-			travels = travel.filter(dato =>
-				dato.topic.toLowerCase().includes(search.toLocaleLowerCase())
-			);
-			dispatch(fetchTravelsSuccess(travels));
-			console.log('tave1', travels);
-		}
-
-		console.log('evento', data);
-		console.log('travelst', travels);
-
-		filterPrice = travels.filter(
-			travel =>
-				//console.log('trav', travel.price), console.log('data', data.priceMin),
-				travel.price >= data.priceMin && travel.price <= data.priceMax
-			//travel.sale === state(),
-		);
-		travels = filterPrice;
-		//setResult(filterPrice)
-		console.log('filtro', filterPrice);
-		console.log('aaaa', travels);
-		dispatch(fetchTravelsSuccess(filterPrice));
-		console.log('singular', travel);
-
-		//dispatch(advertsLoadedSuccess(filterPrice));
-
-		//dispatch(advertsLoadedSuccess(filterPrice));
-	};
-
 	const handleChangeFilterPriceMax = event => {
 		setData({ ...data, priceMax: event.target.value });
+		setPrecMax(event.target.value);
 	};
-
 	const handleChangeFilterPriceMin = event => {
 		setData({ ...data, priceMin: event.target.value });
+		setPrecMin(event.target.value);
 	};
-
-	const travelsjj = useSelector(getTravels);
 	const { isLoading, error } = useSelector(getUi);
-
-	// //busqueda
-	// const searcher = e => {
-	// 	setSearch(e.target.value);
-	// };
-
-	// //filtrado
-	// let travels = [];
-	// if (!search) {
-	// 	travels = result;
-	// } else {
-	// 	travels = result.filter(dato =>
-	// 		dato.topic.toLowerCase().includes(search.toLocaleLowerCase())
-	// 	);
-	// }
-
-	// useEffect(() => {
-	// 	// setResult(travel);
-	// 	dispatch(fetchTravels());
-	// }, [dispatch /* , travel */]);
 
 	if (isLoading) {
 		return <Loading />;
 	}
-	console.log(travels);
+
 	return (
 		<>
 			<section className="travels-first-container">
@@ -173,11 +96,76 @@ const Travels = () => {
 					<div className="row">
 						<input
 							type="text"
-							// value={search}
-							// onChange={searcher}
+							value={search}
+							onChange={searcher}
 							placeholder="Search"
+							name="search"
 							className="form-Control"
 						></input>
+						<form>
+							<label
+								className="labelAdvertsPage"
+								name="price"
+							>
+								Precio Minimo
+							</label>
+							<input
+								className="inputPriceMinAdvertsPage"
+								type="number"
+								pattern="filtro precio"
+								name="price"
+								value={data.sales.value}
+								onChange={handleChangeFilterPriceMin}
+								placeholder="introduzca precio minimo"
+							/>
+							<label
+								className="labelAdvertsPage"
+								name="price"
+							>
+								Precio Maximo
+							</label>
+							<input
+								className="inputPriceMaxAdvertsPage"
+								type="number"
+								pattern="filtro precio"
+								name="price"
+								value={data.sales.value}
+								onChange={handleChangeFilterPriceMax}
+								placeholder="introduzca precio maximo"
+							/>
+							<label className="origin">Origen</label>
+							<select
+								name="origin"
+								id="origin"
+								onChange={e => setLocationOrigin(e.target.value)}
+							>
+								<option value="">Seleccionar</option>
+								{locationsOrigin.map(location => (
+									<option
+										key={location._id}
+										value={location.name}
+									>
+										{location.name}
+									</option>
+								))}
+							</select>
+							<label className="origin">Destino</label>
+							<select
+								name="destination"
+								id="destination"
+								onChange={e => setLocationDestination(e.target.value)}
+							>
+								<option value="">Seleccionar</option>
+								{locationsDestination.map(location => (
+									<option
+										key={location._id}
+										value={location.name}
+									>
+										{location.name}
+									</option>
+								))}
+							</select>
+						</form>
 						{travels ? (
 							travels.map(travel => (
 								<div
