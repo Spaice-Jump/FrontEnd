@@ -3,72 +3,77 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/travels.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { fetchLocations, fetchTravels } from '../../redux/actions';
-
-import { getTravels, getUi, getLocations } from '../../redux/selectors';
+import {
+	getTravels,
+	getUi,
+	getLocations,
+	getUserId,
+} from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
 import Filters from './Filter';
 
 const Travels = () => {
-  const [search, setSearch] = useState('');
-  const dispatch = useDispatch();
-  const [precMax, setPrecMax] = useState(Infinity);
-  const [precMin, setPrecMin] = useState(0);
-  const travel = useSelector(getTravels);
-  const [locationOrigin, setLocationOrigin] = useState('');
-  const [locationDestination, setLocationDestination] = useState('');
+	const [search, setSearch] = useState('');
+	const dispatch = useDispatch();
+	const [precMax, setPrecMax] = useState(Infinity);
+	const [precMin, setPrecMin] = useState(0);
+	const userId = useSelector(getUserId);
 
-  const allLocations = useSelector(getLocations);
+	const travel = useSelector(getTravels);
+	const [locationOrigin, setLocationOrigin] = useState('');
+	const [locationDestination, setLocationDestination] = useState('');
 
-  const [data, setData] = useState({
-    sales: '',
-    buy: '',
-    priceMin: 0,
-    priceMax: Infinity,
-  });
+	const allLocations = useSelector(getLocations);
+
+	const [data, setData] = useState({
+		sales: '',
+		buy: '',
+		priceMin: 0,
+		priceMax: Infinity,
+	});
 
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(1);
   const adsPerPage = 9;
 
   useEffect(() => {
-    dispatch(fetchTravels());
-    dispatch(fetchLocations());
+		dispatch(fetchTravels());
+		dispatch(fetchLocations());
   }, [dispatch]);
 
-  let travels = travel;
-  let locationsOrigin = allLocations;
-  let locationsDestination = allLocations;
+	let travels = travel;
+	let locationsOrigin = allLocations;
+	let locationsDestination = allLocations;
 
-  if (precMax === '') {
-    setPrecMax(Infinity);
-  }
+	if (precMax === '') {
+		setPrecMax(Infinity);
+	}
 
-  if (!!locationOrigin) {
-    const resultDestination = locationsDestination.filter(
-      (location) => location.name !== locationOrigin
-    );
+	if (!!locationOrigin) {
+		const resultDestination = locationsDestination.filter(
+			location => location.name !== locationOrigin
+		);
 
-    locationsDestination = resultDestination;
-  }
+		locationsDestination = resultDestination;
+	}
 
-  if (!!locationDestination) {
-    const resultOrigin = locationsOrigin.filter(
-      (location) => location.name !== locationDestination
-    );
+	if (!!locationDestination) {
+		const resultOrigin = locationsOrigin.filter(
+			location => location.name !== locationDestination
+		);
 
-    locationsOrigin = resultOrigin;
-  }
+		locationsOrigin = resultOrigin;
+	}
 
-  travels = Filters(
-    travels,
-    search,
-    precMax,
-    precMin,
-    locationOrigin,
-    locationDestination
-  );
+	travels = Filters(
+		travels,
+		search,
+		precMax,
+		precMin,
+		locationOrigin,
+		locationDestination
+	);
 
   // Busqueda por palabras
   const searcher = (e) => {
@@ -203,7 +208,7 @@ const Travels = () => {
                     ) : null}
                     <div className="product-content">
                       <h3 className="title">
-                        <Link to={`/travel/${travel._id}`}>{travel.topic}</Link>
+                        <Link to={`/travel/${travel.topic}/${travel._id}`}>{travel.topic}</Link>
                       </h3>
                       <p className="text-travels-ads">Remarks: {travel.remarks}</p>
                       <div className="price">
@@ -232,12 +237,17 @@ const Travels = () => {
                           <i className="fas fa-heart"></i>
                         </a>
                         <Link
-                          to={`/travel/${travel._id}`}
+                          to={`/travel/${travel.topic}/${travel._id}`}
                           className="add-to-cart"
                         >
                           <i className="fa fa-shopping-bag"></i>
-                          {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
+                          {travel.active
+														? 'VIAJAR AQUÍ '
+														: travel.userBuyer === userId
+														? 'YA LO HAS COMPRADO'
+														: 'VIAJE COMPLETO'}
                         </Link>
+
                         <a className="product-compare-icon" href="#">
                           <i className="fas fa-random"></i>
                         </a>

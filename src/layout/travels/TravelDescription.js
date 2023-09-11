@@ -9,7 +9,7 @@ import {
 	getTravelById,
 	getUi,
 } from '../../redux/selectors';
-import { deleteTravel, buyTravel } from '../../redux/actions';
+import { deleteTravel, buyTravel, closeOpenTravel } from '../../redux/actions';
 import Loading from '../utils/spinner/Loading';
 
 const TravelDescription = () => {
@@ -42,7 +42,7 @@ const TravelDescription = () => {
 	}
 
 	const handleEdit = () => {
-		navigate(`/travel-edit/${id}`);
+		navigate(`/travel-edit/${travel.topic}/${id}`);
 	};
 
 	const HandleDeleteProcess = value => () => {
@@ -62,6 +62,11 @@ const TravelDescription = () => {
 		return navigate('/travels');
 	};
 
+	const handleCloseTravel = () => {
+		dispatch(closeOpenTravel(travel._id, !travel.active));
+		setTravel({ ...travel, active: !travel.active });
+	};
+
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -75,8 +80,9 @@ const TravelDescription = () => {
 					<div class="control-travel-description">
 						{travel.active && isLogged ? (
 							<>
-								{userId === travel.userId ? 
-								<p>Viaje de mi compañía</p> : (
+								{userId === travel.userId ? (
+									<p>Viaje de mi compañía</p>
+								) : (
 									<button
 										onClick={handleBuy}
 										className="btn-travel-description"
@@ -96,9 +102,29 @@ const TravelDescription = () => {
 							</>
 						) : (
 							<>
-								<p>Viaje completo</p>
+								{travel.userBuyer === userId ? (
+									<p>Ya has comprado un pasaje para este viaje</p>
+								) : (
+									<p>Viaje completo</p>
+								)}
 							</>
 						)}
+						<div id="open-close-travel">
+							{isLogged && userId === travel.userId ? (
+								travel.active ? (
+									<>
+										<p>¿Quieres cerrar tu viaje?</p>
+										<p>(Podrás volver a abrirlo en cualquier momento)</p>
+										<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
+									</>
+								) : (
+									<>
+										<p>¿Quieres abrir tu viaje?</p>
+										<button onClick={handleCloseTravel}>Abrir mi viaje</button>
+									</>
+								)
+							) : null}
+						</div>
 						<button onClick={handleReturn}>Volver</button>
 					</div>
 				</div>

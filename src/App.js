@@ -42,7 +42,7 @@ function App() {
           element={<Travels />}
         />
         <Route
-          path="/travel/:id"
+          path="/travel/:topic/:id"
           element={<TravelDescription />}
         />
         <Route
@@ -88,7 +88,7 @@ function App() {
           }
         />
         <Route
-          path="/travel-edit/:id"
+          path="/travel-edit/:topic/:id"
           element={<EditTravelPage />}
         />
         <Route
