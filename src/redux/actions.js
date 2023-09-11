@@ -43,9 +43,9 @@ import {
 	BUY_TRAVEL_REQUEST,
 	BUY_TRAVEL_SUCCESS,
 	FILTER_TRAVELS_SUCCESS,
-
-  
-
+  CLOSE_OPEN_TRAVEL_FAILURE,
+  CLOSE_OPEN_TRAVEL_REQUEST,
+  CLOSE_OPEN_TRAVEL_SUCCESS,
 } from './types';
 
 import storage from '../layout/utils/storage';
@@ -134,7 +134,7 @@ export const deleteTravel = (id) =>
     try {
       await api.travels.deleteTravel(id);
       dispatch(deleteTravelSuccess(id));
-      router.navigate("/");
+      router.navigate("/travels");
     } catch (error) {
       dispatch(deleteTravelFailure(error));
     }
@@ -209,46 +209,47 @@ export const buyTravelFailure = error => ({
 	payload: error,
 });
 
-/* export const buyTravel = (id) =>
-  async function (dispatch, _getState, { api, router }) {
+export const buyTravel = id =>
+async function (dispatch, getState, { api, router }) {
     dispatch(buyTravelRequest());
     try {
-      const travel = await api.travels.buyTravel(id);
-      dispatch(buyTravelSuccess(travel));
+        const userBuyer = getUserId(getState());
+        const travel = await api.travels.buyTravel(id, userBuyer);
+        console.log("travel", travel)
+        dispatch(buyTravelSuccess(travel));
+        router.navigate('/congratulations');
     } catch (error) {
-      dispatch(buyTravelFailure(error));
+        dispatch(buyTravelFailure(error));
+        /* throw error; */
     }
-  }; */
+};
 
-/* export const buyTravel = id =>
-	async function (dispatch, _getState, { api, router }) {
-		return new Promise(async (resolve, reject) => {
-			dispatch(buyTravelRequest());
-			try {
-				const travel = await api.travels.buyTravel(id);
-				dispatch(buyTravelSuccess(travel));
-				resolve(travel);
-			} catch (error) {
-				dispatch(buyTravelFailure(error));
-				reject(error);
-			}
-		});
-	}; */
+export const closeOpenTravelRequest = () => ({
+  type: CLOSE_OPEN_TRAVEL_REQUEST,
+});
 
-    export const buyTravel = id =>
-    async function (dispatch, getState, { api, router }) {
-        dispatch(buyTravelRequest());
-        try {
-            const userBuyer = getUserId(getState());
-            const travel = await api.travels.buyTravel(id, userBuyer);
-            console.log("travel", travel)
-            dispatch(buyTravelSuccess(travel));
-            router.navigate('/congratulations');
-        } catch (error) {
-            dispatch(buyTravelFailure(error));
-            /* throw error; */
-        }
-    };
+export const closeOpenTravelSuccess = travel => ({
+  type: CLOSE_OPEN_TRAVEL_SUCCESS,
+  payload: travel,
+});
+
+export const closeOpenTravelFailure = error => ({
+  type: CLOSE_OPEN_TRAVEL_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const closeOpenTravel = (id, travelActive) =>
+async function (dispatch, _getState, { api, router }) {
+    dispatch(closeOpenTravelRequest());
+    try {
+        const travel = await api.travels.closeOpenTravel(id, travelActive);
+        dispatch(closeOpenTravelSuccess(travel));
+        router.navigate(`/travel/${travel._id}`);
+    } catch (error) {
+        dispatch(closeOpenTravelFailure(error));
+    }
+};
 
 // locations actions:
 

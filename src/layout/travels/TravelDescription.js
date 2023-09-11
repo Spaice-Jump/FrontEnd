@@ -9,7 +9,7 @@ import {
 	getTravelById,
 	getUi,
 } from '../../redux/selectors';
-import { deleteTravel, buyTravel } from '../../redux/actions';
+import { deleteTravel, buyTravel, closeOpenTravel } from '../../redux/actions';
 import Loading from '../utils/spinner/Loading';
 
 const TravelDescription = () => {
@@ -62,6 +62,11 @@ const TravelDescription = () => {
 		return navigate('/travels');
 	};
 
+	const handleCloseTravel = () => {
+		dispatch(closeOpenTravel(travel._id, !travel.active));
+		setTravel({ ...travel, active: !travel.active });
+	};
+
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -104,6 +109,22 @@ const TravelDescription = () => {
 								)}
 							</>
 						)}
+						<div id="open-close-travel">
+							{isLogged && userId === travel.userId ? (
+								travel.active ? (
+									<>
+										<p>¿Quieres cerrar tu viaje?</p>
+										<p>(Podrás volver a abrirlo en cualquier momento)</p>
+										<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
+									</>
+								) : (
+									<>
+										<p>¿Quieres abrir tu viaje?</p>
+										<button onClick={handleCloseTravel}>Abrir mi viaje</button>
+									</>
+								)
+							) : null}
+						</div>
 						<button onClick={handleReturn}>Volver</button>
 					</div>
 				</div>
