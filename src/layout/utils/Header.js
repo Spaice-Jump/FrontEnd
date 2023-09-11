@@ -112,19 +112,14 @@ function Header() {
       {isLogged ? (
         <span className="greetings">
           {t('navbar.greetings')}
-          <Link to={`/travel-user/${userName}`} className="text-decoration-none"> {userName} </Link>
+          {userName}
+          <Link to={`/travel-user/${userName}`} className="text-decoration-none user-panel"> User Panel </Link>
         </span>
       ) : (
         <span className="greetings">{t('navbar.greetings-nonuser')}</span>
       )}
       {
         <div className="container px-4 px-lg-5 navbar-style">
-          <NavLink
-            to="/"
-            className="navbar-brand nav-NavLink home-button"
-          >
-            {t('navbar.home')}
-          </NavLink>
           <button
             className="navbar-toggler navbar-toggler-right"
             type="button"
@@ -141,6 +136,12 @@ function Header() {
             className="collapse navbar-collapse"
             id="navbarResponsive"
           >
+          <NavLink
+            to="/"
+            className="navbar-brand nav-NavLink home-button"
+          >
+            {t('navbar.home')}
+          </NavLink>
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <NavLink

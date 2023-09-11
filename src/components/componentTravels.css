@@ -91,6 +91,18 @@
   transition: border-color 0.3s ease;
 }
 
+.new-travel-form #remarks {
+  background-color: transparent;
+  border: 2px solid #64a19d; /* Borde de color */
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+  height: 200px;
+}
+
 .new-travel-form select {
   background-color: #64a19d;
   border: 2px solid #64a19d;
@@ -112,6 +124,12 @@
   outline: none;
   border-color: #64a19d;
   box-shadow: 0 0 20px rgba(100, 161, 157, 0.5);
+}
+
+.new-travel-form #remarks:focus {
+  outline: none;
+  border-color: #64a19d;
+  box-shadow: 0 0 20px rgba(100, 161, 157, 0.5); /* Sombra al enfocar */
 }
 
 .new-travel-form input:focus {

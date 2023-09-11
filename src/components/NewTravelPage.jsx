@@ -147,13 +147,12 @@ function NewTravelPage() {
 							required
 						/>
 						<label htmlFor="remarks">Comentarios</label>
-						<input
+						<textarea
 							value={travel.remarks}
 							onChange={handleChange}
-							type="text"
 							name="remarks"
 							id="remarks"
-						/>
+					></textarea>
 						<label htmlFor="forSale">¿Qué quieres?</label>
 						<select
 							value={travel.forSale}

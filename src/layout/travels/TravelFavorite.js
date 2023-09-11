@@ -13,6 +13,10 @@ const TravelFavorite = () => {
   const [travelsData, setTravelsData] = useState([]);
   const user = useSelector(getUserName);
 
+  // Estado para la paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const adsPerPage = 9;
+
   useEffect(() => {
     const fetchData = async () => {
       const data = { user };
@@ -39,6 +43,33 @@ const TravelFavorite = () => {
     setError(null);
   };
 
+  // Calcula el índice del primer y último anuncio que se mostrará en la página actual
+  const indexOfLastAd = currentPage * adsPerPage;
+  const indexOfFirstAd = indexOfLastAd - adsPerPage;
+
+  // Filtra los anuncios que se mostrarán en la página actual
+  const adsToShow = travelsData.slice(indexOfFirstAd, indexOfLastAd);
+
+  // Calcula el número de páginas
+  const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
+
+  const renderPageNumbers = () => {
+    return (
+      <ul className="pagination">
+        {Array.from({ length: pageNumbers }, (_, index) => (
+          <li
+            key={index}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            <button onClick={() => setCurrentPage(index + 1)}>
+              {index + 1}
+            </button>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <>
       {isLoading ? (
@@ -52,8 +83,8 @@ const TravelFavorite = () => {
               origin={'favorite'}
             />
 
-            {travelsData ? (
-              travelsData.map(travel => (
+            {adsToShow ? (
+              adsToShow.map((travel) => (
                 <div
                   key={travel._id}
                   className="col-md-3 col-sm-6 travels-columns"
@@ -135,6 +166,7 @@ const TravelFavorite = () => {
           <p data-testid="error"> {error}</p>
         </div>
       )}
+      {renderPageNumbers()}
     </>
   );
 };
