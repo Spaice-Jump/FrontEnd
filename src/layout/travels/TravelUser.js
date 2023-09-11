@@ -101,13 +101,26 @@ const TravelUser = () => {
                         >
                           <i className="fas fa-heart"></i>
                         </a>
-                        <Link
-                          to={`/travel/${travel._id}`}
-                          className="add-to-cart"
-                        >
-                          <i className="fa fa-shopping-bag"></i>
-                          {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
-                        </Link>
+                       
+
+                        {!travel.forSale ? (
+                          <Link
+                            to={`/travel/${travel._id}`}
+                            className="add-to-cart"
+                          >
+                            <i className="fa fa-shopping-bag"></i>
+                            {travel.active ? 'CONTACTAR' : 'VIAJE COMPLETO'}
+                          </Link>
+                        ) : (
+                          <Link
+                            to={`/travel/${travel._id}`}
+                            className="add-to-cart"
+                          >
+                            <i className="fa fa-shopping-bag"></i>
+                            {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
+                          </Link>
+                        )}
+
                         <a
                           className="product-compare-icon"
                           href="#"
