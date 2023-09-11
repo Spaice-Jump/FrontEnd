@@ -183,7 +183,7 @@ const Travels = () => {
 										) : null}
 										<div className="product-content">
 											<h3 className="title">
-												<Link to={`/travel/${travel._id}`}>{travel.topic}</Link>
+												<Link to={`/travel/${travel.topic}/${travel._id}`}>{travel.topic}</Link>
 											</h3>
 											<p className="text-travels-ads">
 												Remarks: {travel.remarks}
@@ -221,7 +221,7 @@ const Travels = () => {
 													<i className="fas fa-heart"></i>
 												</a>
 												<Link
-													to={`/travel/${travel._id}`}
+													to={`/travel/${travel.topic}/${travel._id}`}
 													className="add-to-cart"
 												>
 													<i className="fa fa-shopping-bag"></i>

@@ -79,7 +79,7 @@ function EditTravelPage() {
 
 	const navigate = useNavigate();
 	const handleReturn = () => {
-		navigate(`/travel/${id}`);
+		navigate(`/travel/${travel.topic}/${id}`);
 	};
 
 	if (isLoading) {

@@ -42,7 +42,7 @@ const TravelDescription = () => {
 	}
 
 	const handleEdit = () => {
-		navigate(`/travel-edit/${id}`);
+		navigate(`/travel-edit/${travel.topic}/${id}`);
 	};
 
 	const HandleDeleteProcess = value => () => {
