@@ -20,6 +20,15 @@ const TravelUser = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const adsPerPage = 9;
 
+	function formatDate(datetimeCreation) {
+    const dateObj = new Date(datetimeCreation);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const data = { user };
@@ -124,6 +133,9 @@ const TravelUser = () => {
 												</p>
 												<p className="text-travels-ads">
 													Destination: {travel.destination}
+												</p>
+												<p className="text-travels-ads">
+													Travel Date: {formatDate(travel.datetimeCreation)}
 												</p>
 											</div>
 											{userName === user ? null : (

@@ -52,6 +52,15 @@ const TravelFavorite = () => {
 	// Calcula el número de páginas
 	const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
 
+	function formatDate(datetimeCreation) {
+    const dateObj = new Date(datetimeCreation);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+
 	const renderPageNumbers = () => {
 		return (
 			<ul className="pagination">
@@ -108,7 +117,6 @@ const TravelFavorite = () => {
 											</p>
 											<div className="price">
 												<span>Price: {travel.price}€</span>
-												{/* travel.discount && <span> {travel.originalPrice}€</span> */}
 											</div>
 											{travel.forSale ? (
 												<p className="text-travels-ads">Sale</p>
@@ -120,6 +128,9 @@ const TravelFavorite = () => {
 											</p>
 											<p className="text-travels-ads">
 												Destination: {travel.destination}
+											</p>
+											<p className="text-travels-ads">
+												Travel Date: {formatDate(travel.datetimeCreation)}
 											</p>
 										</div>
 										<div className="product-button-group">
