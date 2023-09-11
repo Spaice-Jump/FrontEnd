@@ -107,7 +107,7 @@ export const createTravel = data =>
 			data.datetimeCreation = Date.now();
 			const travel = await api.travels.postTravel(data);
 			dispatch(createTravelSuccess(travel));
-			router.navigate(`/travel/${travel._id}`);
+			router.navigate(`/travel/${travel.topic}/${travel._id}`);
 		} catch (error) {
 			dispatch(createTravelFailure(error));
 		}
