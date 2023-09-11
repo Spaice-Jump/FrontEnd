@@ -32,10 +32,15 @@ const Travels = () => {
 		priceMin: 0,
 		priceMax: Infinity,
 	});
-	useEffect(() => {
+
+  // Estado para la paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const adsPerPage = 9;
+
+  useEffect(() => {
 		dispatch(fetchTravels());
 		dispatch(fetchLocations());
-	}, [dispatch]);
+  }, [dispatch]);
 
 	let travels = travel;
 	let locationsOrigin = allLocations;
@@ -70,104 +75,124 @@ const Travels = () => {
 		locationDestination
 	);
 
-	//busqueda por palabras
-	const searcher = e => {
-		setSearch(e.target.value);
-	};
+  // Busqueda por palabras
+  const searcher = (e) => {
+    setSearch(e.target.value);
+  };
 
-	const handleChangeFilterPriceMax = event => {
-		setData({ ...data, priceMax: event.target.value });
-		setPrecMax(event.target.value);
-	};
-	const handleChangeFilterPriceMin = event => {
-		setData({ ...data, priceMin: event.target.value });
-		setPrecMin(event.target.value);
-	};
-	const { isLoading, error } = useSelector(getUi);
+  const handleChangeFilterPriceMax = (event) => {
+    setData({ ...data, priceMax: event.target.value });
+    setPrecMax(event.target.value);
+  };
 
-	if (isLoading) {
-		return <Loading />;
-	}
+  const handleChangeFilterPriceMin = (event) => {
+    setData({ ...data, priceMin: event.target.value });
+    setPrecMin(event.target.value);
+  };
 
-	return (
+  const { isLoading, error } = useSelector(getUi);
+
+  // Calcula el índice del primer y último anuncio que se mostrará en la página actual
+  const indexOfLastAd = currentPage * adsPerPage;
+  const indexOfFirstAd = indexOfLastAd - adsPerPage;
+
+  // Filtra los anuncios que se mostrarán en la página actual
+  const adsToShow = travels.slice(indexOfFirstAd, indexOfLastAd);
+
+  // Calcula el número de páginas
+  const pageNumbers = Math.ceil(travels.length / adsPerPage);
+
+  const renderPageNumbers = () => {
+    return (
+      <ul className="pagination">
+        {Array.from({ length: pageNumbers }, (_, index) => (
+          <li
+            key={index}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            <button onClick={() => setCurrentPage(index + 1)}>
+              {index + 1}
+            </button>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return (
     <>
       <section className="travels-first-container">
         <div className="container travels-container">
           <div className="row">
-            <input
-              type="text"
-              value={search}
-              onChange={searcher}
-              placeholder="Search"
-              name="search"
-              className="form-Control"
-            ></input>
-            <form>
-              <label
-                className="labelAdvertsPage"
-                name="price"
-              >
-                Precio Minimo
-              </label>
-              <input
-                className="inputPriceMinAdvertsPage"
-                type="number"
-                pattern="filtro precio"
-                name="price"
-                value={data.sales.value}
-                onChange={handleChangeFilterPriceMin}
-                placeholder="introduzca precio minimo"
-              />
-              <label
-                className="labelAdvertsPage"
-                name="price"
-              >
-                Precio Maximo
-              </label>
-              <input
-                className="inputPriceMaxAdvertsPage"
-                type="number"
-                pattern="filtro precio"
-                name="price"
-                value={data.sales.value}
-                onChange={handleChangeFilterPriceMax}
-                placeholder="introduzca precio maximo"
-              />
-              <label className="origin">Origen</label>
-              <select
-                name="origin"
-                id="origin"
-                onChange={e => setLocationOrigin(e.target.value)}
-              >
-                <option value="">Seleccionar</option>
-                {locationsOrigin.map(location => (
-                  <option
-                    key={location._id}
-                    value={location.name}
-                  >
-                    {location.name}
-                  </option>
-                ))}
-              </select>
-              <label className="origin">Destino</label>
-              <select
-                name="destination"
-                id="destination"
-                onChange={e => setLocationDestination(e.target.value)}
-              >
-                <option value="">Seleccionar</option>
-                {locationsDestination.map(location => (
-                  <option
-                    key={location._id}
-                    value={location.name}
-                  >
-                    {location.name}
-                  </option>
-                ))}
-              </select>
-            </form>
-            {travels ? (
-              travels.map(travel => (
+            <section className="filter-section">
+              <form className="filter-form text-white-50">
+                <span className="search-text text-white-50">Búsqueda</span>
+                <input
+                  type="text"
+                  value={search}
+                  onChange={searcher}
+                  placeholder="Search"
+                  name="search"
+                  className="form-Control"
+                />
+                <label className="labelAdvertsPage" name="price">
+                  Precio Minimo
+                </label>
+                <input
+                  className="inputPriceMinAdvertsPage"
+                  type="number"
+                  pattern="filtro precio"
+                  name="price"
+                  value={data.sales.value}
+                  onChange={handleChangeFilterPriceMin}
+                  placeholder="introduzca precio minimo"
+                />
+                <label className="labelAdvertsPage" name="price">
+                  Precio Maximo
+                </label>
+                <input
+                  className="inputPriceMaxAdvertsPage"
+                  type="number"
+                  pattern="filtro precio"
+                  name="price"
+                  value={data.sales.value}
+                  onChange={handleChangeFilterPriceMax}
+                  placeholder="introduzca precio maximo"
+                />
+                <label className="origin">Origen</label>
+                <select
+                  name="origin"
+                  id="origin"
+                  onChange={(e) => setLocationOrigin(e.target.value)}
+                >
+                  <option value="">Seleccionar</option>
+                  {locationsOrigin.map((location) => (
+                    <option key={location._id} value={location.name}>
+                      {location.name}
+                    </option>
+                  ))}
+                </select>
+                <label className="origin">Destino</label>
+                <select
+                  name="destination"
+                  id="destination"
+                  onChange={(e) => setLocationDestination(e.target.value)}
+                >
+                  <option value="">Seleccionar</option>
+                  {locationsDestination.map((location) => (
+                    <option key={location._id} value={location.name}>
+                      {location.name}
+                    </option>
+                  ))}
+                </select>
+              </form>
+            </section>
+            {adsToShow ? (
+              adsToShow.map((travel) => (
                 <div
                   key={travel._id}
                   className="col-md-3 col-sm-6 travels-columns"
@@ -183,11 +208,9 @@ const Travels = () => {
                     ) : null}
                     <div className="product-content">
                       <h3 className="title">
-                        <Link to={`/travel/${travel._id}`}>{travel.topic}</Link>
+                        <Link to={`/travel/${travel.topic}/${travel._id}`}>{travel.topic}</Link>
                       </h3>
-                      <p className="text-travels-ads">
-                        Remarks: {travel.remarks}
-                      </p>
+                      <p className="text-travels-ads">Remarks: {travel.remarks}</p>
                       <div className="price">
                         <span>Price: {travel.price}€</span>
                         {/* travel.discount && <span> {travel.originalPrice}€</span> */}
@@ -197,12 +220,8 @@ const Travels = () => {
                       ) : (
                         <p className="text-travels-ads">Search</p>
                       )}
-                      <p className="text-travels-ads">
-                        Origin: {travel.origin}
-                      </p>
-                      <p className="text-travels-ads">
-                        Destination: {travel.destination}
-                      </p>
+                      <p className="text-travels-ads">Origin: {travel.origin}</p>
+                      <p className="text-travels-ads">Destination: {travel.destination}</p>
                       <p className="text-travels-ads">
                         User :
                         <Link
@@ -222,7 +241,7 @@ const Travels = () => {
                         </a>
                         {!travel.forSale ? (
                           <Link
-                            to={`/travel/${travel._id}`}
+                            to={`/travel/${travel.topic}/${travel._id}`}
                             className="add-to-cart"
                           >
                             <i className="fa fa-shopping-bag"></i>
@@ -234,7 +253,7 @@ const Travels = () => {
                           </Link>
                         ) : (
                           <Link
-                            to={`/travel/${travel._id}`}
+                            to={`/travel/${travel.topic}/${travel._id}`}
                             className="add-to-cart"
                           >
                             <i className="fa fa-shopping-bag"></i>
@@ -246,10 +265,7 @@ const Travels = () => {
                           </Link>
                         )}
 
-                        <a
-                          className="product-compare-icon"
-                          href="#"
-                        >
+                        <a className="product-compare-icon" href="#">
                           <i className="fas fa-random"></i>
                         </a>
                       </div>
@@ -262,6 +278,7 @@ const Travels = () => {
             )}
           </div>
         </div>
+        {renderPageNumbers()}
         {error ? (
           <div className="error">
             <p> {error}</p>

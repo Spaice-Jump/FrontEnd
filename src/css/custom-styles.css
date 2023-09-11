@@ -12,6 +12,24 @@
   transition: none;
   padding: 2rem 1.5rem;
   color: #64a19d;
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+}
+
+.user-panel {
+  background-color: rgb(32 40 43);
+  color: #64a19d;
+  border: 1px white solid;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-panel:hover {
+  color: #447a77;
 }
 
 .language-selector {
