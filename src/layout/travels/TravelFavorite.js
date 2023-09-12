@@ -1,10 +1,10 @@
 import Loading from '../utils/spinner/Loading';
 import './css/travelUser.css';
 import { useEffect, useState } from 'react';
-import { getTravelFavorite } from '../../api/serviceTravels';
+import { getTravelFavorite, setTravelFavorite } from '../../api/serviceTravels';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getUserName } from '../../redux/selectors';
+import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 
 const TravelFavorite = () => {
@@ -12,6 +12,8 @@ const TravelFavorite = () => {
   const [error, setError] = useState(null);
   const [travelsData, setTravelsData] = useState([]);
   const user = useSelector(getUserName);
+  const isLogged = useSelector(getIsLogged);
+  const userId = useSelector(getUserId);
 
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,6 +26,7 @@ const TravelFavorite = () => {
         const travelsData = await getTravelFavorite(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });
+
         if (travelsData?.status === 400) {
           setError(travelsData.message);
         }
@@ -69,6 +72,18 @@ const TravelFavorite = () => {
       </ul>
     );
   };
+
+  const handleFavoriteChange = async (event, travelId) => {
+
+    const checked = event.target.checked;
+    const data = { travelId,checked, userId };
+  
+    await setTravelFavorite(data,{
+        headers: { 'content-type': 'multipart/form-data' },
+      });
+
+  };
+
 
   return (
     <>
@@ -122,12 +137,20 @@ const TravelFavorite = () => {
                       </p>
                     </div>
                     <div className="product-button-group">
-                      <a
-                        className="product-like-icon"
-                        href="#"
-                      >
-                        <i className="fas fa-heart"></i>
-                      </a>
+
+                     {isLogged ? (
+                          <i className="fas fa-heart">
+                            <input
+                              type="checkbox"
+                              className="product-like-icon"
+                              onChange={event =>
+                                handleFavoriteChange(event, travel._id)
+                              }
+                            />
+                          </i>
+                        ) : null}
+
+
                       {!travel.forSale ? (
                         <Link
                           to={`/travel/${travel._id}`}
