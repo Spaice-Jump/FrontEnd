@@ -67,6 +67,15 @@ const TravelDescription = () => {
 		setTravel({ ...travel, active: !travel.active });
 	};
 
+	function formatDate(datetimeCreation) {
+    const dateObj = new Date(datetimeCreation);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -152,6 +161,10 @@ const TravelDescription = () => {
 							<li>
 								<strong>Remarks: </strong>
 								{travel.remarks}
+							</li>
+							<li>
+								<strong>Travel Date </strong>
+								{formatDate(travel.datetimeCreation)}
 							</li>
 						</ul>
 					</div>

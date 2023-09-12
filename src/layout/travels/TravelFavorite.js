@@ -15,9 +15,9 @@ const TravelFavorite = () => {
   const isLogged = useSelector(getIsLogged);
   const userId = useSelector(getUserId);
 
-  // Estado para la paginación
-  const [currentPage, setCurrentPage] = useState(1);
-  const adsPerPage = 9;
+	// Estado para la paginación
+	const [currentPage, setCurrentPage] = useState(1);
+	const adsPerPage = 9;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,36 +42,45 @@ const TravelFavorite = () => {
 
   }, [user]);
 
-  const resetError = () => {
-    setError(null);
-  };
+	const resetError = () => {
+		setError(null);
+	};
 
-  // Calcula el índice del primer y último anuncio que se mostrará en la página actual
-  const indexOfLastAd = currentPage * adsPerPage;
-  const indexOfFirstAd = indexOfLastAd - adsPerPage;
+	// Calcula el índice del primer y último anuncio que se mostrará en la página actual
+	const indexOfLastAd = currentPage * adsPerPage;
+	const indexOfFirstAd = indexOfLastAd - adsPerPage;
 
-  // Filtra los anuncios que se mostrarán en la página actual
-  const adsToShow = travelsData.slice(indexOfFirstAd, indexOfLastAd);
+	// Filtra los anuncios que se mostrarán en la página actual
+	const adsToShow = travelsData.slice(indexOfFirstAd, indexOfLastAd);
 
-  // Calcula el número de páginas
-  const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
+	// Calcula el número de páginas
+	const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
 
-  const renderPageNumbers = () => {
-    return (
-      <ul className="pagination">
-        {Array.from({ length: pageNumbers }, (_, index) => (
-          <li
-            key={index}
-            className={currentPage === index + 1 ? 'active' : ''}
-          >
-            <button onClick={() => setCurrentPage(index + 1)}>
-              {index + 1}
-            </button>
-          </li>
-        ))}
-      </ul>
-    );
-  };
+	function formatDate(datetimeCreation) {
+    const dateObj = new Date(datetimeCreation);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+
+	const renderPageNumbers = () => {
+		return (
+			<ul className="pagination">
+				{Array.from({ length: pageNumbers }, (_, index) => (
+					<li
+						key={index}
+						className={currentPage === index + 1 ? 'active' : ''}
+					>
+						<button onClick={() => setCurrentPage(index + 1)}>
+							{index + 1}
+						</button>
+					</li>
+				))}
+			</ul>
+		);
+	};
 
   const handleFavoriteChange = async (event, travelId) => {
 
@@ -85,18 +94,18 @@ const TravelFavorite = () => {
   };
 
 
-  return (
-    <>
-      {isLoading ? (
-        <section className="travels-first-container">
-          <div className="container travels-container">
-            <div className="row"></div>
-            <h1>Travels to {user}</h1>
+	return (
+		<>
+			{isLoading ? (
+				<section className="travels-first-container">
+					<div className="container travels-container">
+						<div className="row"></div>
+						<h1>Travels to {user}</h1>
 
-            <UserPanel
-              user={user}
-              origin={'favorite'}
-            />
+						<UserPanel
+							user={user}
+							origin={'favorite'}
+						/>
 
             {adsToShow ? (
               adsToShow.map((travel) => (
@@ -189,19 +198,19 @@ const TravelFavorite = () => {
         </>
       )}
 
-      {!error ? (
-        <br />
-      ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
-          <p data-testid="error"> {error}</p>
-        </div>
-      )}
-      {renderPageNumbers()}
-    </>
-  );
+			{!error ? (
+				<br />
+			) : (
+				<div
+					className="error"
+					onClick={resetError}
+				>
+					<p data-testid="error"> {error}</p>
+				</div>
+			)}
+			{renderPageNumbers()}
+		</>
+	);
 };
 
 export default TravelFavorite;

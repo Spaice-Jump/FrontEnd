@@ -38,7 +38,6 @@ const Travels = () => {
     priceMax: Infinity,
   });
 
-  // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(1);
   const adsPerPage = 9;
 
@@ -97,15 +96,21 @@ const Travels = () => {
 
   const { isLoading, error } = useSelector(getUi);
 
-  // Calcula el índice del primer y último anuncio que se mostrará en la página actual
   const indexOfLastAd = currentPage * adsPerPage;
   const indexOfFirstAd = indexOfLastAd - adsPerPage;
 
-  // Filtra los anuncios que se mostrarán en la página actual
   const adsToShow = travels.slice(indexOfFirstAd, indexOfLastAd);
 
-  // Calcula el número de páginas
   const pageNumbers = Math.ceil(travels.length / adsPerPage);
+
+  function formatDate(datetimeCreation) {
+    const dateObj = new Date(datetimeCreation);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
 
   const renderPageNumbers = () => {
     return (
@@ -247,7 +252,6 @@ const Travels = () => {
                       </p>
                       <div className="price">
                         <span>Price: {travel.price}€</span>
-                        {/* travel.discount && <span> {travel.originalPrice}€</span> */}
                       </div>
                       {travel.forSale ? (
                         <p className="text-travels-ads">Sale</p>
@@ -269,6 +273,7 @@ const Travels = () => {
                           {travel.userName}
                         </Link>
                       </p>
+                      <p className="text-travels-ads">Travel Date: {formatDate(travel.datetimeCreation)}</p>
 
                       <div className="product-button-group">
                         {isLogged ? (

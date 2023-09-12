@@ -162,7 +162,7 @@ export const editTravel = (id, data) =>
       const travel = await api.travels.editTravel(id, data);
 			console.log('travel update', travel);
       dispatch(editTravelSuccess(travel));
-      router.navigate(`/travel/${travel._id}`);
+      router.navigate(`/travel/${travel.topic}/${travel._id}`);
     } catch (error) {
       dispatch(editTravelFailure(error));
     }
@@ -245,7 +245,7 @@ async function (dispatch, _getState, { api, router }) {
     try {
         const travel = await api.travels.closeOpenTravel(id, travelActive);
         dispatch(closeOpenTravelSuccess(travel));
-        router.navigate(`/travel/${travel._id}`);
+        router.navigate(`/travel/${travel.topic}/${travel._id}`);
     } catch (error) {
         dispatch(closeOpenTravelFailure(error));
     }
@@ -304,7 +304,7 @@ export const deletePhoto = (id, travel) =>
       console.log('travel', travel);
       await api.travels.deletePhoto(travel.photo);
       dispatch(deletePhotoSuccess(id));
-      router.navigate(`/travel-edit/${id}`);
+      router.navigate(`/travel-edit/${travel.topic}/${id}`);
     } catch (error) {
       dispatch(deletePhotoFailure(error));
     }
