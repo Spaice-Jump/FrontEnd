@@ -11,6 +11,7 @@ import {
 } from '../../../redux/selectors';
 import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
+import jwtDecode from 'jwt-decode';
 
 import { useParams } from 'react-router-dom';
 function UpdatePassword() {
@@ -19,8 +20,7 @@ function UpdatePassword() {
   const userName = useSelector(getUserName);
   
   const dispatch = useDispatch();
-  const [user, setUser] = useState(userName);
-  const [email, setEmail] = useState(userEmail);
+ 
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -31,18 +31,23 @@ function UpdatePassword() {
   };
 
   //setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
+  
+console.log('tooooo',token)
+  getNewPassword(token)
+  const abc = jwtDecode(token);
+  const [user, setUser] = useState(abc.userName);
+  const [email, setEmail] = useState(abc.email);
   const credential = {
     user,
     email,
     password,
     passwordConfirm,
   };
-console.log('tooooo',token)
-  getNewPassword(token)
+  console.log('abc',abc)
   const handleSubmit = async event => {
     event.preventDefault();
         
-      console.log(credential);
+      console.log('credenciales',credential);
       await dispatch(authUpdateUser(credential)) 
       
     //await dispatch(authUpdateUser(data));
@@ -64,7 +69,7 @@ console.log('tooooo',token)
             ) : (
               <>
                 <Input
-                  placeholder={userName}
+                  placeholder={abc.userName}
                   tiLabel="Name User"
                   type="text"
                   name="user"
@@ -75,7 +80,7 @@ console.log('tooooo',token)
                 />
 
                 <Input
-                  placeholder={userEmail}
+                  placeholder={abc.email}
                   tiLabel="Email"
                   type="email"
                   name="email"

@@ -119,7 +119,7 @@ export function auth(state = defaultState.auth, action) {
 		case AUTH_LOGIN_FAILURE:
 			return { isLogged: false, userId: null, email: null };
 		case UPDATE_USER_SUCCESS:
-			return { ...state, isLogged: true, userName: action.payload.userName }; //clonamos el estado y le cambiamos la autenticacion a true o false si esta o no logeado
+			return { ...state, userName: action.payload.userName }; //clonamos el estado y le cambiamos la autenticacion a true o false si esta o no logeado
 		case UPDATE_USER_FAILURE:
 			return { ...state };
 		case AUTH_DETAIL_SUCCESS:
