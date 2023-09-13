@@ -23,6 +23,9 @@ import {
 	BUY_TRAVEL_SUCCESS,
 	FILTER_TRAVELS_SUCCESS,
 	CLOSE_OPEN_TRAVEL_SUCCESS,
+    UPDATE_FAVORITE_REQUEST,
+    UPDATE_FAVORITE_SUCCESS,
+    UPDATE_FAVORITE_FAILURE,
 } from './types';
 
 export const defaultState = {
@@ -90,6 +93,18 @@ export function travels(state = defaultState.travels, action) {
 					travel._id === action.payload._id ? action.payload : travel
 				),
 			};
+
+        case UPDATE_FAVORITE_SUCCESS:
+            return {
+				...state,
+				data: state.data.map(travel =>
+					travel._id === action.payload._id ? action.payload : travel
+				),
+			};
+
+
+
+
 		default:
 			return state;
 	}
