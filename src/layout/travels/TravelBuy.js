@@ -1,14 +1,14 @@
 import Loading from '../utils/spinner/Loading';
 import './css/travelUser.css';
 import { useEffect, useState } from 'react';
-import { getTravelFavorite, setTravelFavorite } from '../../api/serviceTravels';
+import { getTravelBuy } from '../../api/serviceTravels';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 import FavoriteHeart from '../utils/FavoriteHeart';
 
-const TravelFavorite = () => {
+const TravelBuy = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [travelsData, setTravelsData] = useState([]);
@@ -16,16 +16,16 @@ const TravelFavorite = () => {
   const isLogged = useSelector(getIsLogged);
   const userId = useSelector(getUserId);
 
-	// Estado para la paginación
-	const [currentPage, setCurrentPage] = useState(1);
-	const adsPerPage = 9;
+  // Estado para la paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const adsPerPage = 9;
 
   useEffect(() => {
-    setTravelsData([])
+    setTravelsData([]);
     const fetchData = async () => {
-      const data = { user };
+      const data = { userId };
       try {
-        const travelsData = await getTravelFavorite(data, {
+        const travelsData = await getTravelBuy(data, {
           headers: { 'content-type': 'multipart/form-data' },
         });
 
@@ -41,24 +41,23 @@ const TravelFavorite = () => {
       }
     };
     fetchData();
+  }, [userId]);
 
-  }, [user]);
+  const resetError = () => {
+    setError(null);
+  };
 
-	const resetError = () => {
-		setError(null);
-	};
+  // Calcula el índice del primer y último anuncio que se mostrará en la página actual
+  const indexOfLastAd = currentPage * adsPerPage;
+  const indexOfFirstAd = indexOfLastAd - adsPerPage;
 
-	// Calcula el índice del primer y último anuncio que se mostrará en la página actual
-	const indexOfLastAd = currentPage * adsPerPage;
-	const indexOfFirstAd = indexOfLastAd - adsPerPage;
+  // Filtra los anuncios que se mostrarán en la página actual
+  const adsToShow = travelsData.slice(indexOfFirstAd, indexOfLastAd);
 
-	// Filtra los anuncios que se mostrarán en la página actual
-	const adsToShow = travelsData.slice(indexOfFirstAd, indexOfLastAd);
+  // Calcula el número de páginas
+  const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
 
-	// Calcula el número de páginas
-	const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
-
-	function formatDate(datetimeCreation) {
+  function formatDate(datetimeCreation) {
     const dateObj = new Date(datetimeCreation);
     const day = dateObj.getDate();
     const month = dateObj.getMonth() + 1;
@@ -67,27 +66,24 @@ const TravelFavorite = () => {
     return `${day}-${month}-${year}`;
   }
 
-	const renderPageNumbers = () => {
-		return (
-			<ul className="pagination">
-				{Array.from({ length: pageNumbers }, (_, index) => (
-					<li
-						key={index}
-						className={currentPage === index + 1 ? 'active' : ''}
-					>
-						<button onClick={() => setCurrentPage(index + 1)}>
-							{index + 1}
-						</button>
-					</li>
-				))}
-			</ul>
-		);
-	};
+  const renderPageNumbers = () => {
+    return (
+      <ul className="pagination">
+        {Array.from({ length: pageNumbers }, (_, index) => (
+          <li
+            key={index}
+            className={currentPage === index + 1 ? 'active' : ''}
+          >
+            <button onClick={() => setCurrentPage(index + 1)}>
+              {index + 1}
+            </button>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
-
-
-
-	return (
+  return (
     <>
       {isLoading ? (
         <section className="travels-first-container">
@@ -97,7 +93,7 @@ const TravelFavorite = () => {
 
               <UserPanel
                 user={user}
-                origin={'favorite'}
+                origin={'buy'}
               />
 
               {adsToShow ? (
@@ -214,4 +210,4 @@ const TravelFavorite = () => {
   );
 };
 
-export default TravelFavorite;
+export default TravelBuy;

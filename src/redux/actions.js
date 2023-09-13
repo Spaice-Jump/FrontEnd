@@ -531,7 +531,7 @@ export const authUpdateUser = credential =>
     }
   };
 
-export const favoriteChange = (checked, travel, travelId, userId,user) =>
+export const favoriteChange = (checked, travel, travelId, userId) =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(editTravelRequest());
     try {
@@ -539,9 +539,9 @@ export const favoriteChange = (checked, travel, travelId, userId,user) =>
 
       const data = { travelId, checked, userId };
 
-        await api.travels.setTravelFavorite(data,{
-            headers: { 'content-type': 'multipart/form-data' },
-          });
+         await api.travels.setTravelFavorite(data,{
+             headers: { 'content-type': 'multipart/form-data' },
+           });
 
           dispatch(editTravelSuccess(travel));
 

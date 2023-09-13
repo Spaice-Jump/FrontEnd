@@ -131,7 +131,6 @@ const Travels = () => {
   };
 
 
-console.log(travels)
 
   if (isLoading) {
     return <Loading />;

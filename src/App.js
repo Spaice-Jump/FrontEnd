@@ -23,6 +23,7 @@ import UpdateUser from './layout/auth/updateUser/updateUser.js';
 import PurchasedTravel from './components/PurchasedTravel.jsx';
 import TravelUser from './layout/travels/TravelUser.js';
 import TravelFavorite from './layout/travels/TravelFavorite.js';
+import TravelBuy from './layout/travels/TravelBuy.js';
 
 function App() {
   useEffect(() => {
@@ -99,13 +100,23 @@ function App() {
           path="/travel-user/:user"
           element={<TravelUser />}
         />
-        
+
         <Route
           path="/travel-favorite"
           element={
             <RequireAuth>
               {' '}
               <TravelFavorite />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/travel-buy"
+          element={
+            <RequireAuth>
+              {' '}
+              <TravelBuy />
             </RequireAuth>
           }
         />

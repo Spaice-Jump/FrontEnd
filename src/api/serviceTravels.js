@@ -56,5 +56,10 @@ export const closeOpenTravel = (id, travelActive) => {
 
 export const setTravelFavorite = (user, headers) => {
 	const URL = '/api/favorites/setForFavorite';
+	 client.post(URL, user, headers);
+};
+
+export const getTravelBuy = (user, headers) => {
+	const URL = '/api/buy';
 	return client.post(URL, user, headers);
 };
