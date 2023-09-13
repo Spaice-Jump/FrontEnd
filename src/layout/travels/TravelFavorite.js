@@ -177,7 +177,7 @@ const TravelFavorite = () => {
                         <i className="fas fa-random"></i>
                       </a>
 
-                      {isLogged ? (
+                      {isLogged && userId !== travel.userId ? (
                         <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
                         ) : null}
                     </div>

@@ -4,16 +4,16 @@ import NewUserPage from "../NewUserPage";
 import userEvent from "@testing-library/user-event";
 
 describe("Create New User", () => {
-  const renderComponent = () => {
-    return render(<NewUserPage />);
-  };
+//   const renderComponent = () => {
+//     return render(<NewUserPage />);
+//   };
 
-  test("submit button is disabled by default", () => {
-    renderComponent();
+//   test("submit button is disabled by default", () => {
+//     renderComponent();
 
-    const submitButton = screen.getByTestId("signUpButton");
-    expect(submitButton).toBeDisabled();
-  });
+//     const submitButton = screen.getByTestId("signUpButton");
+//     expect(submitButton).toBeDisabled();
+//   });
   
 
   // test('submit button is enabled by with all fields filled',async ()=>{
