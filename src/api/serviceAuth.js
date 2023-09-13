@@ -64,8 +64,8 @@ export const deleteUser = (user, headers) => {
 
   export const getNewPassword = (token) => {
   
-    return client.post(`/updateUser`,{token:token}).then((response) => {
-      console.log(response)
+    return client.get(`/recorderPassword`,{token:token}).then((response) => {
+      console.log('reeeee',response)
       if (response?.status === 400) {
         throw response.error;
       }

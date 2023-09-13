@@ -1,5 +1,6 @@
 import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getNewPassword } from '../../../api/serviceAuth';
 import { authUpdateUser, resetErrors } from '../../../redux/actions';
 import {
   getEmail,
@@ -11,6 +12,7 @@ import {
 import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
 
+import { useParams } from 'react-router-dom';
 function UpdatePassword() {
   let { isLoading, error } = useSelector(getUi);
   const userEmail = useSelector(getEmail);
@@ -22,6 +24,7 @@ function UpdatePassword() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
+  const {token}=useParams()
 
   const resetError = () => {
     dispatch(resetErrors());
@@ -34,7 +37,8 @@ function UpdatePassword() {
     password,
     passwordConfirm,
   };
-
+console.log('tooooo',token)
+  getNewPassword(token)
   const handleSubmit = async event => {
     event.preventDefault();
         

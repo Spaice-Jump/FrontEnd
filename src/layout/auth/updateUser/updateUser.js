@@ -11,8 +11,8 @@ import {
 import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
 import { isButtonDisabled } from '../Signup/formUtils';
-import { updateUser } from '../../../api/serviceAuth';
-import { Params } from 'react-router-dom';
+import { getNewPassword, updateUser } from '../../../api/serviceAuth';
+
 
 
 function UpdateUser() {
@@ -44,7 +44,7 @@ function UpdateUser() {
     event.preventDefault();
         
       console.log(credential);
-      getNewPassword(token)
+      
       await dispatch(authUpdateUser(credential)) 
       
     //await dispatch(authUpdateUser(data));
