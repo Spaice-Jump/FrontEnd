@@ -12,6 +12,8 @@ import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
 import { isButtonDisabled } from '../Signup/formUtils';
 import { updateUser } from '../../../api/serviceAuth';
+import { Params } from 'react-router-dom';
+
 
 function UpdateUser() {
   let { isLoading, error } = useSelector(getUi);
@@ -24,6 +26,7 @@ function UpdateUser() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
+ 
 
   const resetError = () => {
     dispatch(resetErrors());
@@ -41,6 +44,7 @@ function UpdateUser() {
     event.preventDefault();
         
       console.log(credential);
+      getNewPassword(token)
       await dispatch(authUpdateUser(credential)) 
       
     //await dispatch(authUpdateUser(data));
