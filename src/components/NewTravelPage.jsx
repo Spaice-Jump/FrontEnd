@@ -6,6 +6,8 @@ import videoBackground from '../assets/video/new-travel-background.mp4';
 import './componentTravels.css';
 import resizeFile from '../utils/resizeFile';
 import Loading from '../layout/utils/spinner/Loading';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function NewTravelPage() {
 	const userId = useSelector(getUserId);
@@ -21,6 +23,7 @@ function NewTravelPage() {
 		photo: null,
 		active: true,
 		userId: userId,
+		datetimeDeparture: null,
 	});
 
 	const locations = useSelector(getLocations);
@@ -37,6 +40,21 @@ function NewTravelPage() {
 		dispatch(createTravel(travel));
 	};
 
+	const [isPastDate, setIsPastDate] = useState(false);
+
+	const handleDate = date => {
+		const now = new Date();
+		if (date < now) {
+			setTravel({ ...travel, datetimeDeparture: null });
+			setIsPastDate(true);
+			return;
+		} else {
+			setIsPastDate(false);
+		}
+		const event = { target: { value: date, name: 'datetimeDeparture' } };
+		handleChange(event);
+	};
+
 	const handleChange = async event => {
 		const { name, value } = event.target;
 
@@ -50,8 +68,15 @@ function NewTravelPage() {
 		setTravel({ ...travel, [name]: value });
 	};
 
+	const minDate = new Date();
+	minDate.setHours(0, 0, 0, 0);
+
 	const isDisabled =
-		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+		!travel.topic ||
+		!travel.origin ||
+		!travel.destination ||
+		!travel.price ||
+		!travel.datetimeDeparture;
 
 	if (isLoading) {
 		return <Loading />;
@@ -89,6 +114,7 @@ function NewTravelPage() {
 							type="text"
 							name="topic"
 							id="topic"
+							required
 						/>
 						<label
 							htmlFor="origin"
@@ -98,7 +124,7 @@ function NewTravelPage() {
 						</label>
 						<select
 							value={travel.origin}
-							onChange={handleChange}
+							onChange={handleDate}
 							type="string"
 							name="origin"
 							id="origin"
@@ -137,6 +163,26 @@ function NewTravelPage() {
 							))}
 						</select>
 						<br />
+						<label>Fecha de salida</label>
+						<br />
+						<DatePicker
+							selected={travel.datetimeDeparture}
+							onChange={handleDate}
+							dateFormat="dd/MM/yyyy HH:mm"
+							timeIntervals={5}
+							showTimeSelect
+							required
+							minDate={minDate}
+							maxDate={null}
+							timeFormat="HH:mm"
+							placeholderText="Click para seleccionar fecha"
+						/>
+						{isPastDate && (
+							<div className="warning-message" style={{color:"red"}}>
+								La hora seleccionada es anterior a la hora actual. Cámbiala a una hora posterior a la actual.
+							</div>
+						)}
+						<br />
 						<label htmlFor="price">Precio</label>
 						<input
 							value={travel.price}
@@ -152,7 +198,7 @@ function NewTravelPage() {
 							onChange={handleChange}
 							name="remarks"
 							id="remarks"
-					></textarea>
+						></textarea>
 						<label htmlFor="forSale">¿Qué quieres?</label>
 						<select
 							value={travel.forSale}
