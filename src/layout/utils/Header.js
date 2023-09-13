@@ -166,7 +166,7 @@ function Header() {
                       to="/updateUser"
                       className="nav-NavLink"
                     >
-                      Update User
+                      {t('navbar.update-user')}
                     </NavLink>
                   </li>
                   <li className="nav-item">
