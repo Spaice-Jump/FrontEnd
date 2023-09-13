@@ -28,8 +28,10 @@ const TravelUser = () => {
 
     return `${day}-${month}-${year}`;
   }
+  
 
 	useEffect(() => {
+        setTravelsData([])
 		const fetchData = async () => {
 			const data = { user };
 			try {
@@ -84,12 +86,18 @@ const TravelUser = () => {
 
 	return (
 		<>
+           
 			{isLoading ? (
+                
 				<section className="travels-first-container">
+                    
 					<div className="container travels-container">
+                        
 						<div className="row">
 							<h1>Travels to {user}</h1>
-							{userName === user ? (
+                            
+							{userName.trim() === user.trim() ? (
+                                
 								<UserPanel
 									user={user}
 									origin={'property'}
@@ -140,12 +148,12 @@ const TravelUser = () => {
 											</div>
 											{userName === user ? null : (
 												<div className="product-button-group">
-													<a
+													{/* <a
 														className="product-like-icon"
 														href="#"
 													>
 														<i className="fas fa-heart"></i>
-													</a>
+													</a> */}
 
 													{!travel.forSale ? (
 														<Link

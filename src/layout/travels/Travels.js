@@ -14,6 +14,7 @@ import {
 import Loading from '../../layout/utils/spinner/Loading';
 import Filters from './Filter';
 import { setTravelFavorite } from '../../api/serviceTravels';
+import FavoriteHeart from '../utils/FavoriteHeart';
 
 const Travels = () => {
   const [search, setSearch] = useState('');
@@ -129,18 +130,8 @@ const Travels = () => {
     );
   };
 
-  const handleFavoriteChange = async (event, travelId) => {
 
-    const checked = event.target.checked;
-    const data = { travelId,checked, userId };
-  
-    await setTravelFavorite(data,{
-        headers: { 'content-type': 'multipart/form-data' },
-      });
-
-  };
-
-  
+console.log(travels)
 
   if (isLoading) {
     return <Loading />;
@@ -276,17 +267,7 @@ const Travels = () => {
                       <p className="text-travels-ads">Travel Date: {formatDate(travel.datetimeCreation)}</p>
 
                       <div className="product-button-group">
-                        {isLogged ? (
-                          <i className="fas fa-heart">
-                            <input
-                              type="checkbox"
-                              className="product-like-icon"
-                              onChange={event =>
-                                handleFavoriteChange(event, travel._id)
-                              }
-                            />
-                          </i>
-                        ) : null}
+                        
                         {!travel.forSale ? (
                           <Link
                             to={`/travel/${travel.topic}/${travel._id}`}
@@ -319,6 +300,9 @@ const Travels = () => {
                         >
                           <i className="fas fa-random"></i>
                         </a>
+                        {isLogged ? (
+                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                        ) : null}
                       </div>
                     </div>
                   </div>

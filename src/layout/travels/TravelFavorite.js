@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
+import FavoriteHeart from '../utils/FavoriteHeart';
 
 const TravelFavorite = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,7 @@ const TravelFavorite = () => {
 	const adsPerPage = 9;
 
   useEffect(() => {
+    setTravelsData([])
     const fetchData = async () => {
       const data = { user };
       try {
@@ -82,16 +84,7 @@ const TravelFavorite = () => {
 		);
 	};
 
-  const handleFavoriteChange = async (event, travelId) => {
 
-    const checked = event.target.checked;
-    const data = { travelId,checked, userId };
-  
-    await setTravelFavorite(data,{
-        headers: { 'content-type': 'multipart/form-data' },
-      });
-
-  };
 
 
 	return (
@@ -144,20 +137,20 @@ const TravelFavorite = () => {
                       <p className="text-travels-ads">
                         Destination: {travel.destination}
                       </p>
+                      <p className="text-travels-ads">
+                        User :
+                        <Link
+                          to={`/travel-user/${travel.userName}`}
+                          class="text-decoration-none"
+                        >
+                          {travel.userName}
+                        </Link>
+                      </p>
+                      <p className="text-travels-ads">Travel Date: {formatDate(travel.datetimeCreation)}</p>
                     </div>
                     <div className="product-button-group">
 
-                     {isLogged ? (
-                          <i className="fas fa-heart">
-                            <input
-                              type="checkbox"
-                              className="product-like-icon"
-                              onChange={event =>
-                                handleFavoriteChange(event, travel._id)
-                              }
-                            />
-                          </i>
-                        ) : null}
+                    
 
 
                       {!travel.forSale ? (
@@ -183,6 +176,10 @@ const TravelFavorite = () => {
                       >
                         <i className="fas fa-random"></i>
                       </a>
+
+                      {isLogged ? (
+                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                        ) : null}
                     </div>
                   </div>
                 </div>
