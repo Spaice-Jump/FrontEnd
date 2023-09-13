@@ -23,6 +23,7 @@ import UpdateUser from './layout/auth/updateUser/updateUser.js';
 import PurchasedTravel from './components/PurchasedTravel.jsx';
 import TravelUser from './layout/travels/TravelUser.js';
 import TravelFavorite from './layout/travels/TravelFavorite.js';
+import UpdatePassword from './layout/auth/login/UpdatePassword.js'
 
 function App() {
   useEffect(() => {
@@ -107,6 +108,14 @@ function App() {
               {' '}
               <TravelFavorite />
             </RequireAuth>
+          }
+        />
+        <Route
+          path="/recorderPassword/:token"
+          element={
+            
+              <UpdatePassword />
+           
           }
         />
 
