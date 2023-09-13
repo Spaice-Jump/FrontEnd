@@ -23,6 +23,9 @@ import {
 	BUY_TRAVEL_SUCCESS,
 	FILTER_TRAVELS_SUCCESS,
 	CLOSE_OPEN_TRAVEL_SUCCESS,
+    UPDATE_FAVORITE_REQUEST,
+    UPDATE_FAVORITE_SUCCESS,
+    UPDATE_FAVORITE_FAILURE,
 } from './types';
 
 export const defaultState = {
@@ -90,6 +93,18 @@ export function travels(state = defaultState.travels, action) {
 					travel._id === action.payload._id ? action.payload : travel
 				),
 			};
+
+        case UPDATE_FAVORITE_SUCCESS:
+            return {
+				...state,
+				data: state.data.map(travel =>
+					travel._id === action.payload._id ? action.payload : travel
+				),
+			};
+
+
+
+
 		default:
 			return state;
 	}
@@ -119,7 +134,7 @@ export function auth(state = defaultState.auth, action) {
 		case AUTH_LOGIN_FAILURE:
 			return { isLogged: false, userId: null, email: null };
 		case UPDATE_USER_SUCCESS:
-			return { ...state, isLogged: true, userName: action.payload.userName }; //clonamos el estado y le cambiamos la autenticacion a true o false si esta o no logeado
+			return { ...state, userName: action.payload.userName }; //clonamos el estado y le cambiamos la autenticacion a true o false si esta o no logeado
 		case UPDATE_USER_FAILURE:
 			return { ...state };
 		case AUTH_DETAIL_SUCCESS:

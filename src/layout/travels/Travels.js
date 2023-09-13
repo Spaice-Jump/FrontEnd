@@ -5,86 +5,92 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLocations, fetchTravels } from '../../redux/actions';
 import {
-	getTravels,
-	getUi,
-	getLocations,
-	getUserId,
+  getTravels,
+  getUi,
+  getLocations,
+  getUserId,
+  getIsLogged,
 } from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
 import Filters from './Filter';
+import { setTravelFavorite } from '../../api/serviceTravels';
+import FavoriteHeart from '../utils/FavoriteHeart';
 
 const Travels = () => {
-	const [search, setSearch] = useState('');
-	const dispatch = useDispatch();
-	const [precMax, setPrecMax] = useState(Infinity);
-	const [precMin, setPrecMin] = useState(0);
-	const userId = useSelector(getUserId);
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+  const [precMax, setPrecMax] = useState(Infinity);
+  const [precMin, setPrecMin] = useState(0);
+  const userId = useSelector(getUserId);
 
-	const travel = useSelector(getTravels);
-	const [locationOrigin, setLocationOrigin] = useState('');
-	const [locationDestination, setLocationDestination] = useState('');
+  const travel = useSelector(getTravels);
+  const [locationOrigin, setLocationOrigin] = useState('');
+  const [locationDestination, setLocationDestination] = useState('');
+  const isLogged = useSelector(getIsLogged);
 
-	const allLocations = useSelector(getLocations);
+  const [favoriteId, setfavoriteId] = useState('');
 
-	const [data, setData] = useState({
-		sales: '',
-		buy: '',
-		priceMin: 0,
-		priceMax: Infinity,
-	});
+  const allLocations = useSelector(getLocations);
+
+  const [data, setData] = useState({
+    sales: '',
+    buy: '',
+    priceMin: 0,
+    priceMax: Infinity,
+  });
 
   const [currentPage, setCurrentPage] = useState(1);
   const adsPerPage = 9;
 
   useEffect(() => {
-		dispatch(fetchTravels());
-		dispatch(fetchLocations());
+    dispatch(fetchTravels());
+    dispatch(fetchLocations());
   }, [dispatch]);
 
-	let travels = travel;
-	let locationsOrigin = allLocations;
-	let locationsDestination = allLocations;
+  let travels = travel;
+  let locationsOrigin = allLocations;
+  let locationsDestination = allLocations;
 
-	if (precMax === '') {
-		setPrecMax(Infinity);
-	}
+  if (precMax === '') {
+    setPrecMax(Infinity);
+  }
 
-	if (!!locationOrigin) {
-		const resultDestination = locationsDestination.filter(
-			location => location.name !== locationOrigin
-		);
+  if (!!locationOrigin) {
+    const resultDestination = locationsDestination.filter(
+      location => location.name !== locationOrigin
+    );
 
-		locationsDestination = resultDestination;
-	}
+    locationsDestination = resultDestination;
+  }
 
-	if (!!locationDestination) {
-		const resultOrigin = locationsOrigin.filter(
-			location => location.name !== locationDestination
-		);
+  if (!!locationDestination) {
+    const resultOrigin = locationsOrigin.filter(
+      location => location.name !== locationDestination
+    );
 
-		locationsOrigin = resultOrigin;
-	}
+    locationsOrigin = resultOrigin;
+  }
 
-	travels = Filters(
-		travels,
-		search,
-		precMax,
-		precMin,
-		locationOrigin,
-		locationDestination
-	);
+  travels = Filters(
+    travels,
+    search,
+    precMax,
+    precMin,
+    locationOrigin,
+    locationDestination
+  );
 
   // Busqueda por palabras
-  const searcher = (e) => {
+  const searcher = e => {
     setSearch(e.target.value);
   };
 
-  const handleChangeFilterPriceMax = (event) => {
+  const handleChangeFilterPriceMax = event => {
     setData({ ...data, priceMax: event.target.value });
     setPrecMax(event.target.value);
   };
 
-  const handleChangeFilterPriceMin = (event) => {
+  const handleChangeFilterPriceMin = event => {
     setData({ ...data, priceMin: event.target.value });
     setPrecMin(event.target.value);
   };
@@ -124,6 +130,8 @@ const Travels = () => {
     );
   };
 
+
+
   if (isLoading) {
     return <Loading />;
   }
@@ -144,7 +152,10 @@ const Travels = () => {
                   name="search"
                   className="form-Control"
                 />
-                <label className="labelAdvertsPage" name="price">
+                <label
+                  className="labelAdvertsPage"
+                  name="price"
+                >
                   Precio Minimo
                 </label>
                 <input
@@ -156,7 +167,10 @@ const Travels = () => {
                   onChange={handleChangeFilterPriceMin}
                   placeholder="introduzca precio minimo"
                 />
-                <label className="labelAdvertsPage" name="price">
+                <label
+                  className="labelAdvertsPage"
+                  name="price"
+                >
                   Precio Maximo
                 </label>
                 <input
@@ -172,11 +186,14 @@ const Travels = () => {
                 <select
                   name="origin"
                   id="origin"
-                  onChange={(e) => setLocationOrigin(e.target.value)}
+                  onChange={e => setLocationOrigin(e.target.value)}
                 >
                   <option value="">Seleccionar</option>
-                  {locationsOrigin.map((location) => (
-                    <option key={location._id} value={location.name}>
+                  {locationsOrigin.map(location => (
+                    <option
+                      key={location._id}
+                      value={location.name}
+                    >
                       {location.name}
                     </option>
                   ))}
@@ -185,11 +202,14 @@ const Travels = () => {
                 <select
                   name="destination"
                   id="destination"
-                  onChange={(e) => setLocationDestination(e.target.value)}
+                  onChange={e => setLocationDestination(e.target.value)}
                 >
                   <option value="">Seleccionar</option>
-                  {locationsDestination.map((location) => (
-                    <option key={location._id} value={location.name}>
+                  {locationsDestination.map(location => (
+                    <option
+                      key={location._id}
+                      value={location.name}
+                    >
                       {location.name}
                     </option>
                   ))}
@@ -197,7 +217,7 @@ const Travels = () => {
               </form>
             </section>
             {adsToShow ? (
-              adsToShow.map((travel) => (
+              adsToShow.map(travel => (
                 <div
                   key={travel._id}
                   className="col-md-3 col-sm-6 travels-columns"
@@ -213,9 +233,13 @@ const Travels = () => {
                     ) : null}
                     <div className="product-content">
                       <h3 className="title">
-                        <Link to={`/travel/${travel.topic}/${travel._id}`}>{travel.topic}</Link>
+                        <Link to={`/travel/${travel.topic}/${travel._id}`}>
+                          {travel.topic}
+                        </Link>
                       </h3>
-                      <p className="text-travels-ads">Remarks: {travel.remarks}</p>
+                      <p className="text-travels-ads">
+                        Remarks: {travel.remarks}
+                      </p>
                       <div className="price">
                         <span>Price: {travel.price}€</span>
                       </div>
@@ -224,8 +248,12 @@ const Travels = () => {
                       ) : (
                         <p className="text-travels-ads">Search</p>
                       )}
-                      <p className="text-travels-ads">Origin: {travel.origin}</p>
-                      <p className="text-travels-ads">Destination: {travel.destination}</p>
+                      <p className="text-travels-ads">
+                        Origin: {travel.origin}
+                      </p>
+                      <p className="text-travels-ads">
+                        Destination: {travel.destination}
+                      </p>
                       <p className="text-travels-ads">
                         User :
                         <Link
@@ -238,12 +266,7 @@ const Travels = () => {
                       <p className="text-travels-ads">Travel Date: {formatDate(travel.datetimeCreation)}</p>
 
                       <div className="product-button-group">
-                        <a
-                          className="product-like-icon"
-                          href="#"
-                        >
-                          <i className="fas fa-heart"></i>
-                        </a>
+                        
                         {!travel.forSale ? (
                           <Link
                             to={`/travel/${travel.topic}/${travel._id}`}
@@ -270,9 +293,15 @@ const Travels = () => {
                           </Link>
                         )}
 
-                        <a className="product-compare-icon" href="#">
+                        <a
+                          className="product-compare-icon"
+                          href="#"
+                        >
                           <i className="fas fa-random"></i>
                         </a>
+                        {isLogged && userId !== travel.userId ? (
+                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                        ) : null}
                       </div>
                     </div>
                   </div>

@@ -1,56 +1,59 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getNewPassword } from '../../../api/serviceAuth';
 import { authUpdateUser, resetErrors } from '../../../redux/actions';
 import {
   getEmail,
-  getIsLogged,
+  
   getUi,
   getUserId,
   getUserName,
 } from '../../../redux/selectors';
 import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
-import { isButtonDisabled } from '../Signup/formUtils';
-import { getNewPassword, updateUser } from '../../../api/serviceAuth';
+import jwtDecode from 'jwt-decode';
 
-
-
-function UpdateUser() {
+import { useParams } from 'react-router-dom';
+function UpdatePassword() {
   let { isLoading, error } = useSelector(getUi);
   const userEmail = useSelector(getEmail);
   const userName = useSelector(getUserName);
-  const dataa = useSelector(getUserId);
+  
   const dispatch = useDispatch();
-  const [user, setUser] = useState(userName);
-  const [email, setEmail] = useState(userEmail);
+ 
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [buttonDisabled, setButtonDisabled] = useState(true);
- 
+
+  const {token}=useParams()
 
   const resetError = () => {
     dispatch(resetErrors());
   };
 
   //setButtonDisabled(isButtonDisabled(user, email, password, passwordConfirm));
+  
+console.log('tooooo',token)
+  getNewPassword(token)
+  const abc = jwtDecode(token);
+  const [user, setUser] = useState(abc.userName);
+  const [email, setEmail] = useState(abc.email);
   const credential = {
     user,
     email,
     password,
     passwordConfirm,
   };
-
+  console.log('abc',abc)
   const handleSubmit = async event => {
     event.preventDefault();
         
-      console.log(credential);
-      
+      console.log('credenciales',credential);
       await dispatch(authUpdateUser(credential)) 
       
     //await dispatch(authUpdateUser(data));
   };
-  const disableButton = !credential.passwordConfirm && !credential.password && !credential.user;
-  console.log('prueba', !credential.user)
+  const disableButton = !credential.passwordConfirm && !credential.password;
+ 
 
   return (
     <section
@@ -66,17 +69,18 @@ function UpdateUser() {
             ) : (
               <>
                 <Input
-                  placeholder={userName}
+                  placeholder={abc.userName}
                   tiLabel="Name User"
                   type="text"
                   name="user"
                   id="user"
                   required={false}
-                  handleInput={e => setUser(e.target.value)}
+                  readOnly={true}
+                  
                 />
 
                 <Input
-                  placeholder={userEmail}
+                  placeholder={abc.email}
                   tiLabel="Email"
                   type="email"
                   name="email"
@@ -316,4 +320,4 @@ function UpdateUser() {
 //   );
 //               }
 
-export default UpdateUser;
+export default UpdatePassword;

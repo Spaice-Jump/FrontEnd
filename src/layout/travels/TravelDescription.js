@@ -11,6 +11,7 @@ import {
 } from '../../redux/selectors';
 import { deleteTravel, buyTravel, closeOpenTravel } from '../../redux/actions';
 import Loading from '../utils/spinner/Loading';
+import FavoriteHeart from '../utils/FavoriteHeart';
 
 const TravelDescription = () => {
 	const { id } = useParams();
@@ -135,6 +136,10 @@ const TravelDescription = () => {
 							) : null}
 						</div>
 						<button onClick={handleReturn}>Volver</button>
+
+                        {isLogged && userId !== travel.userId ? (
+                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                        ) : null}
 					</div>
 				</div>
 				<div className="product-image-travel-description">

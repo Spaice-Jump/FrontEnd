@@ -61,6 +61,17 @@ export const deleteUser = (user, headers) => {
       return response
     })
   }
+
+  export const getNewPassword = (token) => {
+  
+    return client.post(`/recorderPassword`,{token:token}).then((response) => {
+      console.log('reeeee',response)
+      if (response?.status === 400) {
+        throw response.error;
+      }
+      return response;
+    });
+  };
   
 
   
