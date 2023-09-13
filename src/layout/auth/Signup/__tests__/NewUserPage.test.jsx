@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import NewUserPage from "../NewUserPage";
-import userEvent from "@testing-library/user-event";
+// import { render, screen } from "@testing-library/react";
+// import "@testing-library/jest-dom";
+// import NewUserPage from "../NewUserPage";
+// import userEvent from "@testing-library/user-event";
 
-describe("Create New User", () => {
+//describe("Create New User", () => {
 //   const renderComponent = () => {
 //     return render(<NewUserPage />);
 //   };
@@ -65,4 +65,4 @@ describe("Create New User", () => {
   //     expect(error).toBe('password confirmation does not match')
 
   // })
-});
+//});
