@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewPassword } from '../../../api/serviceAuth';
 import { authUpdateUser, resetErrors } from '../../../redux/actions';
 import {
-  getEmail,
+  
   
   getUi,
-  getUserId,
-  getUserName,
+ 
 } from '../../../redux/selectors';
 import Loading from '../../utils/spinner/Loading';
 import Input from '../Signup/Input';
@@ -16,8 +15,7 @@ import jwtDecode from 'jwt-decode';
 import { useParams } from 'react-router-dom';
 function UpdatePassword() {
   let { isLoading, error } = useSelector(getUi);
-  const userEmail = useSelector(getEmail);
-  const userName = useSelector(getUserName);
+  
   
   const dispatch = useDispatch();
  
