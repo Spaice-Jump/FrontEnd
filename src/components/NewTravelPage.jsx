@@ -18,12 +18,14 @@ function NewTravelPage() {
 		origin: 'Earth',
 		destination: 'Earth',
 		remarks: '',
-		price: null,
+		price: undefined,
 		forSale: true,
-		photo: null,
+		photo: undefined,
 		active: true,
 		userId: userId,
-		datetimeDeparture: null,
+		datetimeDeparture: undefined,
+		availableSeats: undefined,
+		soldSeats: undefined,
 	});
 
 	const locations = useSelector(getLocations);
@@ -59,12 +61,15 @@ function NewTravelPage() {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-			if (name === 'photo') {
-				const image = await resizeFile(event.target.files[0]);
-				setTravel({ ...travel, [name]: image });
-				return;
-			}
+			const image = await resizeFile(event.target.files[0]);
+			setTravel({ ...travel, [name]: image });
+			return;
 		}
+		if (name === 'forSale' && value === 'false') {
+			setTravel({ ...travel, [name]: false, availableSeats: undefined });
+			return;
+		}
+
 		setTravel({ ...travel, [name]: value });
 	};
 
@@ -178,8 +183,12 @@ function NewTravelPage() {
 							placeholderText="Click para seleccionar fecha"
 						/>
 						{isPastDate && (
-							<div className="warning-message" style={{color:"red"}}>
-								La hora seleccionada es anterior a la hora actual. Cámbiala a una hora posterior a la actual.
+							<div
+								className="warning-message"
+								style={{ color: 'red' }}
+							>
+								La hora seleccionada es anterior a la hora actual. Cámbiala a
+								una hora posterior a la actual.
 							</div>
 						)}
 						<br />
@@ -192,6 +201,19 @@ function NewTravelPage() {
 							id="price"
 							required
 						/>
+						{travel.forSale ? (
+							<>
+								<label htmlFor="availableSeats">Asientos disponibles</label>
+								<input
+									value={travel.availableSeats}
+									onChange={handleChange}
+									type="number"
+									name="availableSeats"
+									id="availableSeats"
+									required
+								/>
+							</>
+						) : null}
 						<label htmlFor="remarks">Comentarios</label>
 						<textarea
 							value={travel.remarks}
