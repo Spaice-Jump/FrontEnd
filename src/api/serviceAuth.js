@@ -45,11 +45,11 @@ export const deleteUser = (user, headers) => {
 };
 
   export const getMe=(token)=>{
-    const me_URL = "/api/jwtWeb"
-    const data = {
+    const jwtweb_URL = process.env.REACT_APP_API_JWTWEB_URL;
+	  const data = {
         token
       };
-    return client.post(me_URL,data); 
+    return client.post(jwtweb_URL,data); 
      
   }
 

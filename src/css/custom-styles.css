@@ -1,4 +1,46 @@
-/* NAVBAR */
+/* 404 CSS */
+.error-404 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.content {
+  text-align: center;
+  z-index: 1;
+}
+
+.error-image {
+  width: 400px;
+  height: auto;
+}
+
+.error-text {
+  color: white;
+  font-size: 3rem;
+}
+
+
+/* End 404 CSS */
+
+
+/* Navbar CSS */
 .navbar-style {
   padding-left: 0px !important;
 }
@@ -66,7 +108,43 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* End Navbar CSS */
+
 /* Travel Section CSS */
 .travel-title {
   margin-bottom: 60px !important;
 }
+
+
+/* End Travel Section CSS */
+
+/* ProjectsSection CSS */
+.new-height-custom {
+  height: auto !important;
+}
+
+/* End ProjectsSection CSS */
+
+/* ExperienceSection CSS */
+.custom-title-experience {
+  font-size: 4rem !important;
+  letter-spacing: 1.5rem;
+  text-transform: uppercase;
+}
+
+.custom-margin-image {
+  margin-bottom: 30px;
+}
+
+.custom-width-text {
+  width: 100% !important;
+}
+
+.last-text {
+  font-size: 1.3rem;
+  width: 100% !important;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* End ExperienceSection CSS */

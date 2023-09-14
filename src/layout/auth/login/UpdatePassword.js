@@ -1,6 +1,7 @@
 import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewPassword } from '../../../api/serviceAuth';
+import Layout from '../../Layout';
 import { authUpdateUser, resetErrors } from '../../../redux/actions';
 import {
   
@@ -54,84 +55,86 @@ console.log('tooooo',token)
  
 
   return (
-    <section
-      id="neu-user"
-      className="masthead"
-    >
-      <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-        <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">Update Password</h1>
-          <form onSubmit={handleSubmit}>
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <>
-                <Input
-                  placeholder={abc.userName}
-                  tiLabel="Name User"
-                  type="text"
-                  name="user"
-                  id="user"
-                  required={false}
-                  readOnly={true}
-                  
-                />
+    <Layout>
+      <section
+        id="neu-user"
+        className="masthead"
+      >
+        <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+          <div className="text-center">
+            <h1 className="mx-auto my-0 text-uppercase">Update Password</h1>
+            <form onSubmit={handleSubmit}>
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <>
+                  <Input
+                    placeholder={abc.userName}
+                    tiLabel="Name User"
+                    type="text"
+                    name="user"
+                    id="user"
+                    required={false}
+                    readOnly={true}
+                    
+                  />
 
-                <Input
-                  placeholder={abc.email}
-                  tiLabel="Email"
-                  type="email"
-                  name="email"
-                  id="email"
-                  required={false}
-                  handleInput={e => setEmail(e.target.value)}
-                  readOnly={true}
-                  
-                />
+                  <Input
+                    placeholder={abc.email}
+                    tiLabel="Email"
+                    type="email"
+                    name="email"
+                    id="email"
+                    required={false}
+                    handleInput={e => setEmail(e.target.value)}
+                    readOnly={true}
+                    
+                  />
 
-                <Input
-                  tiLabel="Password"
-                  type="password"
-                  name="password"
-                  id="password"
-                  required={false}
-                  handleInput={e => setPassword(e.target.value)}
-                />
+                  <Input
+                    tiLabel="Password"
+                    type="password"
+                    name="password"
+                    id="password"
+                    required={false}
+                    handleInput={e => setPassword(e.target.value)}
+                  />
 
-                <Input
-                  tiLabel="Password Confirm"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  required={false}
-                  handleInput={e => setPasswordConfirm(e.target.value)}
-                />
+                  <Input
+                    tiLabel="Password Confirm"
+                    type="password"
+                    name="passwordConfirm"
+                    id="passwordConfirm"
+                    required={false}
+                    handleInput={e => setPasswordConfirm(e.target.value)}
+                  />
 
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  data-testid="signUpButton"
-                  disabled={disableButton}
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-testid="signUpButton"
+                    disabled={disableButton}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
+              {!error ? (
+                <br />
+              ) : (
+                <div
+                  className="error"
+                  onClick={resetError}
                 >
-                  Sign Up
-                </button>
-              </>
-            )}
-            {!error ? (
-              <br />
-            ) : (
-              <div
-                className="error"
-                onClick={resetError}
-              >
-                <p data-testid="error"> {error}</p>
-              </div>
-            )}
-          </form>
-          )
+                  <p data-testid="error"> {error}</p>
+                </div>
+              )}
+            </form>
+            )
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Layout>
   );
 }
 

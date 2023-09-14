@@ -1,15 +1,19 @@
 import client from './client';
 
+
 export function getTravels() {
-	return client.get('/api/travels');
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.get(travels_URL);
 }
 
 export function getTravel(id) {
-	return client.get(`/api/travels/${id}`);
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.get(`${travels_URL}/${id}`);
 }
 
 export function postTravel(data) {
-	return client.post('/api/travels', data, {
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.post(travels_URL, data, {
 		headers: {
 			'Content-Type': 'multipart/form-data',
 		},
@@ -17,15 +21,18 @@ export function postTravel(data) {
 }
 
 export function deleteTravel(id) {
-	return client.delete(`/api/travels/${id}`);
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.delete(`${travels_URL}/${id}`);
 }
 
 export function getLocations() {
-	return client.get('/api/locations');
+	const locations_URL = process.env.REACT_APP_API_LOCATIONS_URL;
+	return client.get(locations_URL);
 }
 
 export function editTravel(id, data) {
-	return client.put(`/api/travels/${id}`, data, {
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.put(`${travels_URL}/${id}`, data, {
 		headers: {
 			'Content-Type': 'multipart/form-data',
 		},
@@ -33,33 +40,36 @@ export function editTravel(id, data) {
 }
 
 export function buyTravel(id, userBuyer) {
-	return client.put(`/api/travels/buy/${id}`, { userBuyer });
+	const buy_URL = process.env.REACT_APP_API_BUY_URL;
+	return client.put(`${buy_URL}/${id}`, { userBuyer });
 }
 
 export function deletePhoto(photoName) {
-	return client.delete(`/api/travels/deletePhoto/${photoName}`);
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.delete(`${travels_URL}/deletePhoto/${photoName}`);
 }
 
 export const getTravelUser = (user, headers) => {
-	const URL = '/api/travels/users';
-	return client.post(URL, user, headers);
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.post(`${travels_URL}/users`, user, headers);
 };
 
 export const getTravelFavorite = (user, headers) => {
-	const URL = '/api/favorites';
-	return client.post(URL, user, headers);
+	const favorites_URL = process.env.REACT_APP_API_FAVORITES_URL;
+	return client.post(favorites_URL, user, headers);
 };
 
 export const closeOpenTravel = (id, travelActive) => {
-	return client.put(`/api/travels/active/${id}`, { travelActive });
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	return client.put(`${travels_URL}/active/${id}`, { travelActive });
 };
 
 export const setTravelFavorite = (user, headers) => {
-	const URL = '/api/favorites/setForFavorite';
-	 client.post(URL, user, headers);
+	const favorites_URL = process.env.REACT_APP_API_FAVORITES_URL;
+	client.post(`${favorites_URL}/setForFavorite`, user, headers);
 };
 
 export const getTravelBuy = (user, headers) => {
-	const URL = '/api/buy';
-	return client.post(URL, user, headers);
+	const buy_URL = process.env.REACT_APP_API_BUY_URL;
+	return client.post(buy_URL, user, headers);
 };

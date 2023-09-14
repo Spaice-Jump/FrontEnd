@@ -9,6 +9,7 @@ import {
   getUserName,
 } from '../../../redux/selectors';
 import Loading from '../../utils/spinner/Loading';
+import Layout from '../../Layout';
 import Input from '../Signup/Input';
 import { isButtonDisabled } from '../Signup/formUtils';
 import { getNewPassword, updateUser } from '../../../api/serviceAuth';
@@ -53,83 +54,85 @@ function UpdateUser() {
   console.log('prueba', !credential.user)
 
   return (
-    <section
-      id="neu-user"
-      className="masthead"
-    >
-      <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-        <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">Update User</h1>
-          <form onSubmit={handleSubmit}>
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <>
-                <Input
-                  placeholder={userName}
-                  tiLabel="Name User"
-                  type="text"
-                  name="user"
-                  id="user"
-                  required={false}
-                  handleInput={e => setUser(e.target.value)}
-                />
+    <Layout>
+      <section
+        id="neu-user"
+        className="masthead"
+      >
+        <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+          <div className="text-center">
+            <h1 className="mx-auto my-0 text-uppercase">Update User</h1>
+            <form onSubmit={handleSubmit}>
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <>
+                  <Input
+                    placeholder={userName}
+                    tiLabel="Name User"
+                    type="text"
+                    name="user"
+                    id="user"
+                    required={false}
+                    handleInput={e => setUser(e.target.value)}
+                  />
 
-                <Input
-                  placeholder={userEmail}
-                  tiLabel="Email"
-                  type="email"
-                  name="email"
-                  id="email"
-                  required={false}
-                  handleInput={e => setEmail(e.target.value)}
-                  readOnly={true}
-                  
-                />
+                  <Input
+                    placeholder={userEmail}
+                    tiLabel="Email"
+                    type="email"
+                    name="email"
+                    id="email"
+                    required={false}
+                    handleInput={e => setEmail(e.target.value)}
+                    readOnly={true}
+                    
+                  />
 
-                <Input
-                  tiLabel="Password"
-                  type="password"
-                  name="password"
-                  id="password"
-                  required={false}
-                  handleInput={e => setPassword(e.target.value)}
-                />
+                  <Input
+                    tiLabel="Password"
+                    type="password"
+                    name="password"
+                    id="password"
+                    required={false}
+                    handleInput={e => setPassword(e.target.value)}
+                  />
 
-                <Input
-                  tiLabel="Password Confirm"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  required={false}
-                  handleInput={e => setPasswordConfirm(e.target.value)}
-                />
+                  <Input
+                    tiLabel="Password Confirm"
+                    type="password"
+                    name="passwordConfirm"
+                    id="passwordConfirm"
+                    required={false}
+                    handleInput={e => setPasswordConfirm(e.target.value)}
+                  />
 
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  data-testid="signUpButton"
-                  disabled={disableButton}
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-testid="signUpButton"
+                    disabled={disableButton}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
+              {!error ? (
+                <br />
+              ) : (
+                <div
+                  className="error"
+                  onClick={resetError}
                 >
-                  Sign Up
-                </button>
-              </>
-            )}
-            {!error ? (
-              <br />
-            ) : (
-              <div
-                className="error"
-                onClick={resetError}
-              >
-                <p data-testid="error"> {error}</p>
-              </div>
-            )}
-          </form>
-          )
+                  <p data-testid="error"> {error}</p>
+                </div>
+              )}
+            </form>
+            )
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Layout>
   );
 }
 
