@@ -14,7 +14,7 @@ function ExperienceSection() {
               <img className="img-fluid custom-margin-image" src={ExperienceImage} alt="..." />
               <p className="text-white-50">{t("experience_section.text-1")}</p>
               <p className="text-white-50">{t("experience_section.text-2")}</p>
-              <p className="text-white-50">{t("experience_section.text-3")}</p>
+              <p className="text-white-50 last-text">{t("experience_section.text-3")}</p>
             </div>
           </div>
         </div>

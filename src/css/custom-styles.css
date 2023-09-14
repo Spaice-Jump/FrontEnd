@@ -128,7 +128,8 @@
 /* ExperienceSection CSS */
 .custom-title-experience {
   font-size: 4rem !important;
-  letter-spacing: 0.8rem;
+  letter-spacing: 1.5rem;
+  text-transform: uppercase;
 }
 
 .custom-margin-image {
@@ -137,6 +138,13 @@
 
 .custom-width-text {
   width: 100% !important;
+}
+
+.last-text {
+  font-size: 1.3rem;
+  width: 100% !important;
+  font-weight: bold;
+  font-style: italic;
 }
 
 /* End ExperienceSection CSS */

@@ -13,6 +13,7 @@ import {
 } from '../../redux/selectors';
 import Loading from '../../layout/utils/spinner/Loading';
 import Filters from './Filter';
+import Layout from '../Layout';
 import { setTravelFavorite } from '../../api/serviceTravels';
 import FavoriteHeart from '../utils/FavoriteHeart';
 
@@ -137,7 +138,7 @@ const Travels = () => {
   }
 
   return (
-    <>
+    <Layout>
       <section className="travels-first-container">
         <div className="container travels-container">
           <div className="row">
@@ -319,7 +320,7 @@ const Travels = () => {
           </div>
         ) : null}
       </section>
-    </>
+    </Layout>
   );
 };
 

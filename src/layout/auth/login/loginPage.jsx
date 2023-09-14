@@ -6,6 +6,7 @@ import { authlogin, resetErrors } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
 import { getIsLogged, getUi } from "../../../redux/selectors";
 import Loading from "../../utils/spinner/Loading";
+import Layout from "../../Layout";
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -60,87 +61,89 @@ function LoginPage() {
   };
 
   return (
-    <section id="neu-user" className="masthead login-form-page">
-      <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-        <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">
-          {t("login-page.welcome-traveler-title")}
-          </h1>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <form onSubmit={handleSubmit} className="space-login-form">
-              <p className="text-white-50 mx-auto mt-2 mb-5">
-                <label>
-                {t("login-page.email-label")}
-                  <br />
+    <Layout>
+      <section id="neu-user" className="masthead login-form-page">
+        <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+          <div className="text-center">
+            <h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">
+            {t("login-page.welcome-traveler-title")}
+            </h1>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <form onSubmit={handleSubmit} className="space-login-form">
+                <p className="text-white-50 mx-auto mt-2 mb-5">
+                  <label>
+                  {t("login-page.email-label")}
+                    <br />
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      data-testid="email"
+                      placeholder="Write your Email "
+                      required
+                      onChange={handleChange}
+                    />
+                  </label>
+                </p>
+                <p className="text-white-50 mx-auto mt-2 mb-5">
+                  <label>
+                  {t("login-page.password-label")}
+                    <br />
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Write your Password"
+                      data-testid="password"
+                      required
+                      onChange={handleChange}
+                    />
+                  </label>
+                </p>
+                <p>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={disableButton}
+                    data-testid="signUpButton"
+                  >
+                    Login
+                  </button>
+                </p>
+                <p>
                   <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    data-testid="email"
-                    placeholder="Write your Email "
-                    required
-                    onChange={handleChange}
+                    className="form-check-input"
+                    type="checkbox"
+                    checked={checked}
+                    onChange={handleChecked}
                   />
-                </label>
-              </p>
-              <p className="text-white-50 mx-auto mt-2 mb-5">
-                <label>
-                {t("login-page.password-label")}
+                  <span className="span-check">
+                    Marca para guardar credenciales
+                  </span>
+                </p>
+                <p className="text-white forget-password">
+                  ¿Has olvidado la contraseña?
                   <br />
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Write your Password"
-                    data-testid="password"
-                    required
-                    onChange={handleChange}
-                  />
-                </label>
-              </p>
-              <p>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={disableButton}
-                  data-testid="signUpButton"
-                >
-                  Login
-                </button>
-              </p>
-              <p>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  checked={checked}
-                  onChange={handleChecked}
-                />
-                <span className="span-check">
-                  Marca para guardar credenciales
-                </span>
-              </p>
-              <p className="text-white forget-password">
-                ¿Has olvidado la contraseña?
-                <br />
-                <a href="/password" class="link-info">
-                  <span className="remember-password">Recordar Contraseña</span>
-                </a>
-              </p>
+                  <a href="/password" class="link-info">
+                    <span className="remember-password">Recordar Contraseña</span>
+                  </a>
+                </p>
 
-              {!error ? (
-                <br />
-              ) : (
-                <div className="error" onClick={resetError}>
-                  <p data-testid="error"> {error}</p>
-                </div>
-              )}
-            </form>
-          )}
+                {!error ? (
+                  <br />
+                ) : (
+                  <div className="error" onClick={resetError}>
+                    <p data-testid="error"> {error}</p>
+                  </div>
+                )}
+              </form>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Layout>
   );
 }
 
