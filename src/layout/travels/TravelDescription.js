@@ -12,6 +12,7 @@ import {
 import { deleteTravel, buyTravel, closeOpenTravel } from '../../redux/actions';
 import Loading from '../utils/spinner/Loading';
 import FavoriteHeart from '../utils/FavoriteHeart';
+import CreditCard from '../utils/CreditCard';
 
 const TravelDescription = () => {
 	const { id } = useParams();
@@ -55,9 +56,9 @@ const TravelDescription = () => {
 		navigate('/travels');
 	};
 
-	const handleBuy = () => {
-		dispatch(buyTravel(travel._id));
-	};
+	// const handleBuy = () => {
+	// 	dispatch(buyTravel(travel._id));
+	// };
 
 	const handleReturn = () => {
 		return navigate('/travels');
@@ -93,7 +94,12 @@ const TravelDescription = () => {
 								{userId === travel.userId ? (
 									<p>Viaje de mi compañía</p>
 								) : (
-									<button
+
+                                    <section>
+
+                                    
+                                    <CreditCard travelId={travel._id} price={travel.price}/>
+									{/* <button
 										onClick={handleBuy}
 										className="btn-travel-description"
 									>
@@ -107,7 +113,8 @@ const TravelDescription = () => {
 											></i>
 										</span>
 										<span className="buy-travel-description">Buy Now</span>
-									</button>
+									</button> */}
+                                    </section>
 								)}
 							</>
 						) : (
