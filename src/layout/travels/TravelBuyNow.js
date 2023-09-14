@@ -9,7 +9,7 @@ import {
 	getTravelById,
 	getUi,
 } from '../../redux/selectors';
-import { deleteTravel, closeOpenTravel } from '../../redux/actions';
+import { deleteTravel, buyTravel, closeOpenTravel } from '../../redux/actions';
 import Loading from '../utils/spinner/Loading';
 import FavoriteHeart from '../utils/FavoriteHeart';
 import CreditCard from '../utils/CreditCard';
@@ -76,12 +76,6 @@ const TravelDescription = () => {
     return `${day}-${month}-${year}`;
   }
 
-  const handleBuy = event => {
-    event.preventDefault();
-    return navigate('/travelBuy');
-    
-  }
-
 	if (isLoading) {
 		return <Loading />;
 	}
@@ -97,22 +91,14 @@ const TravelDescription = () => {
 							<>
 								{userId === travel.userId ? (
 									<p>Viaje de mi compañía</p>
-								) :  (
-									<button
-										onClick={handleBuy}
-										className="btn-travel-description"
-									>
-										<span className="price-travel-description">
-											{travel.price}€
-										</span>
-										<span className="shopping-cart-travel-description">
-											<i
-												className="fa fa-shopping-cart"
-												aria-hidden="true"
-											></i>
-										</span>
-										<span className="buy-travel-description">Buy Now</span>
-									</button>
+								) : (
+
+                                    <section>
+
+                                    
+                                    <CreditCard travelId={travel._id} price={travel.price}/>
+									
+                                    </section>
 								)}
 							</>
 						) : (
@@ -124,27 +110,10 @@ const TravelDescription = () => {
 								)}
 							</>
 						)}
-						<div id="open-close-travel">
-							{isLogged && userId === travel.userId ? (
-								travel.active ? (
-									<>
-										<p>¿Quieres cerrar tu viaje?</p>
-										<p>(Podrás volver a abrirlo en cualquier momento)</p>
-										<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
-									</>
-								) : (
-									<>
-										<p>¿Quieres abrir tu viaje?</p>
-										<button onClick={handleCloseTravel}>Abrir mi viaje</button>
-									</>
-								)
-							) : null}
-						</div>
+						
 						<button onClick={handleReturn}>Volver</button>
 
-                        {isLogged && userId !== travel.userId ? (
-                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
-                        ) : null}
+
 					</div>
 				</div>
 				<div className="product-image-travel-description">
@@ -185,41 +154,7 @@ const TravelDescription = () => {
 					</div>
 				) : null}
 			</div>
-			<div className="travel-buttons">
-				{isLogged && userId === travel.userId ? (
-					<>
-						<button
-							onClick={handleEdit}
-							className="btn-travel-description btn-edit"
-						>
-							Editar viaje
-						</button>
-						{!deleteProcess ? (
-							<button
-								onClick={HandleDeleteProcess(true)}
-								className="btn-travel-description btn-delete"
-							>
-								Borrar viaje
-							</button>
-						) : (
-							<>
-								<button
-									onClick={handleDelete}
-									className="btn-travel-description btn-confirm"
-								>
-									Confirmar borrado
-								</button>
-								<button
-									onClick={HandleDeleteProcess(false)}
-									className="btn-travel-description btn-cancel"
-								>
-									Cancelar
-								</button>
-							</>
-						)}
-					</>
-				) : null}
-			</div>
+
 		</section>
 	);
 };
