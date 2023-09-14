@@ -1,7 +1,7 @@
 import React from "react";
-import bgMasthead from "../../../assets/img/bg-masthead.jpg";
-import demoImage01 from "../../../assets/img/demo-image-01.jpg";
-import demoImage02 from "../../../assets/img/demo-image-02.jpg";
+import allPlanets from "../../../assets/img/all-planets.jpg";
+import newEnvironments from "../../../assets/img/new-environments.jpg";
+import differentShips from "../../../assets/img/different-ships.jpg";
 
 function ProjectsSection() {
   return (
@@ -11,15 +11,13 @@ function ProjectsSection() {
           {/*Featured Project Row*/}
           <div className="row gx-0 mb-4 mb-lg-5 align-items-center">
             <div className="col-xl-8 col-lg-7">
-              <img className="img-fluid mb-3 mb-lg-0" src={bgMasthead} alt="..." />
+              <img className="img-fluid mb-3 mb-lg-0 " src={allPlanets} alt="..." />
             </div>
             <div className="col-xl-4 col-lg-5">
               <div className="featured-text text-center text-lg-left">
-                <h4>Shoreline</h4>
+                <h4>¡Viaja por todo el sistema solar!</h4>
                 <p className="text-black-50 mb-0">
-                  Grayscale is open source and MIT licensed. This means you can
-                  use it for any project - even commercial projects! Download
-                  it, customize it, and publish your website!
+                  Prepárate para un emocionante viaje interplanetario que te llevará a recorrer cada rincón de nuestro sistema solar, desde el ardiente sol de Mercurio hasta las heladas lunas de Neptuno. ¡Descubre los secretos y maravillas de este asombroso viaje cósmico!
                 </p>
               </div>
             </div>
@@ -27,16 +25,15 @@ function ProjectsSection() {
           {/*Project One Row*/}
           <div className="row gx-0 mb-5 mb-lg-0 justify-content-center">
             <div className="col-lg-6">
-              <img className="img-fluid" src={demoImage01} alt="..." />
+              <img className="img-fluid new-height-custom" src={newEnvironments} alt="..." />
             </div>
             <div className="col-lg-6">
               <div className="bg-black text-center h-100 project">
                 <div className="d-flex h-100">
                   <div className="project-text w-100 my-auto text-center text-lg-left">
-                    <h4 className="text-white">Misty</h4>
+                    <h4 className="text-white">¡Descubre nuevos mundos y paisajes admirables!</h4>
                     <p className="mb-0 text-white-50">
-                      An example of where you can put an image of a project, or
-                      anything else, along with a description.
+                      Adéntrate en un viaje lleno de sorpresas mientras exploras nuevos mundos y paisajes admirables. Desde exóticos parajes terrestres hasta inexploradas maravillas extraterrestres, te esperan experiencias asombrosas en cada rincón de nuestro universo.
                     </p>
                   </div>
                 </div>
@@ -46,17 +43,15 @@ function ProjectsSection() {
           {/*Project two Row*/}
           <div className="row gx-0 justify-content-center">
             <div className="col-lg-6">
-              <img className="img-fluid" src={demoImage02} alt="..." />
+              <img className="img-fluid new-height-custom" src={differentShips} alt="..." />
             </div>
             <div className="col-lg-6 order-lg-first">
               <div className="bg-black text-center h-100 project">
                 <div className="d-flex h-100">
                   <div className="project-text w-100 my-auto text-center text-lg-right">
-                    <h4 className="text-white">Mountains</h4>
+                    <h4 className="text-white">¡Viaja en todo tipo de naves!</h4>
                     <p className="mb-0 text-white-50">
-                      Another example of a project with its respective
-                      description. These sections work well responsively as
-                      well!
+                      Prepárate para una emocionante aventura en la que podrás viajar en todo tipo de naves. Desde naves espaciales de alta tecnología hasta naves clásicas y exóticas, este viaje te llevará a explorar el espacio de la manera más espectacular y variada posible. ¡Embárcate en una odisea intergaláctica única!
                     </p>
                   </div>
                 </div>

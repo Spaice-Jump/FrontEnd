@@ -1,4 +1,4 @@
-/* 404 NOT FOUND STYLES */
+/* 404 CSS */
 .error-404 {
   position: relative;
   width: 100%;
@@ -27,25 +27,20 @@
 }
 
 .error-image {
-  width: 200px;
+  width: 400px;
   height: auto;
 }
 
 .error-text {
-  font-size: 36px;
-  margin-top: 20px;
-  font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  letter-spacing: 0.2rem;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: white;
+  font-size: 3rem;
 }
 
 
-/* 404 NOT FOUND  END STYLES */
+/* End 404 CSS */
 
 
-/* NAVBAR */
+/* Navbar CSS */
 .navbar-style {
   padding-left: 0px !important;
 }
@@ -113,7 +108,35 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* End Navbar CSS */
+
 /* Travel Section CSS */
 .travel-title {
   margin-bottom: 60px !important;
 }
+
+
+/* End Travel Section CSS */
+
+/* ProjectsSection CSS */
+.new-height-custom {
+  height: auto !important;
+}
+
+/* End ProjectsSection CSS */
+
+/* ExperienceSection CSS */
+.custom-title-experience {
+  font-size: 4rem !important;
+  letter-spacing: 0.8rem;
+}
+
+.custom-margin-image {
+  margin-bottom: 30px;
+}
+
+.custom-width-text {
+  width: 100% !important;
+}
+
+/* End ExperienceSection CSS */
