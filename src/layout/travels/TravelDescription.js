@@ -100,14 +100,22 @@ const TravelDescription = () => {
 									{userId === travel.userId ? (
 										<p>Viaje de mi compañía</p>
 									) : (
-
-																			<section>
-
-																			
-																			<CreditCard travelId={travel._id} price={travel.price}/>
-										
-																			</section>
-									)}
+                                        <button
+                                            onClick={handleBuy}
+                                            className="btn-travel-description"
+                                        >
+                                            <span className="price-travel-description">
+                                                {travel.price}€
+                                            </span>
+                                            <span className="shopping-cart-travel-description">
+                                                <i
+                                                    className="fa fa-shopping-cart"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </span>
+                                            <span className="buy-travel-description">Buy Now</span>
+                                        </button>
+                                    )}
 								</>
 							) : (
 								<>
