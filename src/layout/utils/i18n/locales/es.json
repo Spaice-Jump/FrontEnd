@@ -12,16 +12,24 @@
     "new-user": "Nuevo viajero espacial",
     "login-user": "Iniciar sesión"
   },
+  "travel_section": {
+    "title": "VIAJA AL ESPACIO",
+    "description": "Embárcate en lo inimaginable con nuestra plataforma de exploración espacial. Ya sea que busques el viaje de tus sueños más allá de las estrellas o desees vender una experiencia que cambiará vidas, estamos aquí para convertir tus ambiciones en realidad cósmica. Conectamos a soñadores y aventureros en un mercado intergaláctico, ofreciendo la oportunidad de descubrir los misterios del espacio profundo. ¡Tu próximo viaje espacial comienza aquí!",
+    "start-journey": "Comienza tu viaje aquí"
+  },
   "experience_section": {
     "title": "Vive la experiencia",
     "text-1": "Vive una experiencia única que te transportará a un mundo lleno de emociones y maravillas inigualables. En este viaje excepcional, te invitamos a sumergirte en un universo de posibilidades infinitas, donde cada momento te llevará a descubrir algo nuevo y asombroso. Desde el instante en que emprendas esta travesía, te verás inmerso en un caleidoscopio de experiencias que desafiarán tus sentidos y tu imaginación. Adéntrate en paisajes de ensueño, donde la belleza natural se encuentra en su máximo esplendor, desde majestuosas montañas hasta playas de arena blanca bañadas por aguas cristalinas. Pero esta experiencia única no se limita a la Tierra. Prepárate para adentrarte en el vasto cosmos, donde las estrellas y los planetas te invitarán a explorar sus misterios. Atrévete a viajar más allá de nuestro sistema solar en busca de nuevos mundos y civilizaciones, y descubre el asombroso poder del universo en expansión. En este viaje, no solo descubrirás lugares y paisajes admirables, sino que también te encontrarás a ti mismo en una aventura de autodescubrimiento. Aprenderás a apreciar la belleza de la diversidad y la riqueza de la experiencia humana. Cada día será una oportunidad para crecer, aprender y expandir tus horizontes.",
     "text-2": "Pero esta experiencia única no se limita a la exploración terrestre. También te brindará la oportunidad de adentrarte en las profundidades del océano, donde criaturas fascinantes y ecosistemas marinos te revelarán los secretos de un mundo acuático en constante evolución. Surca los cielos a bordo de aeronaves modernas y contempla la Tierra desde una perspectiva que muy pocos tienen la oportunidad de experimentar. La riqueza cultural de este viaje también te cautivará. Descubre la diversidad de culturas que habitan nuestro planeta, desde tradiciones ancestrales hasta manifestaciones artísticas contemporáneas. Saborea la deliciosa gastronomía local en cada destino, y sumérgete en la historia y la arquitectura de ciudades llenas de encanto y misterio.",
     "text-3": "Entonces, ¿estás listo para vivir una experiencia única que cambiará tu vida para siempre? Embárcate en esta travesía sin igual y deja que la magia de nuestro mundo y del universo te guíe hacia un viaje que nunca olvidarás."
   },
-  "travel_section": {
-    "title": "VIAJA AL ESPACIO",
-    "description": "Embárcate en lo inimaginable con nuestra plataforma de exploración espacial. Ya sea que busques el viaje de tus sueños más allá de las estrellas o desees vender una experiencia que cambiará vidas, estamos aquí para convertir tus ambiciones en realidad cósmica. Conectamos a soñadores y aventureros en un mercado intergaláctico, ofreciendo la oportunidad de descubrir los misterios del espacio profundo. ¡Tu próximo viaje espacial comienza aquí!",
-    "start-journey": "Comienza tu viaje aquí"
+  "projects_section": {
+    "title-1": "¡Viaja por todo el sistema solar!",
+    "text-1": "Prepárate para un emocionante viaje interplanetario que te llevará a recorrer cada rincón de nuestro sistema solar, desde el ardiente sol de Mercurio hasta las heladas lunas de Neptuno. ¡Descubre los secretos y maravillas de este asombroso viaje cósmico!",
+    "title-2": "¡Descubre nuevos mundos y paisajes admirables!",
+    "text-2": "Adéntrate en un viaje lleno de sorpresas mientras exploras nuevos mundos y paisajes admirables. Desde exóticos parajes terrestres hasta inexploradas maravillas extraterrestres, te esperan experiencias asombrosas en cada rincón de nuestro universo.",
+    "title-3": "¡Viaja en todo tipo de naves!",
+    "text-3": "Prepárate para una emocionante aventura en la que podrás viajar en todo tipo de naves. Desde naves espaciales de alta tecnología hasta naves clásicas y exóticas, este viaje te llevará a explorar el espacio de la manera más espectacular y variada posible. ¡Embárcate en una odisea intergaláctica única!"
   },
   "new-user-page": {
     "new-user-title": "NUEVO VIAJERO ESPACIAL",
