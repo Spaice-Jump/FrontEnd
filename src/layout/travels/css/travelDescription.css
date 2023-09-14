@@ -191,3 +191,9 @@
 
 .product-image-travel-description:hover img {transition: all 0.3s ease-out;}
 .product-image-travel-description:hover img {transform: scale(1.2, 1.2);}
+
+.btn-disabled{
+    background-color: #ccc; /* Color de fondo gris cuando está deshabilitado */
+    color: #666; /* Color de texto gris oscuro cuando está deshabilitado */
+    /* Otros estilos aquí */
+}
