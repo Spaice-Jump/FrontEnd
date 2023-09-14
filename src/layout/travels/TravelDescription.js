@@ -79,7 +79,7 @@ const TravelDescription = () => {
 
   const handleBuy = event => {
     event.preventDefault();
-    return navigate('/travelBuy');
+    return navigate(`/travelBuy/${id}`);
     
   }
 

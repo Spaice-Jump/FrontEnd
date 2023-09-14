@@ -21,7 +21,7 @@ const CreditCard = ({ travelId, price }) => {
     event.preventDefault();
 
     console.log(JSON.stringify(state));
-
+    dispatch(buyTravel(travelId));
 
     const timer = setTimeout(() => {
         setShowSpinner(false);
@@ -32,7 +32,7 @@ const CreditCard = ({ travelId, price }) => {
         clearTimeout(timer); // Limpia el temporizador si el componente se desmonta antes
       };
 
-    //dispatch(buyTravel(travelId));
+    
   };
 
 
@@ -78,7 +78,8 @@ const CreditCard = ({ travelId, price }) => {
       ) : (
         <div>
           <div className="card">
-            <div className="card-body">
+            <div className="card-body" >
+                <div className="product-details-travel-description">
               <Cards
                 number={state.number}
                 name={state.name}
@@ -86,6 +87,8 @@ const CreditCard = ({ travelId, price }) => {
                 cvc={state.cvc}
                 focused={state.focus}
               />
+                </div>
+              <div className="product-image-travel-description">
               <form>
                 <div className="form-group">
                   <label htmlFor="number">Número de la tarjeta</label>
@@ -138,21 +141,21 @@ const CreditCard = ({ travelId, price }) => {
                   </div>
                 </div>
 
-                <button
+
+              </form>
+              <div>
+                <p className="buy-travel-description">
+                  Total: <span className="price">{price}</span>
+                </p>
+              </div>
+              <button
                   onClick={handleBuy}
                   className={btnClass}
                   disabled={!buttonDisabled}
                 >
-                  <span className="price-travel-description">{price}€</span>
-                  <span className="shopping-cart-travel-description">
-                    <i
-                      className="fa fa-shopping-cart"
-                      aria-hidden="true"
-                    ></i>
-                  </span>
-                  <span className="buy-travel-description">Buy Now</span>
+                  <span className="buy-travel-description  ">Finalize Buy</span>
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
