@@ -6,6 +6,7 @@ import { authlogin, resetErrors } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
 import { getIsLogged, getUi } from "../../../redux/selectors";
 import Loading from "../../utils/spinner/Loading";
+import Layout from "../../layaut";
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ function LoginPage() {
   };
 
   return (
+    <Layout>
     <section id="neu-user" className="masthead login-form-page">
       <div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
@@ -141,6 +143,7 @@ function LoginPage() {
         </div>
       </div>
     </section>
+    </Layout>
   );
 }
 

@@ -24,7 +24,7 @@ import Error404 from './error-404.js';
 function MainLayout() {
   return (
     <div>
-      <Header />
+      
       <Routes>
         <Route
           path="/"
@@ -121,7 +121,7 @@ function MainLayout() {
         />
       </Routes>
       <ContactSection />
-      <Footer />
+      
     </div>
   );
 }
