@@ -5,11 +5,11 @@
       rgba(0, 0, 0, 0.7) 75%,
       #000 100%
     ),
-    url(../../../assets/img/new-user-background.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
+    url(../../../assets/img/new-user-background.jpg) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-size: cover !important;
 }
 
 .new-space-traveler-title {
