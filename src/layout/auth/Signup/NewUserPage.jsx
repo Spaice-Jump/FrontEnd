@@ -5,7 +5,7 @@ import { signUp } from "../../../api/auth";
 import Form from "./Form";
 import { useTranslation } from "react-i18next";
 import Loading from "../../utils/spinner/Loading";
-import Layout from "../../layaut";
+import Layout from "../../Layout";
 
 function NewUserPage() {
   const { t } = useTranslation();

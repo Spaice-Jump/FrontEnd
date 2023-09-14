@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import MainLayout from './layout/utils/MainLayout.js';
+import AllRoutes from './layout/utils/AllRoutes.js';
 import setupNavbar from './layout/scripts.js';
 import './css/styles.css';
 import './layout/auth/login/login.css';
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <MainLayout />       
+      <AllRoutes />       
     </I18nextProvider>
   );
 }

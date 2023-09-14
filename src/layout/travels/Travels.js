@@ -15,7 +15,7 @@ import Loading from '../../layout/utils/spinner/Loading';
 import Filters from './Filter';
 import { setTravelFavorite } from '../../api/serviceTravels';
 import FavoriteHeart from '../utils/FavoriteHeart';
-import Layout from '../layaut';
+import Layout from '../Layout';
 
 const Travels = () => {
   const [search, setSearch] = useState('');

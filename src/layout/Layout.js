@@ -1,16 +1,16 @@
 import Header from "./utils/Header";
 import Footer from "./utils/Footer";
+import ContactSection from "./utils/ContactSection"
 
 
 const Layout = ({children}) => {
     return (
-      <div className="layaud">
+      <>
         <Header />
-        <main className="mainLayaud">
           {children}
-        </main>
-       <Footer/>
-      </div>
+        <ContactSection />
+        <Footer/>
+      </>
     );
   };
   export default Layout;

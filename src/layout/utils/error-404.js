@@ -1,21 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import image404 from "../../assets/img/404-error.png";
 import video404 from "../../assets/video/space-cat-error404.mp4";
 
 function Error404() {
-  useEffect(() => {
-    function removeElementsByClass(className) {
-      const elements = document.getElementsByClassName(className);
-      while (elements.length > 0) {
-        elements[0].parentNode.removeChild(elements[0]);
-      }
-    }
-
-    removeElementsByClass("contact-section bg-black");
-    removeElementsByClass("navbar navbar-expand-lg navbar-light fixed-top");
-    removeElementsByClass("footer bg-black small text-center text-white-50");
-  }, []);
-
   return (
     <div className="error-404">
       <video autoPlay muted loop className="video-background">

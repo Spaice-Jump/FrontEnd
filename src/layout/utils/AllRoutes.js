@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './Header.js';
-import Footer from './Footer.js';
-import ContactSection from './ContactSection.js';
 import Home from '../home/Home.jsx';
 import Travels from '../travels/Travels.js';
 import TravelDescription from '../travels/TravelDescription.js';
@@ -21,7 +18,7 @@ import TravelBuy from '../travels/TravelBuy.js';
 import UpdatePassword from '../auth/login/UpdatePassword.js';
 import Error404 from './error-404.js';
 
-function MainLayout() {
+function AllRoutes() {
   return (
     <div>
       
@@ -120,10 +117,9 @@ function MainLayout() {
           }
         />
       </Routes>
-      <ContactSection />
       
     </div>
   );
 }
 
-export default MainLayout;
+export default AllRoutes;

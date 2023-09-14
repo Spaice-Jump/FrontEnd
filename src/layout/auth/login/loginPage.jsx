@@ -6,7 +6,7 @@ import { authlogin, resetErrors } from "../../../redux/actions";
 import { useTranslation } from "react-i18next";
 import { getIsLogged, getUi } from "../../../redux/selectors";
 import Loading from "../../utils/spinner/Loading";
-import Layout from "../../layaut";
+import Layout from "../../Layout";
 function LoginPage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
