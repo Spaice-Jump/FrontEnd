@@ -40,7 +40,7 @@ export function editTravel(id, data) {
 }
 
 export function buyTravel(id, userBuyer) {
-	const buy_URL = process.env.REACT_APP_API_BUY_URL;
+	const buy_URL = process.env.REACT_APP_API_TRAVELS_BUY_URL;
 	return client.put(`${buy_URL}/${id}`, { userBuyer });
 }
 
