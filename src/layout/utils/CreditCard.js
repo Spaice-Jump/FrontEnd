@@ -29,20 +29,20 @@ const CreditCard = ({ travelId, price }) => {
       
 
       console.log(JSON.stringify(state));
-      dispatch(buyTravel(travelId));
-
       const timer = setTimeout(() => {
         setShowSpinner(false);
       }, 6000); // Cerrar el spinner después de 6 segundos
       setShowSpinner(true);
       return () => {
         clearTimeout(timer); // Limpia el temporizador si el componente se desmonta antes
+        dispatch(buyTravel(travelId));
       };
     } else {
         setError(validate.message);
     
     }
   };
+
 
   const handleInputChange = e => {
     setState({
