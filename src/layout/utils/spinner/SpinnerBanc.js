@@ -4,13 +4,14 @@ const SpinnerBanc = () => {
   console.log('ejecutando Spinner');
   return (
     <>
-        <div>
+        <div className=" mx-auto">
             <h1>Connecting with the bank</h1>
             <h2>Processing the purchase</h2>
-        </div>
-        <div className="spinner">
+            <div className="spinner mx-auto">
 
-        </div>    
+            </div>    
+        </div>
+        
     </>
 
   );

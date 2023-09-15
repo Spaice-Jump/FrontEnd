@@ -54,7 +54,11 @@ const TravelBuyNow = () => {
                     {travel.active && isLogged ? (
 								<>
 									{userId === travel.userId ? (
-										<p>Viaje de mi compañía</p>
+                                        <div>
+                                            <p>Viaje de mi compañía</p>
+    
+                                            <button onClick={handleReturn}>Volver</button>
+                                        </div>
 									) : (
                                         
                                         <><CreditCard travelId={travel._id} price={travel.price}/></>
@@ -67,9 +71,10 @@ const TravelBuyNow = () => {
 									) : (
 										<p>Viaje completo</p>
 									)}
+                                    <button onClick={handleReturn}>Volver</button>
 								</>
 							)}
-                    <button onClick={handleReturn}>Volver</button>
+                    
                 </div>
             </section>
         </Layout>
