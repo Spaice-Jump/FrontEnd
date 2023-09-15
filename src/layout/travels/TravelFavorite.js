@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 import FavoriteHeart from '../utils/FavoriteHeart';
+import Layout from '../Layout';
 
 const TravelFavorite = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -89,6 +90,7 @@ const TravelFavorite = () => {
 
 	return (
     <>
+    <Layout>
       {isLoading ? (
         <section className="travels-first-container">
           <div className="container travels-container">
@@ -210,6 +212,7 @@ const TravelFavorite = () => {
         </div>
       )}
       {renderPageNumbers()}
+      </Layout>
     </>
   );
 };

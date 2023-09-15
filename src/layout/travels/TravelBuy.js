@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 import FavoriteHeart from '../utils/FavoriteHeart';
+import Layout from '../Layout';
 
 const TravelBuy = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,7 @@ const TravelBuy = () => {
   const user = useSelector(getUserName);
   const isLogged = useSelector(getIsLogged);
   const userId = useSelector(getUserId);
+  
 
   // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +86,8 @@ const TravelBuy = () => {
   };
 
   return (
-    <>
+   
+    <Layout>
       {isLoading ? (
         <section className="travels-first-container">
           <div className="container travels-container">
@@ -206,7 +209,7 @@ const TravelBuy = () => {
         </div>
       )}
       {renderPageNumbers()}
-    </>
+    </Layout>
   );
 };
 

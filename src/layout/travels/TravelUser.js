@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
+import Layout from '../Layout';
 
 const TravelUser = () => {
 	const { user } = useParams();
@@ -34,6 +35,7 @@ const TravelUser = () => {
         setTravelsData([])
 		const fetchData = async () => {
 			const data = { user };
+            console.log(user)
 			try {
 				const travelsData = await getTravelUser(data, {
 					headers: { 'content-type': 'multipart/form-data' },
@@ -45,6 +47,8 @@ const TravelUser = () => {
 					setTravelsData(travelsData.result);
 				}
 				setIsLoading(true);
+
+                console.log(travelsData)
 			} catch (error) {
 				setError(error.message);
 			}
@@ -86,7 +90,7 @@ const TravelUser = () => {
 
 	return (
 		<>
-           
+           <Layout>
 			{isLoading ? (
                 
 				<section className="travels-first-container">
@@ -209,6 +213,7 @@ const TravelUser = () => {
 				</div>
 			)}
 			{renderPageNumbers()}
+            </Layout>
 		</>
 	);
 };
