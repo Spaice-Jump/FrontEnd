@@ -7,6 +7,8 @@ import './componentTravels.css';
 import resizeFile from '../utils/resizeFile';
 import Layout from '../layout/Layout';
 import Loading from '../layout/utils/spinner/Loading';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function NewTravelPage() {
 	const userId = useSelector(getUserId);
@@ -17,11 +19,14 @@ function NewTravelPage() {
 		origin: 'Earth',
 		destination: 'Earth',
 		remarks: '',
-		price: null,
+		price: undefined,
 		forSale: true,
-		photo: null,
+		photo: undefined,
 		active: true,
 		userId: userId,
+		datetimeDeparture: undefined,
+		availableSeats: undefined,
+		soldSeats: undefined,
 	});
 
 	const locations = useSelector(getLocations);
@@ -38,21 +43,46 @@ function NewTravelPage() {
 		dispatch(createTravel(travel));
 	};
 
+	const [isPastDate, setIsPastDate] = useState(false);
+
+	const handleDate = date => {
+		const now = new Date();
+		if (date < now) {
+			setTravel({ ...travel, datetimeDeparture: null });
+			setIsPastDate(true);
+			return;
+		} else {
+			setIsPastDate(false);
+		}
+		const event = { target: { value: date, name: 'datetimeDeparture' } };
+		handleChange(event);
+	};
+
 	const handleChange = async event => {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-			if (name === 'photo') {
-				const image = await resizeFile(event.target.files[0]);
-				setTravel({ ...travel, [name]: image });
-				return;
-			}
+			const image = await resizeFile(event.target.files[0]);
+			setTravel({ ...travel, [name]: image });
+			return;
 		}
+		if (name === 'forSale' && value === 'false') {
+			setTravel({ ...travel, [name]: false, availableSeats: undefined });
+			return;
+		}
+
 		setTravel({ ...travel, [name]: value });
 	};
 
+	const minDate = new Date();
+	minDate.setHours(0, 0, 0, 0);
+
 	const isDisabled =
-		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+		!travel.topic ||
+		!travel.origin ||
+		!travel.destination ||
+		!travel.price ||
+		!travel.datetimeDeparture;
 
 	if (isLoading) {
 		return <Loading />;
@@ -91,7 +121,8 @@ function NewTravelPage() {
 								type="text"
 								name="topic"
 								id="topic"
-							/>
+								required
+						/>
 							<label
 								htmlFor="origin"
 								className="origin-label"
@@ -139,6 +170,30 @@ function NewTravelPage() {
 								))}
 							</select>
 							<br />
+						<label>Fecha de salida</label>
+						<br />
+						<DatePicker
+							selected={travel.datetimeDeparture}
+							onChange={handleDate}
+							dateFormat="dd/MM/yyyy HH:mm"
+							timeIntervals={5}
+							showTimeSelect
+							required
+							minDate={minDate}
+							maxDate={null}
+							timeFormat="HH:mm"
+							placeholderText="Click para seleccionar fecha"
+						/>
+						{isPastDate && (
+							<div
+								className="warning-message"
+								style={{ color: 'red' }}
+							>
+								La hora seleccionada es anterior a la hora actual. Cámbiala a
+								una hora posterior a la actual.
+							</div>
+						)}
+						<br />
 							<label htmlFor="price">Precio</label>
 							<input
 								value={travel.price}
@@ -148,13 +203,26 @@ function NewTravelPage() {
 								id="price"
 								required
 							/>
-							<label htmlFor="remarks">Comentarios</label>
+							{travel.forSale ? (
+							<>
+								<label htmlFor="availableSeats">Asientos disponibles</label>
+								<input
+									value={travel.availableSeats}
+									onChange={handleChange}
+									type="number"
+									name="availableSeats"
+									id="availableSeats"
+									required
+								/>
+							</>
+						) : null}
+						<label htmlFor="remarks">Comentarios</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
 								name="remarks"
 								id="remarks"
-						></textarea>
+							></textarea>
 							<label htmlFor="forSale">¿Qué quieres?</label>
 							<select
 								value={travel.forSale}
