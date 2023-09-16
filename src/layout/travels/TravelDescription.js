@@ -14,6 +14,7 @@ import Loading from '../utils/spinner/Loading';
 import FavoriteHeart from '../utils/FavoriteHeart';
 import Layout from '../Layout';
 import CreditCard from '../utils/CreditCard';
+import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
 
 const TravelDescription = () => {
 	const { id } = useParams();
@@ -57,8 +58,6 @@ const TravelDescription = () => {
 		navigate('/travels');
 	};
 
-
-
 	const handleReturn = () => {
 		return navigate('/travels');
 	};
@@ -68,20 +67,10 @@ const TravelDescription = () => {
 		setTravel({ ...travel, active: !travel.active });
 	};
 
-	function formatDate(datetimeCreation) {
-    const dateObj = new Date(datetimeCreation);
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1;
-    const year = dateObj.getFullYear();
-
-    return `${day}-${month}-${year}`;
-  }
-
-  const handleBuy = event => {
-    event.preventDefault();
-    return navigate(`/travelBuy/${id}`);
-    
-  }
+	const handleBuy = event => {
+		event.preventDefault();
+		return navigate(`/travelBuy/${id}`);
+	};
 
 	if (isLoading) {
 		return <Loading />;
@@ -93,61 +82,59 @@ const TravelDescription = () => {
 				<div id="container-travel-description">
 					<div className="product-details-travel-description">
 						<h1>{travel.topic}</h1>
-						<p class="information">"{travel.remarks}"</p>
-						<div class="control-travel-description">
-							{travel.active && isLogged ? (
+						<p>Publicado el {formatDate(travel.datetimeCreation)}</p>
+						<p className="information">"{travel.remarks}"</p>
+						<div className="control-travel-description">
+							{travel.active && isLogged && travel.forSale ? (
 								<>
 									{userId === travel.userId ? (
 										<p>Viaje de mi compañía</p>
 									) : (
-                                        <button
-                                            onClick={handleBuy}
-                                            className="btn-travel-description"
-                                        >
-                                            <span className="price-travel-description">
-                                                {travel.price}€
-                                            </span>
-                                            <span className="shopping-cart-travel-description">
-                                                <i
-                                                    className="fa fa-shopping-cart"
-                                                    aria-hidden="true"
-                                                ></i>
-                                            </span>
-                                            <span className="buy-travel-description">Buy Now</span>
-                                        </button>
-                                    )}
-								</>
-							) : (
-								<>
-									{travel.userBuyer === userId ? (
-										<p>Ya has comprado un pasaje para este viaje</p>
-									) : (
-										<p>Viaje completo</p>
+										<button
+											onClick={handleBuy}
+											className="btn-travel-description"
+										>
+											<span className="price-travel-description">
+												{travel.price}€
+											</span>
+											<span className="shopping-cart-travel-description">
+												<i
+													className="fa fa-shopping-cart"
+													aria-hidden="true"
+												></i>
+											</span>
+											<span className="buy-travel-description">Buy Now</span>
+										</button>
 									)}
 								</>
-							)}
-							<div id="open-close-travel">
-								{isLogged && userId === travel.userId ? (
-									travel.active ? (
-										<>
-											<p>¿Quieres cerrar tu viaje?</p>
-											<p>(Podrás volver a abrirlo en cualquier momento)</p>
-											<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
-										</>
-									) : (
-										<>
-											<p>¿Quieres abrir tu viaje?</p>
-											<button onClick={handleCloseTravel}>Abrir mi viaje</button>
-										</>
-									)
-								) : null}
-							</div>
-							<button onClick={handleReturn}>Volver</button>
-
-													{isLogged && userId !== travel.userId ? (
-													<FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
-													) : null}
+							) : travel.active && isLogged && !travel.forSale ? (
+								<button>Contactar con el usuario</button>
+							) : null}
 						</div>
+
+						<div id="open-close-travel">
+							{isLogged && userId === travel.userId ? (
+								travel.active ? (
+									<>
+										<p>¿Quieres cerrar tu viaje?</p>
+										<p>(Podrás volver a abrirlo en cualquier momento)</p>
+										<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
+									</>
+								) : (
+									<>
+										<p>¿Quieres abrir tu viaje?</p>
+										<button onClick={handleCloseTravel}>Abrir mi viaje</button>
+									</>
+								)
+							) : null}
+						</div>
+
+						{isLogged && userId !== travel.userId ? (
+							<FavoriteHeart
+								travelId={travel._id}
+								checked={travel.favorite}
+							/>
+						) : null}
 					</div>
 					<div className="product-image-travel-description">
 						{travel.photo ? (
@@ -157,7 +144,9 @@ const TravelDescription = () => {
 							/>
 						) : null}
 						<div className="info-overlay">
-							<p className="overlay-text">Pasa el ratón para ver más detalles</p>
+							<p className="overlay-text">
+								Pasa el ratón para ver más detalles
+							</p>
 						</div>
 						<div className="info-travel-description">
 							<h2>The Description</h2>
@@ -175,8 +164,16 @@ const TravelDescription = () => {
 									{travel.remarks}
 								</li>
 								<li>
-									<strong>Travel Date </strong>
-									{formatDate(travel.datetimeCreation)}
+									<strong>Travel Departure </strong>
+									{formatDateTime(travel.datetimeDeparture)}
+								</li>
+								<li>
+									<strong>Capacidad de viajeros </strong>
+									{travel.availableSeats}
+								</li>
+								<li>
+									<strong>Plazas disponibles </strong>
+									{travel.availableSeats - travel.soldSeats}
 								</li>
 							</ul>
 						</div>
@@ -221,6 +218,7 @@ const TravelDescription = () => {
 							)}
 						</>
 					) : null}
+					<button onClick={handleReturn}>Volver</button>
 				</div>
 			</section>
 		</Layout>

@@ -218,12 +218,10 @@ export const buyTravel = id =>
     try {
       const userBuyer = getUserId(getState());
       const travel = await api.travels.buyTravel(id, userBuyer);
-      console.log('travel', travel);
       dispatch(buyTravelSuccess(travel));
       router.navigate('/congratulations');
     } catch (error) {
       dispatch(buyTravelFailure(error));
-      /* throw error; */
     }
   };
 

@@ -16,6 +16,8 @@ import resizeFile from '../utils/resizeFile';
 import Layout from '../layout/Layout';
 import Loading from '../layout/utils/spinner/Loading';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function EditTravelPage() {
 	const { id } = useParams();
@@ -25,9 +27,12 @@ function EditTravelPage() {
 	const { isLoading, error } = useSelector(getUi);
 
 	useEffect(() => {
-		setTravel(editTrip);
-		if (!editTrip) {
+		if (editTrip) {
+			editTrip.datetimeDeparture = new Date(editTrip.datetimeDeparture);
+			setTravel(editTrip);
+		} else {
 			const trip = dispatch(fetchSingleTravel(id));
+			editTrip.datetimeDeparture = new Date(editTrip.datetimeDeparture);
 			setTravel(trip);
 		}
 	}, [dispatch, id, editTrip]);
@@ -63,6 +68,26 @@ function EditTravelPage() {
 		dispatch(editTravel(id, travel));
 	};
 
+	const navigate = useNavigate();
+	const handleReturn = () => {
+		navigate(`/travel/${travel.topic}/${id}`);
+	};
+
+	const [isPastDate, setIsPastDate] = useState(false);
+
+	const handleDate = date => {
+		const now = new Date();
+		if (date < now) {
+			setTravel({ ...travel, datetimeDeparture: null });
+			setIsPastDate(true);
+			return;
+		} else {
+			setIsPastDate(false);
+		}
+		const event = { target: { value: date, name: 'datetimeDeparture' } };
+		handleChange(event);
+	};
+
 	const handleChange = async event => {
 		const { name, value } = event.target;
 
@@ -71,17 +96,32 @@ function EditTravelPage() {
 			setTravel({ ...travel, [name]: image });
 			return;
 		}
+		if (name === 'forSale' && value === 'false') {
+			setTravel({
+				...travel,
+				[name]: false,
+				availableSeats: undefined,
+				soldSeats: undefined,
+			});
+			return;
+		}
+		if (name === 'availableSeats') {
+			setTravel({ ...travel, [name]: value, soldSeats: 0 });
+			return;
+		}
 
 		setTravel({ ...travel, [name]: value });
 	};
 
-	const isDisabled =
-		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+	const minDate = new Date();
+	minDate.setHours(0, 0, 0, 0);
 
-	const navigate = useNavigate();
-	const handleReturn = () => {
-		navigate(`/travel/${travel.topic}/${id}`);
-	};
+	const isDisabled =
+		!travel.topic ||
+		!travel.origin ||
+		!travel.destination ||
+		!travel.price ||
+		!travel.datetimeDeparture;
 
 	if (isLoading) {
 		return <Loading />;
@@ -90,11 +130,11 @@ function EditTravelPage() {
 	return (
 		<Layout>
 			<section
-				id="edit-travel"
-				className="masthead edit-travel-page"
+				id="new-travel"
+				className="masthead new-travel-page"
 			>
 				<video
-					className="video-background-edit-travel-page"
+					className="video-background"
 					autoPlay
 					muted
 					loop
@@ -104,7 +144,7 @@ function EditTravelPage() {
 						type="video/mp4"
 					/>
 				</video>
-				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center edit-travel-all-form">
+				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
 					<div className="text-center">
 						<h1 className="mx-auto my-0 text-uppercase edit-travel-page-title">
 							Edita tu viaje espacial
@@ -139,7 +179,7 @@ function EditTravelPage() {
 						) : null}
 						<form
 							onSubmit={handleSubmit}
-							className="edit-travel-form"
+							className="new-travel-form"
 						>
 							<label htmlFor="topic">Título del viaje</label>
 							<input
@@ -148,8 +188,14 @@ function EditTravelPage() {
 								type="text"
 								name="topic"
 								id="topic"
+								required
 							/>
-							<label htmlFor="origin">Origen</label>
+							<label
+								htmlFor="origin"
+								className="origin-label"
+							>
+								Origen
+							</label>
 							<select
 								value={travel.origin}
 								onChange={handleChange}
@@ -167,7 +213,12 @@ function EditTravelPage() {
 									</option>
 								))}
 							</select>
-							<label htmlFor="destination">Destino</label>
+							<label
+								htmlFor="destination"
+								className="destination-label"
+							>
+								Destino
+							</label>
 							<select
 								value={travel.destination}
 								onChange={handleChange}
@@ -185,6 +236,31 @@ function EditTravelPage() {
 									</option>
 								))}
 							</select>
+							<br />
+							<label>Fecha de salida</label>
+							<br />
+							<DatePicker
+								selected={travel.datetimeDeparture}
+								onChange={handleDate}
+								dateFormat="dd/MM/yyyy HH:mm"
+								timeIntervals={5}
+								showTimeSelect
+								required
+								minDate={minDate}
+								maxDate={null}
+								timeFormat="HH:mm"
+								placeholderText="Click para seleccionar fecha"
+							/>
+							{isPastDate && (
+								<div
+									className="warning-message"
+									style={{ color: 'red' }}
+								>
+									La hora seleccionada es anterior a la hora actual. Cámbiala a
+									una hora posterior a la actual.
+								</div>
+							)}
+							<br />
 							<label htmlFor="price">Precio</label>
 							<input
 								value={travel.price}
@@ -194,26 +270,27 @@ function EditTravelPage() {
 								id="price"
 								required
 							/>
+							{travel.forSale ? (
+								<>
+									<label htmlFor="availableSeats">Asientos disponibles</label>
+									<input
+										value={travel.availableSeats}
+										onChange={handleChange}
+										type="number"
+										name="availableSeats"
+										id="availableSeats"
+										required
+									/>
+								</>
+							) : null}
 							<label htmlFor="remarks">Comentarios</label>
-							<input
+							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
-								type="text"
 								name="remarks"
 								id="remarks"
-							/>
-							<label htmlFor="forSale">¿Qué quieres?</label>
-							<select
-								value={travel.forSale}
-								onChange={handleChange}
-								name="forSale"
-								id="forSale"
-								required
-							>
-								<option value={true}>Publicar un viaje</option>
-								<option value={false}>Demandar un viaje</option>
-							</select>
-							<label htmlFor="photo">Sustituye la fotografía</label>
+							></textarea>
+							<label htmlFor="photo">Subir una fotografía</label>
 							<input
 								onChange={handleChange}
 								type="file"
@@ -232,12 +309,12 @@ function EditTravelPage() {
 							>
 								Volver atrás
 							</button>
+							{error ? (
+								<div className="error">
+									<p> {error}</p>
+								</div>
+							) : null}
 						</form>
-						{error ? (
-							<div className="error">
-								<p> {error}</p>
-							</div>
-						) : null}
 					</div>
 				</div>
 			</section>
