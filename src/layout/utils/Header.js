@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink,Link, Navigate } from "react-router-dom";
 import { getMe, logout } from "../../api/serviceAuth";
 import { useTranslation } from "react-i18next";
-import { authSuccess, authLogout } from "../../redux/actions";
+import { authSuccess, authLogout, actionLogout } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 import {
   getIsLogged,
@@ -16,6 +17,7 @@ import flagEs from '../../assets/img/flag_es.png';
 import storage from './storage';
 
 function Header() {
+  const navigate = useNavigate()
   const { t, i18n } = useTranslation();
   const changeLanguage = language => {
     i18n.changeLanguage(language);
@@ -57,7 +59,8 @@ function Header() {
 
   const handlerLogout = () => {
     logout();
-    dispatch(authLogout());
+    dispatch(actionLogout());
+    
   };
   return (
     <nav

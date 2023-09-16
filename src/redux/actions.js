@@ -342,6 +342,15 @@ export const authLogout = () => ({
   type: AUTH_LOGOUT,
 });
 
+export const actionLogout = ()=>
+  function(dispatch,  _getState, { api, router }){
+
+    dispatch(authLogout())
+    router.navigate('/login')
+  }
+  
+
+
 export const authlogin = (credential, checked) =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(authLoginRequest()); //saber si esta cargando la llamada
