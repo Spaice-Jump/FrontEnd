@@ -46,7 +46,7 @@ function UpdateUser() {
         
       console.log(credential);
       
-      await dispatch(authUpdateUser(credential)) 
+      await dispatch(authUpdateUser(credential,true)) 
       
     //await dispatch(authUpdateUser(data));
   };

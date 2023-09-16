@@ -51,7 +51,7 @@ import {
 } from './types';
 
 import storage from '../layout/utils/storage';
-import { updateUser } from '../api/serviceAuth';
+import { updateUser, updateUserPassword } from '../api/serviceAuth';
 import { getUserId } from './selectors';
 
 
@@ -501,13 +501,19 @@ export const authUpdateUserFailure = error => ({
   error: true,
   payload: error,
 });
-export const authUpdateUser = credential =>
+export const authUpdateUser = (credential,allUser) =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(authUpdateUserRequest());
     if (credential.password === credential.passwordConfirm) {
       try {
-        console.log('crede', credential);
-        const update = await updateUser(credential);
+        let update = ''
+        if(allUser){
+          console.log('crede', credential);
+          update = await updateUser(credential);
+
+        }else{
+          update = await updateUserPassword(credential)
+        }
 
         console.log('update', update);
         dispatch(authUpdateUserSuccess(update));
