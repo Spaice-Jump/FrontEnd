@@ -60,7 +60,7 @@ function Header() {
   const handlerLogout = () => {
     logout();
     dispatch(actionLogout());
-    
+
   };
   return (
     <nav
@@ -185,6 +185,7 @@ function Header() {
                     <NavLink
                       onClick={handlerLogout}
                       className="nav-NavLink"
+                      to="/login"
                     >
                       {' '}
                       Logout{' '}
