@@ -16,6 +16,7 @@ import Filters from './Filter';
 import Layout from '../Layout';
 import { setTravelFavorite } from '../../api/serviceTravels';
 import FavoriteHeart from '../utils/FavoriteHeart';
+import IconMsg from '../chat/IconMsg';
 
 const Travels = () => {
   const [search, setSearch] = useState('');
@@ -301,7 +302,10 @@ const Travels = () => {
                           <i className="fas fa-random"></i>
                         </a>
                         {isLogged && userId !== travel.userId ? (
-                        <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                            <div className="product-compare-icon">
+                                <FavoriteHeart travelId={travel._id} checked={travel.favorite}/>
+                                <IconMsg travelId={travel._id}/>
+                            </div>
                         ) : null}
                       </div>
                     </div>

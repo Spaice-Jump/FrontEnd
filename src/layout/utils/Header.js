@@ -15,6 +15,7 @@ import {
 import flagEn from '../../assets/img/flag_en.png';
 import flagEs from '../../assets/img/flag_es.png';
 import storage from './storage';
+import IconHeaderMsg from "../chat/IconHeaderMsg";
 
 function Header() {
   const navigate = useNavigate()
@@ -113,11 +114,14 @@ function Header() {
         </ul>
       </li>
       {isLogged ? (
+        <>
         <span className="greetings">
           {t('navbar.greetings')}
           {userName}
           <Link to={`/travel-user/${userName}`} className="text-decoration-none user-panel"> User Panel </Link>
         </span>
+        <IconHeaderMsg/>
+        </>
       ) : (
         <span className="greetings">{t('navbar.greetings-nonuser')}</span>
       )}

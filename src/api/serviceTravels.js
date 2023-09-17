@@ -73,3 +73,4 @@ export const getTravelBuy = (user, headers) => {
 	const buy_URL = process.env.REACT_APP_API_BUY_URL;
 	return client.post(buy_URL, user, headers);
 };
+
