@@ -293,8 +293,20 @@ const Travels = () => {
 																: 'VIAJAR AQUÍ'
 															: 'VIAJE COMPLETO'}
 													</Link>
+													// <Link
+													// to={`/travel/${travel.topic}/${travel._id}`}
+													// className="add-to-cart"
+													// >
+													// <i className="fa fa-shopping-bag"></i>
+													// {travel.datetimeDeparture < Date.now()
+													// 	? 'El viaje ya ha pasado'
+													// 	: travel.active
+													// 	? travel.userBuyer.includes(userId)
+													// 		? 'YA LO HAS COMPRADO'
+													// 		: 'VIAJAR AQUÍ'
+													// 	: 'VIAJE COMPLETO'}
+													// </Link>
 												)}
-
 												<a
 													className="product-compare-icon"
 													href="#"
