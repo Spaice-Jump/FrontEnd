@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink,Link, Navigate } from "react-router-dom";
 import { getMe, logout } from "../../api/serviceAuth";
@@ -15,12 +15,16 @@ import {
 import flagEn from '../../assets/img/flag_en.png';
 import flagEs from '../../assets/img/flag_es.png';
 import storage from './storage';
+import Cookies from "js-cookie";
 
 function Header() {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const changeLanguage = language => {
     i18n.changeLanguage(language);
+    Cookies.set('selectedLanguage', language, { expires: 30 }); // La cookie de idioma expira en 30 días.
+    setSelectedLanguage(language);
   };
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
