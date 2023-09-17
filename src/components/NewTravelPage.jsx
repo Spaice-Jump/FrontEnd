@@ -29,6 +29,11 @@ function NewTravelPage() {
 		soldSeats: undefined,
 	});
 
+	const [minErrors, setMinErrors] = useState({
+		errorMinPrize: '',
+		errorMinSeats: '',
+	});
+
 	const locations = useSelector(getLocations);
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -40,6 +45,23 @@ function NewTravelPage() {
 
 	const handleSubmit = event => {
 		event.preventDefault();
+
+		if (travel.forSale === true && travel.availableSeats <= 0) {
+			setMinErrors({
+				...minErrors,
+				errorMinSeats: 'El número de asientos debe ser mayor que 0',
+			});
+			return;
+		}
+
+		if (travel.price <= 0) {
+			setMinErrors({
+				...minErrors,
+				errorMinPrize: 'El precio debe ser mayor que 0',
+			});
+			return;
+		}
+
 		dispatch(createTravel(travel));
 	};
 
@@ -67,7 +89,16 @@ function NewTravelPage() {
 			return;
 		}
 		if (name === 'forSale' && value === 'false') {
-			setTravel({ ...travel, [name]: false, availableSeats: undefined });
+			setTravel({
+				...travel,
+				[name]: false,
+				availableSeats: undefined,
+				soldSeats: undefined,
+			});
+			return;
+		}
+		if (name === 'availableSeats') {
+			setTravel({ ...travel, [name]: value, soldSeats: 0 });
 			return;
 		}
 
@@ -82,7 +113,8 @@ function NewTravelPage() {
 		!travel.origin ||
 		!travel.destination ||
 		!travel.price ||
-		!travel.datetimeDeparture;
+		!travel.datetimeDeparture ||
+		(travel.forSale === true && !travel.availableSeats)
 
 	if (isLoading) {
 		return <Loading />;
@@ -122,7 +154,7 @@ function NewTravelPage() {
 								name="topic"
 								id="topic"
 								required
-						/>
+							/>
 							<label
 								htmlFor="origin"
 								className="origin-label"
@@ -170,30 +202,30 @@ function NewTravelPage() {
 								))}
 							</select>
 							<br />
-						<label>Fecha de salida</label>
-						<br />
-						<DatePicker
-							selected={travel.datetimeDeparture}
-							onChange={handleDate}
-							dateFormat="dd/MM/yyyy HH:mm"
-							timeIntervals={5}
-							showTimeSelect
-							required
-							minDate={minDate}
-							maxDate={null}
-							timeFormat="HH:mm"
-							placeholderText="Click para seleccionar fecha"
-						/>
-						{isPastDate && (
-							<div
-								className="warning-message"
-								style={{ color: 'red' }}
-							>
-								La hora seleccionada es anterior a la hora actual. Cámbiala a
-								una hora posterior a la actual.
-							</div>
-						)}
-						<br />
+							<label>Fecha y hora de salida</label>
+							<br />
+							<DatePicker
+								selected={travel.datetimeDeparture}
+								onChange={handleDate}
+								dateFormat="dd/MM/yyyy HH:mm"
+								timeIntervals={5}
+								showTimeSelect
+								required
+								minDate={minDate}
+								maxDate={null}
+								timeFormat="HH:mm"
+								placeholderText="Click para seleccionar fecha"
+							/>
+							{isPastDate && (
+								<div
+									className="warning-message"
+									style={{ color: 'red' }}
+								>
+									La hora seleccionada es anterior a la hora actual. Cámbiala a
+									una hora posterior a la actual.
+								</div>
+							)}
+							<br />
 							<label htmlFor="price">Precio</label>
 							<input
 								value={travel.price}
@@ -203,20 +235,30 @@ function NewTravelPage() {
 								id="price"
 								required
 							/>
+							{minErrors.errorMinPrize ? (
+								<div className="error">
+									<p> {minErrors.errorMinPrize}</p>
+								</div>
+							) : null}
 							{travel.forSale ? (
-							<>
-								<label htmlFor="availableSeats">Asientos disponibles</label>
-								<input
-									value={travel.availableSeats}
-									onChange={handleChange}
-									type="number"
-									name="availableSeats"
-									id="availableSeats"
-									required
-								/>
-							</>
-						) : null}
-						<label htmlFor="remarks">Comentarios</label>
+								<>
+									<label htmlFor="availableSeats">Asientos disponibles</label>
+									<input
+										value={travel.availableSeats}
+										onChange={handleChange}
+										type="number"
+										name="availableSeats"
+										id="availableSeats"
+										required
+									/>
+									{minErrors.errorMinSeats ? (
+										<div className="error">
+											<p> {minErrors.errorMinSeats}</p>
+										</div>
+									) : null}
+								</>
+							) : null}
+							<label htmlFor="remarks">Comentarios</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
