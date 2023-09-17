@@ -8,6 +8,7 @@ import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 import FavoriteHeart from '../utils/FavoriteHeart';
 import Layout from '../Layout';
+import IconMsg from '../chat/IconMsg';
 
 const TravelBuy = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -175,10 +176,13 @@ const TravelBuy = () => {
 												</a>
 
 												{isLogged && userId !== travel.userId ? (
+                                                    <div className="product-compare-icon">
 													<FavoriteHeart
 														travelId={travel._id}
 														checked={travel.favorite}
 													/>
+                                                    <IconMsg travelId={travel._id}/>
+                                                    </div>
 												) : null}
 											</div>
 										</div>

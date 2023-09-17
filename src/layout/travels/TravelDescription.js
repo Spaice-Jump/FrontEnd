@@ -15,6 +15,7 @@ import FavoriteHeart from '../utils/FavoriteHeart';
 import Layout from '../Layout';
 import CreditCard from '../utils/CreditCard';
 import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
+import IconMsg from '../chat/IconMsg';
 
 const TravelDescription = () => {
 	const { id } = useParams();
@@ -139,10 +140,13 @@ const TravelDescription = () => {
 						</div>
 
 						{isLogged && userId !== travel.userId ? (
-							<FavoriteHeart
-								travelId={travel._id}
-								checked={travel.favorite}
-							/>
+							<div className="product-compare-icon">
+                            <FavoriteHeart
+                                travelId={travel._id}
+                                checked={travel.favorite}
+                            />
+                            <IconMsg travelId={travel._id}/>
+                            </div>
 						) : null}
 					</div>
 					<div className="product-image-travel-description">
