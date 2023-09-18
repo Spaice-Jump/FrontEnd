@@ -108,6 +108,7 @@ const TravelDescription = () => {
 									)}
 								</>
 							) : travel.active && isLogged && !travel.forSale ? (
+								<>
 								<NavLink className="bi bi-whatsapp " to='https://api.whatsapp.com/send?phone=34696035437'>
 									<button className='p-3 mb-2 bg-success text-white'>Enviar whatsapp al usuario
 									<svg width="26" height="26" fill="currentColor" className="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -117,6 +118,11 @@ const TravelDescription = () => {
 
 									</button>
 								</NavLink>
+								<NavLink to={`/sendEmail/${travel.userName}`}>
+								<button className='p-3 mb-2 bg-success text-white'>Enviar email al usuario
+								</button>
+							</NavLink>
+							</>
 
 							) : null}
 						</div>
