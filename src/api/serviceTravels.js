@@ -74,3 +74,6 @@ export const getTravelBuy = (user, headers) => {
 	return client.post(buy_URL, user, headers);
 };
 
+export const getSendEmail = (email) => {
+	return client.post('/sendEmail', email);
+};
