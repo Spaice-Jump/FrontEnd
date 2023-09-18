@@ -51,7 +51,7 @@ import {
 } from './types';
 
 import storage from '../layout/utils/storage';
-import { updateUser } from '../api/serviceAuth';
+import { updateUser, updateUserPassword } from '../api/serviceAuth';
 import { getUserId } from './selectors';
 
 
@@ -218,12 +218,10 @@ export const buyTravel = id =>
     try {
       const userBuyer = getUserId(getState());
       const travel = await api.travels.buyTravel(id, userBuyer);
-      console.log('travel', travel);
       dispatch(buyTravelSuccess(travel));
       router.navigate('/congratulations');
     } catch (error) {
       dispatch(buyTravelFailure(error));
-      /* throw error; */
     }
   };
 
@@ -341,6 +339,15 @@ export const authLogout = () => ({
   //crea la accion de type authlogout para saber si no esta loguedo
   type: AUTH_LOGOUT,
 });
+
+export const actionLogout = ()=>
+  function(dispatch,  _getState, { api, router }){
+
+    dispatch(authLogout())
+    router.navigate('/login')
+  }
+  
+
 
 export const authlogin = (credential, checked) =>
   async function (dispatch, _getState, { api, router }) {
@@ -501,13 +508,19 @@ export const authUpdateUserFailure = error => ({
   error: true,
   payload: error,
 });
-export const authUpdateUser = credential =>
+export const authUpdateUser = (credential,allUser) =>
   async function (dispatch, _getState, { api, router }) {
     dispatch(authUpdateUserRequest());
     if (credential.password === credential.passwordConfirm) {
       try {
-        console.log('crede', credential);
-        const update = await updateUser(credential);
+        let update = ''
+        if(allUser){
+          console.log('crede', credential);
+          update = await updateUser(credential);
+
+        }else{
+          update = await updateUserPassword(credential)
+        }
 
         console.log('update', update);
         dispatch(authUpdateUserSuccess(update));

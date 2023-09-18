@@ -47,7 +47,7 @@ console.log('tooooo',token)
     event.preventDefault();
         
       console.log('credenciales',credential);
-      await dispatch(authUpdateUser(credential)) 
+      await dispatch(authUpdateUser(credential,false)) 
       
     //await dispatch(authUpdateUser(data));
   };

@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
 import UserPanel from '../utils/UserPanel';
 import FavoriteHeart from '../utils/FavoriteHeart';
+import Layout from '../Layout';
+import IconMsg from '../chat/IconMsg';
 
 const TravelFavorite = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -89,6 +91,7 @@ const TravelFavorite = () => {
 
 	return (
     <>
+    <Layout>
       {isLoading ? (
         <section className="travels-first-container">
           <div className="container travels-container">
@@ -178,10 +181,13 @@ const TravelFavorite = () => {
                         </a>
 
                         {isLogged && userId !== travel.userId ? (
-                          <FavoriteHeart
-                            travelId={travel._id}
-                            checked={travel.favorite}
-                          />
+                         <div className="product-compare-icon">
+                         <FavoriteHeart
+                             travelId={travel._id}
+                             checked={travel.favorite}
+                         />
+                         <IconMsg travelId={travel._id}/>
+                         </div>
                         ) : null}
                       </div>
                     </div>
@@ -210,6 +216,7 @@ const TravelFavorite = () => {
         </div>
       )}
       {renderPageNumbers()}
+      </Layout>
     </>
   );
 };

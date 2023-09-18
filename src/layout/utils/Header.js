@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink,Link, Navigate } from "react-router-dom";
 import { getMe, logout } from "../../api/serviceAuth";
 import { useTranslation } from "react-i18next";
-import { authSuccess, authLogout } from "../../redux/actions";
+import { authSuccess, authLogout, actionLogout } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 import {
   getIsLogged,
@@ -14,11 +16,14 @@ import {
 import flagEn from '../../assets/img/flag_en.png';
 import flagEs from '../../assets/img/flag_es.png';
 import storage from './storage';
+import IconHeaderMsg from "../chat/IconHeaderMsg";
 
 function Header() {
+  const navigate = useNavigate()
   const { t, i18n } = useTranslation();
   const changeLanguage = language => {
     i18n.changeLanguage(language);
+    Cookies.set('selectedLanguage', language, { expires: 30 }); // La cookie de idioma expira en 30 días.
   };
   const isLogged = useSelector(getIsLogged);
   const dispatch = useDispatch();
@@ -57,7 +62,9 @@ function Header() {
 
   const handlerLogout = () => {
     logout();
-    dispatch(authLogout());
+    Cookies.remove('selectedLanguage');
+    dispatch(actionLogout());
+
   };
   return (
     <nav
@@ -110,11 +117,14 @@ function Header() {
         </ul>
       </li>
       {isLogged ? (
+        <>
         <span className="greetings">
           {t('navbar.greetings')}
           {userName}
           <Link to={`/travel-user/${userName}`} className="text-decoration-none user-panel"> User Panel </Link>
         </span>
+        <IconHeaderMsg/>
+        </>
       ) : (
         <span className="greetings">{t('navbar.greetings-nonuser')}</span>
       )}
@@ -182,6 +192,7 @@ function Header() {
                     <NavLink
                       onClick={handlerLogout}
                       className="nav-NavLink"
+                      to="/login"
                     >
                       {' '}
                       Logout{' '}

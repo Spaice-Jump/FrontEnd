@@ -12,7 +12,7 @@ export function getTravel(id) {
 }
 
 export function postTravel(data) {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.post(travels_URL, data, {
 		headers: {
 			'Content-Type': 'multipart/form-data',
@@ -21,7 +21,7 @@ export function postTravel(data) {
 }
 
 export function deleteTravel(id) {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.delete(`${travels_URL}/${id}`);
 }
 
@@ -31,7 +31,7 @@ export function getLocations() {
 }
 
 export function editTravel(id, data) {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.put(`${travels_URL}/${id}`, data, {
 		headers: {
 			'Content-Type': 'multipart/form-data',
@@ -40,17 +40,17 @@ export function editTravel(id, data) {
 }
 
 export function buyTravel(id, userBuyer) {
-	const buy_URL = process.env.REACT_APP_API_BUY_URL;
+	const buy_URL = process.env.REACT_APP_API_TRAVELS_BUY_URL;
 	return client.put(`${buy_URL}/${id}`, { userBuyer });
 }
 
 export function deletePhoto(photoName) {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.delete(`${travels_URL}/deletePhoto/${photoName}`);
 }
 
 export const getTravelUser = (user, headers) => {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.post(`${travels_URL}/users`, user, headers);
 };
 
@@ -60,7 +60,7 @@ export const getTravelFavorite = (user, headers) => {
 };
 
 export const closeOpenTravel = (id, travelActive) => {
-	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
+	const travels_URL = process.env.REACT_APP_API_TRAVELS_P_URL;
 	return client.put(`${travels_URL}/active/${id}`, { travelActive });
 };
 
@@ -73,3 +73,4 @@ export const getTravelBuy = (user, headers) => {
 	const buy_URL = process.env.REACT_APP_API_BUY_URL;
 	return client.post(buy_URL, user, headers);
 };
+

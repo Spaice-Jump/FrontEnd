@@ -17,6 +17,8 @@ import TravelFavorite from '../travels/TravelFavorite.js';
 import TravelBuy from '../travels/TravelBuy.js';
 import UpdatePassword from '../auth/login/UpdatePassword.js';
 import Error404 from './error-404.js';
+import TravelBuyNow from '../travels/TravelBuyNow.js';
+import TravelChat from '../chat/TravelChat.js';
 
 function AllRoutes() {
   return (
@@ -115,6 +117,25 @@ function AllRoutes() {
             <Error404 />
           }
         />
+        <Route
+          path="/travelBuy/:id"
+          element={
+            <RequireAuth>
+
+              {' '}
+              <TravelBuyNow />
+            </RequireAuth>
+          }/>
+
+        <Route
+          path="/travelChat/:id"
+          element={
+            <RequireAuth>
+
+              {' '}
+              <TravelChat/>
+            </RequireAuth>
+          }/>
       </Routes>
     </div>
   );

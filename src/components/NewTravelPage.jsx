@@ -7,6 +7,8 @@ import './componentTravels.css';
 import resizeFile from '../utils/resizeFile';
 import Layout from '../layout/Layout';
 import Loading from '../layout/utils/spinner/Loading';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function NewTravelPage() {
 	const userId = useSelector(getUserId);
@@ -17,11 +19,19 @@ function NewTravelPage() {
 		origin: 'Earth',
 		destination: 'Earth',
 		remarks: '',
-		price: null,
+		price: undefined,
 		forSale: true,
-		photo: null,
+		photo: undefined,
 		active: true,
 		userId: userId,
+		datetimeDeparture: undefined,
+		availableSeats: undefined,
+		soldSeats: undefined,
+	});
+
+	const [minErrors, setMinErrors] = useState({
+		errorMinPrize: '',
+		errorMinSeats: '',
 	});
 
 	const locations = useSelector(getLocations);
@@ -35,24 +45,76 @@ function NewTravelPage() {
 
 	const handleSubmit = event => {
 		event.preventDefault();
+
+		if (travel.forSale === true && travel.availableSeats <= 0) {
+			setMinErrors({
+				...minErrors,
+				errorMinSeats: 'El número de asientos debe ser mayor que 0',
+			});
+			return;
+		}
+
+		if (travel.price <= 0) {
+			setMinErrors({
+				...minErrors,
+				errorMinPrize: 'El precio debe ser mayor que 0',
+			});
+			return;
+		}
+
 		dispatch(createTravel(travel));
+	};
+
+	const [isPastDate, setIsPastDate] = useState(false);
+
+	const handleDate = date => {
+		const now = new Date();
+		if (date < now) {
+			setTravel({ ...travel, datetimeDeparture: null });
+			setIsPastDate(true);
+			return;
+		} else {
+			setIsPastDate(false);
+		}
+		const event = { target: { value: date, name: 'datetimeDeparture' } };
+		handleChange(event);
 	};
 
 	const handleChange = async event => {
 		const { name, value } = event.target;
 
 		if (name === 'photo') {
-			if (name === 'photo') {
-				const image = await resizeFile(event.target.files[0]);
-				setTravel({ ...travel, [name]: image });
-				return;
-			}
+			const image = await resizeFile(event.target.files[0]);
+			setTravel({ ...travel, [name]: image });
+			return;
 		}
+		if (name === 'forSale' && value === 'false') {
+			setTravel({
+				...travel,
+				[name]: false,
+				availableSeats: undefined,
+				soldSeats: undefined,
+			});
+			return;
+		}
+		if (name === 'availableSeats') {
+			setTravel({ ...travel, [name]: value, soldSeats: 0 });
+			return;
+		}
+
 		setTravel({ ...travel, [name]: value });
 	};
 
+	const minDate = new Date();
+	minDate.setHours(0, 0, 0, 0);
+
 	const isDisabled =
-		!travel.topic || !travel.origin || !travel.destination || !travel.price;
+		!travel.topic ||
+		!travel.origin ||
+		!travel.destination ||
+		!travel.price ||
+		!travel.datetimeDeparture ||
+		(travel.forSale === true && !travel.availableSeats)
 
 	if (isLoading) {
 		return <Loading />;
@@ -91,6 +153,7 @@ function NewTravelPage() {
 								type="text"
 								name="topic"
 								id="topic"
+								required
 							/>
 							<label
 								htmlFor="origin"
@@ -139,6 +202,30 @@ function NewTravelPage() {
 								))}
 							</select>
 							<br />
+							<label>Fecha y hora de salida</label>
+							<br />
+							<DatePicker
+								selected={travel.datetimeDeparture}
+								onChange={handleDate}
+								dateFormat="dd/MM/yyyy HH:mm"
+								timeIntervals={5}
+								showTimeSelect
+								required
+								minDate={minDate}
+								maxDate={null}
+								timeFormat="HH:mm"
+								placeholderText="Click para seleccionar fecha"
+							/>
+							{isPastDate && (
+								<div
+									className="warning-message"
+									style={{ color: 'red' }}
+								>
+									La hora seleccionada es anterior a la hora actual. Cámbiala a
+									una hora posterior a la actual.
+								</div>
+							)}
+							<br />
 							<label htmlFor="price">Precio</label>
 							<input
 								value={travel.price}
@@ -148,13 +235,36 @@ function NewTravelPage() {
 								id="price"
 								required
 							/>
+							{minErrors.errorMinPrize ? (
+								<div className="error">
+									<p> {minErrors.errorMinPrize}</p>
+								</div>
+							) : null}
+							{travel.forSale ? (
+								<>
+									<label htmlFor="availableSeats">Asientos disponibles</label>
+									<input
+										value={travel.availableSeats}
+										onChange={handleChange}
+										type="number"
+										name="availableSeats"
+										id="availableSeats"
+										required
+									/>
+									{minErrors.errorMinSeats ? (
+										<div className="error">
+											<p> {minErrors.errorMinSeats}</p>
+										</div>
+									) : null}
+								</>
+							) : null}
 							<label htmlFor="remarks">Comentarios</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
 								name="remarks"
 								id="remarks"
-						></textarea>
+							></textarea>
 							<label htmlFor="forSale">¿Qué quieres?</label>
 							<select
 								value={travel.forSale}
