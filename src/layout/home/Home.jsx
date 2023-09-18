@@ -4,6 +4,7 @@ import TravelSection from "./components/TravelSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ProjectsSection from "./components/ProjectsSection";
 import SubscribeSection from "./components/SubscribeSection";
+import TeamMember from "./components/TeamMembers";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
         <TravelSection />
         <ExperienceSection />
         <ProjectsSection />
+        <TeamMember />
         <SubscribeSection />
       </div>
     </Layout>
