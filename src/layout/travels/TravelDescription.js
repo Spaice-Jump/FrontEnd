@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { getTravel } from '../../api/serviceTravels';
+import { getSendEmail, getTravel } from '../../api/serviceTravels';
 import './css/travelDescription.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -18,6 +18,7 @@ import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
 import IconMsg from '../chat/IconMsg';
 
 const TravelDescription = () => {
+	
 	const { id } = useParams();
 	const [travel, setTravel] = useState(null);
 	const isLogged = useSelector(getIsLogged);
@@ -27,25 +28,39 @@ const TravelDescription = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [deleteProcess, setDeleteProcess] = useState(false);
+	const [sendEmail, setSendEmail] =useState(false)
+	const [travelUser, setTravelUser]= useState('')
+	const [email, setEmail] =useState({
+		name:'',
+		surnames:'',
+		companyName:'',
+		textEmail:'',
+		user:'',
 
+
+	})
+	
+	
 	useEffect(() => {
 		if (!travelById) {
 			getTravel(id)
-				.then(response => {
-					setTravel(response);
-				})
-				.catch(error => {
-					console.error('Error fetching travel details:', error);
-				});
+			.then(response => {
+				setTravel(response);
+			})
+			.catch(error => {
+				console.error('Error fetching travel details:', error);
+			});
 		} else {
 			setTravel(travelById);
 		}
 	}, [id, travelById]);
+	
 
 	if (!travel) {
 		return <p>Loading...</p>;
 	}
 
+	
 	const handleEdit = () => {
 		navigate(`/travel-edit/${travel.topic}/${id}`);
 	};
@@ -76,6 +91,58 @@ const TravelDescription = () => {
 	if (isLoading) {
 		return <Loading />;
 	}
+	
+
+	const handeEmail= event=>{
+		setSendEmail(true)
+		console.log('send',sendEmail)
+
+	}
+	
+
+	const handleChange = async event => {
+		const { name, value } = event.target;
+
+		if (name === 'name') {
+			setEmail({ ...email, [name]: value });
+			
+			return;
+		}
+		if (name === 'surnames') {
+		
+				setEmail({ ...email, [name]: value })
+			;
+			return;
+		}
+		if (name === 'companyName') {
+			setEmail({ ...email, [name]: value });
+			return;
+		}
+		if (name === 'textEmail') {
+			
+			setEmail({ ...email, [name]: value, user: travel.userName });
+			return;
+		}
+
+	};
+	
+	const handleSubmit = event => {
+		event.preventDefault();
+		
+		
+		getSendEmail(email).then(response=>alert(response.msg))
+			
+		
+		
+
+	};
+	
+	const isDisabled =
+		!email.name ||
+		!email.surnames ||
+		!email.companyName ||
+		!email.textEmail
+
 
 	return (
 		<Layout>
@@ -87,6 +154,7 @@ const TravelDescription = () => {
 						<p className="information">"{travel.remarks}"</p>
 						<div className="control-travel-description">
 							{travel.active && isLogged && travel.forSale ? (
+								
 								<>
 									{userId === travel.userId ? (
 										<p>Viaje de mi compañía</p>
@@ -109,6 +177,70 @@ const TravelDescription = () => {
 									)}
 								</>
 							) : travel.active && isLogged && !travel.forSale ? (
+								sendEmail ? <form
+								onSubmit= {handleSubmit}
+								className="new-email-form"
+								
+							>
+								<label htmlFor="name">Nombre</label>
+								<input
+									value={email.name}
+									onChange={handleChange}
+									type="text"
+									name="name"
+									id="name"
+									required
+								/>
+								<label
+									htmlFor="surnames"
+									className="surnames"
+								>
+									Apellidos
+								</label>
+								<input
+									value={email.surname}
+									onChange={handleChange}
+									type="text"
+									name="surnames"
+									id="surnames"
+									required
+								/>
+		
+								<label
+									htmlFor="companyName"
+									className="companyName"
+								>
+									Nombre Empresa
+								</label>
+								<input
+									value={email.companyName}
+									onChange={handleChange}
+									type="text"
+									name="companyName"
+									id="companyName"
+									required
+								/>
+								
+								<label htmlFor="textEmail">Comentarios</label>
+								<textarea
+									value={email.textEmail}
+									onChange={handleChange}
+									name="textEmail"
+									id="textEmail"
+								></textarea>
+								
+								<button
+									type="submit"
+									disabled={isDisabled}
+								>
+									Enviar Email
+								</button>
+								{error ? (
+									<div className="error">
+										<p> {error}</p>
+									</div>
+								) : null}
+							</form>:
 								<>
 								<NavLink className="bi bi-whatsapp " to='https://api.whatsapp.com/send?phone=34696035437'>
 									<button className='p-3 mb-2 bg-success text-white'>Enviar whatsapp al usuario
@@ -119,10 +251,12 @@ const TravelDescription = () => {
 
 									</button>
 								</NavLink>
-								<NavLink to={`/sendEmail/${travel.userName}`}>
-								<button className='p-3 mb-2 bg-success text-white'>Enviar email al usuario
+								<form method='get'>
+
+								<button className='p-3 mb-2 bg-info text-white' onClick={handeEmail}>Enviar email al usuario
 								</button>
-							</NavLink>
+								</form>
+							
 							</>
 
 							) : null}
