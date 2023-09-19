@@ -5,7 +5,7 @@
 * Antonio Luis Martinez Perales
 * Enric Pina Navarro
 * Xavi Roca Vilalta
-* Cristian varela Casas
+* Cristian Varela Casas
 
 ## How to install in local environment
 
