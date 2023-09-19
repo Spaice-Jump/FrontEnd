@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import './css/travelDescription.css';
-import CreditCard from '../utils/CreditCard';
-import Layout from '../Layout';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getTravel } from '../../api/serviceTravels';
+import React, { useEffect, useState } from 'react';
+import Loading from '../utils/spinner/Loading';
+import CreditCard from '../utils/CreditCard';
 import { useSelector } from 'react-redux';
+import './css/travelDescription.css';
+import Layout from '../Layout';
 import {
 	getIsLogged,
 	getTravelById,
 	getUi,
 	getUserId,
 } from '../../redux/selectors';
-import { getTravel } from '../../api/serviceTravels';
-import Loading from '../utils/spinner/Loading';
 
 const TravelBuyNow = () => {
 	const { id } = useParams();

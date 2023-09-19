@@ -1,14 +1,14 @@
+import videoBackground from '../assets/video/new-travel-background.mp4';
+import { getLocations, getUserId, getUi } from '../redux/selectors';
 import { createTravel, fetchLocations } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocations, getUserId, getUi } from '../redux/selectors';
-import { useState, useEffect } from 'react';
-import videoBackground from '../assets/video/new-travel-background.mp4';
-import './componentTravels.css';
-import resizeFile from '../utils/resizeFile';
-import Layout from '../layout/Layout';
 import Loading from '../layout/utils/spinner/Loading';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import resizeFile from '../utils/resizeFile';
+import { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import Layout from '../layout/Layout';
+import './componentTravels.css';
 
 function NewTravelPage() {
 	const userId = useSelector(getUserId);
@@ -114,7 +114,7 @@ function NewTravelPage() {
 		!travel.destination ||
 		!travel.price ||
 		!travel.datetimeDeparture ||
-		(travel.forSale === true && !travel.availableSeats)
+		(travel.forSale === true && !travel.availableSeats);
 
 	if (isLoading) {
 		return <Loading />;
