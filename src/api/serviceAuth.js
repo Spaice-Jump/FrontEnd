@@ -1,8 +1,8 @@
+import storage from '../layout/utils/storage.js';
 import client, {
 	removeAuthorizationHeader,
 	setAuthorizationHeader,
 } from './client';
-import storage from '../layout/utils/storage.js';
 
 export const login = (credentials, isChecked) => {
 	return client.post('/login', credentials).then(response => {
@@ -73,7 +73,6 @@ export const updateUserPassword = credentials => {
 
 export const getNewPassword = token => {
 	return client.post(`/recorderPassword`, { token: token }).then(response => {
-		console.log('reeeee', response);
 		if (response?.status === 400) {
 			throw response.error;
 		}

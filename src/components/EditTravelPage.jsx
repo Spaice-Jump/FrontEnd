@@ -1,23 +1,23 @@
+import { getLocations, getTravelById, getUi } from '../redux/selectors';
+import videoBackground from '../assets/video/new-travel-background.mp4';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../layout/utils/spinner/Loading';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import resizeFile from '../utils/resizeFile';
+import DatePicker from 'react-datepicker';
+import Layout from '../layout/Layout';
+import './componentTravels.css';
 import {
 	fetchLocations,
 	editTravel,
 	deletePhoto,
 	fetchSingleTravel,
 } from '../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { getLocations, getTravelById, getUi } from '../redux/selectors';
-import { useEffect, useState } from 'react';
-import './componentTravels.css';
-import videoBackground from '../assets/video/new-travel-background.mp4';
-import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import resizeFile from '../utils/resizeFile';
-import Layout from '../layout/Layout';
-import Loading from '../layout/utils/spinner/Loading';
-import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 
 function EditTravelPage() {
 	const { id } = useParams();

@@ -1,14 +1,14 @@
-import Loading from '../utils/spinner/Loading';
-import './css/travelUser.css';
-import { useEffect, useState } from 'react';
-import { getTravelBuy } from '../../api/serviceTravels';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
-import UserPanel from '../utils/UserPanel';
+import { getTravelBuy } from '../../api/serviceTravels';
 import FavoriteHeart from '../utils/FavoriteHeart';
-import Layout from '../Layout';
+import Loading from '../utils/spinner/Loading';
+import { useEffect, useState } from 'react';
+import UserPanel from '../utils/UserPanel';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import IconMsg from '../chat/IconMsg';
+import Layout from '../Layout';
+import './css/travelUser.css';
 
 const TravelBuy = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -124,7 +124,6 @@ const TravelBuy = () => {
 												</p>
 												<div className="price">
 													<span>Price: {travel.price}€</span>
-													{/* travel.discount && <span> {travel.originalPrice}€</span> */}
 												</div>
 												{travel.forSale ? (
 													<p className="text-travels-ads">Sale</p>
@@ -176,13 +175,13 @@ const TravelBuy = () => {
 												</a>
 
 												{isLogged && userId !== travel.userId ? (
-                                                    <div className="product-compare-icon">
-													<FavoriteHeart
-														travelId={travel._id}
-														checked={travel.favorite}
-													/>
-                                                    <IconMsg travelId={travel._id}/>
-                                                    </div>
+													<div className="product-compare-icon">
+														<FavoriteHeart
+															travelId={travel._id}
+															checked={travel.favorite}
+														/>
+														<IconMsg travelId={travel._id} />
+													</div>
 												) : null}
 											</div>
 										</div>
