@@ -1,7 +1,7 @@
 # FrontEnd --- 
 
 ## Project: SPACE JUMP
-* Jesús Martín Moreno
+* Jesús Martín Romero
 * Antonio Luis Martinez Perales
 * Enric Pina Navarro
 * Xavi Roca Vilalta

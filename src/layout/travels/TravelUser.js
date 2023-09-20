@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom';
-import Loading from '../utils/spinner/Loading';
-import './css/travelUser.css';
-import { useEffect, useState } from 'react';
 import { getTravelUser } from '../../api/serviceTravels';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { getUserName } from '../../redux/selectors';
+import Loading from '../utils/spinner/Loading';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import UserPanel from '../utils/UserPanel';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Layout from '../Layout';
+import './css/travelUser.css';
 
 const TravelUser = () => {
 	const { user } = useParams();
@@ -22,20 +22,19 @@ const TravelUser = () => {
 	const adsPerPage = 9;
 
 	function formatDate(datetimeCreation) {
-    const dateObj = new Date(datetimeCreation);
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1;
-    const year = dateObj.getFullYear();
+		const dateObj = new Date(datetimeCreation);
+		const day = dateObj.getDate();
+		const month = dateObj.getMonth() + 1;
+		const year = dateObj.getFullYear();
 
-    return `${day}-${month}-${year}`;
-  }
-  
+		return `${day}-${month}-${year}`;
+	}
 
 	useEffect(() => {
-        setTravelsData([])
+		setTravelsData([]);
 		const fetchData = async () => {
 			const data = { user };
-            console.log(user)
+			console.log(user);
 			try {
 				const travelsData = await getTravelUser(data, {
 					headers: { 'content-type': 'multipart/form-data' },
@@ -48,7 +47,7 @@ const TravelUser = () => {
 				}
 				setIsLoading(true);
 
-                console.log(travelsData)
+				console.log(travelsData);
 			} catch (error) {
 				setError(error.message);
 			}
@@ -90,124 +89,117 @@ const TravelUser = () => {
 
 	return (
 		<>
-           <Layout>
-			{isLoading ? (
-                
-				<section className="travels-first-container">
-                    
-					<div className="container travels-container">
-                        
-						<div className="row">
-							<h1>Travels to {user}</h1>
-                            
-							{userName.trim() === user.trim() ? (
-                                
-								<UserPanel
-									user={user}
-									origin={'property'}
-								/>
-							) : null}
-							{adsToShow ? (
-								adsToShow.map(travel => (
-									<div
-										key={travel._id}
-										className="col-md-3 col-sm-6 travels-columns"
-									>
-										<div className="product-grid">
-											{travel.photo ? (
-												<div className="product-image">
-													<img
-														src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
-														alt={travel.topic}
-													/>
-												</div>
-											) : null}
-											<div className="product-content">
-												<h3 className="title">
-													<Link to={`/travel/${travel.topic}/${travel._id}`}>
-														{travel.topic}
-													</Link>
-												</h3>
-												<p className="text-travels-ads">
-													Remarks: {travel.remarks}
-												</p>
-												<div className="price">
-													<span>Price: {travel.price}€</span>
-													{/* travel.discount && <span> {travel.originalPrice}€</span> */}
-												</div>
-												{travel.forSale ? (
-													<p className="text-travels-ads">Sale</p>
-												) : (
-													<p className="text-travels-ads">Search</p>
-												)}
-												<p className="text-travels-ads">
-													Origin: {travel.origin}
-												</p>
-												<p className="text-travels-ads">
-													Destination: {travel.destination}
-												</p>
-												<p className="text-travels-ads">
-													Travel Date: {formatDate(travel.datetimeCreation)}
-												</p>
-											</div>
-											{userName === user ? null : (
-												<div className="product-button-group">
-													{/* <a
-														className="product-like-icon"
-														href="#"
-													>
-														<i className="fas fa-heart"></i>
-													</a> */}
+			<Layout>
+				{isLoading ? (
+					<section className="travels-first-container">
+						<div className="container travels-container">
+							<div className="row">
+								<h1>Travels to {user}</h1>
 
-													{!travel.forSale ? (
-														<Link
-															to={`/travel/${travel.topic}/${travel._id}`}
-															className="add-to-cart"
-														>
-															<i className="fa fa-shopping-bag"></i>
-															{travel.active ? 'CONTACTAR' : 'VIAJE COMPLETO'}
+								{userName.trim() === user.trim() ? (
+									<UserPanel
+										user={user}
+										origin={'property'}
+									/>
+								) : null}
+								{adsToShow ? (
+									adsToShow.map(travel => (
+										<div
+											key={travel._id}
+											className="col-md-3 col-sm-6 travels-columns"
+										>
+											<div className="product-grid">
+												{travel.photo ? (
+													<div className="product-image">
+														<img
+															src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
+															alt={travel.topic}
+														/>
+													</div>
+												) : null}
+												<div className="product-content">
+													<h3 className="title">
+														<Link to={`/travel/${travel.topic}/${travel._id}`}>
+															{travel.topic}
 														</Link>
+													</h3>
+													<p className="text-travels-ads">
+														Remarks: {travel.remarks}
+													</p>
+													<div className="price">
+														<span>Price: {travel.price}€</span>
+													</div>
+													{travel.forSale ? (
+														<p className="text-travels-ads">Sale</p>
 													) : (
-														<Link
-															to={`/travel/${travel.topic}/${travel._id}`}
-															className="add-to-cart"
-														>
-															<i className="fa fa-shopping-bag"></i>
-															{travel.active
-																? 'VIAJAR AQUÍ '
-																: 'VIAJE COMPLETO'}
-														</Link>
+														<p className="text-travels-ads">Search</p>
 													)}
-
+													<p className="text-travels-ads">
+														Origin: {travel.origin}
+													</p>
+													<p className="text-travels-ads">
+														Destination: {travel.destination}
+													</p>
+													<p className="text-travels-ads">
+														Travel Date: {formatDate(travel.datetimeCreation)}
+													</p>
 												</div>
-											)}
+												{userName === user ? null : (
+													<div className="product-button-group">
+														{!travel.forSale ? (
+															<Link
+																to={`/travel/${travel.topic}/${travel._id}`}
+																className="add-to-cart"
+															>
+																<i className="fa fa-shopping-bag"></i>
+																{travel.active ? 'CONTACTAR' : 'VIAJE COMPLETO'}
+															</Link>
+														) : (
+															<Link
+																to={`/travel/${travel.topic}/${travel._id}`}
+																className="add-to-cart"
+															>
+																<i className="fa fa-shopping-bag"></i>
+																{travel.active
+																	? 'VIAJAR AQUÍ '
+																	: 'VIAJE COMPLETO'}
+															</Link>
+														)}
+														<a
+															className="product-compare-icon"
+															href="#"
+														>
+															<i className="fas fa-random"></i>
+														</a>
+													</div>
+												)}
+											</div>
 										</div>
-									</div>
-								))
-							) : (
-								<p>No travel data available.</p>
-							)}
+									))
+								) : (
+									<p>No travel data available.</p>
+								)}
+							</div>
 						</div>
-					</div>
-				</section>
-			) : (
-				<>
-					<Loading />
-				</>
-			)}
+					</section>
+				) : (
+					<>
+						<Loading />
+					</>
+				)}
 
-			{!error ? (
-				<br />
-			) : (
-				<div
-					className="error"
-					onClick={resetError}
-				>
-					<p data-testid="error"> {error}</p>
-				</div>
-			)}
-			{renderPageNumbers()}
-            </Layout>
+				{!error ? (
+					<br />
+				) : (
+					<div
+						className="error"
+						onClick={resetError}
+					>
+						<p data-testid="error"> {error}</p>
+					</div>
+				)}
+				{renderPageNumbers()}
+			</Layout>
 		</>
 	);
 };

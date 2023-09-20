@@ -1,6 +1,5 @@
 import client from './client';
 
-
 export function getTravels() {
 	const travels_URL = process.env.REACT_APP_API_TRAVELS_URL;
 	return client.get(travels_URL);
@@ -74,6 +73,6 @@ export const getTravelBuy = (user, headers) => {
 	return client.post(buy_URL, user, headers);
 };
 
-export const getSendEmail = (email) => {
+export const getSendEmail = email => {
 	return client.post('/sendEmail', email);
 };

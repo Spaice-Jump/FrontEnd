@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import './css/travels.css';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
 import { fetchLocations, fetchTravels } from '../../redux/actions';
+import Loading from '../../layout/utils/spinner/Loading';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import FavoriteHeart from '../utils/FavoriteHeart';
+import { Link } from 'react-router-dom';
+import IconMsg from '../chat/IconMsg';
+import Filters from './Filter';
+import Layout from '../Layout';
+import './css/travels.css';
 import {
 	getTravels,
 	getUi,
@@ -11,13 +17,6 @@ import {
 	getUserId,
 	getIsLogged,
 } from '../../redux/selectors';
-import Loading from '../../layout/utils/spinner/Loading';
-import Filters from './Filter';
-import Layout from '../Layout';
-import { setTravelFavorite } from '../../api/serviceTravels';
-import FavoriteHeart from '../utils/FavoriteHeart';
-import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
-import IconMsg from '../chat/IconMsg';
 
 const Travels = () => {
 	const [search, setSearch] = useState('');
@@ -30,8 +29,6 @@ const Travels = () => {
 	const [locationOrigin, setLocationOrigin] = useState('');
 	const [locationDestination, setLocationDestination] = useState('');
 	const isLogged = useSelector(getIsLogged);
-
-	const [favoriteId, setfavoriteId] = useState('');
 
 	const allLocations = useSelector(getLocations);
 
@@ -230,7 +227,7 @@ const Travels = () => {
 												</Link>
 											</h3>
 											<p className="text-travels-ads">
-												Publicado el: {formatDate(travel.datetimeDeparture)}
+												Publicado el: {formatDate(travel.datetimeCreation)}
 											</p>
 											<p className="text-travels-ads">
 												Remarks: {travel.remarks}
@@ -256,7 +253,7 @@ const Travels = () => {
 												Capacidad de viajeros: {travel.availableSeats}
 											</p>
 											<p className="text-travels-ads">
-												Plazas disponibles:{' '}
+												Plazas disponibles:
 												{travel.availableSeats - travel.soldSeats}
 											</p>
 											<p className="text-travels-ads">
@@ -294,29 +291,16 @@ const Travels = () => {
 																: 'VIAJAR AQUÍ'
 															: 'VIAJE COMPLETO'}
 													</Link>
-													// <Link
-													// to={`/travel/${travel.topic}/${travel._id}`}
-													// className="add-to-cart"
-													// >
-													// <i className="fa fa-shopping-bag"></i>
-													// {travel.datetimeDeparture < Date.now()
-													// 	? 'El viaje ya ha pasado'
-													// 	: travel.active
-													// 	? travel.userBuyer.includes(userId)
-													// 		? 'YA LO HAS COMPRADO'
-													// 		: 'VIAJAR AQUÍ'
-													// 	: 'VIAJE COMPLETO'}
-													// </Link>
 												)}
 												
 												{isLogged && userId !== travel.userId ? (
-                            <div className="product-compare-icon">
-        													<FavoriteHeart
-														travelId={travel._id}
-														checked={travel.favorite}
-													/>
-                                <IconMsg travelId={travel._id}/>
-                            </div>
+													<div className="product-compare-icon">
+														<FavoriteHeart
+															travelId={travel._id}
+															checked={travel.favorite}
+														/>
+														<IconMsg travelId={travel._id} />
+													</div>
 												) : null}
 											</div>
 										</div>

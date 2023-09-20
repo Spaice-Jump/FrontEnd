@@ -1,9 +1,9 @@
+import cristianMember from '../../../assets/img/cristian-team-member.png';
+import antonioMember from '../../../assets/img/antonio-team-member.png';
+import enricMember from '../../../assets/img/enric-team-member.png';
+import jesusMember from '../../../assets/img/jesus-team-member.png';
+import xaviMember from '../../../assets/img/xavi-team-member.png';
 import React from 'react';
-import antonioMember from '../../../assets/img/antonio-team-member.png'
-import cristianMember from '../../../assets/img/cristian-team-member.png'
-import xaviMember from '../../../assets/img/xavi-team-member.png'
-import jesusMember from '../../../assets/img/jesus-team-member.png'
-import enricMember from '../../../assets/img/enric-team-member.png'
 
 const TeamMember = () => {
   return (

@@ -1,50 +1,49 @@
-import Loading from '../utils/spinner/Loading';
-import './css/travelUser.css';
-import { useEffect, useState } from 'react';
-import { getTravelFavorite, setTravelFavorite } from '../../api/serviceTravels';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
-import UserPanel from '../utils/UserPanel';
+import { getTravelFavorite } from '../../api/serviceTravels';
 import FavoriteHeart from '../utils/FavoriteHeart';
-import Layout from '../Layout';
+import Loading from '../utils/spinner/Loading';
+import { useEffect, useState } from 'react';
+import UserPanel from '../utils/UserPanel';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import IconMsg from '../chat/IconMsg';
+import Layout from '../Layout';
+import './css/travelUser.css';
 
 const TravelFavorite = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [travelsData, setTravelsData] = useState([]);
-  const user = useSelector(getUserName);
-  const isLogged = useSelector(getIsLogged);
-  const userId = useSelector(getUserId);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const [travelsData, setTravelsData] = useState([]);
+	const user = useSelector(getUserName);
+	const isLogged = useSelector(getIsLogged);
+	const userId = useSelector(getUserId);
 
 	// Estado para la paginación
 	const [currentPage, setCurrentPage] = useState(1);
 	const adsPerPage = 9;
 
-  useEffect(() => {
-    setTravelsData([])
-    const fetchData = async () => {
-      const data = { user };
-      try {
-        const travelsData = await getTravelFavorite(data, {
-          headers: { 'content-type': 'multipart/form-data' },
-        });
+	useEffect(() => {
+		setTravelsData([]);
+		const fetchData = async () => {
+			const data = { user };
+			try {
+				const travelsData = await getTravelFavorite(data, {
+					headers: { 'content-type': 'multipart/form-data' },
+				});
 
-        if (travelsData?.status === 400) {
-          setError(travelsData.message);
-        }
-        if (travelsData?.status === 'OK') {
-          setTravelsData(travelsData.result);
-        }
-        setIsLoading(true);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchData();
-
-  }, [user]);
+				if (travelsData?.status === 400) {
+					setError(travelsData.message);
+				}
+				if (travelsData?.status === 'OK') {
+					setTravelsData(travelsData.result);
+				}
+				setIsLoading(true);
+			} catch (error) {
+				setError(error.message);
+			}
+		};
+		fetchData();
+	}, [user]);
 
 	const resetError = () => {
 		setError(null);
@@ -61,13 +60,13 @@ const TravelFavorite = () => {
 	const pageNumbers = Math.ceil(travelsData.length / adsPerPage);
 
 	function formatDate(datetimeCreation) {
-    const dateObj = new Date(datetimeCreation);
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1;
-    const year = dateObj.getFullYear();
+		const dateObj = new Date(datetimeCreation);
+		const day = dateObj.getDate();
+		const month = dateObj.getMonth() + 1;
+		const year = dateObj.getFullYear();
 
-    return `${day}-${month}-${year}`;
-  }
+		return `${day}-${month}-${year}`;
+	}
 
 	const renderPageNumbers = () => {
 		return (
@@ -85,9 +84,6 @@ const TravelFavorite = () => {
 			</ul>
 		);
 	};
-
-
-
 
 	return (
     <>

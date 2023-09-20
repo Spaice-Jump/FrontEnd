@@ -1,64 +1,55 @@
-import React, { useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink,Link, Navigate } from "react-router-dom";
-import { getMe, logout } from "../../api/serviceAuth";
-import { useTranslation } from "react-i18next";
-import { authSuccess, authLogout, actionLogout } from "../../redux/actions";
-import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
-
-import {
-  getIsLogged,
-  getUserId,
-  getEmail,
-  getUserName,
-} from '../../redux/selectors';
+import { getIsLogged, getUserId, getUserName } from '../../redux/selectors';
+import { authSuccess, actionLogout } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import flagEn from '../../assets/img/flag_en.png';
 import flagEs from '../../assets/img/flag_es.png';
+import IconHeaderMsg from '../chat/IconHeaderMsg';
+import { NavLink, Link } from 'react-router-dom';
+import { logout } from '../../api/serviceAuth';
+import { useTranslation } from 'react-i18next';
+import React, { useEffect } from 'react';
+import Cookies from 'js-cookie';
 import storage from './storage';
-import IconHeaderMsg from "../chat/IconHeaderMsg";
 
 function Header() {
-  const navigate = useNavigate()
-  const { t, i18n } = useTranslation();
-  const changeLanguage = language => {
-    i18n.changeLanguage(language);
-    Cookies.set('selectedLanguage', language, { expires: 30 }); // La cookie de idioma expira en 30 días.
-  };
-  const isLogged = useSelector(getIsLogged);
-  const dispatch = useDispatch();
-  const userId = useSelector(getUserId);
-  const email = useSelector(getEmail);
-  const userName = useSelector(getUserName);
+	const { t, i18n } = useTranslation();
+	const changeLanguage = language => {
+		i18n.changeLanguage(language);
+		Cookies.set('selectedLanguage', language, { expires: 30 }); // La cookie de idioma expira en 30 días.
+	};
+	const isLogged = useSelector(getIsLogged);
+	const dispatch = useDispatch();
+	const userId = useSelector(getUserId);
+	const userName = useSelector(getUserName);
 
-  //Effect to search de userId
-  useEffect(() => {
-    const fetchData = () => {
-      console.log(userId);
-      if (!userId) {
-        const accessToken = storage.get('auth');
+	//Effect to search de userId
+	useEffect(() => {
+		const fetchData = () => {
+			console.log(userId);
+			if (!userId) {
+				const accessToken = storage.get('auth');
 
-        if (accessToken !== null) {
-          const base64Url = accessToken.split('.')[1];
-          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-          const jsonPayload = decodeURIComponent(
-            window
-              .atob(base64)
-              .split('')
-              .map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-              })
-              .join('')
-          );
-          const jsonweb = JSON.parse(jsonPayload);
+				if (accessToken !== null) {
+					const base64Url = accessToken.split('.')[1];
+					const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+					const jsonPayload = decodeURIComponent(
+						window
+							.atob(base64)
+							.split('')
+							.map(function (c) {
+								return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+							})
+							.join('')
+					);
+					const jsonweb = JSON.parse(jsonPayload);
 
-          dispatch(authSuccess(jsonweb));
-        }
-      }
-    };
+					dispatch(authSuccess(jsonweb));
+				}
+			}
+		};
 
-    fetchData();
-  }, [userId, dispatch]);
+		fetchData();
+	}, [userId, dispatch]);
 
   const handlerLogout = () => {
     logout();
@@ -210,22 +201,22 @@ function Header() {
                     </NavLink>
                   </li>
 
-                  <li className="nav-item">
-                    <NavLink
-                      to="/login"
-                      className="nav-NavLink"
-                    >
-                      {t('navbar.login-user')}
-                    </NavLink>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-      }
-    </nav>
-  );
+									<li className="nav-item">
+										<NavLink
+											to="/login"
+											className="nav-NavLink"
+										>
+											{t('navbar.login-user')}
+										</NavLink>
+									</li>
+								</>
+							)}
+						</ul>
+					</div>
+				</div>
+			}
+		</nav>
+	);
 }
 
 export default Header;
