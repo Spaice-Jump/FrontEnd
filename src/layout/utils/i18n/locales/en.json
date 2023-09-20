@@ -33,6 +33,23 @@
     "title-3": "Travel in all kinds of spacecraft!",
     "text-3": "Get ready for an exciting adventure where you can travel in all kinds of spacecraft. From high-tech spaceships to classic and exotic vessels, this journey will take you to explore space in the most spectacular and diverse way possible. Embark on a unique intergalactic odyssey!"
   },
+  "team_members": {
+    "title": "Meet the team that has made it possible."
+  },
+  "subscribe_section": {
+    "title": "Subscribe to receive new updates!",
+    "button-text": "Coming soon!",
+    "placeholder-text": "Enter email adress..."
+  },
+  "contact_section": {
+    "address": "Address",
+    "address-info": "In KeepCoding's virtual classes!",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "footer": {
+    "text": "All rights reserved for Space Jump Members of Keepcoding | 2023"
+  },
   "new-user-page": {
     "new-user-title": "NEW SPACE TRAVELER",
     "username-label": "Username",

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   faTwitter,
 	faFacebookF,
@@ -12,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function ContactSection() {
+	const { t } = useTranslation();
 	return (
 		<section className="contact-section bg-black">
 			<div className="container px-4 px-lg-5">
@@ -23,10 +25,10 @@ function ContactSection() {
 									icon={faMapMarkedAlt}
 									className="text-primary mb-2"
 								/>
-								<h4 className="text-uppercase m-0">Address</h4>
+								<h4 className="text-uppercase m-0">{t('contact_section.address')}</h4>
 								<hr className="my-4 mx-auto" />
 								<div className="small text-black-50">
-									4923 Market Street, Orlando FL
+									{t('contact_section.address-info')}
 								</div>
 							</div>
 						</div>
@@ -38,10 +40,10 @@ function ContactSection() {
 									icon={faEnvelope}
 									className="text-primary mb-2"
 								/>
-								<h4 className="text-uppercase m-0">Email</h4>
+								<h4 className="text-uppercase m-0">{t('contact_section.email')}</h4>
 								<hr className="my-4 mx-auto" />
 								<div className="small text-black-50">
-									<a href="#!">hello@yourdomain.com</a>
+									<a href="#!">spacejumpkeepcoding@gmail.com</a>
 								</div>
 							</div>
 						</div>
@@ -53,9 +55,9 @@ function ContactSection() {
 									icon={faMobileAlt}
 									className="text-primary mb-2"
 								/>
-								<h4 className="text-uppercase m-0">Phone</h4>
+								<h4 className="text-uppercase m-0">{t('contact_section.phone')}</h4>
 								<hr className="my-4 mx-auto" />
-								<div className="small text-black-50">+1 (555) 902-8832</div>
+								<div className="small text-black-50">+34 888 555 999</div>
 							</div>
 						</div>
 					</div>

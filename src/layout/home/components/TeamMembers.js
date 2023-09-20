@@ -3,13 +3,15 @@ import antonioMember from '../../../assets/img/antonio-team-member.png';
 import enricMember from '../../../assets/img/enric-team-member.png';
 import jesusMember from '../../../assets/img/jesus-team-member.png';
 import xaviMember from '../../../assets/img/xavi-team-member.png';
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 
 const TeamMember = () => {
+	const { t } = useTranslation();
   return (
     <section className="team-members-section">
       <div className='title-container'>
-      <h2 className="team-title text-white">Conoce a el equipo que lo ha hecho posible</h2>
+      <h2 className="team-title text-white">{t('team_members.title')}</h2>
       </div>
       <div className="profile-card enric">
         <div className="img">

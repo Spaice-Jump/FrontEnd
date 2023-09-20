@@ -1,8 +1,10 @@
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 
 function SubscribeSection() {
+	const { t } = useTranslation();
 	return (
 		<section
 			className="signup-section"
@@ -17,7 +19,7 @@ function SubscribeSection() {
 								className="fa-2x mb-2 text-white"
 							/>
 							<h2 className="text-white mb-5">
-								¡Subscríbete para recibir noticias nuevas!
+								{t('subscribe_section.title')}
 							</h2>
 							{/* * * * * * * * * * * * * * * *
                         <!-- * * SB Forms Contact Form * *-->
@@ -38,7 +40,7 @@ function SubscribeSection() {
 											className="form-control"
 											id="emailAddress"
 											type="email"
-											placeholder="Enter email address..."
+											placeholder={t('subscribe_section.placeholder-text')}
 											aria-label="Enter email address..."
 											data-sb-validations="required,email"
 										/>
@@ -49,7 +51,7 @@ function SubscribeSection() {
 											id="submitButton"
 											type="submit"
 										>
-											Notify Me!
+											{t('subscribe_section.button-text')}
 										</button>
 									</div>
 								</div>

@@ -33,6 +33,23 @@
     "title-3": "¡Viaja en todo tipo de naves!",
     "text-3": "Prepárate para una emocionante aventura en la que podrás viajar en todo tipo de naves. Desde naves espaciales de alta tecnología hasta naves clásicas y exóticas, este viaje te llevará a explorar el espacio de la manera más espectacular y variada posible. ¡Embárcate en una odisea intergaláctica única!"
   },
+  "team_members": {
+    "title": "Conoce a el equipo que lo ha hecho posible"
+  },
+  "subscribe_section": {
+    "title": "¡Subscríbete para recibir noticias nuevas!",
+    "button-text": "¡Próximamente!",
+    "placeholder-text": "Escribe tu dirección de correo electrónico..."
+  },
+  "contact_section": {
+    "address": "Dirección",
+    "address-info": "¡En las clases virtuales de KeepCoding!",
+    "email": "Correo electrónico",
+    "phone": "Teléfono"
+  },
+  "footer": {
+    "text": "Todos los derechos reservados para los miembros de Space Jump de Keepcoding | 2023"
+  },
   "new-user-page": {
     "new-user-title": "NUEVO VIAJERO ESPACIAL",
     "username-label": "Nombre de usuario",
