@@ -84,9 +84,13 @@ const TravelDescription = () => {
 		return <Loading />;
 	}
 
-	const handeEmail = event => {
+	const handleEmail = event => {
 		setSendEmail(true);
 		console.log('send', sendEmail);
+	};
+
+	const handleEmailReturn = event => {
+		setSendEmail(false);
 	};
 
 	const handleChange = async event => {
@@ -180,7 +184,6 @@ const TravelDescription = () => {
 											id="surnames"
 											required
 										/>
-
 										<label
 											htmlFor="companyName"
 											className="companyName"
@@ -203,13 +206,21 @@ const TravelDescription = () => {
 											name="textEmail"
 											id="textEmail"
 										></textarea>
-
-										<button
-											type="submit"
-											disabled={isDisabled}
-										>
-											Enviar Email
-										</button>
+										{sendEmail ? (
+											<button
+												type="submit"
+												disabled={isDisabled}
+											>
+												Enviar Email
+											</button>
+										) : (
+											<button
+												type="submit"
+												onClick={handleEmailReturn}
+											>
+												Volver
+											</button>
+										)}
 										{error ? (
 											<div className="error">
 												<p> {error}</p>
@@ -238,7 +249,7 @@ const TravelDescription = () => {
 										<form method="get">
 											<button
 												className="p-3 mb-2 bg-info text-white"
-												onClick={handeEmail}
+												onClick={handleEmail}
 											>
 												Enviar email al usuario
 											</button>
