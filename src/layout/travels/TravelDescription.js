@@ -206,21 +206,20 @@ const TravelDescription = () => {
 											name="textEmail"
 											id="textEmail"
 										></textarea>
-										{sendEmail ? (
-											<button
-												type="submit"
-												disabled={isDisabled}
-											>
-												Enviar Email
-											</button>
-										) : (
-											<button
-												type="submit"
-												onClick={handleEmailReturn}
-											>
-												Volver
-											</button>
-										)}
+										<button
+											type="submit"
+											disabled={isDisabled}
+										>
+											Enviar Email
+										</button>
+
+										<button
+											type="submit"
+											onClick={handleEmailReturn}
+										>
+											Volver
+										</button>
+
 										{error ? (
 											<div className="error">
 												<p> {error}</p>
