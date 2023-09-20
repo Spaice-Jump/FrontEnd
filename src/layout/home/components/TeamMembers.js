@@ -8,9 +8,10 @@ import enricMember from '../../../assets/img/enric-team-member.png'
 const TeamMember = () => {
   return (
     <section className="team-members-section">
-      {/* <div className='title-container'></div>
-      <h2 className="team-title">Conoce a el equipo que lo ha hecho posible</h2> */}
-      <div className="profile-card">
+      <div className='title-container'>
+      <h2 className="team-title text-white">Conoce a el equipo que lo ha hecho posible</h2>
+      </div>
+      <div className="profile-card enric">
         <div className="img">
           <img src={enricMember} alt="Enric" />
         </div>
@@ -24,7 +25,7 @@ const TeamMember = () => {
         </div>
       </div>
 
-      <div className="profile-card">
+      <div className="profile-card antonio">
         <div className="img">
           <img src={antonioMember} alt="Antonio" />
         </div>
@@ -38,7 +39,7 @@ const TeamMember = () => {
         </div>
       </div>
 
-      <div className="profile-card">
+      <div className="profile-card cristian">
         <div className="img">
           <img src={cristianMember} alt="Cristian" />
         </div>
@@ -52,7 +53,7 @@ const TeamMember = () => {
         </div>
       </div>
 
-      <div className="profile-card">
+      <div className="profile-card xavi">
         <div className="img">
           <img src={xaviMember} alt="Xavi" />
         </div>
@@ -66,7 +67,7 @@ const TeamMember = () => {
         </div>
       </div>
 
-      <div className="profile-card">
+      <div className="profile-card jesus">
         <div className="img">
           <img src={jesusMember} alt="Jesus" />
         </div>

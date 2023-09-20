@@ -7,7 +7,7 @@ function IconMsg({ travelId }) {
       <Link to={`/travelChat/${travelId}`}>
         <button
           className="icon-msg__btn">
-          <span>✉️</span>
+          <span>Contactar con el propietario ✉️</span>
         </button>
       </Link>
     </div>

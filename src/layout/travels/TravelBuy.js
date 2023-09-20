@@ -168,12 +168,6 @@ const TravelBuy = () => {
 														{travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
 													</Link>
 												)}
-												<a
-													className="product-compare-icon"
-													href="#"
-												>
-													<i className="fas fa-random"></i>
-												</a>
 
 												{isLogged && userId !== travel.userId ? (
                                                     <div className="product-compare-icon">

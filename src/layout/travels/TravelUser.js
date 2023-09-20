@@ -179,12 +179,6 @@ const TravelUser = () => {
 														</Link>
 													)}
 
-													<a
-														className="product-compare-icon"
-														href="#"
-													>
-														<i className="fas fa-random"></i>
-													</a>
 												</div>
 											)}
 										</div>

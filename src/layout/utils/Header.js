@@ -121,7 +121,7 @@ function Header() {
         <span className="greetings">
           {t('navbar.greetings')}
           {userName}
-          <Link to={`/travel-user/${userName}`} className="text-decoration-none user-panel"> User Panel </Link>
+          <Link to={`/travel-user/${userName}`} className="text-decoration-none user-panel">{t('navbar.user-panel')}</Link>
         </span>
         <IconHeaderMsg/>
         </>
@@ -184,7 +184,7 @@ function Header() {
                       to="/deleteUser"
                       className="nav-NavLink"
                     >
-                      Delete User
+                      {t('navbar.delete-user')}
                     </NavLink>
                   </li>
 
@@ -195,7 +195,7 @@ function Header() {
                       to="/login"
                     >
                       {' '}
-                      Logout{' '}
+                      {t('navbar.logout-user')}{' '}
                     </NavLink>
                   </li>
                 </>

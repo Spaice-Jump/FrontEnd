@@ -2,6 +2,7 @@
   "navbar": {
     "greetings": "Welcome, ",
     "greetings-nonuser": "Welcome, visitor",
+    "user-panel": "User Panel",
     "home": "HOME",
     "menu_mobile": "Menu",
     "travels": "Travels",
@@ -10,7 +11,8 @@
     "update-user": "Update User",
     "logout-user": "Logout",
     "new-user": "New space traveler",
-    "login-user": "Login"
+    "login-user": "Login",
+    "logout-user": "Logout"
   },
   "travel_section": {
     "title": "TRAVEL TO SPACE",
