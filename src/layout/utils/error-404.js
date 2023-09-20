@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import image404 from '../../assets/img/404-error.png';
 import video404 from '../../assets/video/space-cat-error404.mp4';
