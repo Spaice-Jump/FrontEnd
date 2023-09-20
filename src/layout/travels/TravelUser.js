@@ -34,7 +34,6 @@ const TravelUser = () => {
 		setTravelsData([]);
 		const fetchData = async () => {
 			const data = { user };
-			console.log(user);
 			try {
 				const travelsData = await getTravelUser(data, {
 					headers: { 'content-type': 'multipart/form-data' },
@@ -46,8 +45,6 @@ const TravelUser = () => {
 					setTravelsData(travelsData.result);
 				}
 				setIsLoading(true);
-
-				console.log(travelsData);
 			} catch (error) {
 				setError(error.message);
 			}

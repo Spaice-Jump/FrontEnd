@@ -97,17 +97,17 @@
 }
 
 .product-grid {
-  border: cadetblue;
-  border-style: outset;
-  border-radius: 35px;
-  height: 130vh;
-  width: 40vh;
-  font-family: "Oswald", sans-serif;
-  text-align: center;
-  margin: 40px 10px;
-  background: url("../../../assets/img/background-card-travel.jpg");
-  background-size: cover;
-  overflow: hidden;
+	border: cadetblue;
+	border-style: outset;
+	border-radius: 35px;
+	height: 130vh;
+	width: 40vh;
+	font-family: 'Oswald', sans-serif;
+	text-align: center;
+	margin: 40px 10px;
+	background: url('../../../assets/img/background-card-travel.jpg');
+	background-size: cover;
+	overflow: hidden;
 }
 .product-grid .product-image {
 	position: relative;
@@ -234,21 +234,21 @@
 }
 .product-grid .product-like-icon,
 .product-grid .product-compare-icon {
-  cursor: pointer;
-  color: white;
-  border: 1px solid #fff;
-  background: var(--text-color);
-  border-radius: 10px;
-  line-height: 34px;
-  width: 200px;
-  height: 34px;
-  opacity: 0;
-  transform: translateZ(-10%);
-  position: absolute;
-  top: 150%;
-  left: 50px;
-  z-index: -1;
-  transition: all 0.25s ease 0s;
+	cursor: pointer;
+	color: white;
+	border: 1px solid #fff;
+	background: var(--text-color);
+	border-radius: 10px;
+	line-height: 34px;
+	width: 200px;
+	height: 34px;
+	opacity: 0;
+	transform: translateZ(-10%);
+	position: absolute;
+	top: 150%;
+	left: 50px;
+	z-index: -1;
+	transition: all 0.25s ease 0s;
 }
 .product-grid .product-compare-icon {
 	left: auto;
@@ -263,16 +263,16 @@
 	right: 0;
 }
 .icon-msg__btn {
-  cursor: pointer;
-  color: white;
-  border: 1px solid #fff;
-  background: var(--text-color);
-  border-radius: 10px;
-  line-height: 34px;
-  width: 200px;
-  height: 80px;
-  opacity: 1;
-  margin-top: 10px;
+	cursor: pointer;
+	color: white;
+	border: 1px solid #fff;
+	background: var(--text-color);
+	border-radius: 10px;
+	line-height: 34px;
+	width: 200px;
+	height: 80px;
+	opacity: 1;
+	margin-top: 10px;
 }
 
 @media only screen and (max-width: 990px) {

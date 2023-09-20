@@ -162,7 +162,6 @@ export const editTravel = (id, data) =>
 		dispatch(editTravelRequest());
 		try {
 			const travel = await api.travels.editTravel(id, data);
-			console.log('travel update', travel);
 			dispatch(editTravelSuccess(travel));
 			router.navigate(`/travel/${travel.topic}/${travel._id}`);
 		} catch (error) {
@@ -301,7 +300,6 @@ export const deletePhoto = (id, travel) =>
 	async function (dispatch, _getState, { api, router }) {
 		dispatch(deletePhotoRequest(id));
 		try {
-			console.log('travel', travel);
 			await api.travels.deletePhoto(travel.photo);
 			dispatch(deletePhotoSuccess(id));
 			router.navigate(`/travel-edit/${travel.topic}/${id}`);
@@ -350,8 +348,6 @@ export const authlogin = (credential, checked) =>
 		dispatch(authLoginRequest()); //saber si esta cargando la llamada
 		try {
 			const user = await api.auth.login(credential, checked);
-			console.log('aaaaa', user);
-			//leguearse
 			dispatch(authLoginSuccess(user));
 			const to = router.state?.from?.pathname || '/'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
 			router.navigate(to);
@@ -383,11 +379,9 @@ export const authPassword = credential =>
 	async function (dispatch, _getState, { api, router }) {
 		dispatch(authRememberPasswordRequest());
 		try {
-			console.log('crede', credential);
 			const password = await api.auth.rememberPassword(credential);
 			dispatch(authRememberPasswordSuccess());
 			alert(password.msg);
-			console.log('paaaaaaaa', password.msg);
 			const to = router.state?.from?.pathname || '/login'; //cogemos la redireccion de la pagina que veniamos que nos viene de la pagina de RequireAuth
 			router.navigate(to);
 		} catch (error) {
@@ -511,13 +505,12 @@ export const authUpdateUser = (credential, allUser) =>
 			try {
 				let update = '';
 				if (allUser) {
-					console.log('crede', credential);
+
 					update = await updateUser(credential);
 				} else {
 					update = await updateUserPassword(credential);
 				}
 
-				console.log('update', update);
 				dispatch(authUpdateUserSuccess(update));
 				alert(update.msg);
 				router.navigate('/');

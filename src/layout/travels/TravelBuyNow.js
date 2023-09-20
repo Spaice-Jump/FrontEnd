@@ -19,7 +19,7 @@ const TravelBuyNow = () => {
 	const [travel, setTravel] = useState(null);
 	const isLogged = useSelector(getIsLogged);
 	const userId = useSelector(getUserId);
-	const { isLoading, error } = useSelector(getUi);
+	const { isLoading } = useSelector(getUi);
 	const navigate = useNavigate();
 
 	useEffect(() => {

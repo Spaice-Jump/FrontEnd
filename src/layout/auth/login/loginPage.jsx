@@ -10,7 +10,6 @@ function LoginPage() {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();
 	let { isLoading, error } = useSelector(getUi);
-	const estado = useSelector(getIsLogged);
 
 	const handleSubmit = async event => {
 		event.preventDefault();

@@ -25,7 +25,6 @@ const CreditCard = ({ travelId, price }) => {
 
 		const validate = validateCard(state);
 		if (validate.status) {
-			console.log(JSON.stringify(state));
 			const timer = setTimeout(() => {
 				setShowSpinner(false);
 				dispatch(buyTravel(travelId));
