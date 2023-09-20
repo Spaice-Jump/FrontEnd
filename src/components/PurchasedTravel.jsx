@@ -27,7 +27,9 @@ const PurchasedTravel = () => {
 			</div>
 			<h1>{t('travel_purchased.congrats')}</h1>
 			<p>{t('travel_purchased.success')}</p>
-			<button onClick={handleReturn}>{t('travel_purchased.keep-navigation')}</button>
+			<button onClick={handleReturn}>
+				{t('travel_purchased.keep-navigation')}
+			</button>
 		</div>
 	);
 };

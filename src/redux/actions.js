@@ -505,7 +505,6 @@ export const authUpdateUser = (credential, allUser) =>
 			try {
 				let update = '';
 				if (allUser) {
-
 					update = await updateUser(credential);
 				} else {
 					update = await updateUserPassword(credential);

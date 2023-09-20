@@ -339,9 +339,7 @@ const Travels = () => {
 						)}
 					</div>
 				</div>
-				<div className="pagination-container">
-				{renderPageNumbers()}
-				</div>
+				<div className="pagination-container">{renderPageNumbers()}</div>
 				{error ? (
 					<div className="error">
 						<p> {error}</p>

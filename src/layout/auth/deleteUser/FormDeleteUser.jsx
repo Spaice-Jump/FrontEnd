@@ -40,8 +40,9 @@ function FormDeleteUser({ userId }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}
-		className="space-login-form"
+		<form
+			onSubmit={handleSubmit}
+			className="space-login-form"
 		>
 			{isLoading ? (
 				<Loading />

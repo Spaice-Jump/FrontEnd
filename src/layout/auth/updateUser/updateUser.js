@@ -46,11 +46,12 @@ function UpdateUser() {
 				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
 					<div className="text-center">
 						<h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">
-							{t('update-user.update-user-title')}</h1>
-						<form onSubmit={handleSubmit}
-						className="space-login-form"
+							{t('update-user.update-user-title')}
+						</h1>
+						<form
+							onSubmit={handleSubmit}
+							className="space-login-form"
 						>
-							
 							{isLoading ? (
 								<Loading />
 							) : (

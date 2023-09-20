@@ -86,129 +86,131 @@ const TravelFavorite = () => {
 	};
 
 	return (
-    <>
-    <Layout>
-      {isLoading ? (
-        <section className="travels-first-container">
-          <div className="container travels-container">
-            <div className="row">
-              <h1>Travels to {user}</h1>
+		<>
+			<Layout>
+				{isLoading ? (
+					<section className="travels-first-container">
+						<div className="container travels-container">
+							<div className="row">
+								<h1>Travels to {user}</h1>
 
-              <UserPanel
-                user={user}
-                origin={'favorite'}
-              />
+								<UserPanel
+									user={user}
+									origin={'favorite'}
+								/>
 
-              {adsToShow ? (
-                adsToShow.map(travel => (
-                  <div
-                    key={travel._id}
-                    className="col-md-3 col-sm-6 travels-columns"
-                  >
-                    <div className="product-grid">
-                      {travel.photo ? (
-                        <div className="product-image">
-                          <img
-                            src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
-                            alt={travel.topic}
-                          />
-                        </div>
-                      ) : null}
-                      <div className="product-content">
-                        <h3 className="title">
-                          <Link to={`/travel/${travel.topic}/${travel._id}`}>
-                            {travel.topic}
-                          </Link>
-                        </h3>
-                        <p className="text-travels-ads">
-                          Remarks: {travel.remarks}
-                        </p>
-                        <div className="price">
-                          <span>Price: {travel.price}€</span>
-                          {/* travel.discount && <span> {travel.originalPrice}€</span> */}
-                        </div>
-                        {travel.forSale ? (
-                          <p className="text-travels-ads">Sale</p>
-                        ) : (
-                          <p className="text-travels-ads">Search</p>
-                        )}
-                        <p className="text-travels-ads">
-                          Origin: {travel.origin}
-                        </p>
-                        <p className="text-travels-ads">
-                          Destination: {travel.destination}
-                        </p>
-                        <p className="text-travels-ads">
-                          User :
-                          <Link
-                            to={`/travel-user/${travel.userName}`}
-                            class="text-decoration-none"
-                          >
-                            {travel.userName}
-                          </Link>
-                        </p>
-                        <p className="text-travels-ads">
-                          Travel Date: {formatDate(travel.datetimeCreation)}
-                        </p>
-                      </div>
-                      <div className="product-button-group">
-                        {!travel.forSale ? (
-                          <Link
-                            to={`/travel/${travel._id}`}
-                            className="add-to-cart"
-                          >
-                            <i className="fa fa-shopping-bag"></i>
-                            {travel.active ? 'CONTACTAR' : 'VIAJE COMPLETO'}
-                          </Link>
-                        ) : (
-                          <Link
-                            to={`/travel/${travel._id}`}
-                            className="add-to-cart"
-                          >
-                            <i className="fa fa-shopping-bag"></i>
-                            {travel.active ? 'VIAJAR AQUÍ ' : 'VIAJE COMPLETO'}
-                          </Link>
-                        )}
+								{adsToShow ? (
+									adsToShow.map(travel => (
+										<div
+											key={travel._id}
+											className="col-md-3 col-sm-6 travels-columns"
+										>
+											<div className="product-grid">
+												{travel.photo ? (
+													<div className="product-image">
+														<img
+															src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${travel.photo}`}
+															alt={travel.topic}
+														/>
+													</div>
+												) : null}
+												<div className="product-content">
+													<h3 className="title">
+														<Link to={`/travel/${travel.topic}/${travel._id}`}>
+															{travel.topic}
+														</Link>
+													</h3>
+													<p className="text-travels-ads">
+														Remarks: {travel.remarks}
+													</p>
+													<div className="price">
+														<span>Price: {travel.price}€</span>
+														{/* travel.discount && <span> {travel.originalPrice}€</span> */}
+													</div>
+													{travel.forSale ? (
+														<p className="text-travels-ads">Sale</p>
+													) : (
+														<p className="text-travels-ads">Search</p>
+													)}
+													<p className="text-travels-ads">
+														Origin: {travel.origin}
+													</p>
+													<p className="text-travels-ads">
+														Destination: {travel.destination}
+													</p>
+													<p className="text-travels-ads">
+														User :
+														<Link
+															to={`/travel-user/${travel.userName}`}
+															class="text-decoration-none"
+														>
+															{travel.userName}
+														</Link>
+													</p>
+													<p className="text-travels-ads">
+														Travel Date: {formatDate(travel.datetimeCreation)}
+													</p>
+												</div>
+												<div className="product-button-group">
+													{!travel.forSale ? (
+														<Link
+															to={`/travel/${travel._id}`}
+															className="add-to-cart"
+														>
+															<i className="fa fa-shopping-bag"></i>
+															{travel.active ? 'CONTACTAR' : 'VIAJE COMPLETO'}
+														</Link>
+													) : (
+														<Link
+															to={`/travel/${travel._id}`}
+															className="add-to-cart"
+														>
+															<i className="fa fa-shopping-bag"></i>
+															{travel.active
+																? 'VIAJAR AQUÍ '
+																: 'VIAJE COMPLETO'}
+														</Link>
+													)}
 
-                        {isLogged && userId !== travel.userId ? (
-                         <div className="product-compare-icon">
-                         <FavoriteHeart
-                             travelId={travel._id}
-                             checked={travel.favorite}
-                         />
-                         <IconMsg travelId={travel._id}/>
-                         </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>No travel data available.</p>
-              )}
-            </div>
-          </div>
-        </section>
-      ) : (
-        <>
-          <Loading />
-        </>
-      )}
+													{isLogged && userId !== travel.userId ? (
+														<div className="product-compare-icon">
+															<FavoriteHeart
+																travelId={travel._id}
+																checked={travel.favorite}
+															/>
+															<IconMsg travelId={travel._id} />
+														</div>
+													) : null}
+												</div>
+											</div>
+										</div>
+									))
+								) : (
+									<p>No travel data available.</p>
+								)}
+							</div>
+						</div>
+					</section>
+				) : (
+					<>
+						<Loading />
+					</>
+				)}
 
-      {!error ? (
-        <br />
-      ) : (
-        <div
-          className="error"
-          onClick={resetError}
-        >
-          <p data-testid="error"> {error}</p>
-        </div>
-      )}
-      {renderPageNumbers()}
-      </Layout>
-    </>
-  );
+				{!error ? (
+					<br />
+				) : (
+					<div
+						className="error"
+						onClick={resetError}
+					>
+						<p data-testid="error"> {error}</p>
+					</div>
+				)}
+				{renderPageNumbers()}
+			</Layout>
+		</>
+	);
 };
 
 export default TravelFavorite;

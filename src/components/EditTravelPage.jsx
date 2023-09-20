@@ -148,7 +148,7 @@ function EditTravelPage() {
 				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
 					<div className="text-center">
 						<h1 className="mx-auto my-0 text-uppercase edit-travel-page-title">
-						{t('edit-travel-page.title')}
+							{t('edit-travel-page.title')}
 						</h1>
 						{travel.photo ? (
 							<>
@@ -169,11 +169,13 @@ function EditTravelPage() {
 										</button>
 										{isDeleteConfirmationVisible && (
 											<div className="delete-confirmation-edit-travel">
-												<p>
-													{t('edit-travel-page.confirm-photo')}
-												</p>
-												<button onClick={confirmDeletePhoto}>{t('edit-travel-page.confirm')}</button>
-												<button onClick={cancelDeletePhoto}>{t('edit-travel-page.cancel')}</button>
+												<p>{t('edit-travel-page.confirm-photo')}</p>
+												<button onClick={confirmDeletePhoto}>
+													{t('edit-travel-page.confirm')}
+												</button>
+												<button onClick={cancelDeletePhoto}>
+													{t('edit-travel-page.cancel')}
+												</button>
 											</div>
 										)}
 									</div>
@@ -184,7 +186,9 @@ function EditTravelPage() {
 							onSubmit={handleSubmit}
 							className="new-travel-form"
 						>
-							<label htmlFor="topic">{t('edit-travel-page.travel-title')}</label>
+							<label htmlFor="topic">
+								{t('edit-travel-page.travel-title')}
+							</label>
 							<input
 								value={travel.topic}
 								onChange={handleChange}
@@ -263,7 +267,9 @@ function EditTravelPage() {
 								</div>
 							)}
 							<br />
-							<label htmlFor="price">{t('edit-travel-page.travel-price')}</label>
+							<label htmlFor="price">
+								{t('edit-travel-page.travel-price')}
+							</label>
 							<input
 								value={travel.price}
 								onChange={handleChange}
@@ -274,7 +280,8 @@ function EditTravelPage() {
 							/>
 							{travel.forSale ? (
 								<>
-									<label htmlFor="availableSeats">{t('edit-travel-page.seats-available')}
+									<label htmlFor="availableSeats">
+										{t('edit-travel-page.seats-available')}
 									</label>
 									<input
 										value={travel.availableSeats}
@@ -286,14 +293,18 @@ function EditTravelPage() {
 									/>
 								</>
 							) : null}
-							<label htmlFor="remarks">{t('edit-travel-page.travel-remarks')}</label>
+							<label htmlFor="remarks">
+								{t('edit-travel-page.travel-remarks')}
+							</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
 								name="remarks"
 								id="remarks"
 							></textarea>
-							<label htmlFor="photo">{t('edit-travel-page.upload-photo')}</label>
+							<label htmlFor="photo">
+								{t('edit-travel-page.upload-photo')}
+							</label>
 							<input
 								onChange={handleChange}
 								type="file"

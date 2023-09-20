@@ -131,7 +131,10 @@ const TravelDescription = () => {
 				<div id="container-travel-description">
 					<div className="product-details-travel-description">
 						<h1>{travel.topic}</h1>
-						<p>{t('travel_description.published')} {formatDate(travel.datetimeCreation)}</p>
+						<p>
+							{t('travel_description.published')}{' '}
+							{formatDate(travel.datetimeCreation)}
+						</p>
 						<p className="information">"{travel.remarks}"</p>
 						<div className="contact-buttons">
 							{travel.active && isLogged && travel.forSale ? (
@@ -153,7 +156,8 @@ const TravelDescription = () => {
 												></i>
 											</span>
 											<span className="buy-travel-description">
-												{t('travel_description.buy-button')}</span>
+												{t('travel_description.buy-button')}
+											</span>
 										</button>
 									)}
 								</>
@@ -163,7 +167,8 @@ const TravelDescription = () => {
 										onSubmit={handleSubmit}
 										className="new-email-form"
 									>
-										<label htmlFor="name">{t('travel_description.form-name')}
+										<label htmlFor="name">
+											{t('travel_description.form-name')}
 										</label>
 										<br></br>
 										<input
@@ -207,7 +212,8 @@ const TravelDescription = () => {
 											required
 										/>
 										<hr></hr>
-										<label htmlFor="textEmail">{t('travel_description.remarks')}
+										<label htmlFor="textEmail">
+											{t('travel_description.remarks')}
 										</label>
 										<br></br>
 										<textarea
@@ -284,7 +290,7 @@ const TravelDescription = () => {
 										<p>{t('travel_description.open-travel')}</p>
 										<button onClick={handleCloseTravel}>
 											{t('travel_description.open-travel-button')}
-											</button>
+										</button>
 									</>
 								)
 							) : null}
@@ -324,14 +330,11 @@ const TravelDescription = () => {
 									{travel.destination}
 								</li>
 								<li>
-									<strong>{t('travel_description.remarks-description')}
-									</strong>
+									<strong>{t('travel_description.remarks-description')}</strong>
 									{travel.remarks}
 								</li>
 								<li>
-									<strong>
-										{t('travel_description.travel-departure')}
-									</strong>
+									<strong>{t('travel_description.travel-departure')}</strong>
 									{formatDateTime(travel.datetimeDeparture)}
 								</li>
 								<li>
@@ -385,8 +388,7 @@ const TravelDescription = () => {
 							)}
 						</>
 					) : null}
-					<button onClick={handleReturn}>{t('travel_description.back')}
-					</button>
+					<button onClick={handleReturn}>{t('travel_description.back')}</button>
 				</div>
 			</section>
 		</Layout>

@@ -26,9 +26,14 @@ function FavoriteHeart({ travelId, checked }) {
 		handleFavoriteChange(newFavoriteState);
 	};
 
-  return (
-      <span className='fav-hearth' onClick={toggleFavorite}>{isFavorite ? 'Añadido a favoritos ❤️' : 'Añadir a favoritos 🤍'}</span>
-  );
+	return (
+		<span
+			className="fav-hearth"
+			onClick={toggleFavorite}
+		>
+			{isFavorite ? 'Añadido a favoritos ❤️' : 'Añadir a favoritos 🤍'}
+		</span>
+	);
 }
 
 export default FavoriteHeart;
