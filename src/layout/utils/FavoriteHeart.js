@@ -27,9 +27,7 @@ function FavoriteHeart({ travelId, checked }) {
 	};
 
   return (
-    <div>
       <span className='fav-hearth' onClick={toggleFavorite}>{isFavorite ? 'Añadido a favoritos ❤️' : 'Añadir a favoritos 🤍'}</span>
-    </div>
   );
 }
 

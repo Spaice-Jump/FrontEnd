@@ -5,6 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../layout/utils/spinner/Loading';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -87,6 +88,7 @@ function EditTravelPage() {
 		const event = { target: { value: date, name: 'datetimeDeparture' } };
 		handleChange(event);
 	};
+	const { t } = useTranslation();
 
 	const handleChange = async event => {
 		const { name, value } = event.target;
@@ -126,7 +128,6 @@ function EditTravelPage() {
 	if (isLoading) {
 		return <Loading />;
 	}
-
 	return (
 		<Layout>
 			<section
@@ -147,7 +148,7 @@ function EditTravelPage() {
 				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
 					<div className="text-center">
 						<h1 className="mx-auto my-0 text-uppercase edit-travel-page-title">
-							Edita tu viaje espacial
+						{t('edit-travel-page.title')}
 						</h1>
 						{travel.photo ? (
 							<>
@@ -164,13 +165,15 @@ function EditTravelPage() {
 										>
 											<FontAwesomeIcon icon={faTrash} />
 											<br />
-											Eliminar fotografía actual
+											{t('edit-travel-page.delete-photo')}
 										</button>
 										{isDeleteConfirmationVisible && (
 											<div className="delete-confirmation-edit-travel">
-												<p>¿Estás seguro de que quieres eliminar esta foto?</p>
-												<button onClick={confirmDeletePhoto}>Aceptar</button>
-												<button onClick={cancelDeletePhoto}>Cancelar</button>
+												<p>
+													{t('edit-travel-page.confirm-photo')}
+												</p>
+												<button onClick={confirmDeletePhoto}>{t('edit-travel-page.confirm')}</button>
+												<button onClick={cancelDeletePhoto}>{t('edit-travel-page.cancel')}</button>
 											</div>
 										)}
 									</div>
@@ -181,7 +184,7 @@ function EditTravelPage() {
 							onSubmit={handleSubmit}
 							className="new-travel-form"
 						>
-							<label htmlFor="topic">Título del viaje</label>
+							<label htmlFor="topic">{t('edit-travel-page.travel-title')}</label>
 							<input
 								value={travel.topic}
 								onChange={handleChange}
@@ -194,7 +197,7 @@ function EditTravelPage() {
 								htmlFor="origin"
 								className="origin-label"
 							>
-								Origen
+								{t('edit-travel-page.travel-origin')}
 							</label>
 							<select
 								value={travel.origin}
@@ -217,7 +220,7 @@ function EditTravelPage() {
 								htmlFor="destination"
 								className="destination-label"
 							>
-								Destino
+								{t('edit-travel-page.travel-destination')}
 							</label>
 							<select
 								value={travel.destination}
@@ -237,7 +240,7 @@ function EditTravelPage() {
 								))}
 							</select>
 							<br />
-							<label>Fecha de salida</label>
+							<label>{t('edit-travel-page.travel-departure-time')}</label>
 							<br />
 							<DatePicker
 								selected={travel.datetimeDeparture}
@@ -256,12 +259,11 @@ function EditTravelPage() {
 									className="warning-message"
 									style={{ color: 'red' }}
 								>
-									La hora seleccionada es anterior a la hora actual. Cámbiala a
-									una hora posterior a la actual.
+									{t('edit-travel-page.travel-departure-error')}
 								</div>
 							)}
 							<br />
-							<label htmlFor="price">Precio</label>
+							<label htmlFor="price">{t('edit-travel-page.travel-price')}</label>
 							<input
 								value={travel.price}
 								onChange={handleChange}
@@ -272,7 +274,8 @@ function EditTravelPage() {
 							/>
 							{travel.forSale ? (
 								<>
-									<label htmlFor="availableSeats">Asientos disponibles</label>
+									<label htmlFor="availableSeats">{t('edit-travel-page.seats-available')}
+									</label>
 									<input
 										value={travel.availableSeats}
 										onChange={handleChange}
@@ -283,14 +286,14 @@ function EditTravelPage() {
 									/>
 								</>
 							) : null}
-							<label htmlFor="remarks">Comentarios</label>
+							<label htmlFor="remarks">{t('edit-travel-page.travel-remarks')}</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
 								name="remarks"
 								id="remarks"
 							></textarea>
-							<label htmlFor="photo">Subir una fotografía</label>
+							<label htmlFor="photo">{t('edit-travel-page.upload-photo')}</label>
 							<input
 								onChange={handleChange}
 								type="file"
@@ -301,13 +304,13 @@ function EditTravelPage() {
 								type="submit"
 								disabled={isDisabled}
 							>
-								Actualizar viaje
+								{t('edit-travel-page.update-travel')}
 							</button>
 							<button
 								type="submit"
 								onClick={handleReturn}
 							>
-								Volver atrás
+								{t('edit-travel-page.back')}
 							</button>
 							{error ? (
 								<div className="error">

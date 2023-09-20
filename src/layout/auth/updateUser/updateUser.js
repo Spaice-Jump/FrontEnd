@@ -1,6 +1,7 @@
 import { authUpdateUser, resetErrors } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../utils/spinner/Loading';
+import { useTranslation } from 'react-i18next';
 import Input from '../Signup/Input';
 import Layout from '../../Layout';
 import { useState } from 'react';
@@ -27,6 +28,8 @@ function UpdateUser() {
 		passwordConfirm,
 	};
 
+	const { t } = useTranslation();
+
 	const handleSubmit = async event => {
 		event.preventDefault();
 		await dispatch(authUpdateUser(credential, true));
@@ -38,19 +41,23 @@ function UpdateUser() {
 		<Layout>
 			<section
 				id="neu-user"
-				className="masthead"
+				className="masthead update-user-form-page"
 			>
 				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
 					<div className="text-center">
-						<h1 className="mx-auto my-0 text-uppercase">Update User</h1>
-						<form onSubmit={handleSubmit}>
+						<h1 className="mx-auto my-0 text-uppercase new-space-traveler-title">
+							{t('update-user.update-user-title')}</h1>
+						<form onSubmit={handleSubmit}
+						className="space-login-form"
+						>
+							
 							{isLoading ? (
 								<Loading />
 							) : (
 								<>
 									<Input
 										placeholder={userName}
-										tiLabel="Name User"
+										tiLabel={t('update-user.username-label')}
 										type="text"
 										name="user"
 										id="user"
@@ -59,7 +66,7 @@ function UpdateUser() {
 									/>
 									<Input
 										placeholder={userEmail}
-										tiLabel="Email"
+										tiLabel={t('update-user.email-label')}
 										type="email"
 										name="email"
 										id="email"
@@ -68,7 +75,7 @@ function UpdateUser() {
 										readOnly={true}
 									/>
 									<Input
-										tiLabel="Password"
+										tiLabel={t('update-user.password-label')}
 										type="password"
 										name="password"
 										id="password"
@@ -76,7 +83,7 @@ function UpdateUser() {
 										handleInput={e => setPassword(e.target.value)}
 									/>
 									<Input
-										tiLabel="Password Confirm"
+										tiLabel={t('update-user.password-confirm-label')}
 										type="password"
 										name="passwordConfirm"
 										id="passwordConfirm"
@@ -89,7 +96,7 @@ function UpdateUser() {
 										data-testid="signUpButton"
 										disabled={disableButton}
 									>
-										Sign Up
+										{t('update-user.update-button')}
 									</button>
 								</>
 							)}

@@ -1,4 +1,5 @@
 import { formatDate, formatDateTime } from '../utils/formatDateFunctions';
+import { useTranslation } from 'react-i18next';
 import { deleteTravel, closeOpenTravel } from '../../redux/actions';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { getSendEmail, getTravel } from '../../api/serviceTravels';
@@ -48,6 +49,7 @@ const TravelDescription = () => {
 			setTravel(travelById);
 		}
 	}, [id, travelById]);
+	const { t } = useTranslation();
 
 	if (!travel) {
 		return <p>Loading...</p>;
@@ -130,13 +132,13 @@ const TravelDescription = () => {
 				<div id="container-travel-description">
 					<div className="product-details-travel-description">
 						<h1>{travel.topic}</h1>
-						<p>Publicado el {formatDate(travel.datetimeCreation)}</p>
+						<p>{t('travel_description.published')} {formatDate(travel.datetimeCreation)}</p>
 						<p className="information">"{travel.remarks}"</p>
 						<div className="contact-buttons">
 							{travel.active && isLogged && travel.forSale ? (
 								<>
 									{userId === travel.userId ? (
-										<p>Viaje de mi compañía</p>
+										<p>{t('travel_description.own-property')}</p>
 									) : (
 										<button
 											onClick={handleBuy}
@@ -151,7 +153,8 @@ const TravelDescription = () => {
 													aria-hidden="true"
 												></i>
 											</span>
-											<span className="buy-travel-description">Buy Now</span>
+											<span className="buy-travel-description">
+												{t('travel_description.buy-button')}</span>
 										</button>
 									)}
 								</>
@@ -161,7 +164,9 @@ const TravelDescription = () => {
 										onSubmit={handleSubmit}
 										className="new-email-form"
 									>
-										<label htmlFor="name">Nombre</label>
+										<label htmlFor="name">{t('travel_description.form-name')}
+										</label>
+										<br></br>
 										<input
 											value={email.name}
 											onChange={handleChange}
@@ -170,12 +175,14 @@ const TravelDescription = () => {
 											id="name"
 											required
 										/>
+										<br></br>
 										<label
 											htmlFor="surnames"
 											className="surnames"
 										>
-											Apellidos
+											{t('travel_description.form-second-name')}
 										</label>
+										<br></br>
 										<input
 											value={email.surname}
 											onChange={handleChange}
@@ -184,12 +191,14 @@ const TravelDescription = () => {
 											id="surnames"
 											required
 										/>
+										<br></br>
 										<label
 											htmlFor="companyName"
 											className="companyName"
 										>
-											Nombre Empresa
+											{t('travel_description.company')}
 										</label>
+										<br></br>
 										<input
 											value={email.companyName}
 											onChange={handleChange}
@@ -198,26 +207,29 @@ const TravelDescription = () => {
 											id="companyName"
 											required
 										/>
-
-										<label htmlFor="textEmail">Comentarios</label>
+										<hr></hr>
+										<label htmlFor="textEmail">{t('travel_description.remarks')}
+										</label>
+										<br></br>
 										<textarea
 											value={email.textEmail}
 											onChange={handleChange}
 											name="textEmail"
 											id="textEmail"
 										></textarea>
+										<br></br>
 										<button
 											type="submit"
 											disabled={isDisabled}
 										>
-											Enviar Email
+											{t('travel_description.send-mail')}
 										</button>
-
+										<br></br>
 										<button
 											type="submit"
 											onClick={handleEmailReturn}
 										>
-											Volver
+											{t('travel_description.back')}
 										</button>
 
 										{error ? (
@@ -233,7 +245,7 @@ const TravelDescription = () => {
 											to={`https://api.whatsapp.com/send?phone=${process.env.REACT_APP_API_TELEFONO_WHATSAPP}`}
 										>
 											<button className="p-3 mb-2 bg-success text-white">
-												Enviar whatsapp al usuario
+												{t('travel_description.whatsapp')}
 												<svg
 													width="26"
 													height="26"
@@ -250,7 +262,7 @@ const TravelDescription = () => {
 												className="p-3 mb-2 bg-info text-white"
 												onClick={handleEmail}
 											>
-												Enviar email al usuario
+												{t('travel_description.send-mail-user')}
 											</button>
 										</form>
 									</>
@@ -262,14 +274,18 @@ const TravelDescription = () => {
 							{isLogged && userId === travel.userId ? (
 								travel.active ? (
 									<>
-										<p>¿Quieres cerrar tu viaje?</p>
-										<p>(Podrás volver a abrirlo en cualquier momento)</p>
-										<button onClick={handleCloseTravel}>Cerrar mi viaje</button>
+										<p>{t('travel_description.close-travel')}</p>
+										<p>{t('travel_description.close-travel-info')}</p>
+										<button onClick={handleCloseTravel}>
+											{t('travel_description.close-travel-button')}
+										</button>
 									</>
 								) : (
 									<>
-										<p>¿Quieres abrir tu viaje?</p>
-										<button onClick={handleCloseTravel}>Abrir mi viaje</button>
+										<p>{t('travel_description.open-travel')}</p>
+										<button onClick={handleCloseTravel}>
+											{t('travel_description.open-travel-button')}
+											</button>
 									</>
 								)
 							) : null}
@@ -294,34 +310,37 @@ const TravelDescription = () => {
 						) : null}
 						<div className="info-overlay">
 							<p className="overlay-text">
-								Pasa el ratón para ver más detalles
+								{t('travel_description.open-travel-button')}
 							</p>
 						</div>
 						<div className="info-travel-description">
-							<h2>The Description</h2>
+							<h2>{t('travel_description.description')}</h2>
 							<ul>
 								<li>
-									<strong>Origin: </strong>
+									<strong>{t('travel_description.origin')}</strong>
 									{travel.origin}
 								</li>
 								<li>
-									<strong>Destination: </strong>
+									<strong>{t('travel_description.destination')}</strong>
 									{travel.destination}
 								</li>
 								<li>
-									<strong>Remarks: </strong>
+									<strong>{t('travel_description.remarks-description')}
+									</strong>
 									{travel.remarks}
 								</li>
 								<li>
-									<strong>Travel Departure </strong>
+									<strong>
+										{t('travel_description.travel-departure')}
+									</strong>
 									{formatDateTime(travel.datetimeDeparture)}
 								</li>
 								<li>
-									<strong>Capacidad de viajeros </strong>
+									<strong>{t('travel_description.capacity')}</strong>
 									{travel.availableSeats}
 								</li>
 								<li>
-									<strong>Plazas disponibles </strong>
+									<strong>{t('travel_description.available-seats')}</strong>
 									{travel.availableSeats - travel.soldSeats}
 								</li>
 							</ul>
@@ -340,14 +359,14 @@ const TravelDescription = () => {
 								onClick={handleEdit}
 								className="btn-travel-description btn-edit"
 							>
-								Editar viaje
+								{t('travel_description.edit-travel')}
 							</button>
 							{!deleteProcess ? (
 								<button
 									onClick={HandleDeleteProcess(true)}
 									className="btn-travel-description btn-delete"
 								>
-									Borrar viaje
+									{t('travel_description.delete-travel')}
 								</button>
 							) : (
 								<>
@@ -355,19 +374,20 @@ const TravelDescription = () => {
 										onClick={handleDelete}
 										className="btn-travel-description btn-confirm"
 									>
-										Confirmar borrado
+										{t('travel_description.confirm-delete')}
 									</button>
 									<button
 										onClick={HandleDeleteProcess(false)}
 										className="btn-travel-description btn-cancel"
 									>
-										Cancelar
+										{t('travel_description.cancel-delete')}
 									</button>
 								</>
 							)}
 						</>
 					) : null}
-					<button onClick={handleReturn}>Volver</button>
+					<button onClick={handleReturn}>{t('travel_description.back')}
+					</button>
 				</div>
 			</section>
 		</Layout>

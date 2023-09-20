@@ -75,6 +75,45 @@
     "complete-travel": "FULLY BOOKED TRIP",
     "no-data-travel": "No travel data available."
   },
+  "travel_description": {
+    "published": "Published on: ",
+    "own-property": "Trip created by you",
+    "buy-button": "Buy Now",
+    "form-name": "Name",
+    "form-second-name": "Last names",
+    "company": "Company Name",
+    "remarks": "Remarks",
+    "send-mail": "Send Email",
+    "back": "Go back",
+    "whatsapp": "Contact on WhatsApp",
+    "send-mail-user": "Contact on Email",
+    "close-travel": "Do you want to close your trip?",
+    "close-travel-info": "(You can reopen it at any time)",
+    "close-travel-button": "Close my trip",
+    "open-travel": "Do you want to open your trip?",
+    "open-travel-button": "Open my trip",
+    "more-details": "Hover to see more details",
+    "description": "The Description",
+    "origin": "Origin: ",
+    "destination": "Destination: ",
+    "remarks-description": "Comments: ",
+    "travel-departure": "Travel Date: ",
+    "capacity": "Traveler Capacity: ",
+    "available-seats": "Available Seats: ",
+    "edit-travel": "Edit Trip",
+    "delete-travel": "Delete Trip",
+    "confirm-delete": "Confirm Deletion",
+    "cancel-delete": "Cancel"
+  },
+  "travel_purchased": {
+    "congrats": "Congratulations, you're going on a trip!",
+    "success": "The purchase of the trip was successful",
+    "keep-navigation": "Continue browsing"
+  },
+  "error_404": {
+    "text": "Oops... It looks like you're lost in space...",
+    "button": "Back to Home"
+  },
   "new-user-page": {
     "new-user-title": "NEW SPACE TRAVELER",
     "username-label": "Username",
@@ -94,6 +133,21 @@
     "password-forget": "Forgot your password?",
     "password-remember": "Retrieve Password"
   },
+  "update-user": {
+    "update-user-title": "Update User",
+    "username-label": "Username",
+    "email-label": "Email",
+    "password-label": "Password",
+    "password-confirm-label": "Confirm Password",
+    "update-button": "Update"
+  },
+  "delete-user": {
+    "delete-user-title": "Delete User",
+    "email-label": "Email",
+    "password-label": "Password",
+    "password-confirm-label": "Confirm Password",
+    "confirm-button": "Confirm"
+  },
   "new-travel-page": {
     "title": "CREATE NEW SPACE TRIP",
     "travel-title": "Your Trip Name",
@@ -112,5 +166,23 @@
     "search-travel": "Search for a Trip",
     "upload-photo": "Upload a Photo",
     "create-travel": "Create trip"
+  },
+  "edit-travel-page": {
+    "delete-photo": "Delete current photo",
+    "confirm-photo": "Are you sure you want to delete this photo?",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "title": "EDIT YOUR SPACE TRIP",
+    "travel-title": "Your trip's name",
+    "travel-origin": "Origin",
+    "travel-destination": "Destination",
+    "travel-departure-time": "Departure date and time",
+    "travel-departure-error": "The selected time is earlier than the current time. Please change it to a time after the current time.",
+    "travel-price": "Price",
+    "seats-available": "Available seats",
+    "travel-remarks": "Comments",
+    "upload-photo": "Upload a photo",
+    "update-travel": "Update Trip",
+    "back": "Go back"
   }
 }

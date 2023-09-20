@@ -75,6 +75,45 @@
     "complete-travel": "VIAJE COMPLETO",
     "no-data-travel": "No hay información de viajes."
   },
+  "travel_description": {
+    "published": "Publicado el: ",
+    "own-property": "Viaje creado por ti",
+    "buy-button": "Comprar Ahora",
+    "form-name": "Nombre",
+    "form-second-name": "Apellidos",
+    "company": "Nombre de la compañía",
+    "remarks": "Comentarios",
+    "send-mail": "Enviar Email",
+    "back": "Volver",
+    "whatsapp": "Contactar por Whatsapp",
+    "send-mail-user": "Contactar por correo electrónico",
+    "close-travel": "¿Quieres cerrar tu viaje?",
+    "close-travel-info": "(Podrás volver a abrirlo en cualquier momento)",
+    "close-travel-button": "Cerrar mi viaje",
+    "open-travel": "¿Quieres abrir tu viaje?",
+    "open-travel-button": "Abrir mi viaje",
+    "more-details": "Pasa el ratón para ver más detalles",
+    "description": "La Descripción",
+    "origin:": "Origen: ",
+    "destination": "Destino: ",
+    "remarks-description": "Comentarios: ",
+    "travel-departure": "Fecha del Viaje: ",
+    "capacity": "Capacidad de viajeros: ",
+    "available-seats": "Plazas disponibles: ",
+    "edit-travel": "Editar Viaje",
+    "delete-travel": "Borrar Viaje",
+    "confirm-delete": "Confirmar Borrado",
+    "cancel-delete": "Cancelar"
+  },
+  "travel_purchased": {
+    "congrats": "¡Enhorabuena, te vas de viaje!",
+    "success": "La compra del viaje se ha realizado con éxito",
+    "keep-navigation": "Seguir navegando"
+  },
+  "error_404": {
+    "text": "Ups... Parece que estás perdido en el espacio...",
+    "button": "Volver a Inicio"
+  },
   "new-user-page": {
     "new-user-title": "NUEVO VIAJERO ESPACIAL",
     "username-label": "Nombre de usuario",
@@ -94,6 +133,21 @@
     "password-forget": "¿Has olvidado la contraseña?",
     "password-remember": "Recuperar Contraseña"
   },
+  "update-user": {
+    "update-user-title": "Actualizar Usuario",
+    "username-label": "Nombre de usuario",
+    "email-label": "Correo electrónico",
+    "password-label": "Contraseña",
+    "password-confirm-label": "Contraseña",
+    "update-button": "Actualizar"
+  },
+  "delete-user": {
+    "delete-user-title": "Eliminar Usuario",
+    "email-label": "Correo electrónico",
+    "password-label": "Contraseña",
+    "password-confirm-label": "Confirmar Contraseña",
+    "confirm-button": "Confirmar"
+  },
   "new-travel-page": {
     "title": "CREAR NUEVO VIAJE ESPACIAL",
     "travel-title": "Nombre de tu viaje",
@@ -112,5 +166,23 @@
     "search-travel": "Demandar un viaje",
     "upload-photo": "Subir una fotografía",
     "create-travel": "Crear Viaje"
+  },
+  "edit-travel-page": {
+    "delete-photo": "Eliminar fotografía actual",
+    "confirm-photo": "¿Estás seguro de que quieres eliminar esta foto?",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "title": "EDITA TU VIAJE ESPACIAL",
+    "travel-title": "Nombre de tu viaje",
+    "travel-origin": "Origen",
+    "travel-destination": "Destino",
+    "travel-departure-time": "Fecha y hora de salida",
+    "travel-departure-error": "La hora seleccionada es anterior a la hora actual Cámbiala a una hora posterior a la actual.",
+    "travel-price": "Precio",
+    "seats-available": "Asientos disponibles",
+    "travel-remarks": "Comentarios",
+    "upload-photo": "Subir una fotografía",
+    "update-travel": "Actualizar Viaje",
+    "back": "Volver atrás"
   }
 }

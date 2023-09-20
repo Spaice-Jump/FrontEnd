@@ -2,11 +2,13 @@ import { authDeleteUser, resetErrors } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { isButtonDisabled } from '../Signup/formUtils';
 import Loading from '../../utils/spinner/Loading';
+import { useTranslation } from 'react-i18next';
 import { getUi } from '../../../redux/selectors';
 import { useEffect, useState } from 'react';
 import Input from '../Signup/Input';
 
 function FormDeleteUser({ userId }) {
+	const { t } = useTranslation();
 	let { isLoading, error } = useSelector(getUi);
 
 	const dispatch = useDispatch();
@@ -38,27 +40,29 @@ function FormDeleteUser({ userId }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit}
+		className="space-login-form"
+		>
 			{isLoading ? (
 				<Loading />
 			) : (
 				<>
 					<Input
-						tiLabel="Email"
+						tiLabel={t('delete-user.email-label')}
 						type="email"
 						name="email"
 						id="email"
 						handleInput={e => setEmail(e.target.value)}
 					/>
 					<Input
-						tiLabel="Password"
+						tiLabel={t('delete-user.password-label')}
 						type="password"
 						name="password"
 						id="password"
 						handleInput={e => setPassword(e.target.value)}
 					/>
 					<Input
-						tiLabel="Password Confirm"
+						tiLabel={t('delete-user.password-confirm-label')}
 						type="password"
 						name="passwordConfirm"
 						id="passwordConfirm"
@@ -70,7 +74,7 @@ function FormDeleteUser({ userId }) {
 						disabled={buttonDisabled}
 						data-testid="signUpButton"
 					>
-						Sign Up
+						{t('delete-user.confirm-button')}
 					</button>
 				</>
 			)}

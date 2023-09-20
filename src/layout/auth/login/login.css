@@ -13,6 +13,36 @@
 	background-size: cover !important;
 }
 
+.delete-user-form-page {
+	height: 80vh;
+	background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(0, 0, 0, 0.7) 75%,
+			#000 100%
+		),
+		url(../../../assets/img/delete-user.jpg) !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-attachment: scroll !important;
+	background-size: cover !important;
+}
+
+.update-user-form-page {
+	height: 80vh;
+	background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.3) 0%,
+			rgba(0, 0, 0, 0.7) 75%,
+			#000 100%
+		),
+		url(../../../assets/img/update-user.jpg) !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-attachment: scroll !important;
+	background-size: cover !important;
+}
+
 .new-space-traveler-title {
 	margin-top: 60px !important;
 }

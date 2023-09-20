@@ -41,7 +41,7 @@ const Travels = () => {
 	});
 
 	const [currentPage, setCurrentPage] = useState(1);
-	const adsPerPage = 9;
+	const adsPerPage = 6;
 
 	useEffect(() => {
 		dispatch(fetchTravels());
@@ -330,7 +330,9 @@ const Travels = () => {
 						)}
 					</div>
 				</div>
+				<div className="pagination-container">
 				{renderPageNumbers()}
+				</div>
 				{error ? (
 					<div className="error">
 						<p> {error}</p>
