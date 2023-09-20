@@ -28,11 +28,7 @@ function IconHeaderMsg() {
 	}, [travelId, userId]);
 
 	const handelButton = () => {
-		setIsMsg(false);
-
-		setTimeout(() => {
-			return navigate(`/travelChat/${travelId}`);
-		}, 3000);
+		return navigate(`/travelChat/${travelId}`);
 	};
 
 	return (
