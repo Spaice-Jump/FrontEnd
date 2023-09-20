@@ -50,6 +50,31 @@
   "footer": {
     "text": "Todos los derechos reservados para los miembros de Space Jump de Keepcoding | 2023"
   },
+  "travels_section": {
+    "filter-1": "Búsqueda por nombre",
+    "filter-1-1": "Realiza la búsqueda por nombre...",
+    "filter-2": "Búsqueda por precio mínimo",
+    "filter-2-1": "Introduzca un precio mínimo...",
+    "filter-3": "Búsqueda por precio máximo",
+    "filter-3-1": "Introduzca un precio máximo...",
+    "origin": "Origen: ",
+    "destination": "Destino: ",
+    "select": "Seleccionar",
+    "published": "Publicado el:",
+    "remarks": "Comentarios:",
+    "price": "Precio:",
+    "sale": "Se VENDE viaje",
+    "search": "Se BUSCA viaje",
+    "travel-date": "Fecha del viaje:",
+    "travellers": "Capacidad de viajeros:",
+    "available-seats": "Asientos disponibles:",
+    "user": "Usuario: ",
+    "contact": "CONTACTAR",
+    "already-buy": "Ya has comprado este viaje",
+    "travel-here": "VIAJAR AQUÍ",
+    "complete-travel": "VIAJE COMPLETO",
+    "no-data-travel": "No hay información de viajes."
+  },
   "new-user-page": {
     "new-user-title": "NUEVO VIAJERO ESPACIAL",
     "username-label": "Nombre de usuario",
@@ -61,6 +86,31 @@
   "login-page": {
     "welcome-traveler-title": "Bienvenido de nuevo, viajero",
     "email-label": "Correo electrónico",
-    "password-label": "Contraseña"
+    "email-input": "Escribe tu correo electrónico...",
+    "password-label": "Contraseña",
+    "password-input": "Escribe tu contraseña...",
+    "login-button": "Iniciar Sesión",
+    "check-remember": "Marca para guardar credenciales",
+    "password-forget": "¿Has olvidado la contraseña?",
+    "password-remember": "Recuperar Contraseña"
+  },
+  "new-travel-page": {
+    "title": "CREAR NUEVO VIAJE ESPACIAL",
+    "travel-title": "Nombre de tu viaje",
+    "travel-origin": "Origen",
+    "travel-destination": "Destino",
+    "travel-departure-time": "Fecha y hora de salida",
+    "travel-departure-error": "La hora seleccionada es anterior a la hora actual Cámbiala a una hora posterior a la actual.",
+    "date-select": "Selecciona fecha y hora",
+    "travel-price": "Precio",
+    "travel-min-price": "El precio debe ser mayor que 0",
+    "seats-available": "Asientos disponibles",
+    "seats-min-available": "El número de asientos debe ser mayor que 0",
+    "travel-remarks": "Comentarios",
+    "what-want": "¿Qué quieres?",
+    "publish-travel": "Publicar un viaje",
+    "search-travel": "Demandar un viaje",
+    "upload-photo": "Subir una fotografía",
+    "create-travel": "Crear Viaje"
   }
 }

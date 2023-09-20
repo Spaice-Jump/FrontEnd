@@ -100,7 +100,7 @@
   border: cadetblue;
   border-style: outset;
   border-radius: 35px;
-  height: 95vh;
+  height: 130vh;
   width: 40vh;
   font-family: "Oswald", sans-serif;
   text-align: center;
@@ -180,7 +180,7 @@
 }
 .product-grid .title {
 	color: white;
-	font-size: 20px;
+	font-size: 24px;
 	text-transform: capitalize;
 	margin: 0 0 7px;
 }
@@ -193,14 +193,14 @@
 }
 .product-grid .price {
 	color: white;
-	font-size: 18px;
+	font-size: 20px;
 	letter-spacing: 0.005em;
 	margin-bottom: 10px;
 }
 .product-grid .price span {
 	color: white;
-	font-size: 14px;
-	font-weight: 400;
+	font-size: 20px;
+	font-weight: 600;
 }
 .product-grid .product-button-group {
 	position: relative;
@@ -226,7 +226,7 @@
 }
 .product-grid:hover .add-to-cart {
 	color: #fff;
-	background: var(--text-color);
+	background: #64a19d;
 }
 .product-grid:hover .add-to-cart i {
 	display: inline-block;
@@ -303,4 +303,6 @@
 
 .text-travels-ads {
 	color: white;
+	margin-top: 30px;
+	font-weight: 600;
 }

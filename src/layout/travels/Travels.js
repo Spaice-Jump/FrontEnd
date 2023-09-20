@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import FavoriteHeart from '../utils/FavoriteHeart';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import IconMsg from '../chat/IconMsg';
 import Filters from './Filter';
 import Layout from '../Layout';
@@ -120,6 +121,7 @@ const Travels = () => {
 			</ul>
 		);
 	};
+	const { t } = useTranslation();
 
 	if (isLoading) {
 		return <Loading />;
@@ -132,12 +134,12 @@ const Travels = () => {
 					<div className="row">
 						<section className="filter-section">
 							<form className="filter-form text-white-50">
-								<span className="search-text text-white-50">Búsqueda</span>
+								<span className="search-text text-white-50">{t('travels_section.filter-1')}</span>
 								<input
 									type="text"
 									value={search}
 									onChange={searcher}
-									placeholder="Search"
+									placeholder={t('travels_section.filter-1-1')}
 									name="search"
 									className="form-Control"
 								/>
@@ -145,7 +147,7 @@ const Travels = () => {
 									className="labelAdvertsPage"
 									name="price"
 								>
-									Precio Minimo
+									{t('travels_section.filter-2')}
 								</label>
 								<input
 									className="inputPriceMinAdvertsPage"
@@ -154,13 +156,13 @@ const Travels = () => {
 									name="price"
 									value={data.sales.value}
 									onChange={handleChangeFilterPriceMin}
-									placeholder="introduzca precio minimo"
+									placeholder={t('travels_section.filter-2-1')}
 								/>
 								<label
 									className="labelAdvertsPage"
 									name="price"
 								>
-									Precio Maximo
+									{t('travels_section.filter-3')}
 								</label>
 								<input
 									className="inputPriceMaxAdvertsPage"
@@ -169,15 +171,15 @@ const Travels = () => {
 									name="price"
 									value={data.sales.value}
 									onChange={handleChangeFilterPriceMax}
-									placeholder="introduzca precio maximo"
+									placeholder={t('travels_section.filter-3-1')}
 								/>
-								<label className="origin">Origen</label>
+								<label className="origin">{t('travels_section.origin')}</label>
 								<select
 									name="origin"
 									id="origin"
 									onChange={e => setLocationOrigin(e.target.value)}
 								>
-									<option value="">Seleccionar</option>
+									<option value="">{t('travels_section.select')}</option>
 									{locationsOrigin.map(location => (
 										<option
 											key={location._id}
@@ -187,13 +189,13 @@ const Travels = () => {
 										</option>
 									))}
 								</select>
-								<label className="origin">Destino</label>
+								<label className="origin">{t('travels_section.destination')}</label>
 								<select
 									name="destination"
 									id="destination"
 									onChange={e => setLocationDestination(e.target.value)}
 								>
-									<option value="">Seleccionar</option>
+									<option value="">{t('travels_section.select')}</option>
 									{locationsDestination.map(location => (
 										<option
 											key={location._id}
@@ -227,37 +229,53 @@ const Travels = () => {
 												</Link>
 											</h3>
 											<p className="text-travels-ads">
-												Publicado el: {formatDate(travel.datetimeCreation)}
+												{t('travels_section.published')}
+												<br></br>
+												{formatDate(travel.datetimeCreation)}
 											</p>
 											<p className="text-travels-ads">
-												Remarks: {travel.remarks}
+												{t('travels_section.remarks')}
+												<br></br>
+												{travel.remarks}
 											</p>
 											<div className="price">
-												<span>Price: {travel.price}€</span>
+												<span>
+													{t('travels_section.price')}
+													<br></br>
+													{travel.price}€</span>
 											</div>
 											{travel.forSale ? (
-												<p className="text-travels-ads">Sale</p>
+												<p className="text-travels-ads">{t('travels_section.sale')}</p>
 											) : (
-												<p className="text-travels-ads">Search</p>
+												<p className="text-travels-ads">{t('travels_section.search')}</p>
 											)}
 											<p className="text-travels-ads">
-												Origin: {travel.origin}
+												{t('travels_section.origin')}
+												<br></br>
+												{travel.origin}
 											</p>
 											<p className="text-travels-ads">
-												Destination: {travel.destination}
+												{t('travels_section.destination')}
+												<br></br>
+												{travel.destination}
 											</p>
 											<p className="text-travels-ads">
-												Travel Date: {formatDateTime(travel.datetimeDeparture)}
+												{t('travels_section.travel-date')}
+												<br></br>
+												{formatDateTime(travel.datetimeDeparture)}
 											</p>
 											<p className="text-travels-ads">
-												Capacidad de viajeros: {travel.availableSeats}
+												{t('travels_section.travellers')}
+												<br></br>
+												{travel.availableSeats}
 											</p>
 											<p className="text-travels-ads">
-												Plazas disponibles:
+												{t('travels_section.available-seats')}
+												<br></br>
 												{travel.availableSeats - travel.soldSeats}
 											</p>
 											<p className="text-travels-ads">
-												User :
+												{t('travels_section.user')}
 												<Link
 													to={`/travel-user/${travel.userName}`}
 													class="text-decoration-none"
@@ -272,7 +290,7 @@ const Travels = () => {
 														className="add-to-cart"
 													>
 														<i className="fa fa-shopping-bag"></i>
-														'CONTACTAR'
+														{t('travels_section.contact')}
 														{/* 														{travel.active
 															? 'CONTACTAR'
 															: travel.userBuyer.includes(userId)
@@ -287,9 +305,9 @@ const Travels = () => {
 														<i className="fa fa-shopping-bag"></i>
 														{travel.active
 															? travel.userBuyer.includes(userId)
-																? 'YA LO HAS COMPRADO'
-																: 'VIAJAR AQUÍ'
-															: 'VIAJE COMPLETO'}
+																? t('travels_section.already-buy')
+																: t('travels_section.travel-here')
+															: t('travels_section.complete-travel')}
 													</Link>
 												)}
 												
@@ -308,7 +326,7 @@ const Travels = () => {
 								</div>
 							))
 						) : (
-							<p>No travel data available.</p>
+							<p>{t('travels_section.no-data-travel')}</p>
 						)}
 					</div>
 				</div>

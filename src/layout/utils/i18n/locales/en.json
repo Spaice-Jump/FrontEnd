@@ -34,7 +34,7 @@
     "text-3": "Get ready for an exciting adventure where you can travel in all kinds of spacecraft. From high-tech spaceships to classic and exotic vessels, this journey will take you to explore space in the most spectacular and diverse way possible. Embark on a unique intergalactic odyssey!"
   },
   "team_members": {
-    "title": "Meet the team that has made it possible."
+    "title": "Meet the team that has made it possible"
   },
   "subscribe_section": {
     "title": "Subscribe to receive new updates!",
@@ -50,6 +50,31 @@
   "footer": {
     "text": "All rights reserved for Space Jump Members of Keepcoding | 2023"
   },
+  "travels_section": {
+    "filter-1": "Search by name",
+    "filter-1-1": "Perform the search by name...",
+    "filter-2": "Search by minimum price",
+    "filter-2-1": "Enter a minimum price...",
+    "filter-3": "Search by maximum price",
+    "filter-3-1": "Enter a maximum price...",
+    "origin": "Origin: ",
+    "destination": "Destination: ",
+    "select": "Select",
+    "published": "Published on:",
+    "remarks": "Remarks:",
+    "price": "Price:",
+    "sale": "Trip for SALE",
+    "search": "LOOKING for a trip",
+    "travel-date": "Travel Date:",
+    "travellers": "Traveler capacity:",
+    "available-seats": "Available Seats:",
+    "user": "User: ",
+    "contact": "CONTACT",
+    "already-buy": "You have already purchased this trip",
+    "travel-here": "TRAVEL HERE",
+    "complete-travel": "FULLY BOOKED TRIP",
+    "no-data-travel": "No travel data available."
+  },
   "new-user-page": {
     "new-user-title": "NEW SPACE TRAVELER",
     "username-label": "Username",
@@ -61,6 +86,31 @@
   "login-page": {
     "welcome-traveler-title": "Welcome back, traveler",
     "email-label": "Email",
-    "password-label": "Password"
+    "email-input": "Write your Email...",
+    "password-input": "Write your Password...",
+    "password-label": "Password",
+    "login-button": "Login",
+    "check-remember": "Check to save credentials",
+    "password-forget": "Forgot your password?",
+    "password-remember": "Retrieve Password"
+  },
+  "new-travel-page": {
+    "title": "CREATE NEW SPACE TRIP",
+    "travel-title": "Your Trip Name",
+    "travel-origin": "Origin",
+    "travel-destination": "Destination",
+    "travel-departure-time": "Departure Date and Time",
+    "travel-departure-error": "The selected time is earlier than the current time. Please change it to a time later than the current one.",
+    "date-select": "Select Date and Time",
+    "travel-price": "Price",
+    "travel-min-price": "The price must be greater than 0",
+    "seats-available": "Available Seats",
+    "seats-min-available": "The number of seats must be greater than 0",
+    "travel-remarks": "Comments",
+    "what-want": "What do you want?",
+    "publish-travel": "Publish a Trip",
+    "search-travel": "Search for a Trip",
+    "upload-photo": "Upload a Photo",
+    "create-travel": "Create trip"
   }
 }

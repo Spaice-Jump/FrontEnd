@@ -66,7 +66,7 @@ function LoginPage() {
 											name="email"
 											id="email"
 											data-testid="email"
-											placeholder="Write your Email "
+											placeholder={t('login-page.email-input')}
 											required
 											onChange={handleChange}
 										/>
@@ -80,7 +80,7 @@ function LoginPage() {
 											type="password"
 											name="password"
 											id="password"
-											placeholder="Write your Password"
+											placeholder={t('login-page.password-input')}
 											data-testid="password"
 											required
 											onChange={handleChange}
@@ -94,7 +94,7 @@ function LoginPage() {
 										disabled={disableButton}
 										data-testid="signUpButton"
 									>
-										Login
+										{t('login-page.login-button')}
 									</button>
 								</p>
 								<p>
@@ -105,18 +105,18 @@ function LoginPage() {
 										onChange={handleChecked}
 									/>
 									<span className="span-check">
-										Marca para guardar credenciales
+										{t('login-page.check-remember')}
 									</span>
 								</p>
 								<p className="text-white forget-password">
-									¿Has olvidado la contraseña?
+									{t('login-page.password-forget')}
 									<br />
 									<a
 										href="/password"
 										class="link-info"
 									>
 										<span className="remember-password">
-											Recordar Contraseña
+											{t('login-page.password-remember')}
 										</span>
 									</a>
 								</p>

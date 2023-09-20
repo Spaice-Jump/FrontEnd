@@ -6,11 +6,13 @@ import Loading from '../layout/utils/spinner/Loading';
 import 'react-datepicker/dist/react-datepicker.css';
 import resizeFile from '../utils/resizeFile';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
 import Layout from '../layout/Layout';
 import './componentTravels.css';
 
 function NewTravelPage() {
+	const { t } = useTranslation();
 	const userId = useSelector(getUserId);
 	const { isLoading, error } = useSelector(getUi);
 
@@ -49,7 +51,7 @@ function NewTravelPage() {
 		if (travel.forSale === true && travel.availableSeats <= 0) {
 			setMinErrors({
 				...minErrors,
-				errorMinSeats: 'El número de asientos debe ser mayor que 0',
+				errorMinSeats: t('new-travel-seats-min-available'),
 			});
 			return;
 		}
@@ -57,7 +59,7 @@ function NewTravelPage() {
 		if (travel.price <= 0) {
 			setMinErrors({
 				...minErrors,
-				errorMinPrize: 'El precio debe ser mayor que 0',
+				errorMinPrize: t('new-travel-min-price'),
 			});
 			return;
 		}
@@ -140,13 +142,13 @@ function NewTravelPage() {
 				<div className="px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center new-travel-all-form">
 					<div className="text-center">
 						<h1 className="mx-auto my-0 text-uppercase new-travel-title">
-							Crear nuevo viaje espacial
+							{t('new-travel-page.title')}
 						</h1>
 						<form
 							onSubmit={handleSubmit}
 							className="new-travel-form"
 						>
-							<label htmlFor="topic">Título del viaje</label>
+							<label htmlFor="topic">{t('new-travel-page.travel-title')}</label>
 							<input
 								value={travel.topic}
 								onChange={handleChange}
@@ -159,7 +161,7 @@ function NewTravelPage() {
 								htmlFor="origin"
 								className="origin-label"
 							>
-								Origen
+								{t('new-travel-page.travel-origin')}
 							</label>
 							<select
 								value={travel.origin}
@@ -182,7 +184,7 @@ function NewTravelPage() {
 								htmlFor="destination"
 								className="destination-label"
 							>
-								Destino
+								{t('new-travel-page.travel-destination')}
 							</label>
 							<select
 								value={travel.destination}
@@ -202,7 +204,7 @@ function NewTravelPage() {
 								))}
 							</select>
 							<br />
-							<label>Fecha y hora de salida</label>
+							<label>{t('new-travel-page.travel-departure-time')}</label>
 							<br />
 							<DatePicker
 								selected={travel.datetimeDeparture}
@@ -214,19 +216,18 @@ function NewTravelPage() {
 								minDate={minDate}
 								maxDate={null}
 								timeFormat="HH:mm"
-								placeholderText="Click para seleccionar fecha"
+								placeholderText={t('new-travel-page.date-select')}
 							/>
 							{isPastDate && (
 								<div
 									className="warning-message"
 									style={{ color: 'red' }}
 								>
-									La hora seleccionada es anterior a la hora actual. Cámbiala a
-									una hora posterior a la actual.
+									{t('new-travel-page.travel-departure-error')}
 								</div>
 							)}
 							<br />
-							<label htmlFor="price">Precio</label>
+							<label htmlFor="price">{t('new-travel-page.travel-price')}</label>
 							<input
 								value={travel.price}
 								onChange={handleChange}
@@ -242,7 +243,8 @@ function NewTravelPage() {
 							) : null}
 							{travel.forSale ? (
 								<>
-									<label htmlFor="availableSeats">Asientos disponibles</label>
+									<label htmlFor="availableSeats">
+										{t('new-travel-page.seats-available')}</label>
 									<input
 										value={travel.availableSeats}
 										onChange={handleChange}
@@ -258,14 +260,14 @@ function NewTravelPage() {
 									) : null}
 								</>
 							) : null}
-							<label htmlFor="remarks">Comentarios</label>
+							<label htmlFor="remarks">{t('new-travel-page.travel-remarks')}</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
 								name="remarks"
 								id="remarks"
 							></textarea>
-							<label htmlFor="forSale">¿Qué quieres?</label>
+							<label htmlFor="forSale">{t('new-travel-page.what-want')}</label>
 							<select
 								value={travel.forSale}
 								onChange={handleChange}
@@ -273,10 +275,10 @@ function NewTravelPage() {
 								id="forSale"
 								required
 							>
-								<option value={true}>Publicar un viaje</option>
-								<option value={false}>Demandar un viaje</option>
+								<option value={true}>{t('new-travel-page.publish-travel')}</option>
+								<option value={false}>{t('new-travel-page.search-travel')}</option>
 							</select>
-							<label htmlFor="photo">Subir una fotografía</label>
+							<label htmlFor="photo">{t('new-travel-page.upload-photo')}</label>
 							<input
 								onChange={handleChange}
 								type="file"
@@ -287,7 +289,7 @@ function NewTravelPage() {
 								type="submit"
 								disabled={isDisabled}
 							>
-								Crear viaje
+								{t('new-travel-page.create-travel')}
 							</button>
 							{error ? (
 								<div className="error">
