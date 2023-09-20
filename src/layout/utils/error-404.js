@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import image404 from '../../assets/img/404-error.png';
+import { useTranslation } from 'react-i18next';
 import video404 from '../../assets/video/space-cat-error404.mp4';
 
 function Error404() {
