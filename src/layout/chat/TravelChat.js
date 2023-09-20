@@ -66,53 +66,47 @@ function TravelChat() {
 		setError(null);
 	};
 
-
 	useEffect(() => {
+		const handleUpdateMsg = async () => {
+			const data = { user };
+			try {
+				const chatData = await getTravelChat(data, {
+					headers: { 'content-type': 'multipart/form-data' },
+				});
 
-        const handleUpdateMsg = async () => {
-            const data = { user };
-            try {
-                const chatData = await getTravelChat(data, {
-                    headers: { 'content-type': 'multipart/form-data' },
-                });
-    
-                if (chatData?.status === 400) {
-                    setError(chatData.message);
-                }
-    
-                if (chatData?.status === 'KO') {
-                    setChatTravelsData(chatData.result);
-                    setIsMsg(false);
-                    setError(null);
-                }
-    
-                if (chatData?.status === 'OK') {
-                    setChatTravelsData(chatData.result);
-                    setIsMsg(true);
-                    setError(null);
-    
-                    if (id === '00') {
-                        setTravelIdView(chatData.result[0].travelId);
-                    }
-                }
-    
-                setIsLoading(true);
-                setError(null);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-    
+				if (chatData?.status === 400) {
+					setError(chatData.message);
+				}
 
+				if (chatData?.status === 'KO') {
+					setChatTravelsData(chatData.result);
+					setIsMsg(false);
+					setError(null);
+				}
 
+				if (chatData?.status === 'OK') {
+					setChatTravelsData(chatData.result);
+					setIsMsg(true);
+					setError(null);
 
+					if (id === '00') {
+						setTravelIdView(chatData.result[0].travelId);
+					}
+				}
+
+				setIsLoading(true);
+				setError(null);
+			} catch (error) {
+				setError(error.message);
+			}
+		};
 
 		const intervalId = setInterval(() => {
 			handleUpdateMsg();
 		}, 10000);
 
 		return () => clearInterval(intervalId);
-	}, [id,user]);
+	}, [id, user]);
 
 	return (
 		<NavUserPanel origin="chat">
@@ -120,7 +114,7 @@ function TravelChat() {
 				{isLoading ? (
 					<div className="TravelChat">
 						<h2 className="text-white">Travel Chat</h2>
-						<button >Update Messages</button>
+						<button>Update Messages</button>
 						{isMsg ? (
 							<TravelUserChat
 								data={chatTravelsData}

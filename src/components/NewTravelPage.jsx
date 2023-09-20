@@ -244,7 +244,8 @@ function NewTravelPage() {
 							{travel.forSale ? (
 								<>
 									<label htmlFor="availableSeats">
-										{t('new-travel-page.seats-available')}</label>
+										{t('new-travel-page.seats-available')}
+									</label>
 									<input
 										value={travel.availableSeats}
 										onChange={handleChange}
@@ -260,7 +261,9 @@ function NewTravelPage() {
 									) : null}
 								</>
 							) : null}
-							<label htmlFor="remarks">{t('new-travel-page.travel-remarks')}</label>
+							<label htmlFor="remarks">
+								{t('new-travel-page.travel-remarks')}
+							</label>
 							<textarea
 								value={travel.remarks}
 								onChange={handleChange}
@@ -275,8 +278,12 @@ function NewTravelPage() {
 								id="forSale"
 								required
 							>
-								<option value={true}>{t('new-travel-page.publish-travel')}</option>
-								<option value={false}>{t('new-travel-page.search-travel')}</option>
+								<option value={true}>
+									{t('new-travel-page.publish-travel')}
+								</option>
+								<option value={false}>
+									{t('new-travel-page.search-travel')}
+								</option>
 							</select>
 							<label htmlFor="photo">{t('new-travel-page.upload-photo')}</label>
 							<input

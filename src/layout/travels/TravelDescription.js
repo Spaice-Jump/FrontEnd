@@ -86,7 +86,6 @@ const TravelDescription = () => {
 
 	const handleEmail = event => {
 		setSendEmail(true);
-		console.log('send', sendEmail);
 	};
 
 	const handleEmailReturn = event => {

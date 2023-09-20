@@ -134,7 +134,9 @@ const Travels = () => {
 					<div className="row">
 						<section className="filter-section">
 							<form className="filter-form text-white-50">
-								<span className="search-text text-white-50">{t('travels_section.filter-1')}</span>
+								<span className="search-text text-white-50">
+									{t('travels_section.filter-1')}
+								</span>
 								<input
 									type="text"
 									value={search}
@@ -189,7 +191,9 @@ const Travels = () => {
 										</option>
 									))}
 								</select>
-								<label className="origin">{t('travels_section.destination')}</label>
+								<label className="origin">
+									{t('travels_section.destination')}
+								</label>
 								<select
 									name="destination"
 									id="destination"
@@ -242,12 +246,17 @@ const Travels = () => {
 												<span>
 													{t('travels_section.price')}
 													<br></br>
-													{travel.price}€</span>
+													{travel.price}€
+												</span>
 											</div>
 											{travel.forSale ? (
-												<p className="text-travels-ads">{t('travels_section.sale')}</p>
+												<p className="text-travels-ads">
+													{t('travels_section.sale')}
+												</p>
 											) : (
-												<p className="text-travels-ads">{t('travels_section.search')}</p>
+												<p className="text-travels-ads">
+													{t('travels_section.search')}
+												</p>
 											)}
 											<p className="text-travels-ads">
 												{t('travels_section.origin')}
@@ -310,7 +319,7 @@ const Travels = () => {
 															: t('travels_section.complete-travel')}
 													</Link>
 												)}
-												
+
 												{isLogged && userId !== travel.userId ? (
 													<div className="product-compare-icon">
 														<FavoriteHeart
