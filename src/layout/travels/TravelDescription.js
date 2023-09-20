@@ -132,7 +132,7 @@ const TravelDescription = () => {
 						<h1>{travel.topic}</h1>
 						<p>Publicado el {formatDate(travel.datetimeCreation)}</p>
 						<p className="information">"{travel.remarks}"</p>
-						<div className="control-travel-description">
+						<div className="contact-buttons">
 							{travel.active && isLogged && travel.forSale ? (
 								<>
 									{userId === travel.userId ? (
